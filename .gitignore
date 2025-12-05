@@ -1,2 +1,6 @@
-# Local Netlify folder
-.netlify
+# Ignore files with special characters that cause deployment issues
+*#*
+*!*
+
+# Ignore macOS system files
+.DS_Store
