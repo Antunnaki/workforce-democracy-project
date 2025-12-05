@@ -1,57 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Backend Connection Test</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
-            background-color: #f5f5f5;
-        }
-        .container {
-            background-color: white;
-            padding: 20px;
-            border-radius:8px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-        }
-        .test-result {
-            padding: 15px;
-            margin: 10px 0;
-            border-radius: 4px;
-        }
-       .success {
-            background-color: #d4edda;
-            color: #155724;
-            border: 1px solid #c3e6cb;
-        }
-        .error {
-            background-color: #f8d7da;
-            color: #721c24;
-            border: 1px solid #f5c6cb;
-        }
-        button {
-            background-color: #007bff;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 4px;
-            cursor: pointer;
-font-size: 16px;
-        }
-        button:hover {
-            background-color: #0056b3;
-        }
-        .loading {
-            display: none;
-        }
-    </style>
-</head>
-<body>
-    <div class="container">
         <h1>Backend Connection Test</h1>
         <p>This page tests the connection between the frontend and backend.</p>
         
@@ -59,55 +5,110 @@ font-size: 16px;
         <div class="loading" id="loading">Testing connection...</div>
         
         <div id="results"></div>
+        
+        <div id="corsFixInstructions" style="display: none;" class="instructions">
+            <h3>🔧 CORS Issue Detected</h3>
+            <p>To fix the CORS issue, follow these steps:</p>
+            <div class="step">1. Run the CORS deployment script:</div>
+            <code>./deploy-cors-fix.sh</code>
+            <div class="step">2. Follow the instructions provided by the script to SSH into your server</div>
+            <div class="step">3. Run the automated CORS fix script on your server</div>
+            <div class="step">4. Refresh this page and test the connection again</div>
+        </div>
     </div>
 
-   <script>
+    <script>
         document.getElementById('testButton').addEventListener('click', async function() {
             const resultsDiv = document.getElementById('results');
             const loadingDiv = document.getElementById('loading');
+            const corsFixInstructions = document.getElementById('corsFixInstructions');
+            
+            // Hide instructions initially
+            corsFixInstructions.style.display = 'none';
             
             // Show loading indicator
             loadingDiv.style.display = 'block';
             resultsDiv.innerHTML = '';
             
             try {
-               // Test health endpoint
+                // Test health endpoint
                 const healthResponse = await fetch('https://api.workforcedemocracyproject.org/health');
                 const healthData = await healthResponse.json();
                 
                 let resultHTML = `
                     <div class="test-result success">
                         <h3>✅ Health Check Successful</h3>
-                       <p>Status: ${healthData.status}</p>
+                        <p>Status: ${healthData.status}</p>
                         <p>Message: ${healthData.message}</p>
                         <p>Timestamp: ${healthData.timestamp}</p>
                     </div>
                 `;
                 
-                // Test bills endpoint with a sample postcode
+                // Test representatives endpoint with a sample ZIP code
                 try {
-                    const billsResponse = await fetch('https://api.workforcedemocracyproject.org/api/bills/location?postcode=94102');
-                    if (billsResponse.ok) {
-                        const billsData = await billsResponse.json();
+                    const repsResponse = await fetch('https://api.workforcedemocracyproject.org/api/representatives?zip=12061');
+                    if (repsResponse.ok) {
+                        const repsData = await repsResponse.json();
                         resultHTML += `
                             <div class="test-result success">
-                                <h3>✅ Bills API Connected</h3>
-                                <p>Received ${billsData.length} bills for postcode 94102</p>
+                                <h3>✅ Representatives API Connected</h3>
+                                <p>Found ${repsData.count} representatives for ZIP code 12061</p>
+                                <p>State: ${repsData.stateName}</p>
                             </div>
                         `;
                     } else {
                         resultHTML += `
                             <div class="test-result error">
-                                <h3>❌ Bills API Error</h3>
-                                <p>Status: ${billsResponse.status}</p>
+                                <h3>❌ Representatives API Error</h3>
+                                <p>Status: ${repsResponse.status}</p>
                             </div>
                         `;
                     }
-                } catch (billsError) {
+                } catch (repsError) {
                     resultHTML += `
                         <div class="test-result error">
-                            <h3>❌ Bills API Connection Failed</h3>
-                            <p>Error: ${billsError.message}</p>
+                            <h3>❌ Representatives API Connection Failed</h3>
+                            <p>Error: ${repsError.message}</p>
+                        </div>
+                    `;
+                }
+                
+                // Check CORS headers
+                try {
+                    const corsResponse = await fetch('https://api.workforcedemocracyproject.org/health', {
+                        method: 'OPTIONS'
+                    });
+                    
+                    const corsHeaders = {
+                        'Access-Control-Allow-Origin': corsResponse.headers.get('Access-Control-Allow-Origin'),
+                        'Access-Control-Allow-Methods': corsResponse.headers.get('Access-Control-Allow-Methods'),
+                        'Access-Control-Allow-Headers': corsResponse.headers.get('Access-Control-Allow-Headers')
+                    };
+                    
+                    if (corsHeaders['Access-Control-Allow-Origin']) {
+                        resultHTML += `
+                            <div class="test-result success">
+                                <h3>✅ CORS Headers Configured</h3>
+                                <p>Access-Control-Allow-Origin: ${corsHeaders['Access-Control-Allow-Origin']}</p>
+                                <p>Access-Control-Allow-Methods: ${corsHeaders['Access-Control-Allow-Methods'] || 'Not set'}</p>
+                                <p>Access-Control-Allow-Headers: ${corsHeaders['Access-Control-Allow-Headers'] || 'Not set'}</p>
+                            </div>
+                        `;
+                    } else {
+                        resultHTML += `
+                            <div class="test-result warning">
+                                <h3>⚠️ CORS Headers Missing</h3>
+                                <p>CORS headers are not properly configured. This will prevent the frontend from communicating with the backend.</p>
+                            </div>
+                        `;
+                        // Show fix instructions
+                        corsFixInstructions.style.display = 'block';
+                    }
+                } catch (corsError) {
+                    resultHTML += `
+                        <div class="test-result warning">
+                            <h3>⚠️ CORS Check Failed</h3>
+                            <p>Could not verify CORS headers: ${corsError.message}</p>
                         </div>
                     `;
                 }
