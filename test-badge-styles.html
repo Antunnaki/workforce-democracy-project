@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Badge Style Test - v37.1.2</title>
+    <style>
+        body {
+            font-family: system-ui, -apple-system, sans-serif;
+            padding: 40px;
+            background: #f5f5f5;
+        }
+        
+        .test-section {
+            background: white;
+            padding: 30px;
+            margin: 20px 0;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        h2 {
+            margin-top: 0;
+            color: #333;
+        }
+        
+        .badge-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+            margin: 20px 0;
+        }
+        
+        /* Test 1: Inline styles (should ALWAYS work) */
+        .test-inline {
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+        
+        /* Test 2: CSS classes only */
+        .source-type-badge {
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 10px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+        
+        .source-type-badge.independent {
+            background: #10b981;
+            color: white;
+        }
+        
+        .source-type-badge.factcheck {
+            background: #3b82f6;
+            color: white;
+        }
+        
+        .source-type-badge.finance {
+            background: #f59e0b;
+            color: white;
+        }
+        
+        .source-type-badge.news {
+            background: #6b7280;
+            color: white;
+        }
+        
+        /* Test 3: Generic .badge selector (the problem) */
+        .badge {
+            border-radius: 9999px;
+            padding: 0.25rem 0.75rem;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .info-box {
+            background: #eff6ff;
+            border: 2px solid #3b82f6;
+            padding: 16px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        
+        .error-box {
+            background: #fef2f2;
+            border: 2px solid #ef4444;
+            padding: 16px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        
+        .success-box {
+            background: #f0fdf4;
+            border: 2px solid #10b981;
+            padding: 16px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        
+        code {
+            background: #f1f5f9;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: monospace;
+            font-size: 13px;
+        }
+    </style>
+</head>
+<body>
+    <h1>🔍 Badge Style Diagnostic Test - v37.1.2</h1>
+    
+    <div class="info-box">
+        <strong>Purpose:</strong> Test if badge colors are displaying correctly after CSS fix.<br>
+        <strong>Date:</strong> Tuesday, November 4, 2025<br>
+        <strong>Version:</strong> v37.1.2 + CSS Conflict Fix
+    </div>
+    
+    <!-- Test 1: Inline Styles (Should ALWAYS work) -->
+    <div class="test-section">
+        <h2>✅ Test 1: Inline Styles (Highest Priority)</h2>
+        <p>These badges use inline <code>style=""</code> attributes. They should ALWAYS display correctly.</p>
+        
+        <div class="badge-container">
+            <span class="test-inline" style="background: #10b981; color: white;">
+                🟢 Independent (Inline)
+            </span>
+            <span class="test-inline" style="background: #3b82f6; color: white;">
+                🔵 Fact Check (Inline)
+            </span>
+            <span class="test-inline" style="background: #f59e0b; color: white;">
+                🟠 Finance (Inline)
+            </span>
+            <span class="test-inline" style="background: #6b7280; color: white;">
+                ⚫ News (Inline)
+            </span>
+        </div>
+        
+        <div class="success-box">
+            <strong>Expected:</strong> All 4 badges above should show colored backgrounds.<br>
+            <strong>If not:</strong> Browser has serious CSS rendering issue (very rare).
+        </div>
+    </div>
+    
+    <!-- Test 2: CSS Classes Only -->
+    <div class="test-section">
+        <h2>⚠️ Test 2: CSS Classes Only (May Conflict)</h2>
+        <p>These badges use CSS classes. They may conflict with generic <code>.badge</code> selector.</p>
+        
+        <div class="badge-container">
+            <span class="source-type-badge independent">
+                Independent (CSS)
+            </span>
+            <span class="source-type-badge factcheck">
+                Fact Check (CSS)
+            </span>
+            <span class="source-type-badge finance">
+                Finance (CSS)
+            </span>
+            <span class="source-type-badge news">
+                News (CSS)
+            </span>
+        </div>
+        
+        <div class="info-box">
+            <strong>Expected:</strong> All 4 badges should show colored backgrounds.<br>
+            <strong>If gray:</strong> Generic <code>.badge</code> selector is still conflicting.
+        </div>
+    </div>
+    
+    <!-- Test 3: CSS Classes + Inline Styles (v37.1.2 Approach) -->
+    <div class="test-section">
+        <h2>🎯 Test 3: Classes + Inline Styles (v37.1.2)</h2>
+        <p>This is how universal-chat.js v37.1.2 applies badge styles (classes + inline).</p>
+        
+        <div class="badge-container">
+            <span class="source-type-badge independent" style="background: #10b981; color: white; padding: 2px 6px; border-radius: 4px; font-size: 10px; font-weight: 600; text-transform: uppercase;">
+                Independent
+            </span>
+            <span class="source-type-badge factcheck" style="background: #3b82f6; color: white; padding: 2px 6px; border-radius: 4px; font-size: 10px; font-weight: 600; text-transform: uppercase;">
+                Fact Check
+            </span>
+            <span class="source-type-badge finance" style="background: #f59e0b; color: white; padding: 2px 6px; border-radius: 4px; font-size: 10px; font-weight: 600; text-transform: uppercase;">
+                Finance
+            </span>
+            <span class="source-type-badge news" style="background: #6b7280; color: white; padding: 2px 6px; border-radius: 4px; font-size: 10px; font-weight: 600; text-transform: uppercase;">
+                News
+            </span>
+        </div>
+        
+        <div class="success-box">
+            <strong>Expected:</strong> All 4 badges should show colored backgrounds (inline styles override everything).<br>
+            <strong>If not:</strong> Extremely unusual - inline styles being ignored.
+        </div>
+    </div>
+    
+    <!-- Test 4: Conflicting .badge Selector -->
+    <div class="test-section">
+        <h2>🐛 Test 4: Generic .badge Conflict</h2>
+        <p>This badge has both <code>class="source-type-badge badge independent"</code> - simulating the conflict.</p>
+        
+        <div class="badge-container">
+            <span class="source-type-badge badge independent" style="background: #10b981; color: white; padding: 2px 6px; border-radius: 4px; font-size: 10px; font-weight: 600; text-transform: uppercase;">
+                Independent (with .badge)
+            </span>
+        </div>
+        
+        <div class="error-box">
+            <strong>This badge includes the generic <code>.badge</code> class.</strong><br>
+            If it's gray or wrong color: The <code>.badge</code> selector is interfering.<br>
+            If it's green: Inline styles are winning (good!).
+        </div>
+    </div>
+    
+    <!-- Diagnostic Console Output -->
+    <div class="test-section">
+        <h2>🔍 Browser Console Diagnostics</h2>
+        <p>Open Developer Tools (F12) to see computed styles for each badge.</p>
+        <button onclick="runDiagnostics()">Run Diagnostics</button>
+        <pre id="diagnostic-output" style="background: #1e293b; color: #e2e8f0; padding: 20px; border-radius: 8px; margin-top: 16px; overflow-x: auto; max-height: 400px;"></pre>
+    </div>
+    
+    <script>
+        function runDiagnostics() {
+            const output = document.getElementById('diagnostic-output');
+            let log = '🔍 BADGE STYLE DIAGNOSTICS\n';
+            log += '═'.repeat(60) + '\n\n';
+            
+            // Test each badge type
+            const badges = document.querySelectorAll('.source-type-badge');
+            
+            badges.forEach((badge, index) => {
+                log += `Badge ${index + 1}: ${badge.textContent.trim()}\n`;
+                log += '─'.repeat(60) + '\n';
+                
+                // Get computed styles
+                const computed = window.getComputedStyle(badge);
+                const bgColor = computed.backgroundColor;
+                const color = computed.color;
+                const padding = computed.padding;
+                const borderRadius = computed.borderRadius;
+                const fontSize = computed.fontSize;
+                
+                log += `  Background Color: ${bgColor}\n`;
+                log += `  Text Color: ${color}\n`;
+                log += `  Padding: ${padding}\n`;
+                log += `  Border Radius: ${borderRadius}\n`;
+                log += `  Font Size: ${fontSize}\n`;
+                
+                // Check if inline styles are present
+                const inlineStyle = badge.getAttribute('style');
+                log += `  Inline Style: ${inlineStyle ? 'YES ✅' : 'NO ❌'}\n`;
+                
+                // Check classes
+                log += `  Classes: ${badge.className}\n`;
+                
+                // Analyze background color
+                if (bgColor.includes('16, 185, 129') || bgColor === 'rgb(16, 185, 129)') {
+                    log += `  ✅ CORRECT: Green background (#10b981)\n`;
+                } else if (bgColor.includes('59, 130, 246') || bgColor === 'rgb(59, 130, 246)') {
+                    log += `  ✅ CORRECT: Blue background (#3b82f6)\n`;
+                } else if (bgColor.includes('245, 158, 11') || bgColor === 'rgb(245, 158, 11)') {
+                    log += `  ✅ CORRECT: Orange background (#f59e0b)\n`;
+                } else if (bgColor.includes('107, 114, 128') || bgColor === 'rgb(107, 114, 128)') {
+                    log += `  ✅ CORRECT: Gray background (#6b7280)\n`;
+                } else {
+                    log += `  ❌ WRONG COLOR: ${bgColor}\n`;
+                }
+                
+                log += '\n';
+            });
+            
+            // Check for conflicting CSS
+            log += '🔍 CHECKING FOR CONFLICTS\n';
+            log += '═'.repeat(60) + '\n\n';
+            
+            // Check if .badge selector exists
+            const styles = document.styleSheets;
+            let badgeRuleFound = false;
+            
+            for (let sheet of styles) {
+                try {
+                    const rules = sheet.cssRules || sheet.rules;
+                    for (let rule of rules) {
+                        if (rule.selectorText && rule.selectorText.includes('.badge')) {
+                            log += `  Found rule: ${rule.selectorText}\n`;
+                            log += `    ${rule.cssText}\n\n`;
+                            badgeRuleFound = true;
+                        }
+                    }
+                } catch (e) {
+                    // Cross-origin stylesheet, skip
+                }
+            }
+            
+            if (!badgeRuleFound) {
+                log += '  ✅ No conflicting .badge rules found\n';
+            }
+            
+            output.textContent = log;
+            console.log(log);
+        }
+    </script>
+</body>
+</html>

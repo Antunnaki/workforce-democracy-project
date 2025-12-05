@@ -1,0 +1,264 @@
+/**
+ * HERO SECTION
+ * Version: 37.11.4-PHASE3C
+ * Date: 2025-01-14
+ * 
+ * Landing page hero section with title, subtitle, and deprecated feature cards.
+ * 
+ * Dependencies:
+ * - variables.css (design tokens)
+ * - base.css (reset & normalize)
+ * - typography.css (font styles)
+ * 
+ * Components:
+ * - .hero-section - Main hero container
+ * - .hero-content - Content wrapper
+ * - .hero-title - Main headline
+ * - .hero-subtitle - Subheading text
+ * - .feature-cards-container - Grid for feature cards (deprecated)
+ * - .feature-card - Individual feature card (deprecated)
+ * - .feature-icon - Icon with float animation
+ * - .feature-title - Card title
+ * - .feature-description - Card description
+ * - .feature-btn - Call-to-action button
+ * 
+ * NOTE: Feature cards are deprecated but kept for backward compatibility
+ */
+
+/* ============================================
+   HERO SECTION
+   ============================================ */
+.hero-section {
+  background-color: transparent;
+  background-image: none;
+  color: rgba(255, 255, 255, 0.98);
+  padding: var(--space-xl) 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-section * {
+  color: rgba(255, 255, 255, 0.98);
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
+}
+
+@media (min-width: 768px) {
+  .hero-section {
+    padding: var(--space-3xl) 0;
+  }
+}
+
+/* Removed ::before wallpaper overlay - site wallpaper handles this */
+
+.hero-content {
+  position: relative;
+  z-index: 1;
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.hero-title {
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-extrabold);
+  margin-bottom: var(--space-lg);
+  color: #F4E5A1;
+  text-shadow: 0 2px 16px rgba(0, 0, 0, 0.8), 0 0 30px rgba(74, 144, 226, 0.4);
+}
+
+@media (min-width: 480px) {
+  .hero-title {
+    font-size: var(--font-size-3xl);
+  }
+}
+
+.hero-subtitle {
+  font-size: var(--font-size-base);
+  line-height: var(--line-height-relaxed);
+  margin-bottom: var(--space-xl);
+  color: rgba(255, 255, 255, 0.98);
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.7);
+}
+
+@media (min-width: 480px) {
+  .hero-subtitle {
+    font-size: var(--font-size-lg);
+    margin-bottom: var(--space-2xl);
+  }
+}
+
+/* Feature Cards Container */
+/* ============================================
+   DEPRECATED: OLD FEATURE CARDS (No longer used in hero)
+   Left here for backward compatibility if used elsewhere
+   ============================================ */
+
+.feature-cards-container {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-lg);
+  margin: var(--space-2xl) 0;
+  max-width: 100%;
+}
+
+/* Mobile: Stack vertically */
+@media (max-width: 767px) {
+  .feature-cards-container {
+    grid-template-columns: 1fr;
+    gap: var(--space-md);
+    margin: var(--space-xl) 0;
+  }
+}
+
+/* Tablet: 2 columns */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .feature-cards-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Desktop: 3 columns */
+@media (min-width: 1024px) {
+  .feature-cards-container {
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-xl);
+  }
+}
+
+/* Feature Card */
+.feature-card {
+  background: var(--surface);
+  border: 2px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-xl);
+  text-align: center;
+  transition: all var(--transition-base);
+  cursor: pointer;
+  min-height: 280px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Mobile: More compact */
+@media (max-width: 767px) {
+  .feature-card {
+    padding: var(--space-lg);
+    min-height: 240px;
+  }
+}
+
+.feature-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--secondary), var(--accent));
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform var(--transition-base);
+}
+
+.feature-card:hover {
+  border-color: var(--secondary);
+  box-shadow: 0 8px 30px rgba(243, 156, 18, 0.2);
+  transform: translateY(-4px);
+}
+
+.feature-card:hover::before {
+  transform: scaleX(1);
+}
+
+.feature-icon {
+  font-size: 3.5rem;
+  margin-bottom: var(--space-md);
+  animation: float 3s ease-in-out infinite;
+}
+
+@media (max-width: 767px) {
+  .feature-icon {
+    font-size: 2.5rem;
+    margin-bottom: var(--space-sm);
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.feature-card:nth-child(1) .feature-icon { animation-delay: 0s; }
+.feature-card:nth-child(2) .feature-icon { animation-delay: 0.2s; }
+.feature-card:nth-child(3) .feature-icon { animation-delay: 0.4s; }
+.feature-card:nth-child(4) .feature-icon { animation-delay: 0.6s; }
+.feature-card:nth-child(5) .feature-icon { animation-delay: 0.8s; }
+
+.feature-title {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-bold);
+  color: var(--primary);
+  margin: 0 0 var(--space-md) 0;
+  line-height: var(--line-height-tight);
+}
+
+@media (max-width: 767px) {
+  .feature-title {
+    font-size: var(--font-size-base);
+    margin: 0 0 var(--space-sm) 0;
+  }
+}
+
+.feature-description {
+  color: var(--text-secondary);
+  font-size: var(--font-size-sm);
+  line-height: var(--line-height-relaxed);
+  margin: 0 0 var(--space-lg) 0;
+  flex-grow: 1;
+}
+
+@media (max-width: 767px) {
+  .feature-description {
+    font-size: var(--font-size-xs);
+    margin: 0 0 var(--space-md) 0;
+  }
+}
+
+.feature-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-xs);
+  background: var(--secondary);
+  color: white;
+  border: none;
+  padding: var(--space-md) var(--space-lg);
+  border-radius: var(--radius-full);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  width: 100%;
+  box-shadow: 0 4px 12px rgba(243, 156, 18, 0.3);
+}
+
+.feature-btn:hover {
+  background: var(--secondary-dark);
+  transform: translateX(4px);
+  box-shadow: 0 6px 20px rgba(243, 156, 18, 0.4);
+}
+
+.feature-btn i {
+  transition: transform var(--transition-fast);
+}
+
+.feature-btn:hover i {
+  transform: translateX(4px);
+}

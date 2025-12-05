@@ -1,0 +1,175 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 400" role="img" aria-label="Global Network of Workplace Democracy Values">
+  <defs>
+    <!-- Gradients -->
+    <radialGradient id="globeGrad" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" style="stop-color:#5BA3D0;stop-opacity:1" />
+      <stop offset="70%" style="stop-color:#4A90E2;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#357ABD;stop-opacity:1" />
+    </radialGradient>
+    
+    <radialGradient id="nodeGrad" cx="30%" cy="30%" r="70%">
+      <stop offset="0%" style="stop-color:#F4D03F;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#E8B84D;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#D4A564;stop-opacity:1" />
+    </radialGradient>
+    
+    <radialGradient id="glowGrad" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" style="stop-color:#F4D03F;stop-opacity:0.6" />
+      <stop offset="100%" style="stop-color:#F4D03F;stop-opacity:0" />
+    </radialGradient>
+    
+    <filter id="softGlow">
+      <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  
+  <!-- Background subtle grid -->
+  <g opacity="0.03">
+    <line x1="0" y1="100" x2="1200" y2="100" stroke="#4A90E2" stroke-width="1"/>
+    <line x1="0" y1="200" x2="1200" y2="200" stroke="#4A90E2" stroke-width="1"/>
+    <line x1="0" y1="300" x2="1200" y2="300" stroke="#4A90E2" stroke-width="1"/>
+    <line x1="300" y1="0" x2="300" y2="400" stroke="#4A90E2" stroke-width="1"/>
+    <line x1="600" y1="0" x2="600" y2="400" stroke="#4A90E2" stroke-width="1"/>
+    <line x1="900" y1="0" x2="900" y2="400" stroke="#4A90E2" stroke-width="1"/>
+  </g>
+  
+  <!-- Central Globe -->
+  <g transform="translate(600, 200)">
+    <!-- Outer glow -->
+    <circle cx="0" cy="0" r="90" fill="url(#glowGrad)" opacity="0.4"/>
+    
+    <!-- Main globe -->
+    <circle cx="0" cy="0" r="70" fill="url(#globeGrad)" opacity="0.95"/>
+    
+    <!-- Latitude lines -->
+    <ellipse cx="0" cy="0" rx="70" ry="25" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="1.5"/>
+    <ellipse cx="0" cy="0" rx="70" ry="50" fill="none" stroke="rgba(255,255,255,0.15)" stroke-width="1"/>
+    <line x1="-70" y1="0" x2="70" y2="0" stroke="rgba(255,255,255,0.2)" stroke-width="1.5"/>
+    
+    <!-- Longitude lines -->
+    <ellipse cx="0" cy="0" rx="25" ry="70" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="1.5"/>
+    <ellipse cx="0" cy="0" rx="50" ry="70" fill="none" stroke="rgba(255,255,255,0.15)" stroke-width="1"/>
+    
+    <!-- Continents suggestion (abstract) -->
+    <path d="M -30 -20 Q -20 -30 -10 -25 Q 0 -20 5 -15 Q 10 -10 5 -5 Q 0 0 -10 5 Q -20 10 -30 5 Z" 
+          fill="rgba(255,255,255,0.25)" opacity="0.6"/>
+    <path d="M 15 10 Q 25 5 30 15 Q 35 25 30 30 Q 25 35 20 30 Q 15 25 15 20 Z" 
+          fill="rgba(255,255,255,0.25)" opacity="0.6"/>
+    <path d="M -15 20 Q -5 25 0 30 Q -5 35 -15 35 Q -20 30 -15 25 Z" 
+          fill="rgba(255,255,255,0.25)" opacity="0.6"/>
+  </g>
+  
+  <!-- Connection lines from center to nodes (hub-and-spoke) -->
+  <g stroke="#E8B84D" stroke-width="1.5" opacity="0.3" fill="none">
+    <!-- Top arc -->
+    <line x1="600" y1="200" x2="600" y2="70"/>
+    <line x1="600" y1="200" x2="720" y2="85"/>
+    <line x1="600" y1="200" x2="810" y2="120"/>
+    <line x1="600" y1="200" x2="870" y2="175"/>
+    <line x1="600" y1="200" x2="900" y2="200"/>
+    
+    <!-- Bottom arc -->
+    <line x1="600" y1="200" x2="870" y2="225"/>
+    <line x1="600" y1="200" x2="810" y2="280"/>
+    <line x1="600" y1="200" x2="720" y2="315"/>
+    <line x1="600" y1="200" x2="600" y2="330"/>
+    
+    <!-- Left side -->
+    <line x1="600" y1="200" x2="480" y2="85"/>
+    <line x1="600" y1="200" x2="390" y2="120"/>
+    <line x1="600" y1="200" x2="330" y2="175"/>
+    <line x1="600" y1="200" x2="300" y2="200"/>
+    <line x1="600" y1="200" x2="330" y2="225"/>
+    <line x1="600" y1="200" x2="390" y2="280"/>
+    <line x1="600" y1="200" x2="480" y2="315"/>
+  </g>
+  
+  <!-- Subtle interconnection between nearby nodes -->
+  <g stroke="#F4D03F" stroke-width="1" opacity="0.15" fill="none" stroke-dasharray="3,3">
+    <path d="M 600 70 Q 660 75 720 85"/>
+    <path d="M 720 85 Q 770 95 810 120"/>
+    <path d="M 810 120 Q 845 145 870 175"/>
+    <path d="M 870 175 Q 890 185 900 200"/>
+    <path d="M 900 200 Q 890 215 870 225"/>
+    <path d="M 870 225 Q 845 255 810 280"/>
+    <path d="M 810 280 Q 770 305 720 315"/>
+    <path d="M 720 315 Q 660 325 600 330"/>
+    
+    <path d="M 600 330 Q 540 325 480 315"/>
+    <path d="M 480 315 Q 430 305 390 280"/>
+    <path d="M 390 280 Q 355 255 330 225"/>
+    <path d="M 330 225 Q 310 215 300 200"/>
+    <path d="M 300 200 Q 310 185 330 175"/>
+    <path d="M 330 175 Q 355 145 390 120"/>
+    <path d="M 390 120 Q 430 95 480 85"/>
+    <path d="M 480 85 Q 540 75 600 70"/>
+  </g>
+  
+  <!-- 17 Nodes around the globe -->
+  <g filter="url(#softGlow)">
+    <!-- Top -->
+    <circle cx="600" cy="70" r="14" fill="url(#nodeGrad)"/>
+    
+    <!-- Upper right arc -->
+    <circle cx="720" cy="85" r="14" fill="url(#nodeGrad)"/>
+    <circle cx="810" cy="120" r="14" fill="url(#nodeGrad)"/>
+    <circle cx="870" cy="175" r="14" fill="url(#nodeGrad)"/>
+    
+    <!-- Right -->
+    <circle cx="900" cy="200" r="14" fill="url(#nodeGrad)"/>
+    
+    <!-- Lower right arc -->
+    <circle cx="870" cy="225" r="14" fill="url(#nodeGrad)"/>
+    <circle cx="810" cy="280" r="14" fill="url(#nodeGrad)"/>
+    <circle cx="720" cy="315" r="14" fill="url(#nodeGrad)"/>
+    
+    <!-- Bottom -->
+    <circle cx="600" cy="330" r="14" fill="url(#nodeGrad)"/>
+    
+    <!-- Lower left arc -->
+    <circle cx="480" cy="315" r="14" fill="url(#nodeGrad)"/>
+    <circle cx="390" cy="280" r="14" fill="url(#nodeGrad)"/>
+    <circle cx="330" cy="225" r="14" fill="url(#nodeGrad)"/>
+    
+    <!-- Left -->
+    <circle cx="300" cy="200" r="14" fill="url(#nodeGrad)"/>
+    
+    <!-- Upper left arc -->
+    <circle cx="330" cy="175" r="14" fill="url(#nodeGrad)"/>
+    <circle cx="390" cy="120" r="14" fill="url(#nodeGrad)"/>
+    <circle cx="480" cy="85" r="14" fill="url(#nodeGrad)"/>
+    
+    <!-- One more for 17th -->
+    <circle cx="680" cy="100" r="14" fill="url(#nodeGrad)"/>
+  </g>
+  
+  <!-- Text above graphic -->
+  <text x="600" y="30" text-anchor="middle" fill="#E8B84D" font-family="Inter, sans-serif" font-size="26" font-weight="700" letter-spacing="2">
+    GROWING TOGETHER
+  </text>
+  
+  <!-- Text below graphic -->
+  <text x="600" y="385" text-anchor="middle" fill="#4A90E2" font-family="Inter, sans-serif" font-size="18" font-weight="600">
+    Toward Workplace Democracy
+  </text>
+  
+  <!-- Subtle tagline at bottom -->
+  <text x="600" y="398" text-anchor="middle" fill="rgba(74, 144, 226, 0.5)" font-family="Inter, sans-serif" font-size="11" font-style="italic">
+    17 Values • One Global Movement
+  </text>
+  
+  <style>
+    circle[fill*="nodeGrad"] {
+      transition: all 0.3s ease;
+    }
+    
+    circle[fill*="nodeGrad"]:hover {
+      r: 16;
+      opacity: 1;
+    }
+  </style>
+</svg>

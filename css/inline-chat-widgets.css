@@ -1,0 +1,666 @@
+/* ============================================
+   UNIFIED CHAT WIDGET STYLES
+   V32.9.5 - Standardized for Jobs, Civic, Bills, Ethical Business
+   Dropdown-style chat widgets matching the Jobs pattern
+   ============================================ */
+
+/* ============================================
+   CIVIC CHAT WIDGET (Purple Theme)
+   ============================================ */
+
+.civic-chat-top {
+  max-width: 900px;
+  margin: 0 auto 2rem;
+  padding: 0 1rem;
+}
+
+.civic-chat-toggle-top {
+  width: 100%;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border: none;
+  border-radius: 12px;
+  padding: 1rem 1.5rem;
+  color: white;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.25);
+  transition: all 0.3s ease;
+}
+
+.civic-chat-toggle-top:hover {
+  background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(102, 126, 234, 0.35);
+}
+
+.civic-chat-toggle-top .icon {
+  font-size: 1.25rem;
+}
+
+.civic-chat-toggle-top .arrow {
+  margin-left: auto;
+  font-size: 0.875rem;
+  transition: transform 0.3s ease;
+}
+
+.civic-chat-toggle-top.active .arrow {
+  transform: rotate(180deg);
+}
+
+/* Chat Window Dropdown */
+.civic-chat-window-top {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s ease, opacity 0.3s ease;
+  opacity: 0;
+  background: white;
+  border-radius: 12px;
+  margin-top: 1rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.civic-chat-window-top.active {
+  max-height: 600px;
+  opacity: 1;
+  overflow-y: auto;
+}
+
+.civic-chat-header-top {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  padding: 1.25rem 1.5rem;
+  color: white;
+  border-radius: 12px 12px 0 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.civic-chat-header-top h4 {
+  margin: 0;
+  font-size: 1.125rem;
+  font-weight: 600;
+}
+
+.civic-chat-close-top {
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  color: white;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s ease;
+}
+
+.civic-chat-close-top:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.civic-chat-messages-top {
+  padding: 1.5rem;
+  min-height: 200px;
+  max-height: 350px;
+  overflow-y: auto;
+  background: #f7fafc;
+}
+
+.civic-chat-empty-state-top {
+  text-align: center;
+  padding: 2rem 1rem;
+}
+
+.civic-chat-empty-state-top .chat-icon-svg {
+  width: 4rem;
+  height: 4rem;
+  margin: 0 auto 1.5rem;
+  display: block;
+}
+
+.civic-chat-empty-state-top p {
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin: 0.5rem 0;
+}
+
+.civic-chat-empty-state-top p:first-of-type {
+  color: var(--text-primary);
+  font-weight: 600;
+  font-size: 1.125rem;
+}
+
+.civic-chat-input-container-top {
+  padding: 1rem 1.5rem;
+  background: white;
+  border-top: 1px solid #e2e8f0;
+  display: flex;
+  gap: 0.75rem;
+  border-radius: 0 0 12px 12px;
+}
+
+.civic-chat-input-top {
+  flex: 1;
+  border: 2px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+  resize: none;
+  min-height: 44px;
+  max-height: 120px;
+  font-family: inherit;
+  transition: border-color 0.2s ease;
+}
+
+.civic-chat-input-top:focus {
+  outline: none;
+  border-color: #667eea;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.civic-chat-send-top {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border: none;
+  width: 44px;
+  height: 44px;
+  border-radius: 8px;
+  color: white;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+}
+
+.civic-chat-send-top:hover {
+  background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+}
+
+/* ============================================
+   BILLS CHAT WIDGET (Purple Theme - Same as Civic)
+   ============================================ */
+
+.bills-chat-top {
+  max-width: 900px;
+  margin: 0 auto 2rem;
+  padding: 0 1rem;
+}
+
+.bills-chat-toggle-top {
+  width: 100%;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border: none;
+  border-radius: 12px;
+  padding: 1rem 1.5rem;
+  color: white;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.25);
+  transition: all 0.3s ease;
+}
+
+.bills-chat-toggle-top:hover {
+  background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(102, 126, 234, 0.35);
+}
+
+.bills-chat-toggle-top .icon {
+  font-size: 1.25rem;
+}
+
+.bills-chat-toggle-top .arrow {
+  margin-left: auto;
+  font-size: 0.875rem;
+  transition: transform 0.3s ease;
+}
+
+.bills-chat-toggle-top.active .arrow {
+  transform: rotate(180deg);
+}
+
+.bills-chat-window-top {
+  max-height: 0;
+  overflow: hidden;
+  background: white;
+  border: 2px solid #e2e8f0;
+  border-radius: 12px;
+  margin-top: 1rem;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+  transition: max-height 0.3s ease, opacity 0.3s ease;
+  opacity: 0;
+}
+
+.bills-chat-window-top.active {
+  max-height: 600px;
+  opacity: 1;
+}
+
+.bills-chat-header-top {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  padding: 1rem 1.5rem;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-radius: 10px 10px 0 0;
+}
+
+.bills-chat-header-top h4 {
+  margin: 0;
+  font-size: 1.125rem;
+  font-weight: 600;
+}
+
+.bills-chat-close-top {
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  color: white;
+  font-size: 1.25rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s ease;
+}
+
+.bills-chat-close-top:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.bills-chat-messages-top {
+  height: 400px;
+  overflow-y: auto;
+  padding: 1.5rem;
+  background: #f7fafc;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.bills-chat-empty-state-top {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  text-align: center;
+  color: #718096;
+}
+
+.bills-chat-empty-state-top svg {
+  width: 64px;
+  height: 64px;
+  margin-bottom: 1rem;
+}
+
+.bills-chat-empty-state-top p {
+  margin: 0.5rem 0;
+  font-size: 0.9375rem;
+}
+
+.bills-chat-input-container-top {
+  padding: 1rem 1.5rem;
+  background: white;
+  border-top: 2px solid #e2e8f0;
+  display: flex;
+  gap: 0.75rem;
+  border-radius: 0 0 10px 10px;
+}
+
+.bills-chat-input-top {
+  flex: 1;
+  border: 2px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+  resize: none;
+  min-height: 44px;
+  max-height: 120px;
+  font-family: inherit;
+  transition: border-color 0.2s ease;
+}
+
+.bills-chat-input-top:focus {
+  outline: none;
+  border-color: #667eea;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.bills-chat-send-top {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border: none;
+  width: 44px;
+  height: 44px;
+  border-radius: 8px;
+  color: white;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+}
+
+.bills-chat-send-top:hover {
+  background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+}
+
+/* ============================================
+   ETHICAL BUSINESS CHAT WIDGET (Orange Theme)
+   ============================================ */
+
+.ethical-chat-top {
+  max-width: 900px;
+  margin: 0 auto 2rem;
+  padding: 0 1rem;
+}
+
+.ethical-chat-toggle-top {
+  width: 100%;
+  background: linear-gradient(135deg, #FF9A56 0%, #F4A261 100%);
+  border: none;
+  border-radius: 12px;
+  padding: 1rem 1.5rem;
+  color: white;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  box-shadow: 0 4px 12px rgba(255, 154, 86, 0.25);
+  transition: all 0.3s ease;
+}
+
+.ethical-chat-toggle-top:hover {
+  background: linear-gradient(135deg, #F4A261 0%, #FF9A56 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(255, 154, 86, 0.35);
+}
+
+.ethical-chat-toggle-top .icon {
+  font-size: 1.25rem;
+}
+
+.ethical-chat-toggle-top .arrow {
+  margin-left: auto;
+  font-size: 0.875rem;
+  transition: transform 0.3s ease;
+}
+
+.ethical-chat-toggle-top.active .arrow {
+  transform: rotate(180deg);
+}
+
+/* Chat Window Dropdown */
+.ethical-chat-window-top {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s ease, opacity 0.3s ease;
+  opacity: 0;
+  background: white;
+  border-radius: 12px;
+  margin-top: 1rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.ethical-chat-window-top.active {
+  max-height: 600px;
+  opacity: 1;
+  overflow-y: auto;
+}
+
+.ethical-chat-header-top {
+  background: linear-gradient(135deg, #FF9A56 0%, #F4A261 100%);
+  padding: 1.25rem 1.5rem;
+  color: white;
+  border-radius: 12px 12px 0 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.ethical-chat-header-top h4 {
+  margin: 0;
+  font-size: 1.125rem;
+  font-weight: 600;
+}
+
+.ethical-chat-close-top {
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  color: white;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s ease;
+}
+
+.ethical-chat-close-top:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.ethical-chat-messages-top {
+  padding: 1.5rem;
+  min-height: 200px;
+  max-height: 350px;
+  overflow-y: auto;
+  background: #f7fafc;
+}
+
+.ethical-chat-empty-state-top {
+  text-align: center;
+  padding: 2rem 1rem;
+}
+
+.ethical-chat-empty-state-top .chat-icon-svg {
+  width: 4rem;
+  height: 4rem;
+  margin: 0 auto 1.5rem;
+  display: block;
+}
+
+.ethical-chat-empty-state-top p {
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin: 0.5rem 0;
+}
+
+.ethical-chat-empty-state-top p:first-of-type {
+  color: var(--text-primary);
+  font-weight: 600;
+  font-size: 1.125rem;
+}
+
+.ethical-chat-input-container-top {
+  padding: 1rem 1.5rem;
+  background: white;
+  border-top: 1px solid #e2e8f0;
+  display: flex;
+  gap: 0.75rem;
+  border-radius: 0 0 12px 12px;
+}
+
+.ethical-chat-input-top {
+  flex: 1;
+  border: 2px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+  resize: none;
+  min-height: 44px;
+  max-height: 120px;
+  font-family: inherit;
+  transition: border-color 0.2s ease;
+}
+
+.ethical-chat-input-top:focus {
+  outline: none;
+  border-color: #FF9A56;
+  box-shadow: 0 0 0 3px rgba(255, 154, 86, 0.1);
+}
+
+.ethical-chat-send-top {
+  background: linear-gradient(135deg, #FF9A56 0%, #F4A261 100%);
+  border: none;
+  width: 44px;
+  height: 44px;
+  border-radius: 8px;
+  color: white;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+}
+
+.ethical-chat-send-top:hover {
+  background: linear-gradient(135deg, #F4A261 0%, #FF9A56 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(255, 154, 86, 0.3);
+}
+
+/* ============================================
+   CHAT MESSAGES SHARED STYLES
+   Used by all three chat widgets
+   ============================================ */
+
+.chat-message {
+  margin-bottom: 1rem;
+  animation: fadeInMessage 0.3s ease;
+}
+
+@keyframes fadeInMessage {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.message-content {
+  padding: 0;
+  color: #2d3748 !important; /* V36.8.1: Fix grey text in candidate chat */
+}
+
+.message-bubble {
+  padding: 1rem;
+  border-radius: 12px;
+  background: white;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  line-height: 1.6;
+}
+
+.user-message .message-bubble {
+  background: linear-gradient(135deg, #4a90e2 0%, #667eea 100%);
+  color: white;
+  margin-left: auto;
+  max-width: 80%;
+}
+
+.ai-message .message-bubble {
+  background: white;
+  /* V36.7.2.1: Increased specificity to prevent CSS variable conflicts */
+  color: #2d3748 !important;
+  border: 1px solid #e2e8f0;
+}
+
+.ai-message .message-bubble p {
+  margin: 0.5rem 0;
+  /* V36.7.2.1: Ensure dark text color for readability */
+  color: #2d3748 !important;
+}
+
+.ai-message .message-bubble p:first-child {
+  margin-top: 0;
+}
+
+.ai-message .message-bubble p:last-child {
+  margin-bottom: 0;
+}
+
+/* ============================================
+   MOBILE RESPONSIVE
+   ============================================ */
+
+@media (max-width: 768px) {
+  .civic-chat-top,
+  .ethical-chat-top,
+  .jobs-chat-top {
+    padding: 0 0.5rem;
+  }
+  
+  .civic-chat-toggle-top,
+  .ethical-chat-toggle-top,
+  .jobs-chat-toggle-top {
+    font-size: 0.875rem;
+    padding: 0.875rem 1rem;
+  }
+  
+  .civic-chat-window-top.active,
+  .ethical-chat-window-top.active,
+  .jobs-chat-window-top.active {
+    max-height: 500px;
+  }
+  
+  .civic-chat-messages-top,
+  .ethical-chat-messages-top,
+  .jobs-chat-messages-top {
+    max-height: 300px;
+  }
+  
+  .message-bubble {
+    padding: 0.75rem;
+    font-size: 0.9375rem;
+  }
+}
+
+/* ============================================
+   TYPING INDICATOR (V36.6.0)
+   ============================================ */
+
+.typing-indicator {
+  display: inline-block;
+  color: #667eea;
+  font-size: 1.5rem;
+  letter-spacing: 0.2rem;
+  animation: typingPulse 1.4s infinite;
+}
+
+@keyframes typingPulse {
+  0%, 100% {
+    opacity: 0.3;
+  }
+  50% {
+    opacity: 1;
+  }
+}

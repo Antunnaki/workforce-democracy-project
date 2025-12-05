@@ -1,0 +1,176 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="800" height="500">
+  <defs>
+    <!-- Clean gradient background -->
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#e8f5f9;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#dceef5;stop-opacity:1" />
+    </linearGradient>
+    
+    <!-- Center glow effect -->
+    <radialGradient id="centerGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" style="stop-color:#fff;stop-opacity:0.6" />
+      <stop offset="100%" style="stop-color:#5ba3d0;stop-opacity:0" />
+    </radialGradient>
+    
+    <!-- Polished circle gradient with depth -->
+    <radialGradient id="circleGradient" cx="35%" cy="35%" r="65%">
+      <stop offset="0%" style="stop-color:#ffffff;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#f8fcff;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#e3f2fd;stop-opacity:1" />
+    </radialGradient>
+    
+    <!-- Circle shadow for depth -->
+    <filter id="circleShadow">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="3"/>
+      <feOffset dx="0" dy="2" result="offsetblur"/>
+      <feComponentTransfer>
+        <feFuncA type="linear" slope="0.3"/>
+      </feComponentTransfer>
+      <feMerge>
+        <feMergeNode/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    
+    <!-- Animated gradient for magical lines -->
+    <linearGradient id="animatedOrange" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#ff9800;stop-opacity:0.8">
+        <animate attributeName="stop-opacity" values="0.8;1;0.8" dur="3s" repeatCount="indefinite"/>
+      </stop>
+      <stop offset="50%" style="stop-color:#ffb74d;stop-opacity:1">
+        <animate attributeName="stop-opacity" values="1;0.7;1" dur="3s" repeatCount="indefinite"/>
+      </stop>
+      <stop offset="100%" style="stop-color:#ffa726;stop-opacity:0.8">
+        <animate attributeName="stop-opacity" values="0.8;1;0.8" dur="3s" repeatCount="indefinite"/>
+      </stop>
+    </linearGradient>
+    
+    <linearGradient id="animatedGreen" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#4caf50;stop-opacity:0.7">
+        <animate attributeName="stop-opacity" values="0.7;0.9;0.7" dur="4s" repeatCount="indefinite"/>
+      </stop>
+      <stop offset="50%" style="stop-color:#81c784;stop-opacity:0.9">
+        <animate attributeName="stop-opacity" values="0.9;0.6;0.9" dur="4s" repeatCount="indefinite"/>
+      </stop>
+      <stop offset="100%" style="stop-color:#66bb6a;stop-opacity:0.7">
+        <animate attributeName="stop-opacity" values="0.7;0.9;0.7" dur="4s" repeatCount="indefinite"/>
+      </stop>
+    </linearGradient>
+    
+    <linearGradient id="animatedBlue" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#2196f3;stop-opacity:0.5">
+        <animate attributeName="stop-opacity" values="0.5;0.7;0.5" dur="5s" repeatCount="indefinite"/>
+      </stop>
+      <stop offset="50%" style="stop-color:#64b5f6;stop-opacity:0.7">
+        <animate attributeName="stop-opacity" values="0.7;0.4;0.7" dur="5s" repeatCount="indefinite"/>
+      </stop>
+      <stop offset="100%" style="stop-color:#42a5f5;stop-opacity:0.5">
+        <animate attributeName="stop-opacity" values="0.5;0.7;0.5" dur="5s" repeatCount="indefinite"/>
+      </stop>
+    </linearGradient>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="800" height="500" fill="url(#bg)"/>
+  
+  <!-- Center glow -->
+  <circle cx="400" cy="250" r="180" fill="url(#centerGlow)"/>
+  
+  <!-- Subtle rings -->
+  <circle cx="400" cy="250" r="165" fill="none" stroke="#5ba3d0" stroke-width="1.5" stroke-dasharray="15 8" opacity="0.2"/>
+  
+  <!-- ANIMATED MAGICAL LINES - Clean and flowing -->
+  <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+    
+    <!-- Primary connections (Warm amber/gold) -->
+    <g>
+      <path d="M 365,135 Q 310,200 265,320" stroke="url(#animatedOrange)" stroke-width="3.5" stroke-dasharray="10 5">
+        <animate attributeName="stroke-dashoffset" from="0" to="15" dur="2s" repeatCount="indefinite"/>
+      </path>
+      <path d="M 435,135 Q 490,200 535,320" stroke="url(#animatedOrange)" stroke-width="3.5" stroke-dasharray="10 5">
+        <animate attributeName="stroke-dashoffset" from="0" to="15" dur="2s" repeatCount="indefinite"/>
+      </path>
+      <path d="M 315,355 Q 400,340 485,355" stroke="url(#animatedOrange)" stroke-width="3.5" stroke-dasharray="10 5">
+        <animate attributeName="stroke-dashoffset" from="0" to="15" dur="2s" repeatCount="indefinite"/>
+      </path>
+    </g>
+    
+    <!-- Secondary connections (Emerald green) -->
+    <g>
+      <path d="M 270,325 Q 330,230 360,140" stroke="url(#animatedGreen)" stroke-width="2.8" stroke-dasharray="8 6">
+        <animate attributeName="stroke-dashoffset" from="0" to="14" dur="3s" repeatCount="indefinite"/>
+      </path>
+      <path d="M 530,325 Q 470,230 440,140" stroke="url(#animatedGreen)" stroke-width="2.8" stroke-dasharray="8 6">
+        <animate attributeName="stroke-dashoffset" from="0" to="14" dur="3s" repeatCount="indefinite"/>
+      </path>
+      <path d="M 480,350 Q 400,365 320,350" stroke="url(#animatedGreen)" stroke-width="2.8" stroke-dasharray="8 6">
+        <animate attributeName="stroke-dashoffset" from="0" to="14" dur="3s" repeatCount="indefinite"/>
+      </path>
+    </g>
+    
+    <!-- Tertiary connections (Serene blue) -->
+    <g>
+      <path d="M 380,145 Q 350,250 280,340" stroke="url(#animatedBlue)" stroke-width="2" stroke-dasharray="6 8">
+        <animate attributeName="stroke-dashoffset" from="0" to="14" dur="4s" repeatCount="indefinite"/>
+      </path>
+      <path d="M 420,145 Q 450,250 520,340" stroke="url(#animatedBlue)" stroke-width="2" stroke-dasharray="6 8">
+        <animate attributeName="stroke-dashoffset" from="0" to="14" dur="4s" repeatCount="indefinite"/>
+      </path>
+      <path d="M 290,360 Q 400,380 510,360" stroke="url(#animatedBlue)" stroke-width="2" stroke-dasharray="6 8">
+        <animate attributeName="stroke-dashoffset" from="0" to="14" dur="4s" repeatCount="indefinite"/>
+      </path>
+    </g>
+    
+    <!-- Animated sparkle particles following paths -->
+    <g fill="#ffd54f" opacity="0.7">
+      <circle cx="338" cy="167" r="2">
+        <animate attributeName="opacity" values="0.3;1;0.3" dur="2s" repeatCount="indefinite"/>
+      </circle>
+      <circle cx="370" cy="227" r="1.5">
+        <animate attributeName="opacity" values="0.5;1;0.5" dur="2.5s" repeatCount="indefinite"/>
+      </circle>
+      <circle cx="287" cy="280" r="2">
+        <animate attributeName="opacity" values="0.4;1;0.4" dur="3s" repeatCount="indefinite"/>
+      </circle>
+      <circle cx="462" cy="167" r="2">
+        <animate attributeName="opacity" values="0.3;1;0.3" dur="2s" repeatCount="indefinite"/>
+      </circle>
+      <circle cx="430" cy="227" r="1.5">
+        <animate attributeName="opacity" values="0.5;1;0.5" dur="2.5s" repeatCount="indefinite"/>
+      </circle>
+      <circle cx="513" cy="280" r="2">
+        <animate attributeName="opacity" values="0.4;1;0.4" dur="3s" repeatCount="indefinite"/>
+      </circle>
+    </g>
+  </g>
+  
+  <!-- TOP: CITIZENS (Polished with depth) -->
+  <g transform="translate(400, 110)" filter="url(#circleShadow)">
+    <circle cx="0" cy="0" r="54" fill="url(#circleGradient)" stroke="#5ba3d0" stroke-width="3" opacity="0.98"/>
+    <circle cx="0" cy="0" r="54" fill="none" stroke="#ffffff" stroke-width="1.5" opacity="0.4"/>
+    <text y="-12" font-family="Arial, sans-serif" font-size="38" fill="#5ba3d0" text-anchor="middle" filter="drop-shadow(0 1px 2px rgba(0,0,0,0.1))">👥</text>
+    <text y="23" font-family="Arial, sans-serif" font-size="10.5" font-weight="700" fill="#5ba3d0" text-anchor="middle" letter-spacing="0.8">CITIZENS</text>
+  </g>
+  
+  <!-- BOTTOM LEFT: REPRESENTATIVES (Polished with depth) -->
+  <g transform="translate(260, 350)" filter="url(#circleShadow)">
+    <circle cx="0" cy="0" r="54" fill="url(#circleGradient)" stroke="#5ba3d0" stroke-width="3" opacity="0.98"/>
+    <circle cx="0" cy="0" r="54" fill="none" stroke="#ffffff" stroke-width="1.5" opacity="0.4"/>
+    <text y="-9" font-family="Arial, sans-serif" font-size="38" fill="#5ba3d0" text-anchor="middle" filter="drop-shadow(0 1px 2px rgba(0,0,0,0.1))">🏛️</text>
+    <text y="25" font-family="Arial, sans-serif" font-size="10.5" font-weight="700" fill="#5ba3d0" text-anchor="middle" letter-spacing="0.8">REPS</text>
+  </g>
+  
+  <!-- BOTTOM RIGHT: COURT (Polished with depth) -->
+  <g transform="translate(540, 350)" filter="url(#circleShadow)">
+    <circle cx="0" cy="0" r="54" fill="url(#circleGradient)" stroke="#5ba3d0" stroke-width="3" opacity="0.98"/>
+    <circle cx="0" cy="0" r="54" fill="none" stroke="#ffffff" stroke-width="1.5" opacity="0.4"/>
+    <text y="-9" font-family="Arial, sans-serif" font-size="38" fill="#5ba3d0" text-anchor="middle" filter="drop-shadow(0 1px 2px rgba(0,0,0,0.1))">⚖️</text>
+    <text y="25" font-family="Arial, sans-serif" font-size="10.5" font-weight="700" fill="#5ba3d0" text-anchor="middle" letter-spacing="0.8">COURT</text>
+  </g>
+  
+  <!-- Center text with refined styling -->
+  <g opacity="0.8">
+    <text x="400" y="240" font-family="Arial, sans-serif" font-size="15" font-weight="600" fill="#5ba3d0" text-anchor="middle" letter-spacing="1.5">MUTUAL</text>
+    <text x="400" y="260" font-family="Arial, sans-serif" font-size="15" font-weight="600" fill="#5ba3d0" text-anchor="middle" letter-spacing="1.5">ACCOUNTABILITY</text>
+  </g>
+</svg>

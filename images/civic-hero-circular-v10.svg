@@ -1,0 +1,318 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="800" height="500">
+  <defs>
+    <!-- Clean gradient background -->
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#e8f5f9;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#dceef5;stop-opacity:1" />
+    </linearGradient>
+    
+    <!-- Center glow -->
+    <radialGradient id="centerGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" style="stop-color:#fff;stop-opacity:0.6" />
+      <stop offset="100%" style="stop-color:#5ba3d0;stop-opacity:0" />
+    </radialGradient>
+    
+    <!-- Sharp, crisp circle gradient -->
+    <radialGradient id="circleGradient" cx="30%" cy="30%" r="70%">
+      <stop offset="0%" style="stop-color:#ffffff;stop-opacity:1" />
+      <stop offset="40%" style="stop-color:#fafcfe;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#e8f4f9;stop-opacity:1" />
+    </radialGradient>
+    
+    <!-- Sharp shadow for definition -->
+    <filter id="sharpShadow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="2"/>
+      <feOffset dx="0" dy="3" result="offsetblur"/>
+      <feComponentTransfer>
+        <feFuncA type="linear" slope="0.4"/>
+      </feComponentTransfer>
+      <feMerge>
+        <feMergeNode/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    
+    <!-- Crisp text rendering -->
+    <filter id="sharpen">
+      <feConvolveMatrix order="3" kernelMatrix="0 -1 0 -1 5 -1 0 -1 0"/>
+    </filter>
+    
+    <!-- Volumetric gradient for lines (orange) -->
+    <linearGradient id="volOrange" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#ff9800;stop-opacity:1">
+        <animate attributeName="stop-opacity" values="1;0.7;1" dur="2s" repeatCount="indefinite"/>
+      </stop>
+      <stop offset="50%" style="stop-color:#ffb74d;stop-opacity:1"/>
+      <stop offset="100%" style="stop-color:#ffa726;stop-opacity:0.8">
+        <animate attributeName="stop-opacity" values="0.8;1;0.8" dur="2s" repeatCount="indefinite"/>
+      </stop>
+    </linearGradient>
+    
+    <!-- Volumetric gradient for lines (green) -->
+    <linearGradient id="volGreen" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#4caf50;stop-opacity:0.9">
+        <animate attributeName="stop-opacity" values="0.9;0.6;0.9" dur="3s" repeatCount="indefinite"/>
+      </stop>
+      <stop offset="50%" style="stop-color:#81c784;stop-opacity:1"/>
+      <stop offset="100%" style="stop-color:#66bb6a;stop-opacity:0.7">
+        <animate attributeName="stop-opacity" values="0.7;0.9;0.7" dur="3s" repeatCount="indefinite"/>
+      </stop>
+    </linearGradient>
+    
+    <!-- Volumetric gradient for lines (blue) -->
+    <linearGradient id="volBlue" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#2196f3;stop-opacity:0.7">
+        <animate attributeName="stop-opacity" values="0.7;0.4;0.7" dur="4s" repeatCount="indefinite"/>
+      </stop>
+      <stop offset="50%" style="stop-color:#64b5f6;stop-opacity:0.9"/>
+      <stop offset="100%" style="stop-color:#42a5f5;stop-opacity:0.5">
+        <animate attributeName="stop-opacity" values="0.5;0.7;0.5" dur="4s" repeatCount="indefinite"/>
+      </stop>
+    </linearGradient>
+    
+    <!-- Glow filter for volumetric effect on lines -->
+    <filter id="lineGlow">
+      <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="800" height="500" fill="url(#bg)"/>
+  
+  <!-- Center glow -->
+  <circle cx="400" cy="250" r="180" fill="url(#centerGlow)"/>
+  
+  <!-- Subtle rings -->
+  <circle cx="400" cy="250" r="165" fill="none" stroke="#5ba3d0" stroke-width="1.5" stroke-dasharray="15 8" opacity="0.2"/>
+  
+  <!-- VOLUMETRIC ANIMATED LINES with texture -->
+  <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+    
+    <!-- Primary connections (Orange) with volume -->
+    <g filter="url(#lineGlow)">
+      <!-- Base volumetric line -->
+      <path d="M 365,135 Q 310,200 265,320" stroke="url(#volOrange)" stroke-width="5" opacity="0.3"/>
+      <path d="M 435,135 Q 490,200 535,320" stroke="url(#volOrange)" stroke-width="5" opacity="0.3"/>
+      <path d="M 315,355 Q 400,340 485,355" stroke="url(#volOrange)" stroke-width="5" opacity="0.3"/>
+      
+      <!-- Core animated line -->
+      <path d="M 365,135 Q 310,200 265,320" stroke="url(#volOrange)" stroke-width="3" stroke-dasharray="12 6">
+        <animate attributeName="stroke-dashoffset" from="0" to="18" dur="1.5s" repeatCount="indefinite"/>
+      </path>
+      <path d="M 435,135 Q 490,200 535,320" stroke="url(#volOrange)" stroke-width="3" stroke-dasharray="12 6">
+        <animate attributeName="stroke-dashoffset" from="0" to="18" dur="1.5s" repeatCount="indefinite"/>
+      </path>
+      <path d="M 315,355 Q 400,340 485,355" stroke="url(#volOrange)" stroke-width="3" stroke-dasharray="12 6">
+        <animate attributeName="stroke-dashoffset" from="0" to="18" dur="1.5s" repeatCount="indefinite"/>
+      </path>
+      
+      <!-- Highlight line for texture -->
+      <path d="M 365,135 Q 310,200 265,320" stroke="#ffe0b2" stroke-width="1" stroke-dasharray="8 10" opacity="0.6">
+        <animate attributeName="stroke-dashoffset" from="0" to="-18" dur="1.5s" repeatCount="indefinite"/>
+      </path>
+      <path d="M 435,135 Q 490,200 535,320" stroke="#ffe0b2" stroke-width="1" stroke-dasharray="8 10" opacity="0.6">
+        <animate attributeName="stroke-dashoffset" from="0" to="-18" dur="1.5s" repeatCount="indefinite"/>
+      </path>
+      <path d="M 315,355 Q 400,340 485,355" stroke="#ffe0b2" stroke-width="1" stroke-dasharray="8 10" opacity="0.6">
+        <animate attributeName="stroke-dashoffset" from="0" to="-18" dur="1.5s" repeatCount="indefinite"/>
+      </path>
+    </g>
+    
+    <!-- Secondary connections (Green) with volume -->
+    <g filter="url(#lineGlow)">
+      <!-- Base volumetric line -->
+      <path d="M 270,325 Q 330,230 360,140" stroke="url(#volGreen)" stroke-width="4" opacity="0.25"/>
+      <path d="M 530,325 Q 470,230 440,140" stroke="url(#volGreen)" stroke-width="4" opacity="0.25"/>
+      <path d="M 480,350 Q 400,365 320,350" stroke="url(#volGreen)" stroke-width="4" opacity="0.25"/>
+      
+      <!-- Core animated line -->
+      <path d="M 270,325 Q 330,230 360,140" stroke="url(#volGreen)" stroke-width="2.5" stroke-dasharray="10 7">
+        <animate attributeName="stroke-dashoffset" from="0" to="17" dur="2.5s" repeatCount="indefinite"/>
+      </path>
+      <path d="M 530,325 Q 470,230 440,140" stroke="url(#volGreen)" stroke-width="2.5" stroke-dasharray="10 7">
+        <animate attributeName="stroke-dashoffset" from="0" to="17" dur="2.5s" repeatCount="indefinite"/>
+      </path>
+      <path d="M 480,350 Q 400,365 320,350" stroke="url(#volGreen)" stroke-width="2.5" stroke-dasharray="10 7">
+        <animate attributeName="stroke-dashoffset" from="0" to="17" dur="2.5s" repeatCount="indefinite"/>
+      </path>
+      
+      <!-- Highlight line for texture -->
+      <path d="M 270,325 Q 330,230 360,140" stroke="#c8e6c9" stroke-width="1" stroke-dasharray="6 12" opacity="0.5">
+        <animate attributeName="stroke-dashoffset" from="0" to="-18" dur="2.5s" repeatCount="indefinite"/>
+      </path>
+      <path d="M 530,325 Q 470,230 440,140" stroke="#c8e6c9" stroke-width="1" stroke-dasharray="6 12" opacity="0.5">
+        <animate attributeName="stroke-dashoffset" from="0" to="-18" dur="2.5s" repeatCount="indefinite"/>
+      </path>
+      <path d="M 480,350 Q 400,365 320,350" stroke="#c8e6c9" stroke-width="1" stroke-dasharray="6 12" opacity="0.5">
+        <animate attributeName="stroke-dashoffset" from="0" to="-18" dur="2.5s" repeatCount="indefinite"/>
+      </path>
+    </g>
+    
+    <!-- Tertiary connections (Blue) with volume -->
+    <g filter="url(#lineGlow)">
+      <!-- Base volumetric line -->
+      <path d="M 380,145 Q 350,250 280,340" stroke="url(#volBlue)" stroke-width="3.5" opacity="0.2"/>
+      <path d="M 420,145 Q 450,250 520,340" stroke="url(#volBlue)" stroke-width="3.5" opacity="0.2"/>
+      <path d="M 290,360 Q 400,380 510,360" stroke="url(#volBlue)" stroke-width="3.5" opacity="0.2"/>
+      
+      <!-- Core animated line -->
+      <path d="M 380,145 Q 350,250 280,340" stroke="url(#volBlue)" stroke-width="2" stroke-dasharray="8 8">
+        <animate attributeName="stroke-dashoffset" from="0" to="16" dur="3.5s" repeatCount="indefinite"/>
+      </path>
+      <path d="M 420,145 Q 450,250 520,340" stroke="url(#volBlue)" stroke-width="2" stroke-dasharray="8 8">
+        <animate attributeName="stroke-dashoffset" from="0" to="16" dur="3.5s" repeatCount="indefinite"/>
+      </path>
+      <path d="M 290,360 Q 400,380 510,360" stroke="url(#volBlue)" stroke-width="2" stroke-dasharray="8 8">
+        <animate attributeName="stroke-dashoffset" from="0" to="16" dur="3.5s" repeatCount="indefinite"/>
+      </path>
+    </g>
+    
+    <!-- MOVING PARTICLES along paths -->
+    <!-- Orange path particles -->
+    <circle r="3.5" fill="#ff9800" opacity="0.9">
+      <animateMotion dur="3s" repeatCount="indefinite">
+        <mpath href="#path1"/>
+      </animateMotion>
+      <animate attributeName="opacity" values="0.3;1;0.3" dur="3s" repeatCount="indefinite"/>
+    </circle>
+    <circle r="3.5" fill="#ff9800" opacity="0.9">
+      <animateMotion dur="3s" repeatCount="indefinite" begin="1s">
+        <mpath href="#path1"/>
+      </animateMotion>
+      <animate attributeName="opacity" values="0.3;1;0.3" dur="3s" repeatCount="indefinite" begin="1s"/>
+    </circle>
+    <circle r="3.5" fill="#ff9800" opacity="0.9">
+      <animateMotion dur="3s" repeatCount="indefinite" begin="2s">
+        <mpath href="#path1"/>
+      </animateMotion>
+      <animate attributeName="opacity" values="0.3;1;0.3" dur="3s" repeatCount="indefinite" begin="2s"/>
+    </circle>
+    
+    <circle r="3.5" fill="#ff9800" opacity="0.9">
+      <animateMotion dur="3s" repeatCount="indefinite">
+        <mpath href="#path2"/>
+      </animateMotion>
+      <animate attributeName="opacity" values="0.3;1;0.3" dur="3s" repeatCount="indefinite"/>
+    </circle>
+    <circle r="3.5" fill="#ff9800" opacity="0.9">
+      <animateMotion dur="3s" repeatCount="indefinite" begin="1s">
+        <mpath href="#path2"/>
+      </animateMotion>
+      <animate attributeName="opacity" values="0.3;1;0.3" dur="3s" repeatCount="indefinite" begin="1s"/>
+    </circle>
+    
+    <circle r="3.5" fill="#ff9800" opacity="0.9">
+      <animateMotion dur="3s" repeatCount="indefinite">
+        <mpath href="#path3"/>
+      </animateMotion>
+      <animate attributeName="opacity" values="0.3;1;0.3" dur="3s" repeatCount="indefinite"/>
+    </circle>
+    <circle r="3.5" fill="#ff9800" opacity="0.9">
+      <animateMotion dur="3s" repeatCount="indefinite" begin="1.5s">
+        <mpath href="#path3"/>
+      </animateMotion>
+      <animate attributeName="opacity" values="0.3;1;0.3" dur="3s" repeatCount="indefinite" begin="1.5s"/>
+    </circle>
+    
+    <!-- Green path particles -->
+    <circle r="2.5" fill="#4caf50" opacity="0.8">
+      <animateMotion dur="4s" repeatCount="indefinite">
+        <mpath href="#path4"/>
+      </animateMotion>
+      <animate attributeName="opacity" values="0.3;1;0.3" dur="4s" repeatCount="indefinite"/>
+    </circle>
+    <circle r="2.5" fill="#4caf50" opacity="0.8">
+      <animateMotion dur="4s" repeatCount="indefinite" begin="2s">
+        <mpath href="#path4"/>
+      </animateMotion>
+      <animate attributeName="opacity" values="0.3;1;0.3" dur="4s" repeatCount="indefinite" begin="2s"/>
+    </circle>
+    
+    <circle r="2.5" fill="#4caf50" opacity="0.8">
+      <animateMotion dur="4s" repeatCount="indefinite">
+        <mpath href="#path5"/>
+      </animateMotion>
+      <animate attributeName="opacity" values="0.3;1;0.3" dur="4s" repeatCount="indefinite"/>
+    </circle>
+    <circle r="2.5" fill="#4caf50" opacity="0.8">
+      <animateMotion dur="4s" repeatCount="indefinite" begin="2s">
+        <mpath href="#path5"/>
+      </animateMotion>
+      <animate attributeName="opacity" values="0.3;1;0.3" dur="4s" repeatCount="indefinite" begin="2s"/>
+    </circle>
+    
+    <circle r="2.5" fill="#4caf50" opacity="0.8">
+      <animateMotion dur="4s" repeatCount="indefinite">
+        <mpath href="#path6"/>
+      </animateMotion>
+      <animate attributeName="opacity" values="0.3;1;0.3" dur="4s" repeatCount="indefinite"/>
+    </circle>
+    
+    <!-- Blue path particles -->
+    <circle r="2" fill="#2196f3" opacity="0.7">
+      <animateMotion dur="5s" repeatCount="indefinite">
+        <mpath href="#path7"/>
+      </animateMotion>
+      <animate attributeName="opacity" values="0.2;0.9;0.2" dur="5s" repeatCount="indefinite"/>
+    </circle>
+    <circle r="2" fill="#2196f3" opacity="0.7">
+      <animateMotion dur="5s" repeatCount="indefinite">
+        <mpath href="#path8"/>
+      </animateMotion>
+      <animate attributeName="opacity" values="0.2;0.9;0.2" dur="5s" repeatCount="indefinite"/>
+    </circle>
+    <circle r="2" fill="#2196f3" opacity="0.7">
+      <animateMotion dur="5s" repeatCount="indefinite">
+        <mpath href="#path9"/>
+      </animateMotion>
+      <animate attributeName="opacity" values="0.2;0.9;0.2" dur="5s" repeatCount="indefinite"/>
+    </circle>
+  </g>
+  
+  <!-- Hidden path definitions for particle motion -->
+  <defs>
+    <path id="path1" d="M 365,135 Q 310,200 265,320"/>
+    <path id="path2" d="M 435,135 Q 490,200 535,320"/>
+    <path id="path3" d="M 315,355 Q 400,340 485,355"/>
+    <path id="path4" d="M 270,325 Q 330,230 360,140"/>
+    <path id="path5" d="M 530,325 Q 470,230 440,140"/>
+    <path id="path6" d="M 480,350 Q 400,365 320,350"/>
+    <path id="path7" d="M 380,145 Q 350,250 280,340"/>
+    <path id="path8" d="M 420,145 Q 450,250 520,340"/>
+    <path id="path9" d="M 290,360 Q 400,380 510,360"/>
+  </defs>
+  
+  <!-- TOP: CITIZENS (Sharp & Crisp) -->
+  <g transform="translate(400, 110)" filter="url(#sharpShadow)">
+    <circle cx="0" cy="0" r="56" fill="url(#circleGradient)" stroke="#4a8cb8" stroke-width="3.5" opacity="1"/>
+    <circle cx="0" cy="0" r="56" fill="none" stroke="#ffffff" stroke-width="2" opacity="0.5"/>
+    <text y="-11" font-family="Arial, sans-serif" font-size="40" font-weight="600" fill="#4a8cb8" text-anchor="middle" style="paint-order: stroke; stroke: #ffffff; stroke-width: 0.5px;">👥</text>
+    <text y="24" font-family="Arial, sans-serif" font-size="11" font-weight="700" fill="#4a8cb8" text-anchor="middle" letter-spacing="0.8" style="paint-order: stroke; stroke: #ffffff; stroke-width: 0.3px;">CITIZENS</text>
+  </g>
+  
+  <!-- BOTTOM LEFT: REPRESENTATIVES (Sharp & Crisp) -->
+  <g transform="translate(260, 350)" filter="url(#sharpShadow)">
+    <circle cx="0" cy="0" r="56" fill="url(#circleGradient)" stroke="#4a8cb8" stroke-width="3.5" opacity="1"/>
+    <circle cx="0" cy="0" r="56" fill="none" stroke="#ffffff" stroke-width="2" opacity="0.5"/>
+    <text y="-8" font-family="Arial, sans-serif" font-size="40" font-weight="600" fill="#4a8cb8" text-anchor="middle" style="paint-order: stroke; stroke: #ffffff; stroke-width: 0.5px;">🏛️</text>
+    <text y="26" font-family="Arial, sans-serif" font-size="11" font-weight="700" fill="#4a8cb8" text-anchor="middle" letter-spacing="0.8" style="paint-order: stroke; stroke: #ffffff; stroke-width: 0.3px;">REPS</text>
+  </g>
+  
+  <!-- BOTTOM RIGHT: COURT (Sharp & Crisp) -->
+  <g transform="translate(540, 350)" filter="url(#sharpShadow)">
+    <circle cx="0" cy="0" r="56" fill="url(#circleGradient)" stroke="#4a8cb8" stroke-width="3.5" opacity="1"/>
+    <circle cx="0" cy="0" r="56" fill="none" stroke="#ffffff" stroke-width="2" opacity="0.5"/>
+    <text y="-8" font-family="Arial, sans-serif" font-size="40" font-weight="600" fill="#4a8cb8" text-anchor="middle" style="paint-order: stroke; stroke: #ffffff; stroke-width: 0.5px;">⚖️</text>
+    <text y="26" font-family="Arial, sans-serif" font-size="11" font-weight="700" fill="#4a8cb8" text-anchor="middle" letter-spacing="0.8" style="paint-order: stroke; stroke: #ffffff; stroke-width: 0.3px;">COURT</text>
+  </g>
+  
+  <!-- Center text -->
+  <g opacity="0.75">
+    <text x="400" y="240" font-family="Arial, sans-serif" font-size="15" font-weight="600" fill="#5ba3d0" text-anchor="middle" letter-spacing="1.5">MUTUAL</text>
+    <text x="400" y="260" font-family="Arial, sans-serif" font-size="15" font-weight="600" fill="#5ba3d0" text-anchor="middle" letter-spacing="1.5">ACCOUNTABILITY</text>
+  </g>
+</svg>

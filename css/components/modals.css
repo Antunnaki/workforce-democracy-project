@@ -1,0 +1,506 @@
+/**
+ * MODALS & OVERLAYS
+ * Version: 37.11.4-PHASE3C-PRIORITY
+ * Date: 2025-01-14
+ * 
+ * All modal dialog windows: share modal, bill text modal, language modal, 
+ * generic modal, and loading indicator.
+ * 
+ * Dependencies:
+ * - variables.css (design tokens)
+ * - buttons.css (button styles)
+ * 
+ * Components:
+ * - .share-modal - Social sharing modal
+ * - .bill-text-modal - Full bill text viewer
+ * - .modal-overlay/.modal-container - Generic modal system
+ * - .language-modal - Language selection modal
+ * - .loading-indicator - Loading spinner overlay
+ * 
+ * Accessibility:
+ * - Keyboard trap (managed by JS)
+ * - Focus indicators
+ * - ARIA labels (in HTML)
+ */
+
+/* ============================================
+   SHARE MODAL
+   ============================================ */
+.share-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.7);
+  z-index: var(--z-modal-backdrop);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-md);
+  backdrop-filter: blur(4px);
+}
+
+.share-modal {
+  background: var(--surface);
+  border-radius: var(--radius-lg);
+  max-width: 600px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: var(--shadow-xl);
+}
+
+.share-modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--space-lg);
+  border-bottom: 1px solid var(--border-light);
+}
+
+.share-modal-header h3 {
+  margin: 0;
+  color: var(--text);
+}
+
+.share-modal-close {
+  background: transparent;
+  border: none;
+  color: var(--text-secondary);
+  font-size: var(--font-size-xl);
+  cursor: pointer;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: all var(--transition-fast);
+}
+
+.share-modal-close:hover {
+  background: var(--background);
+  color: var(--text);
+}
+
+.share-modal-content {
+  padding: var(--space-lg);
+}
+
+.share-privacy-note {
+  background: rgba(76, 175, 80, 0.1);
+  color: var(--success);
+  padding: var(--space-md);
+  border-radius: var(--radius-md);
+  border-left: 4px solid var(--success);
+  margin-bottom: var(--space-lg);
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  font-size: var(--font-size-sm);
+}
+
+.share-buttons-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-sm);
+  margin-bottom: var(--space-lg);
+}
+
+@media (min-width: 480px) {
+  .share-buttons-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.share-platform-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-xs);
+  padding: var(--space-md);
+  border-radius: var(--radius-md);
+  text-decoration: none;
+  color: white;
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  transition: all var(--transition-fast);
+  min-height: 80px;
+}
+
+.share-platform-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.share-platform-btn i {
+  font-size: var(--font-size-2xl);
+}
+
+.share-platform-btn.twitter { background: #1DA1F2; }
+.share-platform-btn.facebook { background: #1877F2; }
+.share-platform-btn.linkedin { background: #0A66C2; }
+.share-platform-btn.whatsapp { background: #25D366; }
+.share-platform-btn.telegram { background: #0088cc; }
+.share-platform-btn.reddit { background: #FF4500; }
+.share-platform-btn.email { background: #6B7280; }
+.share-platform-btn.sms { background: #10B981; }
+
+.share-copy-section {
+  display: flex;
+  gap: var(--space-sm);
+}
+
+.share-copy-input {
+  flex: 1;
+  padding: var(--space-sm) var(--space-md);
+  border: 2px solid var(--border);
+  border-radius: var(--radius-md);
+  font-size: var(--font-size-sm);
+  color: var(--text);
+  background: var(--background);
+}
+
+.share-copy-btn {
+  padding: var(--space-sm) var(--space-lg);
+  background: var(--primary);
+  color: white;
+  border: none;
+  border-radius: var(--radius-md);
+  font-weight: var(--font-weight-semibold);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  white-space: nowrap;
+}
+
+.share-copy-btn:hover {
+  background: var(--primary-dark);
+}
+
+/* ============================================
+   BILL TEXT MODAL
+   ============================================ */
+.bill-text-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.7);
+  z-index: var(--z-modal-backdrop);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-md);
+  backdrop-filter: blur(4px);
+}
+
+.bill-text-modal {
+  background: var(--surface);
+  border-radius: var(--radius-lg);
+  max-width: 900px;
+  width: 100%;
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  box-shadow: var(--shadow-xl);
+}
+
+.bill-text-modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--space-lg);
+  border-bottom: 1px solid var(--border-light);
+  flex-shrink: 0;
+}
+
+.bill-text-modal-header h3 {
+  margin: 0;
+  color: var(--text);
+  font-size: var(--font-size-lg);
+}
+
+.bill-text-modal-close {
+  background: transparent;
+  border: none;
+  color: var(--text-secondary);
+  font-size: var(--font-size-xl);
+  cursor: pointer;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: all var(--transition-fast);
+}
+
+.bill-text-modal-close:hover {
+  background: var(--background);
+  color: var(--text);
+}
+
+.bill-text-modal-content {
+  padding: var(--space-lg);
+  overflow-y: auto;
+  flex: 1;
+}
+
+.bill-full-text {
+  color: var(--text-secondary);
+  line-height: var(--line-height-relaxed);
+  margin-bottom: var(--space-lg);
+}
+
+.bill-official-link {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: var(--space-md) var(--space-lg);
+  background: var(--primary);
+  color: white;
+  text-decoration: none;
+  border-radius: var(--radius-md);
+  font-weight: var(--font-weight-semibold);
+  transition: all var(--transition-fast);
+}
+
+.bill-official-link:hover {
+  background: var(--primary-dark);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+/* ============================================
+   GENERIC MODAL SYSTEM
+   ============================================ */
+.modal-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(30, 24, 18, 0.85); /* Warm dark brown overlay */
+  z-index: var(--z-modal-backdrop);
+  backdrop-filter: blur(6px);
+}
+
+.modal-overlay.active {
+  display: block;
+}
+
+.modal-container {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  /* Background set by consolidated section at end of CSS */
+  border-radius: var(--radius-lg);
+  max-width: 900px;
+  width: 95%;
+  max-height: 90vh;
+  overflow-y: auto;
+  z-index: var(--z-modal);
+  padding: var(--space-2xl);
+  /* Colors set by consolidated section at end of CSS */
+}
+
+.modal-container.active {
+  display: block;
+}
+
+@media (min-width: 768px) {
+  .modal-container {
+    width: 85%;
+  }
+}
+
+@media (min-width: 1024px) {
+  .modal-container {
+    width: 80%;
+  }
+}
+
+/* ============================================
+   LANGUAGE SELECTOR MODAL
+   ============================================ */
+.language-modal {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  /* Background set by consolidated section at end of CSS */
+  border-radius: var(--radius-lg);
+  max-width: 400px;
+  width: 90%;
+  z-index: var(--z-modal);
+  overflow: hidden;
+}
+
+.language-modal.active {
+  display: block;
+}
+
+.language-modal-header {
+  /* Background and color set by consolidated section at end of CSS */
+  padding: var(--space-lg) var(--space-xl);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.language-modal-title {
+  margin: 0;
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-bold);
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  color: white;
+}
+
+.language-modal-title i {
+  font-size: var(--font-size-2xl);
+  color: var(--secondary);
+}
+
+.language-modal-close {
+  background: transparent;
+  border: none;
+  color: white;
+  font-size: var(--font-size-xl);
+  cursor: pointer;
+  padding: var(--space-xs);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-md);
+  transition: all var(--transition-base);
+}
+
+.language-modal-close:hover {
+  background: rgba(255, 255, 255, 0.25);
+  transform: scale(1.1);
+}
+
+.language-modal-close:focus {
+  outline: 2px solid white;
+  outline-offset: 2px;
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.language-modal-content {
+  padding: var(--space-xl);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.language-option {
+  /* Background and colors set by consolidated section at end of CSS */
+  border-radius: var(--radius-md);
+  padding: var(--space-lg) var(--space-xl);
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  cursor: pointer;
+  transition: all var(--transition-base);
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-medium);
+  text-align: left;
+}
+
+.language-option:hover {
+  /* Hover styles set by consolidated section at end of CSS */
+  transform: translateX(6px);
+}
+
+.language-option:active {
+  transform: translateX(6px) scale(0.98);
+  border-color: var(--secondary-dark);
+}
+
+.language-option:focus {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+.language-flag {
+  font-size: var(--font-size-2xl);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 40px;
+}
+
+.language-name {
+  flex: 1;
+  font-size: var(--font-size-lg);
+}
+
+/* Mobile optimization */
+@media (max-width: 480px) {
+  .language-modal {
+    width: 95%;
+    max-width: none;
+  }
+  
+  .language-modal-header {
+    padding: var(--space-md) var(--space-lg);
+  }
+  
+  .language-modal-title {
+    font-size: var(--font-size-lg);
+  }
+  
+  .language-modal-content {
+    padding: var(--space-lg);
+  }
+  
+  .language-option {
+    padding: var(--space-md) var(--space-lg);
+  }
+}
+
+/* ============================================
+   LOADING INDICATOR
+   ============================================ */
+.loading-indicator {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: var(--surface);
+  padding: var(--space-2xl);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-xl);
+  z-index: var(--z-modal);
+  text-align: center;
+}
+
+.loading-indicator.active {
+  display: block;
+}
+
+.spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid var(--border);
+  border-top-color: var(--primary);
+  border-radius: var(--radius-full);
+  animation: spin 0.8s linear infinite;
+  margin: 0 auto var(--space-md);
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}

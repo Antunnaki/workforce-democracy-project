@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" role="img" aria-label="Universal Capacity for Change">
+  <defs>
+    <linearGradient id="changeGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#7FB069;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#5D8A47;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Caterpillar transforming into butterfly -->
+  <circle cx="100" cy="100" r="90" fill="#F5F5DC" opacity="0.2"/>
+  
+  <!-- Caterpillar (left) -->
+  <g opacity="0.6">
+    <circle cx="50" cy="120" r="8" fill="#8B7355"/>
+    <circle cx="58" cy="118" r="7" fill="#8B7355"/>
+    <circle cx="65" cy="117" r="7" fill="#8B7355"/>
+    <circle cx="72" cy="116" r="6" fill="#8B7355"/>
+    <circle cx="48" cy="118" r="2" fill="#2C1F14"/>
+    <circle cx="52" cy="118" r="2" fill="#2C1F14"/>
+  </g>
+  
+  <!-- Transformation spiral/chrysalis (center) -->
+  <ellipse cx="100" cy="110" rx="18" ry="30" fill="#CD853F" opacity="0.7" stroke="#8B6F47" stroke-width="2"/>
+  <path d="M 100 85 Q 95 95 100 105 Q 105 115 100 125 Q 95 135 100 135" 
+        fill="none" stroke="#8B6F47" stroke-width="2" opacity="0.6"/>
+  
+  <!-- Arrow of transformation -->
+  <path d="M 75 100 L 90 100 L 85 95 M 90 100 L 85 105" 
+        stroke="#FFD700" stroke-width="3" stroke-linecap="round" opacity="0.8"/>
+  <path d="M 110 100 L 125 100 L 120 95 M 125 100 L 120 105" 
+        stroke="#FFD700" stroke-width="3" stroke-linecap="round" opacity="0.8"/>
+  
+  <!-- Butterfly (right) -->
+  <g transform="translate(150, 95)">
+    <!-- Body -->
+    <ellipse cx="0" cy="0" rx="4" ry="15" fill="#5D4E37"/>
+    <circle cx="0" cy="-12" r="4" fill="#5D4E37"/>
+    
+    <!-- Antennae -->
+    <path d="M -2 -15 Q -5 -22 -7 -20" fill="none" stroke="#5D4E37" stroke-width="1.5"/>
+    <path d="M 2 -15 Q 5 -22 7 -20" fill="none" stroke="#5D4E37" stroke-width="1.5"/>
+    <circle cx="-7" cy="-20" r="1.5" fill="#5D4E37"/>
+    <circle cx="7" cy="-20" r="1.5" fill="#5D4E37"/>
+    
+    <!-- Wings -->
+    <ellipse cx="-12" cy="-5" rx="15" ry="20" fill="url(#changeGrad)" opacity="0.8" stroke="#5D8A47" stroke-width="2"/>
+    <ellipse cx="12" cy="-5" rx="15" ry="20" fill="url(#changeGrad)" opacity="0.8" stroke="#5D8A47" stroke-width="2"/>
+    <ellipse cx="-10" cy="8" rx="10" ry="12" fill="#A0826D" opacity="0.8" stroke="#8B6F47" stroke-width="2"/>
+    <ellipse cx="10" cy="8" rx="10" ry="12" fill="#A0826D" opacity="0.8" stroke="#8B6F47" stroke-width="2"/>
+    
+    <!-- Wing patterns -->
+    <circle cx="-12" cy="-5" r="4" fill="#FFD700" opacity="0.6"/>
+    <circle cx="12" cy="-5" r="4" fill="#FFD700" opacity="0.6"/>
+  </g>
+  
+  <!-- Growth text -->
+  <text x="100" y="165" text-anchor="middle" font-family="Inter" font-size="14" font-weight="600" fill="#7FB069">GROWTH</text>
+</svg>

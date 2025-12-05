@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" role="img" aria-label="Continuous Learning">
+  <defs>
+    <linearGradient id="learningGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#4A90E2;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#357ABD;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Open book with growth spiral -->
+  <circle cx="100" cy="100" r="90" fill="#F5F5DC" opacity="0.2"/>
+  
+  <!-- Open book -->
+  <path d="M 60 90 L 60 140 Q 60 145 65 145 L 95 145 L 95 90 Z" 
+        fill="url(#learningGrad)" stroke="#357ABD" stroke-width="2"/>
+  <path d="M 105 90 L 105 145 L 135 145 Q 140 145 140 140 L 140 90 Z" 
+        fill="url(#learningGrad)" stroke="#357ABD" stroke-width="2"/>
+  <path d="M 95 90 L 100 85 L 105 90" fill="none" stroke="#357ABD" stroke-width="2"/>
+  
+  <!-- Pages -->
+  <line x1="70" y1="100" x2="88" y2="100" stroke="#F5F5DC" stroke-width="1.5" opacity="0.6"/>
+  <line x1="70" y1="108" x2="88" y2="108" stroke="#F5F5DC" stroke-width="1.5" opacity="0.6"/>
+  <line x1="70" y1="116" x2="88" y2="116" stroke="#F5F5DC" stroke-width="1.5" opacity="0.6"/>
+  <line x1="112" y1="100" x2="130" y2="100" stroke="#F5F5DC" stroke-width="1.5" opacity="0.6"/>
+  <line x1="112" y1="108" x2="130" y2="108" stroke="#F5F5DC" stroke-width="1.5" opacity="0.6"/>
+  <line x1="112" y1="116" x2="130" y2="116" stroke="#F5F5DC" stroke-width="1.5" opacity="0.6"/>
+  
+  <!-- Growth spiral above -->
+  <path d="M 100 70 Q 105 65 110 70 Q 115 75 110 80 Q 105 85 100 80 Q 92 75 98 68" 
+        fill="none" stroke="#7FB069" stroke-width="3" stroke-linecap="round"/>
+  
+  <!-- Stars of knowledge -->
+  <path d="M 85 60 L 87 65 L 92 65 L 88 68 L 90 73 L 85 70 L 80 73 L 82 68 L 78 65 L 83 65 Z" fill="#FFD700"/>
+  <path d="M 115 55 L 117 60 L 122 60 L 118 63 L 120 68 L 115 65 L 110 68 L 112 63 L 108 60 L 113 60 Z" fill="#FFD700"/>
+  
+  <!-- Arrow pointing up (growth) -->
+  <path d="M 100 45 L 95 52 L 98 52 L 98 60 L 102 60 L 102 52 L 105 52 Z" fill="#CD853F"/>
+</svg>

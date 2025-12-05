@@ -1,0 +1,115 @@
+# ⚡ ONE-COMMAND DEPLOYMENT ⚡
+
+## Copy and paste this SINGLE LINE into your Mac Terminal:
+
+```bash
+cd "/Users/acejrowski/Desktop/AG/WORKFORCE DEMOCRACY PROJECT/SITE FILES/WDP-v37.18.0/backend" && scp DIAGNOSE-DEEP-RESEARCH-v37.18.4.sh FIX-DEEP-RESEARCH-CALL-v37.18.4.js DEPLOY-DEEP-RESEARCH-FIX-v37.18.4.sh root@185.193.126.13:/var/www/workforce-democracy/version-b/backend/ && ssh root@185.193.126.13 'cd /var/www/workforce-democracy/version-b/backend && chmod +x DEPLOY-DEEP-RESEARCH-FIX-v37.18.4.sh && ./DEPLOY-DEEP-RESEARCH-FIX-v37.18.4.sh'
+```
+
+## What it does:
+
+1. ✅ Changes to your project directory
+2. ✅ Uploads all 3 files to VPS Version B
+3. ✅ SSHs into VPS
+4. ✅ Makes the deployment script executable
+5. ✅ Runs the deployment
+6. ✅ Shows you the results
+
+## That's literally it!
+
+Just copy the command above, paste it into Terminal, press Enter, and watch it work.
+
+---
+
+## Alternative: Separate Commands (if one-liner fails)
+
+If the one-liner doesn't work, run these commands one at a time:
+
+### 1. Upload files:
+```bash
+cd "/Users/acejrowski/Desktop/AG/WORKFORCE DEMOCRACY PROJECT/SITE FILES/WDP-v37.18.0/backend"
+
+scp DIAGNOSE-DEEP-RESEARCH-v37.18.4.sh root@185.193.126.13:/var/www/workforce-democracy/version-b/backend/
+
+scp FIX-DEEP-RESEARCH-CALL-v37.18.4.js root@185.193.126.13:/var/www/workforce-democracy/version-b/backend/
+
+scp DEPLOY-DEEP-RESEARCH-FIX-v37.18.4.sh root@185.193.126.13:/var/www/workforce-democracy/version-b/backend/
+```
+
+### 2. SSH and deploy:
+```bash
+ssh root@185.193.126.13
+
+cd /var/www/workforce-democracy/version-b/backend
+
+chmod +x DEPLOY-DEEP-RESEARCH-FIX-v37.18.4.sh
+
+./DEPLOY-DEEP-RESEARCH-FIX-v37.18.4.sh
+```
+
+---
+
+## Expected Output:
+
+```
+DIAGNOSE-DEEP-RESEARCH-v37.18.4.sh      100%   3KB   1.5MB/s   00:00
+FIX-DEEP-RESEARCH-CALL-v37.18.4.js      100%   6KB   3.0MB/s   00:00
+DEPLOY-DEEP-RESEARCH-FIX-v37.18.4.sh    100%   3KB   1.5MB/s   00:00
+
+🔧 DEEP RESEARCH FIX DEPLOYMENT - v37.18.4
+===========================================
+
+📊 STEP 1: Run Diagnostic
+✅ deep-research.js EXISTS
+✅ Found searchRepresentativeVotingRecord function
+
+📊 STEP 2: Apply Fix
+✅ Backed up to: deep-research-BACKUP-before-call-fix-1732589822.js
+✅ FIX APPLIED: Added searchCongressGovBills call
+
+📊 STEP 3: Verify Syntax
+✅ Syntax check passed
+
+📊 STEP 4: Restart Backend
+✅ Service restarted
+
+📊 STEP 5: Verify Service
+● workforce-backend-b.service - Workforce Democracy Backend B
+   Active: active (running)
+
+📊 STEP 6: Test Deep Research
+Job ID: abc-123-xyz
+Waiting 30 seconds for processing...
+
+📊 STEP 7: Check Results
+🏛️ Checking for Congress.gov sources:
+{
+  "title": "H.R. 6249 - Substance Use Services Act",
+  "url": "https://api.congress.gov/v3/bill/118/hr/6249",
+  "type": "congress_bill",
+  "relevanceScore": 500
+}
+
+🎉 DEPLOYMENT COMPLETE!
+```
+
+---
+
+## Next Steps:
+
+1. **Test on GenSpark:**
+   - URL: https://sxcrlfyt.gensparkspace.com
+   - ZIP: 12061
+   - Ask: "How has Chuck Schumer voted on healthcare?"
+   - Expect: Congress.gov bill citations
+
+2. **Deploy to Production** (after testing):
+   ```bash
+   ssh root@185.193.126.13
+   cd /var/www/workforce-democracy/deployment-scripts
+   ./sync-b-to-a.sh
+   ```
+
+---
+
+**Ready?** Copy the one-liner at the top and paste it into your Mac Terminal! 🚀

@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Netlify Citation Diagnostic</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 16px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+        h1 {
+            color: #667eea;
+            margin-bottom: 10px;
+            font-size: 32px;
+        }
+        .subtitle {
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 16px;
+        }
+        .netlify-badge {
+            display: inline-block;
+            background: #00c7b7;
+            color: white;
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+        .section {
+            background: #f8f9fa;
+            border-left: 4px solid #667eea;
+            padding: 25px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+        .section-title {
+            font-size: 20px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .status-badge {
+            display: inline-block;
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: bold;
+            margin-left: auto;
+        }
+        .status-pass { background: #10b981; color: white; }
+        .status-fail { background: #ef4444; color: white; }
+        .status-warning { background: #f59e0b; color: white; }
+        .status-info { background: #3b82f6; color: white; }
+        .result-box {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+            margin: 15px 0;
+            font-family: 'Courier New', monospace;
+            font-size: 13px;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+        .result-box.pass {
+            border-left: 4px solid #10b981;
+            background: #f0fdf4;
+        }
+        .result-box.fail {
+            border-left: 4px solid #ef4444;
+            background: #fef2f2;
+        }
+        .result-box.warning {
+            border-left: 4px solid #f59e0b;
+            background: #fffbeb;
+        }
+        .code-block {
+            background: #1f2937;
+            color: #10b981;
+            padding: 20px;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            font-size: 13px;
+            overflow-x: auto;
+            margin: 15px 0;
+        }
+        .action-buttons {
+            display: flex;
+            gap: 10px;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+        .btn {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 14px 28px;
+            border-radius: 8px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .btn:hover {
+            background: #5568d3;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+        }
+        .btn:active {
+            transform: translateY(0);
+        }
+        .btn-secondary {
+            background: #64748b;
+        }
+        .btn-secondary:hover {
+            background: #475569;
+        }
+        .critical-issue {
+            background: #fef2f2;
+            border: 3px solid #ef4444;
+            padding: 25px;
+            border-radius: 12px;
+            margin: 25px 0;
+        }
+        .critical-title {
+            color: #ef4444;
+            font-size: 22px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .fix-box {
+            background: #f0fdf4;
+            border: 3px solid #10b981;
+            padding: 25px;
+            border-radius: 12px;
+            margin: 25px 0;
+        }
+        .fix-title {
+            color: #10b981;
+            font-size: 22px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .file-url {
+            background: #1f2937;
+            color: #60a5fa;
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+            display: inline-block;
+            margin: 5px 0;
+        }
+        .test-area {
+            background: #f8f9fa;
+            border: 2px dashed #cbd5e1;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 15px 0;
+        }
+        .test-input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #cbd5e1;
+            border-radius: 6px;
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+        .test-output {
+            background: white;
+            padding: 15px;
+            border-radius: 6px;
+            border: 1px solid #ddd;
+            min-height: 60px;
+            font-family: 'Courier New', monospace;
+            font-size: 13px;
+        }
+        .spinner {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid #f3f4f6;
+            border-top-color: #667eea;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="netlify-badge">🌐 NETLIFY DEPLOYMENT</div>
+        <h1>🔬 Netlify Citation System Diagnostic</h1>
+        <div class="subtitle">
+            Checking what version of markdown-renderer.js Netlify deployed and why citations aren't working
+        </div>
+
+        <div class="action-buttons">
+            <button class="btn" onclick="runFullDiagnostic()">🚀 Run Full Diagnostic</button>
+            <button class="btn btn-secondary" onclick="testFunctionDirectly()">🧪 Test Function Directly</button>
+            <button class="btn btn-secondary" onclick="checkNetlifyCache()">📦 Check Netlify Cache</button>
+            <button class="btn btn-secondary" onclick="clearResults()">🗑️ Clear Results</button>
+        </div>
+
+        <div id="results"></div>
+
+        <!-- Live Test Area -->
+        <div class="section">
+            <div class="section-title">
+                🧪 Live Function Test
+                <span class="status-badge status-info">INTERACTIVE</span>
+            </div>
+            <div class="test-area">
+                <label for="test-input" style="display: block; margin-bottom: 10px; font-weight: 600;">
+                    Test Input (text with [1] citation):
+                </label>
+                <input 
+                    type="text" 
+                    id="test-input" 
+                    class="test-input" 
+                    value="Test __bold__[1] text with citation"
+                    placeholder="Enter text with [1] citation..."
+                />
+                <button class="btn" onclick="testLiveInput()">▶️ Process Text</button>
+                
+                <div style="margin-top: 15px;">
+                    <strong>Output:</strong>
+                    <div id="test-live-output" class="test-output">
+                        <span style="color: #94a3b8;">Click "Process Text" to see result...</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Load the actual scripts to test -->
+    <script src="js/citation-renderer.js"></script>
+    <script src="js/markdown-renderer.js"></script>
+
+    <script>
+        const resultsDiv = document.getElementById('results');
+        let diagnosticResults = [];
+
+        function clearResults() {
+            resultsDiv.innerHTML = '';
+            diagnosticResults = [];
+        }
+
+        function addSection(title, content, status = 'info') {
+            const section = document.createElement('div');
+            section.className = 'section';
+            section.innerHTML = `
+                <div class="section-title">
+                    ${title}
+                    <span class="status-badge status-${status}">${status.toUpperCase()}</span>
+                </div>
+                <div class="result-box ${status}">
+${content}
+                </div>
+            `;
+            resultsDiv.appendChild(section);
+            
+            diagnosticResults.push({ title, content, status });
+        }
+
+        function addCriticalIssue(title, description, fix) {
+            const section = document.createElement('div');
+            section.className = 'critical-issue';
+            section.innerHTML = `
+                <div class="critical-title">
+                    ❌ ${title}
+                </div>
+                <div style="margin-bottom: 20px; line-height: 1.6;">
+                    ${description}
+                </div>
+            `;
+            resultsDiv.appendChild(section);
+
+            if (fix) {
+                const fixSection = document.createElement('div');
+                fixSection.className = 'fix-box';
+                fixSection.innerHTML = `
+                    <div class="fix-title">
+                        ✅ How to Fix This
+                    </div>
+                    <div style="line-height: 1.6;">
+                        ${fix}
+                    </div>
+                `;
+                resultsDiv.appendChild(fixSection);
+            }
+        }
+
+        async function runFullDiagnostic() {
+            clearResults();
+            
+            const loading = document.createElement('div');
+            loading.innerHTML = '<div class="section"><div style="text-align: center; padding: 40px;"><div class="spinner"></div><p style="margin-top: 15px; color: #64748b;">Running diagnostic...</p></div></div>';
+            resultsDiv.appendChild(loading);
+
+            await new Promise(resolve => setTimeout(resolve, 500));
+            resultsDiv.removeChild(loading);
+
+            // Check 1: Are scripts loaded?
+            checkScriptsLoaded();
+
+            // Check 2: What version is loaded?
+            checkScriptVersion();
+
+            // Check 3: Get actual function code
+            checkFunctionCode();
+
+            // Check 4: Test the function
+            testFunction();
+
+            // Check 5: Check file URL
+            checkFileURL();
+
+            // Check 6: Netlify-specific checks
+            checkNetlifyDeployment();
+
+            // Final analysis
+            analyzeDiagnostic();
+        }
+
+        function checkScriptsLoaded() {
+            const checks = [];
+            
+            checks.push(typeof window.parseMarkdownAndCitations === 'function' 
+                ? '✅ parseMarkdownAndCitations() is loaded'
+                : '❌ parseMarkdownAndCitations() NOT FOUND');
+            
+            checks.push(typeof window.convertCitationsToHTML === 'function'
+                ? '✅ convertCitationsToHTML() is loaded'
+                : '❌ convertCitationsToHTML() NOT FOUND');
+            
+            checks.push(typeof window.processInlineMarkdown === 'function'
+                ? '✅ processInlineMarkdown() is loaded'
+                : '❌ processInlineMarkdown() NOT FOUND');
+            
+            checks.push(typeof window.typewriterWithMarkdownAndCitations === 'function'
+                ? '✅ typewriterWithMarkdownAndCitations() is loaded'
+                : '❌ typewriterWithMarkdownAndCitations() NOT FOUND');
+
+            const allLoaded = checks.every(c => c.startsWith('✅'));
+            addSection(
+                '📦 Check 1: Scripts Loaded',
+                checks.join('\n'),
+                allLoaded ? 'pass' : 'fail'
+            );
+        }
+
+        function checkScriptVersion() {
+            if (typeof window.processInlineMarkdown !== 'function') {
+                addSection(
+                    '🔍 Check 2: Script Version',
+                    '❌ processInlineMarkdown() not found - script not loaded',
+                    'fail'
+                );
+                return;
+            }
+
+            const functionCode = window.processInlineMarkdown.toString();
+
+            let result = '';
+            let status = 'fail';
+
+            if (functionCode.includes('◊◊CITE')) {
+                result = `✅ V36.11.12 DETECTED
+
+The function code contains the special character placeholder: ◊◊CITE
+
+This is the CORRECT version!
+
+Placeholder format: ◊◊CITE\${citationIndex}◊◊`;
+                status = 'pass';
+            } else if (functionCode.includes('__CITATION_')) {
+                result = `❌ OLD VERSION DETECTED (V36.11.11 or earlier)
+
+The function code contains the old placeholder: __CITATION_
+
+This is the WRONG version that causes the bug!
+
+Placeholder format: __CITATION_\${citationIndex}__
+
+⚠️ Netlify is serving the OLD cached version!`;
+                status = 'fail';
+            } else {
+                result = `⚠️ UNKNOWN VERSION
+
+Cannot find citation placeholder in function code.
+
+This might indicate:
+- Function code has been modified
+- Function is corrupted
+- Script loaded incorrectly`;
+                status = 'warning';
+            }
+
+            addSection('🔍 Check 2: Script Version', result, status);
+        }
+
+        function checkFunctionCode() {
+            if (typeof window.processInlineMarkdown !== 'function') {
+                addSection(
+                    '📝 Check 3: Function Code',
+                    '❌ Function not available',
+                    'fail'
+                );
+                return;
+            }
+
+            const functionCode = window.processInlineMarkdown.toString();
+            const lines = functionCode.split('\n');
+            
+            // Find the placeholder line
+            const placeholderLine = lines.find(line => 
+                line.includes('placeholder') && (line.includes('CITE') || line.includes('CITATION'))
+            );
+
+            if (!placeholderLine) {
+                addSection(
+                    '📝 Check 3: Function Code',
+                    '❌ Cannot find placeholder declaration in code',
+                    'fail'
+                );
+                return;
+            }
+
+            const cleanLine = placeholderLine.trim();
+            const status = cleanLine.includes('◊◊CITE') ? 'pass' : 'fail';
+
+            addSection(
+                '📝 Check 3: Function Code',
+                `Placeholder line found:
+
+${cleanLine}
+
+${status === 'pass' ? '✅ This is V36.11.12 code (using ◊◊CITE)' : '❌ This is OLD code (using __CITATION_)'}`,
+                status
+            );
+        }
+
+        function testFunction() {
+            if (typeof window.processInlineMarkdown !== 'function') {
+                addSection(
+                    '🧪 Check 4: Function Test',
+                    '❌ Function not available',
+                    'fail'
+                );
+                return;
+            }
+
+            try {
+                const input = 'Test __bold__[1] citation';
+                const output = window.processInlineMarkdown(input);
+
+                const checks = [];
+                
+                if (output.includes('[1]')) {
+                    checks.push('✅ Citation [1] preserved correctly');
+                } else if (output.includes('◊◊CITE')) {
+                    checks.push('❌ Placeholder not restored - shows ◊◊CITE in output');
+                } else if (output.includes('CITATION')) {
+                    checks.push('❌ Placeholder leaked - shows CITATION text');
+                } else {
+                    checks.push('❌ Citation completely lost');
+                }
+
+                if (output.includes('<strong>bold</strong>')) {
+                    checks.push('✅ Bold __text__ converted correctly');
+                } else {
+                    checks.push('❌ Bold conversion failed');
+                }
+
+                const allPassed = checks.every(c => c.startsWith('✅'));
+
+                addSection(
+                    '🧪 Check 4: Function Test',
+                    `Input:  "${input}"
+Output: "${output}"
+
+${checks.join('\n')}`,
+                    allPassed ? 'pass' : 'fail'
+                );
+
+            } catch (error) {
+                addSection(
+                    '🧪 Check 4: Function Test',
+                    `❌ Error: ${error.message}
+
+Stack trace:
+${error.stack}`,
+                    'fail'
+                );
+            }
+        }
+
+        function checkFileURL() {
+            // Try to find the script tag
+            const scripts = Array.from(document.scripts);
+            const markdownScript = scripts.find(s => s.src.includes('markdown-renderer'));
+
+            if (markdownScript) {
+                const url = markdownScript.src;
+                const hasVersion = url.includes('?v=');
+                const version = hasVersion ? url.match(/\?v=([^&]+)/)?.[1] : 'NO VERSION PARAMETER';
+
+                addSection(
+                    '🔗 Check 5: File URL',
+                    `Script URL:
+<span class="file-url">${url}</span>
+
+Version parameter: ${version}
+
+${version === '36.11.12' ? '✅ Correct version parameter' : '⚠️ Version parameter may be outdated'}
+
+${hasVersion ? 'Version parameter exists (good for cache busting)' : '❌ No version parameter (browser will cache indefinitely)'}`,
+                    version === '36.11.12' ? 'pass' : 'warning'
+                );
+            } else {
+                addSection(
+                    '🔗 Check 5: File URL',
+                    '❌ Cannot find markdown-renderer.js script tag in page',
+                    'fail'
+                );
+            }
+        }
+
+        function checkNetlifyDeployment() {
+            const info = [];
+
+            // Check if we're on Netlify
+            const hostname = window.location.hostname;
+            const isNetlify = hostname.includes('netlify.app') || hostname.includes('netlify.com');
+
+            info.push(`Hostname: ${hostname}`);
+            info.push(`Is Netlify: ${isNetlify ? 'YES' : 'NO (custom domain)'}`);
+
+            // Check deploy context from headers (if available)
+            info.push('\nNetlify CDN is caching files globally.');
+            info.push('After deployment, files may take 5-10 minutes to propagate.');
+
+            addSection(
+                '🌐 Check 6: Netlify Deployment',
+                info.join('\n'),
+                'info'
+            );
+        }
+
+        function analyzeDiagnostic() {
+            resultsDiv.innerHTML += '<h2 style="margin: 40px 0 20px 0; color: #667eea;">📊 Final Analysis</h2>';
+
+            const versionCheck = diagnosticResults.find(r => r.title.includes('Check 2'));
+            
+            if (versionCheck && versionCheck.status === 'fail' && versionCheck.content.includes('OLD VERSION')) {
+                addCriticalIssue(
+                    'Netlify is Serving OLD Cached Version',
+                    `<p><strong>Problem:</strong> Your browser received the OLD V36.11.11 version of markdown-renderer.js from Netlify's CDN.</p>
+                    <p>Even though you deployed the new version, Netlify's global CDN is still serving cached files from the previous deployment.</p>`,
+                    `<p><strong>Step 1: Clear Netlify's Cache</strong></p>
+                    <ol>
+                        <li>Go to Netlify Dashboard → Your Site</li>
+                        <li>Go to "Deploys" tab</li>
+                        <li>Click "Trigger deploy" → "Clear cache and deploy site"</li>
+                        <li>Wait for deployment to complete (2-5 minutes)</li>
+                    </ol>
+
+                    <p style="margin-top: 20px;"><strong>Step 2: Force New Version Parameter</strong></p>
+                    <p>Make sure index.html line 3549 has:</p>
+                    <div class="code-block">&lt;script src="js/markdown-renderer.js?v=36.11.12&t=${Date.now()}"&gt;&lt;/script&gt;</div>
+                    <p>Adding <code>&t=${Date.now()}</code> creates a UNIQUE URL that bypasses all caches.</p>
+
+                    <p style="margin-top: 20px;"><strong>Step 3: Wait 5-10 Minutes</strong></p>
+                    <p>Netlify's CDN needs time to propagate the new files globally. After clearing cache:</p>
+                    <ul>
+                        <li>Wait 5-10 minutes</li>
+                        <li>Clear your browser cache again</li>
+                        <li>Re-run this diagnostic</li>
+                    </ul>
+
+                    <p style="margin-top: 20px;"><strong>Step 4: Verify Deployment</strong></p>
+                    <p>Check Netlify's deploy log to confirm markdown-renderer.js was included in the deployment.</p>`
+                );
+            } else if (versionCheck && versionCheck.status === 'pass') {
+                const fixSection = document.createElement('div');
+                fixSection.className = 'fix-box';
+                fixSection.innerHTML = `
+                    <div class="fix-title">✅ V36.11.12 is Loaded on Netlify!</div>
+                    <div>
+                        <p>The correct version is loaded. If citations still don't work, the issue is in a different part of the pipeline.</p>
+                        <p style="margin-top: 15px;"><strong>Next steps:</strong></p>
+                        <ol>
+                            <li>Check browser console for errors (F12 → Console)</li>
+                            <li>Test the chat widget with a real query</li>
+                            <li>Check if backend is sending correct format</li>
+                        </ol>
+                    </div>
+                `;
+                resultsDiv.appendChild(fixSection);
+            }
+        }
+
+        function testFunctionDirectly() {
+            if (typeof window.processInlineMarkdown !== 'function') {
+                alert('❌ processInlineMarkdown() not found');
+                return;
+            }
+
+            const input = prompt('Enter text with [1] citation:', 'Test __bold__[1] text');
+            if (!input) return;
+
+            const output = window.processInlineMarkdown(input);
+
+            clearResults();
+            addSection(
+                '🧪 Direct Function Test',
+                `Input:  "${input}"
+Output: "${output}"
+
+Analysis:
+${output.includes('[1]') ? '✅ Citation preserved' : '❌ Citation lost or corrupted'}
+${output.includes('<strong>') ? '✅ Bold converted' : '⚠️ No bold in output'}
+${output.includes('CITE') ? '❌ Placeholder leaked!' : '✅ No placeholder in output'}`,
+                output.includes('[1]') && !output.includes('CITE') ? 'pass' : 'fail'
+            );
+        }
+
+        function testLiveInput() {
+            const input = document.getElementById('test-input').value;
+            const outputDiv = document.getElementById('test-live-output');
+
+            if (!input) {
+                outputDiv.innerHTML = '<span style="color: #ef4444;">Please enter some text</span>';
+                return;
+            }
+
+            if (typeof window.processInlineMarkdown !== 'function') {
+                outputDiv.innerHTML = '<span style="color: #ef4444;">❌ processInlineMarkdown() not loaded</span>';
+                return;
+            }
+
+            try {
+                const output = window.processInlineMarkdown(input);
+                
+                let analysis = [];
+                if (output.includes('[1]')) analysis.push('✅ Citation preserved');
+                else if (output.includes('CITE')) analysis.push('❌ Placeholder leaked');
+                else analysis.push('❌ Citation lost');
+
+                if (output.includes('<strong>')) analysis.push('✅ Bold converted');
+                if (output.includes('<em>')) analysis.push('✅ Italic converted');
+
+                outputDiv.innerHTML = `<strong>Result:</strong>
+${output}
+
+<div style="margin-top: 10px; padding-top: 10px; border-top: 1px solid #e5e7eb;">
+<strong>Analysis:</strong>
+${analysis.join(' | ')}
+</div>`;
+            } catch (error) {
+                outputDiv.innerHTML = `<span style="color: #ef4444;">❌ Error: ${error.message}</span>`;
+            }
+        }
+
+        function checkNetlifyCache() {
+            clearResults();
+            
+            addSection(
+                '📦 Netlify Cache Information',
+                `<strong>How Netlify Caching Works:</strong>
+
+1. When you deploy, Netlify builds your site and publishes it to their global CDN
+2. The CDN caches all static files (HTML, CSS, JS) for fast delivery worldwide
+3. Cache is distributed across many edge servers globally
+4. Each edge server caches files independently
+
+<strong>Why Old Files Persist:</strong>
+
+- Even after redeployment, edge servers may still serve cached versions
+- Cache propagation can take 5-10 minutes globally
+- Different users may see different versions during propagation
+- Browser caches add another layer of caching
+
+<strong>How to Clear Netlify Cache:</strong>
+
+1. <strong>In Netlify Dashboard:</strong>
+   - Go to Deploys tab
+   - Click "Trigger deploy" → "Clear cache and deploy site"
+   - This clears Netlify's CDN cache globally
+
+2. <strong>Force Unique URLs:</strong>
+   - Use timestamp in version parameter: ?v=36.11.12&t=${Date.now()}
+   - This creates a UNIQUE URL that bypasses all caches
+
+3. <strong>Wait for Propagation:</strong>
+   - After clearing cache, wait 5-10 minutes
+   - Clear your browser cache
+   - Test again
+
+<strong>Current Status:</strong>
+Running this diagnostic to see which version you currently have loaded...
+
+Click "Run Full Diagnostic" to check!`,
+                'info'
+            );
+        }
+
+        // Auto-run on page load
+        window.addEventListener('DOMContentLoaded', () => {
+            setTimeout(() => {
+                runFullDiagnostic();
+            }, 500);
+        });
+    </script>
+</body>
+</html>

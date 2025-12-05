@@ -1,0 +1,748 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Essential Meta Tags -->
+    <meta name="description" content="View your personal browsing analytics - privacy-first, in-house tracking with no external services. Your data stays in your browser.">
+    <meta name="robots" content="noindex, nofollow">
+    
+    <title>Your Analytics Dashboard - Workforce Democracy Project</title>
+    
+    <!-- V36.9.10: Performance - Preload Critical Assets -->
+    <link rel="preload" href="css/main.css" as="style">
+    <link rel="preload" href="images/site-logo-v2.svg" as="image" type="image/svg+xml">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="css/fonts.css">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/unified-color-scheme.css">
+    
+    <!-- Chart.js for visualizations -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    
+    <style>
+        /* Analytics Dashboard Styles */
+        .analytics-page {
+            min-height: 100vh;
+            background: var(--background);
+            padding-top: 80px;
+        }
+        
+        .analytics-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        .analytics-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .analytics-header h1 {
+            font-size: 2.5rem;
+            color: var(--text);
+            margin-bottom: 1rem;
+        }
+        
+        .analytics-header .subtitle {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .privacy-badge {
+            background: rgba(72, 187, 120, 0.1);
+            border-left: 4px solid var(--success);
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin: 2rem 0;
+        }
+        
+        .privacy-badge strong {
+            color: var(--text);
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+        
+        .privacy-badge ul {
+            margin: 0.5rem 0 0 1.5rem;
+            color: var(--text-secondary);
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .stat-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+        
+        .stat-card .label {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 0.5rem;
+        }
+        
+        .stat-card .value {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: var(--primary);
+            line-height: 1;
+        }
+        
+        .stat-card .description {
+            font-size: 0.875rem;
+            color: var(--text-light);
+            margin-top: 0.5rem;
+        }
+        
+        .chart-section {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 2rem 0;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+        
+        .chart-section h3 {
+            color: var(--text);
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+        }
+        
+        .chart-container {
+            position: relative;
+            height: 400px;
+            margin: 1rem 0;
+        }
+        
+        .popular-pages-list {
+            list-style: none;
+            padding: 0;
+            margin: 1rem 0;
+        }
+        
+        .popular-pages-list li {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+            background: var(--surface-alt);
+            border-radius: 8px;
+            margin-bottom: 0.5rem;
+        }
+        
+        .popular-pages-list .page-name {
+            font-weight: 500;
+            color: var(--text);
+        }
+        
+        .popular-pages-list .page-count {
+            background: var(--primary);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 12px;
+            font-size: 0.875rem;
+        }
+        
+        .recent-activity {
+            max-height: 400px;
+            overflow-y: auto;
+        }
+        
+        .activity-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 1rem;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .activity-item:last-child {
+            border-bottom: none;
+        }
+        
+        .activity-info {
+            flex: 1;
+        }
+        
+        .activity-page {
+            font-weight: 500;
+            color: var(--text);
+        }
+        
+        .activity-time {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            margin-top: 0.25rem;
+        }
+        
+        .activity-device {
+            background: var(--surface-alt);
+            padding: 0.25rem 0.75rem;
+            border-radius: 12px;
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+        }
+        
+        .actions-section {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin: 2rem 0;
+        }
+        
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+            font-size: 1rem;
+        }
+        
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+        }
+        
+        .btn-secondary {
+            background: var(--surface-alt);
+            color: var(--text);
+            border: 1px solid var(--border);
+        }
+        
+        .btn-secondary:hover {
+            background: var(--surface);
+        }
+        
+        .btn-danger {
+            background: var(--error);
+            color: white;
+        }
+        
+        .btn-danger:hover {
+            background: #e53e3e;
+        }
+        
+        .empty-state {
+            text-align: center;
+            padding: 4rem 2rem;
+            color: var(--text-secondary);
+        }
+        
+        .empty-state-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+        }
+        
+        .empty-state h3 {
+            color: var(--text);
+            margin-bottom: 0.5rem;
+        }
+        
+        @media (max-width: 768px) {
+            .analytics-header h1 {
+                font-size: 2rem;
+            }
+            
+            .chart-container {
+                height: 300px;
+            }
+            
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .actions-section {
+                flex-direction: column;
+            }
+            
+            .btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body class="analytics-page">
+    <!-- Skip Link -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <!-- Header -->
+    <header class="site-header" role="banner">
+        <div class="container">
+            <div class="header-content">
+                <div class="brand">
+                    <a href="index.html" style="display: flex; align-items: center; text-decoration: none;">
+                        <img src="images/site-logo-v2.svg" alt="Workforce Democracy Project" class="site-logo" style="height: 40px; margin-right: 12px;">
+                        <h1 class="site-title">Workforce Democracy Project</h1>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main id="main-content" class="analytics-container">
+        <!-- Header -->
+        <div class="analytics-header">
+            <h1>📊 Your Analytics Dashboard</h1>
+            <p class="subtitle">
+                View your personal browsing data. All data stays in your browser - 
+                no external tracking, no data collection, complete privacy.
+            </p>
+        </div>
+
+        <!-- Privacy Badge -->
+        <div class="privacy-badge">
+            <strong>🔒 Your Data, Your Control</strong>
+            <ul>
+                <li>All analytics data stays in YOUR browser (localStorage)</li>
+                <li>NO data sent to external servers or tracking services</li>
+                <li>NO Google Analytics, NO Facebook Pixel, NO third-party tracking</li>
+                <li>You can export or delete your data anytime</li>
+            </ul>
+        </div>
+
+        <!-- Loading State -->
+        <div id="loading-state" style="text-align: center; padding: 3rem;">
+            <p style="color: var(--text-secondary);">Loading your analytics data...</p>
+        </div>
+
+        <!-- Empty State -->
+        <div id="empty-state" class="empty-state" style="display: none;">
+            <div class="empty-state-icon">📊</div>
+            <h3>No Analytics Data Yet</h3>
+            <p>Start browsing the site to see your analytics here!</p>
+            <a href="index.html" class="btn btn-primary" style="display: inline-block; margin-top: 1rem;">
+                Go to Homepage
+            </a>
+        </div>
+
+        <!-- Dashboard Content -->
+        <div id="dashboard-content" style="display: none;">
+            <!-- Stats Grid -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="label">Total Page Views</div>
+                    <div class="value" id="stat-pageviews">0</div>
+                    <div class="description">Pages you've visited</div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="label">Unique Pages</div>
+                    <div class="value" id="stat-unique-pages">0</div>
+                    <div class="description">Different pages visited</div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="label">Total Events</div>
+                    <div class="value" id="stat-events">0</div>
+                    <div class="description">Interactions tracked</div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="label">Date Range</div>
+                    <div class="value" id="stat-date-range" style="font-size: 1.2rem;">-</div>
+                    <div class="description">First to last visit</div>
+                </div>
+            </div>
+
+            <!-- Device Breakdown Chart -->
+            <div class="chart-section">
+                <h3>📱 Device Breakdown</h3>
+                <div class="chart-container">
+                    <canvas id="device-chart"></canvas>
+                </div>
+            </div>
+
+            <!-- Popular Pages -->
+            <div class="chart-section">
+                <h3>🔥 Most Visited Pages</h3>
+                <ul class="popular-pages-list" id="popular-pages-list">
+                    <!-- Populated by JavaScript -->
+                </ul>
+            </div>
+
+            <!-- Events Breakdown Chart -->
+            <div class="chart-section">
+                <h3>📈 Event Types</h3>
+                <div class="chart-container">
+                    <canvas id="events-chart"></canvas>
+                </div>
+            </div>
+
+            <!-- Recent Activity -->
+            <div class="chart-section">
+                <h3>🕒 Recent Activity</h3>
+                <div class="recent-activity" id="recent-activity">
+                    <!-- Populated by JavaScript -->
+                </div>
+            </div>
+
+            <!-- Actions -->
+            <div class="actions-section">
+                <button class="btn btn-primary" onclick="exportAnalytics()">
+                    📥 Export Your Data (JSON)
+                </button>
+                <button class="btn btn-secondary" onclick="refreshDashboard()">
+                    🔄 Refresh Dashboard
+                </button>
+                <button class="btn btn-danger" onclick="clearAnalytics()">
+                    🗑️ Clear All Data
+                </button>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer" role="contentinfo">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3 class="footer-title">About</h3>
+                    <p>
+                        Workforce Democracy Project is a non-partisan educational resource 
+                        exploring democratic workplaces and government transparency. 
+                        Completely free, privacy-first, and ad-free forever.
+                    </p>
+                </div>
+                
+                <div class="footer-section">
+                    <h3 class="footer-title">Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="index.html#civic">Civic Engagement</a></li>
+                        <li><a href="index.html#jobs">Explore Jobs</a></li>
+                        <li><a href="learning.html">Learning Resources</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3 class="footer-title">Resources</h3>
+                    <ul class="footer-links">
+                        <li><a href="faq-new.html">FAQ</a></li>
+                        <li><a href="privacy.html">Privacy & Personalization</a></li>
+                        <li><a href="philosophies.html">Our Philosophies</a></li>
+                        <li><a href="analytics.html">Your Analytics</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p class="copyright">
+                    &copy; 2025 Workforce Democracy Project. 
+                    <span>All content freely available under Creative Commons.</span>
+                </p>
+                <p class="footer-note">
+                    <i class="fas fa-shield-alt"></i>
+                    <span>Zero tracking. Zero ads. Complete privacy.</span>
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Analytics Tracker (excluded on this page to avoid self-tracking) -->
+    <!-- <script src="js/analytics-tracker.js"></script> -->
+
+    <!-- Dashboard JavaScript -->
+    <script>
+        // Load analytics data and render dashboard
+        function loadDashboard() {
+            try {
+                const dataStr = localStorage.getItem('wdp_analytics_data');
+                
+                if (!dataStr) {
+                    showEmptyState();
+                    return;
+                }
+                
+                const data = JSON.parse(dataStr);
+                
+                // Calculate summary
+                const summary = calculateSummary(data);
+                
+                if (summary.overview.totalPageViews === 0) {
+                    showEmptyState();
+                    return;
+                }
+                
+                // Show dashboard
+                document.getElementById('loading-state').style.display = 'none';
+                document.getElementById('dashboard-content').style.display = 'block';
+                
+                // Populate stats
+                populateStats(summary);
+                
+                // Render charts
+                renderDeviceChart(summary.devices);
+                renderEventsChart(summary.events);
+                
+                // Populate lists
+                populatePopularPages(summary.popularPages);
+                populateRecentActivity(summary.recentActivity);
+                
+            } catch (error) {
+                console.error('Error loading dashboard:', error);
+                showEmptyState();
+            }
+        }
+        
+        function showEmptyState() {
+            document.getElementById('loading-state').style.display = 'none';
+            document.getElementById('empty-state').style.display = 'block';
+        }
+        
+        function calculateSummary(data) {
+            // Calculate time range
+            const oldestEvent = data.pageViews[0] || { timestamp: Date.now() };
+            const newestEvent = data.pageViews[data.pageViews.length - 1] || { timestamp: Date.now() };
+            
+            // Calculate unique pages
+            const uniquePages = new Set(data.pageViews.map(pv => pv.page.url));
+            
+            // Calculate device breakdown
+            const deviceBreakdown = data.pageViews.reduce((acc, pv) => {
+                const device = pv.device.type;
+                acc[device] = (acc[device] || 0) + 1;
+                return acc;
+            }, {});
+            
+            // Calculate popular pages
+            const pageCount = data.pageViews.reduce((acc, pv) => {
+                acc[pv.page.url] = (acc[pv.page.url] || 0) + 1;
+                return acc;
+            }, {});
+            const popularPages = Object.entries(pageCount)
+                .sort((a, b) => b[1] - a[1])
+                .slice(0, 10);
+            
+            // Calculate event breakdown
+            const eventBreakdown = data.events.reduce((acc, evt) => {
+                acc[evt.category] = (acc[evt.category] || 0) + 1;
+                return acc;
+            }, {});
+            
+            return {
+                overview: {
+                    totalPageViews: data.metadata.totalPageViews,
+                    totalEvents: data.metadata.totalEvents,
+                    uniquePages: uniquePages.size,
+                    dateRange: {
+                        start: new Date(oldestEvent.timestamp),
+                        end: new Date(newestEvent.timestamp)
+                    }
+                },
+                devices: deviceBreakdown,
+                popularPages: popularPages,
+                events: eventBreakdown,
+                recentActivity: data.pageViews.slice(-10).reverse()
+            };
+        }
+        
+        function populateStats(summary) {
+            document.getElementById('stat-pageviews').textContent = summary.overview.totalPageViews.toLocaleString();
+            document.getElementById('stat-unique-pages').textContent = summary.overview.uniquePages;
+            document.getElementById('stat-events').textContent = summary.overview.totalEvents.toLocaleString();
+            
+            const daysDiff = Math.ceil((summary.overview.dateRange.end - summary.overview.dateRange.start) / (1000 * 60 * 60 * 24));
+            document.getElementById('stat-date-range').textContent = daysDiff > 0 ? `${daysDiff} days` : 'Today';
+        }
+        
+        function renderDeviceChart(devices) {
+            const ctx = document.getElementById('device-chart');
+            
+            const labels = Object.keys(devices).map(d => d.charAt(0).toUpperCase() + d.slice(1));
+            const data = Object.values(devices);
+            
+            new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        data: data,
+                        backgroundColor: [
+                            '#667eea', // primary
+                            '#4ECDC4', // success
+                            '#ed8936'  // warning
+                        ]
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom'
+                        }
+                    }
+                }
+            });
+        }
+        
+        function renderEventsChart(events) {
+            const ctx = document.getElementById('events-chart');
+            
+            const labels = Object.keys(events);
+            const data = Object.values(events);
+            
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Event Count',
+                        data: data,
+                        backgroundColor: '#667eea'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: false
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: {
+                                precision: 0
+                            }
+                        }
+                    }
+                }
+            });
+        }
+        
+        function populatePopularPages(pages) {
+            const list = document.getElementById('popular-pages-list');
+            list.innerHTML = '';
+            
+            if (pages.length === 0) {
+                list.innerHTML = '<li style="text-align: center; color: var(--text-secondary);">No page data yet</li>';
+                return;
+            }
+            
+            pages.forEach(([page, count]) => {
+                const li = document.createElement('li');
+                li.innerHTML = `
+                    <span class="page-name">${page}</span>
+                    <span class="page-count">${count} views</span>
+                `;
+                list.appendChild(li);
+            });
+        }
+        
+        function populateRecentActivity(activity) {
+            const container = document.getElementById('recent-activity');
+            container.innerHTML = '';
+            
+            if (activity.length === 0) {
+                container.innerHTML = '<div style="text-align: center; padding: 2rem; color: var(--text-secondary);">No recent activity</div>';
+                return;
+            }
+            
+            activity.forEach(item => {
+                const div = document.createElement('div');
+                div.className = 'activity-item';
+                
+                const date = new Date(item.timestamp);
+                const timeStr = date.toLocaleString();
+                
+                div.innerHTML = `
+                    <div class="activity-info">
+                        <div class="activity-page">${item.page.url}</div>
+                        <div class="activity-time">${timeStr}</div>
+                    </div>
+                    <div class="activity-device">${item.device.type}</div>
+                `;
+                container.appendChild(div);
+            });
+        }
+        
+        function exportAnalytics() {
+            try {
+                const dataStr = localStorage.getItem('wdp_analytics_data');
+                if (!dataStr) {
+                    alert('No analytics data to export');
+                    return;
+                }
+                
+                const data = JSON.parse(dataStr);
+                const summary = calculateSummary(data);
+                
+                const exportData = {
+                    exportDate: new Date().toISOString(),
+                    summary: summary,
+                    rawData: data
+                };
+                
+                // Create download link
+                const blob = new Blob([JSON.stringify(exportData, null, 2)], { type: 'application/json' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = `wdp-analytics-${Date.now()}.json`;
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+                
+                alert('✅ Analytics data exported successfully!');
+            } catch (error) {
+                console.error('Error exporting data:', error);
+                alert('❌ Error exporting data. Check console for details.');
+            }
+        }
+        
+        function refreshDashboard() {
+            loadDashboard();
+            alert('✅ Dashboard refreshed!');
+        }
+        
+        function clearAnalytics() {
+            if (confirm('⚠️ Are you sure you want to delete ALL your analytics data? This cannot be undone.')) {
+                try {
+                    localStorage.removeItem('wdp_analytics_data');
+                    sessionStorage.removeItem('wdp_session_id');
+                    alert('✅ Analytics data cleared successfully!');
+                    location.reload();
+                } catch (error) {
+                    console.error('Error clearing data:', error);
+                    alert('❌ Error clearing data. Check console for details.');
+                }
+            }
+        }
+        
+        // Load dashboard on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            loadDashboard();
+        });
+    </script>
+</body>
+</html>

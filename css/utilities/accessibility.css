@@ -1,0 +1,46 @@
+/* ============================================================================
+   WORKFORCE DEMOCRACY PROJECT - ACCESSIBILITY UTILITIES
+   Version: 37.11.0-PHASE3B
+   Date: November 14, 2024
+   
+   Accessibility helpers: skip links, screen reader utilities, focus states
+   
+   Dependencies: variables.css (MUST load before this file)
+   
+   ============================================================================ */
+
+/* ============================================
+   SKIP LINK
+   ============================================ */
+
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 0;
+  background: var(--primary);
+  color: white;
+  padding: var(--space-sm) var(--space-md);
+  z-index: 100;
+  border-radius: var(--radius-md);
+}
+
+.skip-link:focus {
+  top: 0;
+}
+
+/* ============================================
+   SCREEN READER ONLY
+   ============================================ */
+
+/* Screen reader only content */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}

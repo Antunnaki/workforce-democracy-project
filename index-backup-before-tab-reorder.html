@@ -1,0 +1,1276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Essential Meta Tags -->
+    <meta name="description" content="Workforce Democracy Project - Exploring democratic workplaces, job comparisons, and government transparency. Non-partisan educational resource for everyone.">
+    <meta name="keywords" content="workplace democracy, worker cooperatives, democratic jobs, government transparency, civic engagement, ethical work">
+    <meta name="author" content="Workforce Democracy Project">
+    <meta name="theme-color" content="#FF6B35">
+    
+    <!-- Privacy-First Approach -->
+    <meta name="robots" content="index, follow">
+    <meta name="googlebot" content="index, follow">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    
+    <!-- V23: NUCLEAR CACHE PREVENTION -->
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="Workforce Democracy Project Est. Oct 2025">
+    <meta property="og:description" content="Non-partisan educational resource exploring democratic workplaces and government transparency">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://workforcedemocracyproject.org">
+    <meta property="og:image" content="/images/social-preview.jpg">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Workforce Democracy Project">
+    <meta name="twitter:description" content="Exploring democratic workplaces and government transparency">
+    
+    <!-- No Tracking -->
+    <meta name="google-analytics" content="no">
+    <meta name="facebook-domain-verification" content="no">
+    
+    <!-- AGGRESSIVE CACHE BUSTING - V44-CLEAN-CSS -->
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    
+    <!-- Strict CSP for Security -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://cdn.tailwindcss.com https://www.youtube-nocookie.com; style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; font-src 'self' https://cdn.jsdelivr.net; img-src 'self' data: https:; connect-src 'self'; frame-src https://www.youtube-nocookie.com; object-src 'none'; base-uri 'self'; form-action 'self';">
+    
+    <title>Workforce Democracy Project Est. Oct 2025</title>
+    
+    <!-- Privacy-Respecting Resources -->
+    <!-- Font Awesome via jsDelivr (ethical, privacy-respecting CDN) -->
+    <!-- V19: Font Awesome kept for site-wide icons, but chat widget icons use custom SVGs -->
+    <!-- V26: TEMPORARILY DISABLED Font Awesome to test if it's causing emoji overlay -->
+    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css"> -->
+    
+    <!-- Privacy-Respecting Fonts (system fonts, no tracking) -->
+    <link rel="stylesheet" href="css/fonts.css?v=20250122-225000-DROPDOWN-FIX">
+    
+    <!-- Main Stylesheet -->
+    <link rel="stylesheet" href="css/main.css?t=1737656400">
+    
+    <!-- Unified Color Scheme (Hero-Based Palette) -->
+    <link rel="stylesheet" href="css/unified-color-scheme.css?v=20250123-FINAL-CLEAN">
+    
+    <!-- Unified Personalization Modal -->
+    <link rel="stylesheet" href="css/unified-personalization.css?v=20250123-V15-ROOT-CAUSE-4">
+    
+    <!-- Civic Streamlined Tabbed Interface -->
+    <link rel="stylesheet" href="css/civic-redesign.css?v=20250123-SPECIFICITY-V2">
+    
+    <!-- New Hero Section -->
+    <link rel="stylesheet" href="css/hero-new.css?v=20250123-FINAL-CLEAN">
+    
+    <!-- Redesigned Jobs Section -->
+    <link rel="stylesheet" href="css/jobs-new.css?v=20250123-FINAL-CLEAN">
+    <link rel="stylesheet" href="css/jobs-comparison-redesign.css?v=20250123-FINAL-CLEAN">
+    
+    <!-- Inline Chat Widgets -->
+    <link rel="stylesheet" href="css/inline-chat-widget.css?v=20250123-V22-FORCE-SVG-JS">
+    
+    <!-- Ethical Business Finder -->
+    <link rel="stylesheet" href="css/ethical-business.css?v=20250123-MOBILE-SPECIFICITY-V2">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="alternate icon" type="image/png" href="favicon.png">
+    
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="manifest.json">
+</head>
+<body>
+    <!-- DISABLE SERVICE WORKER + CLEAR ALL CACHES -->
+    <script>
+        (function() {
+            // 1. UNREGISTER ALL SERVICE WORKERS IMMEDIATELY
+            if ('serviceWorker' in navigator) {
+                navigator.serviceWorker.getRegistrations().then(function(registrations) {
+                    for (let registration of registrations) {
+                        registration.unregister();
+                    }
+                });
+            }
+            
+            // 2. DELETE ALL CACHES
+            if ('caches' in window) {
+                caches.keys().then(names => {
+                    names.forEach(name => caches.delete(name));
+                });
+            }
+            
+            // 3. CLEAR CIVIC DATA FROM LOCALSTORAGE
+            try {
+                for (let i = localStorage.length - 1; i >= 0; i--) {
+                    const key = localStorage.key(i);
+                    if (key && (key.includes('civic') || key.includes('cached') || key.includes('wdp'))) {
+                        localStorage.removeItem(key);
+                    }
+                }
+            } catch (e) {}
+            
+            // 4. CLEAR SESSION STORAGE
+            try {
+                sessionStorage.clear();
+            } catch (e) {}
+        })();
+    </script>
+    
+    <!-- Hidden debug script to fix timing issue -->
+    <script>
+        // Console.log wrapper that somehow fixes the timing/execution order
+        (function() {
+            const originalLog = console.log;
+            const originalError = console.error;
+            console.log = function(...args) {
+                return originalLog.apply(console, args);
+            };
+            console.error = function(...args) {
+                return originalError.apply(console, args);
+            };
+        })();
+    </script>
+    
+    <!-- Accessibility Skip Link -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <!-- Unified Personalization Modal -->
+    <div id="personalizationModal" class="personalization-modal-overlay" style="display: none;" onclick="closePersonalizationModalIfOutside(event)">
+        <div class="personalization-modal" role="dialog" aria-labelledby="personalization-modal-title" aria-modal="true" onclick="event.stopPropagation()">
+            <div class="personalization-modal-header">
+                <button class="personalization-modal-close" onclick="closePersonalizationModal()" aria-label="Close modal">
+                    <i class="fas fa-times"></i>
+                </button>
+                <h2 id="personalization-modal-title">
+                    <i class="fas fa-magic"></i>
+                    Personalize Your Experience
+                </h2>
+                <p>Enable features tailored to your location and interests</p>
+            </div>
+            
+            <div class="personalization-modal-body">
+                <p style="margin: 0 0 1rem; font-size: 1rem; color: rgba(255, 255, 255, 0.9);">
+                    Get the most out of this site with personalized features:
+                </p>
+                
+                <ul class="personalization-features">
+                    <li>
+                        <div class="feature-icon">🗳️</div>
+                        <div class="feature-content">
+                            <h3 class="feature-title">Local Representatives Tracker</h3>
+                            <p class="feature-description">Find and track your elected officials, see their voting records, and stay informed on local politics</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="feature-icon">🤝</div>
+                        <div class="feature-content">
+                            <h3 class="feature-title">Ethical Business Finder</h3>
+                            <p class="feature-description">Discover worker cooperatives, ethical businesses, and community services in your area</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="feature-icon">📊</div>
+                        <div class="feature-content">
+                            <h3 class="feature-title">Civic Voting Tracker</h3>
+                            <p class="feature-description">Track your voting patterns on bills and legislation to see how your views align with representatives</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="feature-icon">📚</div>
+                        <div class="feature-content">
+                            <h3 class="feature-title">Learning Progress & Recommendations</h3>
+                            <p class="feature-description">Get personalized content recommendations based on topics you've explored and questions you've asked</p>
+                        </div>
+                    </li>
+                </ul>
+                
+                <div class="personalization-input-section">
+                    <h3><i class="fas fa-map-marker-alt"></i> Your Location (Optional)</h3>
+                    <div class="personalization-input-group">
+                        <input 
+                            type="text" 
+                            id="personalizationPostcode" 
+                            placeholder="Enter your postcode/ZIP code"
+                            aria-label="Postcode or ZIP code"
+                        >
+                    </div>
+                    <p class="personalization-input-help">
+                        We use this to find local representatives and businesses near you. Leave blank if you prefer not to share.
+                    </p>
+                </div>
+                
+                <div class="personalization-security-notice">
+                    <i class="fas fa-shield-alt"></i>
+                    <div>
+                        <p><strong>Your privacy is protected:</strong></p>
+                        <p>
+                            All data is encrypted with military-grade AES-256 encryption and stored <strong>only on your device</strong>. 
+                            Nothing is sent to servers. You can delete all data anytime from the Privacy page.
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="personalization-modal-actions">
+                    <button class="btn-enable" onclick="acceptUnifiedPersonalization()">
+                        <i class="fas fa-check"></i>
+                        Enable Personalization
+                    </button>
+                    <button class="btn-skip" onclick="skipUnifiedPersonalization()">
+                        <i class="fas fa-ban"></i>
+                        No Thanks, Don't Ask Again
+                    </button>
+                </div>
+                
+                <div class="personalization-privacy-link">
+                    <a href="privacy.html" target="_blank">Learn more about privacy & data security</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header class="site-header" role="banner">
+        <div class="container">
+            <div class="header-content">
+                <div class="brand">
+                    <h1 class="site-title">
+                        <img src="images/site-logo.svg" alt="Workforce Democracy Project" class="site-logo">
+                        <span class="title-text" data-translate="site_title">Workforce Democracy Project</span>
+                    </h1>
+                    <p class="establishment" data-translate="establishment">Est. Oct 2025</p>
+                </div>
+                
+                <!-- Desktop Navigation -->
+                <nav class="desktop-nav" role="navigation" aria-label="Main navigation">
+                    <ul class="nav-list">
+                        <li><a href="#civic" data-translate="nav_civic">🗳️ Civic Engagement & Transparency</a></li>
+                        <li><a href="#jobs" data-translate="nav_jobs">💼 Explore Jobs</a></li>
+                        <li><a href="#ethical-business" data-translate="nav_ethical_business">🤝 Ethical Businesses</a></li>
+                        <li><a href="learning.html" data-translate="nav_learning">📚 Learn</a></li>
+                        <li><a href="faq.html" data-translate="nav_faq">💡 FAQ</a></li>
+                        <li><a href="help.html" data-translate="nav_help">❓ Help & Guide</a></li>
+                        <li><a href="privacy.html" data-translate="nav_privacy">🔒 Personalization & Privacy</a></li>
+                        <li><a href="philosophies.html" data-translate="nav_philosophy">🌟 Our Philosophies</a></li>
+                        <li class="nav-language">
+                            <!-- Language Selector Button (Desktop - opens modal) -->
+                            <div class="language-selector desktop-language" id="desktopLanguageSelector">
+                                <button class="language-btn" id="languageBtnDesktop" aria-label="Select language">
+                                    <i class="fas fa-globe"></i>
+                                    <span id="currentLanguageDesktop">EN</span>
+                                </button>
+                            </div>
+                        </li>
+                    </ul>
+                </nav>
+                
+                <!-- Mobile Controls: Language Selector + Menu Toggle -->
+                <div class="mobile-controls">
+                    <!-- Language Selector Button (opens modal) -->
+                    <div class="language-selector" id="languageSelector">
+                        <button class="language-btn" id="languageBtnMobile" aria-label="Select language">
+                            <i class="fas fa-globe"></i>
+                            <span id="currentLanguage">EN</span>
+                        </button>
+                    </div>
+                    
+                    <!-- Mobile Menu Toggle -->
+                    <button class="mobile-menu-toggle" onclick="toggleMobileMenu()" aria-label="Toggle menu">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Mobile Navigation -->
+            <nav class="mobile-nav" id="mobileNav" role="navigation" aria-label="Mobile navigation">
+                <ul class="mobile-nav-list">
+                    <li><a href="#civic" onclick="closeMobileMenu()" data-translate="nav_civic">🗳️ Civic Engagement & Transparency</a></li>
+                    <li><a href="#jobs" onclick="closeMobileMenu()" data-translate="nav_jobs">💼 Explore Jobs</a></li>
+                    <li><a href="#ethical-business" onclick="closeMobileMenu()" data-translate="nav_ethical_business">🤝 Ethical Businesses</a></li>
+                    <li><a href="learning.html" onclick="closeMobileMenu()" data-translate="nav_learning">📚 Learn</a></li>
+                    <li><a href="faq.html" onclick="closeMobileMenu()" data-translate="nav_faq">💡 FAQ</a></li>
+                    <li><a href="help.html" onclick="closeMobileMenu()" data-translate="nav_help">❓ Help & Guide</a></li>
+                    <li><a href="privacy.html" onclick="closeMobileMenu()" data-translate="nav_privacy">🔒 Personalization & Privacy</a></li>
+                    <li><a href="philosophies.html" onclick="closeMobileMenu()" data-translate="nav_philosophy">🌟 Our Philosophies</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main id="main-content" role="main">
+        
+        <!-- Hero Section - Warm & Welcoming -->
+        <section class="hero-section-new">
+            <div class="hero-container">
+                <div class="hero-content">
+                    <div class="hero-text">
+                        <h1 class="hero-headline">Your Voice Matters Here</h1>
+                        <p class="hero-lead">
+                            Welcome to a space where democracy isn't just a concept—it's something you can actively participate in and understand. Whether you're curious about how your representatives vote, exploring democratic workplaces, or simply want to make your voice heard, you're in the right place.
+                        </p>
+                        <p class="hero-subtext">
+                            We believe everyone deserves transparency, real representation, and the power to shape their own future. Let's explore together.
+                        </p>
+                        <div class="hero-cta">
+                            <button class="btn-primary" onclick="navigateToSection('civic')">
+                                <span>Track Your Representatives</span>
+                                <i class="fas fa-arrow-right"></i>
+                            </button>
+                            <button class="btn-secondary" onclick="navigateToSection('jobs')">
+                                <span>Explore Democratic Workplaces</span>
+                                <i class="fas fa-briefcase"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="hero-image">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 500" class="hero-illustration">
+                            <defs>
+                                <linearGradient id="heroGrad1" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" style="stop-color:#667eea;stop-opacity:1" />
+                                    <stop offset="100%" style="stop-color:#764ba2;stop-opacity:1" />
+                                </linearGradient>
+                                <linearGradient id="heroGrad2" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" style="stop-color:#4facfe;stop-opacity:1" />
+                                    <stop offset="100%" style="stop-color:#00f2fe;stop-opacity:1" />
+                                </linearGradient>
+                                <linearGradient id="heroGrad3" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" style="stop-color:#43e97b;stop-opacity:1" />
+                                    <stop offset="100%" style="stop-color:#38f9d7;stop-opacity:1" />
+                                </linearGradient>
+                                <linearGradient id="heroGradOrange" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" style="stop-color:#f093fb;stop-opacity:1" />
+                                    <stop offset="100%" style="stop-color:#f5576c;stop-opacity:1" />
+                                </linearGradient>
+                            </defs>
+                            
+                            <!-- Background soft circles -->
+                            <circle cx="300" cy="250" r="220" fill="url(#heroGrad1)" opacity="0.05"/>
+                            <circle cx="300" cy="250" r="180" fill="url(#heroGrad2)" opacity="0.05"/>
+                            <circle cx="300" cy="250" r="140" fill="url(#heroGrad3)" opacity="0.05"/>
+                            
+                            <!-- Central collaboration circle with people -->
+                            <g transform="translate(300, 250)">
+                                <!-- Main circle outline -->
+                                <circle cx="0" cy="0" r="110" fill="none" stroke="url(#heroGrad1)" stroke-width="3" opacity="0.3"/>
+                                <circle cx="0" cy="0" r="115" fill="none" stroke="url(#heroGrad2)" stroke-width="2" opacity="0.2" stroke-dasharray="10 5">
+                                    <animateTransform attributeName="transform" type="rotate" 
+                                        from="0 0 0" to="360 0 0" dur="40s" repeatCount="indefinite"/>
+                                </circle>
+                                
+                                <!-- 5 People around circle (evenly spaced) -->
+                                <!-- Person 1 - Top -->
+                                <g transform="translate(0, -110)">
+                                    <circle cx="0" cy="0" r="24" fill="url(#heroGrad1)"/>
+                                    <rect x="-14" y="24" width="28" height="42" rx="14" fill="url(#heroGrad1)"/>
+                                </g>
+                                
+                                <!-- Person 2 - Top Right -->
+                                <g transform="translate(105, -34)">
+                                    <circle cx="0" cy="0" r="24" fill="url(#heroGrad2)"/>
+                                    <rect x="-14" y="24" width="28" height="42" rx="14" fill="url(#heroGrad2)"/>
+                                </g>
+                                
+                                <!-- Person 3 - Bottom Right -->
+                                <g transform="translate(65, 89)">
+                                    <circle cx="0" cy="0" r="24" fill="url(#heroGrad3)"/>
+                                    <rect x="-14" y="24" width="28" height="42" rx="14" fill="url(#heroGrad3)"/>
+                                </g>
+                                
+                                <!-- Person 4 - Bottom Left -->
+                                <g transform="translate(-65, 89)">
+                                    <circle cx="0" cy="0" r="24" fill="url(#heroGradOrange)"/>
+                                    <rect x="-14" y="24" width="28" height="42" rx="14" fill="url(#heroGradOrange)"/>
+                                </g>
+                                
+                                <!-- Person 5 - Top Left -->
+                                <g transform="translate(-105, -34)">
+                                    <circle cx="0" cy="0" r="24" fill="url(#heroGrad3)"/>
+                                    <rect x="-14" y="24" width="28" height="42" rx="14" fill="url(#heroGrad3)"/>
+                                </g>
+                                
+                                <!-- Connection lines between people -->
+                                <line x1="0" y1="-86" x2="81" y2="-10" stroke="url(#heroGrad2)" stroke-width="2.5" opacity="0.3" stroke-dasharray="8 4">
+                                    <animate attributeName="stroke-dashoffset" from="0" to="12" dur="2s" repeatCount="indefinite"/>
+                                </line>
+                                <line x1="81" y1="-10" x2="51" y2="65" stroke="url(#heroGrad3)" stroke-width="2.5" opacity="0.3" stroke-dasharray="8 4">
+                                    <animate attributeName="stroke-dashoffset" from="0" to="12" dur="2.2s" repeatCount="indefinite"/>
+                                </line>
+                                <line x1="51" y1="65" x2="-51" y2="65" stroke="url(#heroGradOrange)" stroke-width="2.5" opacity="0.3" stroke-dasharray="8 4">
+                                    <animate attributeName="stroke-dashoffset" from="0" to="12" dur="2.4s" repeatCount="indefinite"/>
+                                </line>
+                                <line x1="-51" y1="65" x2="-81" y2="-10" stroke="url(#heroGrad1)" stroke-width="2.5" opacity="0.3" stroke-dasharray="8 4">
+                                    <animate attributeName="stroke-dashoffset" from="0" to="12" dur="2.6s" repeatCount="indefinite"/>
+                                </line>
+                                <line x1="-81" y1="-10" x2="0" y2="-86" stroke="url(#heroGrad2)" stroke-width="2.5" opacity="0.3" stroke-dasharray="8 4">
+                                    <animate attributeName="stroke-dashoffset" from="0" to="12" dur="2.8s" repeatCount="indefinite"/>
+                                </line>
+                                
+                                <!-- Central collaborative icon (hands joining / unity symbol) -->
+                                <g opacity="0.7">
+                                    <circle cx="0" cy="0" r="35" fill="none" stroke="url(#heroGrad1)" stroke-width="2.5" opacity="0.4"/>
+                                    <circle cx="0" cy="0" r="28" fill="none" stroke="url(#heroGrad2)" stroke-width="2" opacity="0.3">
+                                        <animateTransform attributeName="transform" type="rotate" 
+                                            from="0 0 0" to="-360 0 0" dur="30s" repeatCount="indefinite"/>
+                                    </circle>
+                                    <!-- Democracy/Collaboration icon -->
+                                    <text x="0" y="15" font-size="40" text-anchor="middle" fill="url(#heroGrad1)" opacity="0.8">⚖️</text>
+                                </g>
+                            </g>
+                            
+                            <!-- Floating elements (kept from original) -->
+                            <circle cx="80" cy="100" r="9" fill="url(#heroGrad1)" opacity="0.6">
+                                <animate attributeName="cy" values="100;85;100" dur="3s" repeatCount="indefinite"/>
+                                <animate attributeName="opacity" values="0.6;0.8;0.6" dur="3s" repeatCount="indefinite"/>
+                            </circle>
+                            <circle cx="520" cy="140" r="11" fill="url(#heroGrad2)" opacity="0.6">
+                                <animate attributeName="cy" values="140;125;140" dur="3.5s" repeatCount="indefinite"/>
+                                <animate attributeName="opacity" values="0.6;0.9;0.6" dur="3.5s" repeatCount="indefinite"/>
+                            </circle>
+                            <circle cx="90" cy="380" r="8" fill="url(#heroGrad3)" opacity="0.6">
+                                <animate attributeName="cy" values="380;365;380" dur="4s" repeatCount="indefinite"/>
+                                <animate attributeName="opacity" values="0.6;0.85;0.6" dur="4s" repeatCount="indefinite"/>
+                            </circle>
+                            <circle cx="510" cy="370" r="10" fill="url(#heroGradOrange)" opacity="0.6">
+                                <animate attributeName="cy" values="370;355;370" dur="3.2s" repeatCount="indefinite"/>
+                                <animate attributeName="opacity" values="0.6;0.9;0.6" dur="3.2s" repeatCount="indefinite"/>
+                            </circle>
+                            <circle cx="150" cy="200" r="7" fill="url(#heroGrad2)" opacity="0.5">
+                                <animate attributeName="cx" values="150;160;150" dur="4.5s" repeatCount="indefinite"/>
+                                <animate attributeName="cy" values="200;190;200" dur="4.5s" repeatCount="indefinite"/>
+                            </circle>
+                            <circle cx="450" cy="320" r="7" fill="url(#heroGrad3)" opacity="0.5">
+                                <animate attributeName="cx" values="450;440;450" dur="5s" repeatCount="indefinite"/>
+                                <animate attributeName="cy" values="320;310;320" dur="5s" repeatCount="indefinite"/>
+                            </circle>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Civic Engagement & Transparency Module (STREAMLINED WITH TABS) -->
+        <section id="civic" class="civic-section section">
+            <div class="container">
+                
+                <!-- HERO ILLUSTRATION (Circular - Mutual Accountability) -->
+                <div class="civic-hero">
+                    <img src="images/civic-hero-circular-v10.svg?v=20250122-233000-SHARP" alt="Circle of mutual accountability: Citizens, Representatives, and Supreme Court seamlessly integrated and accountable to each other" class="civic-hero-image" onerror="this.onerror=null; this.src='images/civic-hero-circular-v9.svg';" />
+                </div>
+                
+                <!-- TITLE & TAGLINE (Below Hero) -->
+                <div class="civic-header-text">
+                    <h2 class="civic-title" data-translate="civic_title">Civic Engagement & Transparency</h2>
+                    <p class="civic-subtitle" data-translate="civic_subtitle">
+                        Your personal democracy toolkit - vote on bills, track representatives, explore court decisions, and see who truly represents your values
+                    </p>
+                </div>
+                
+                <!-- PROMINENT TAB NAVIGATION (Impossible to Miss!) -->
+                <div class="civic-tabs" role="tablist" aria-label="Civic engagement features">
+                    <button class="civic-tab active" 
+                            data-tab="representatives" 
+                            onclick="switchCivicTab('representatives')" 
+                            role="tab"
+                            aria-selected="true"
+                            aria-controls="representatives-panel"
+                            id="representatives-tab">
+                        <span class="tab-icon">👥</span>
+                        <span class="tab-label">My Reps</span>
+                    </button>
+                    
+                    <button class="civic-tab" 
+                            data-tab="candidates" 
+                            onclick="switchCivicTab('candidates')" 
+                            role="tab"
+                            aria-selected="false"
+                            aria-controls="candidates-panel"
+                            id="candidates-tab">
+                        <span class="tab-icon">🗳️</span>
+                        <span class="tab-label">Candidates</span>
+                    </button>
+                    
+                    <button class="civic-tab" 
+                            data-tab="bills" 
+                            onclick="switchCivicTab('bills')" 
+                            role="tab" 
+                            aria-selected="false"
+                            aria-controls="bills-panel"
+                            id="bills-tab">
+                        <span class="tab-icon">📜</span>
+                        <span class="tab-label">Vote on Bills</span>
+                    </button>
+                    
+                    <button class="civic-tab" 
+                            data-tab="court" 
+                            onclick="switchCivicTab('court')" 
+                            role="tab"
+                            aria-selected="false"
+                            aria-controls="court-panel"
+                            id="court-tab">
+                        <span class="tab-icon">⚖️</span>
+                        <span class="tab-label">Supreme Court</span>
+                    </button>
+                    
+                    <button class="civic-tab" 
+                            data-tab="dashboard" 
+                            onclick="switchCivicTab('dashboard')" 
+                            role="tab"
+                            aria-selected="false"
+                            aria-controls="dashboard-panel"
+                            id="dashboard-tab">
+                        <span class="tab-icon">📊</span>
+                        <span class="tab-label">My Dashboard</span>
+                    </button>
+                </div>
+                
+                <!-- TAB PANELS (Content Areas) -->
+                <div class="civic-tab-panels">
+                    
+                    <!-- PANEL 1: My Representatives -->
+                    <div class="civic-panel active" 
+                         id="representatives-panel" 
+                         role="tabpanel" 
+                         aria-labelledby="representatives-tab">
+                        
+                        <div class="panel-intro">
+                            <h3>📋 Cast Your Votes on Legislation</h3>
+                            <p>See active bills and upcoming votes. Cast your opinion to track how well your representatives align with your values.</p>
+                        </div>
+                        
+                        <!-- Country/Level Selection (Streamlined) -->
+                        <div class="civic-controls-compact">
+                            <select id="countrySelect" class="civic-select" onchange="handleCountryChange()">
+                                <option value="">Choose your country...</option>
+                                <option value="us">🇺🇸 United States</option>
+                                <option value="au">🇦🇺 Australia</option>
+                                <option value="gb">🇬🇧 United Kingdom</option>
+                                <option value="fr">🇫🇷 France</option>
+                                <option value="de">🇩🇪 Germany</option>
+                                <option value="ca">🇨🇦 Canada</option>
+                            </select>
+                            
+                            <select id="governmentLevelSelect" class="civic-select" onchange="handleGovernmentLevelChange()">
+                                <option value="federal">🏛️ Federal/National</option>
+                                <option value="state">🏢 State/Provincial</option>
+                                <option value="local">🏘️ Local/City</option>
+                            </select>
+                            
+                            <select id="billCategorySelect" class="civic-select">
+                                <option value="">All Categories</option>
+                                <option value="education">📚 Education</option>
+                                <option value="health">🏥 Healthcare</option>
+                                <option value="environment">🌍 Environment</option>
+                                <option value="economy">💰 Economy</option>
+                                <option value="rights">⚖️ Civil Rights</option>
+                                <option value="labor">💼 Labor</option>
+                                <option value="housing">🏠 Housing</option>
+                            </select>
+                        </div>
+                        
+                        <!-- Bills List (Current & Upcoming) - Will be populated by civic-voting.js -->
+                        <div id="billsListContainer" class="bills-container"></div>
+                        <div id="upcomingBillsContainer" class="bills-container"></div>
+                    </div>
+                    
+                    <!-- PANEL 2: Candidates -->
+                    <div class="civic-panel" 
+                         id="candidates-panel" 
+                         role="tabpanel" 
+                         aria-labelledby="candidates-tab">
+                        
+                        <div class="panel-intro">
+                            <h3>👥 Track Your Representatives</h3>
+                            <p>Search for your representatives, see their voting records, and discover how well they align with your positions.</p>
+                        </div>
+                        
+                        <!-- Search & Location -->
+                        <div class="civic-controls-compact">
+                            <input 
+                                type="search" 
+                                id="civicSearch" 
+                                class="civic-search" 
+                                placeholder="Search by name, district, or zip code..."
+                                aria-label="Search representatives"
+                            >
+                            <button class="civic-search-btn" onclick="searchCivicData()">
+                                <i class="fas fa-search"></i> Search
+                            </button>
+                        </div>
+                        
+                        <!-- Representatives Results -->
+                        <div id="civicResults" class="representatives-container"></div>
+                    </div>
+                    
+                    <!-- PANEL 3: Supreme Court -->
+                    <div class="civic-panel" 
+                         id="court-panel" 
+                         role="tabpanel" 
+                         aria-labelledby="court-tab">
+                        
+                        <div class="panel-intro">
+                            <h3>⚖️ Supreme Court Decisions</h3>
+                            <p>Explore landmark cases, recent decisions, and understand how the court shapes policy.</p>
+                        </div>
+                        
+                        <!-- Court Selection -->
+                        <div class="civic-controls-compact">
+                            <select id="courtCountrySelect" class="civic-select">
+                                <option value="">Choose country...</option>
+                                <option value="us">🇺🇸 United States</option>
+                                <option value="au">🇦🇺 Australia</option>
+                                <option value="gb">🇬🇧 United Kingdom</option>
+                                <option value="ca">🇨🇦 Canada</option>
+                            </select>
+                            
+                            <select id="courtLevelSelect" class="civic-select">
+                                <option value="federal">🏛️ Federal Supreme Court</option>
+                                <option value="state">🏢 State Courts</option>
+                            </select>
+                        </div>
+                        
+                        <!-- Court Decisions (will be populated by existing Supreme Court functionality) -->
+                        <div id="courtContainer" class="court-container"></div>
+                    </div>
+                    
+                    <!-- PANEL 4: Candidates -->
+                    <div class="civic-panel" 
+                         id="candidates-panel" 
+                         role="tabpanel" 
+                         aria-labelledby="candidates-tab">
+                        
+                        <div class="panel-intro">
+                            <h3>🗳️ Analyze Election Candidates</h3>
+                            <p>Research candidates running for office - including primary challengers and newcomers. Get AI-powered analysis of their policy positions based on all publicly available data.</p>
+                        </div>
+                        
+                        <!-- Candidate Search -->
+                        <div class="candidate-search-section">
+                            <div class="search-header">
+                                <h4>Search for Candidates</h4>
+                                <p>Enter a candidate's name, the office they're running for, or your location to find relevant candidates.</p>
+                            </div>
+                            
+                            <div class="candidate-search-controls">
+                                <div class="search-input-group">
+                                    <i class="fas fa-search"></i>
+                                    <input 
+                                        type="text" 
+                                        id="candidateSearchInput" 
+                                        placeholder="Search by name, office, or location..."
+                                        aria-label="Search for candidates"
+                                    />
+                                </div>
+                                
+                                <div class="search-filters">
+                                    <select id="candidateOfficeFilter" class="civic-select" aria-label="Filter by office">
+                                        <option value="">All Offices</option>
+                                        <option value="president">President</option>
+                                        <option value="senate">U.S. Senate</option>
+                                        <option value="house">U.S. House</option>
+                                        <option value="governor">Governor</option>
+                                        <option value="state-senate">State Senate</option>
+                                        <option value="state-house">State House</option>
+                                        <option value="mayor">Mayor</option>
+                                        <option value="local">Local Office</option>
+                                    </select>
+                                    
+                                    <select id="candidateElectionFilter" class="civic-select" aria-label="Filter by election type">
+                                        <option value="">All Elections</option>
+                                        <option value="primary">Primary</option>
+                                        <option value="general">General Election</option>
+                                        <option value="special">Special Election</option>
+                                    </select>
+                                    
+                                    <button class="search-button" onclick="searchCandidates()" aria-label="Search candidates">
+                                        <i class="fas fa-search"></i>
+                                        <span>Search</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Candidate Results -->
+                        <div id="candidateResults" class="candidate-results">
+                            <!-- Will be populated by JavaScript -->
+                        </div>
+                        
+                        <!-- Candidate Detail View (Modal or Inline) -->
+                        <div id="candidateDetailView" class="candidate-detail-view" style="display: none;">
+                            <!-- Will be populated when a candidate is selected -->
+                        </div>
+                        
+                        <!-- AI Chat for Candidate Questions -->
+                        <div class="candidate-chat-widget">
+                            <div class="chat-widget-header">
+                                <div class="chat-widget-title">
+                                    <i class="fas fa-comments"></i>
+                                    <span>Ask About Candidates</span>
+                                </div>
+                                <div class="chat-widget-subtitle">
+                                    AI-powered analysis • Ask questions about candidate positions • Compare candidates
+                                </div>
+                            </div>
+                            
+                            <div class="chat-widget-body">
+                                <div id="candidateChatMessages" class="chat-messages">
+                                    <!-- Messages will be added here -->
+                                </div>
+                            </div>
+                            
+                            <div class="chat-widget-footer">
+                                <div class="chat-input-container">
+                                    <textarea 
+                                        id="candidateChatInput" 
+                                        class="chat-input"
+                                        placeholder="Ask about candidate positions, compare candidates, or request analysis..."
+                                        rows="2"
+                                        aria-label="Chat about candidates"
+                                    ></textarea>
+                                    <button id="candidateChatSend" class="chat-send-btn" aria-label="Send message">
+                                        <i class="fas fa-paper-plane"></i>
+                                    </button>
+                                </div>
+                                <div class="chat-widget-actions">
+                                    <button id="candidateChatClear" class="chat-action-btn">
+                                        <i class="fas fa-trash-alt"></i>
+                                        <span>Clear History</span>
+                                    </button>
+                                    <div class="chat-privacy-badge">
+                                        <i class="fas fa-shield-alt"></i>
+                                        <span>Privacy-Focused Analysis</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- PANEL 5: My Dashboard -->
+                    <div class="civic-panel" 
+                         id="dashboard-panel" 
+                         role="tabpanel" 
+                         aria-labelledby="dashboard-tab">
+                        
+                        <div class="panel-intro">
+                            <h3>📊 Your Civic Engagement Dashboard</h3>
+                            <p>Track your voting activity, see how you align with representatives, and discover your civic engagement patterns.</p>
+                        </div>
+                        
+                        <!-- Dashboard Stats & Visualizations - Will be populated by civic-voting.js -->
+                        <div id="personalDashboardContainer" class="dashboard-container"></div>
+                    </div>
+                    
+                </div>
+                
+                <!-- Civic Chat Widget (Available on all tabs) -->
+                <div class="chat-widget civic-chat-widget" id="civicChatWidget">
+                    <button class="chat-toggle" onclick="toggleCivicChat(event)" aria-label="Ask questions">
+                        <i class="fas fa-comment-dots"></i>
+                        <span>Need Help? Ask Questions</span>
+                    </button>
+                    <div class="chat-window" id="civicChatWindow">
+                        <div class="chat-header">
+                            <h4>Civic Engagement Assistant</h4>
+                            <button class="chat-close" onclick="toggleCivicChat(event)" aria-label="Close chat">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </div>
+                        <div class="chat-messages" id="civicChatMessages">
+                            <div class="chat-empty-state">
+                                <!-- V31: Clean custom SVG icon - Purple gradient chat bubble -->
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" class="chat-icon" style="width: 5rem; height: 5rem; display: block; margin: 0 auto 1.5rem auto;">
+                                  <defs>
+                                    <linearGradient id="civicGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                      <stop offset="0%" style="stop-color:#667eea;stop-opacity:1" />
+                                      <stop offset="100%" style="stop-color:#764ba2;stop-opacity:1" />
+                                    </linearGradient>
+                                  </defs>
+                                  <!-- Chat bubble shape -->
+                                  <path d="M 20 25 Q 20 15 30 15 L 70 15 Q 80 15 80 25 L 80 55 Q 80 65 70 65 L 45 65 L 30 80 L 30 65 Q 20 65 20 55 Z" 
+                                        fill="url(#civicGradient)" stroke="none"/>
+                                  <!-- Three dots inside bubble -->
+                                  <circle cx="35" cy="40" r="4.5" fill="white" opacity="0.9"/>
+                                  <circle cx="50" cy="40" r="4.5" fill="white" opacity="0.9"/>
+                                  <circle cx="65" cy="40" r="4.5" fill="white" opacity="0.9"/>
+                                </svg>
+                                <p>Welcome! I'm your AI-powered civic assistant.</p>
+                                <p style="font-size: 0.9rem; margin-top: 0.5rem; font-weight: normal;">Ask me about bills, voting records, Supreme Court decisions, or how to use this tool. 100% free, no tracking, complete privacy.</p>
+                            </div>
+                        </div>
+                        <div class="chat-input-container">
+                            <textarea 
+                                id="civicChatInput" 
+                                class="chat-input"
+                                placeholder="Ask anything about bills, representatives, or how to use this tool..."
+                                aria-label="Chat input"
+                                rows="1"
+                            ></textarea>
+                            <button class="chat-send" onclick="sendCivicMessage()" aria-label="Send">
+                                <i class="fas fa-paper-plane"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+        </section>
+
+
+        <!-- Jobs Comparison Module - Redesigned -->
+        <section id="jobs" class="jobs-section-new section">
+            <div class="jobs-container">
+                <!-- Jobs Hero Header -->
+                <div class="jobs-hero">
+                    <div class="jobs-hero-content">
+                        <div class="jobs-hero-badge">
+                            <svg width="50" height="50" viewBox="0 0 50 50" class="jobs-icon-svg">
+                                <defs>
+                                    <linearGradient id="jobsGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                        <stop offset="0%" style="stop-color:#667eea;stop-opacity:1" />
+                                        <stop offset="100%" style="stop-color:#764ba2;stop-opacity:1" />
+                                    </linearGradient>
+                                </defs>
+                                <circle cx="25" cy="25" r="23" fill="url(#jobsGrad)" opacity="0.15"/>
+                                <text x="25" y="35" font-size="28" text-anchor="middle" fill="url(#jobsGrad)">💼</text>
+                            </svg>
+                        </div>
+                        <h2 class="jobs-hero-title" data-translate="jobs_title">Your Work, Reimagined</h2>
+                        <p class="jobs-hero-subtitle" data-translate="jobs_headline">
+                            Discover how your profession transforms in democratic workplaces
+                        </p>
+                        <p class="jobs-hero-description" data-translate="jobs_description">
+                            Select your industry below to compare traditional hierarchical workplaces with worker-owned cooperatives where employees share power, profits, and decision-making. See real examples of how 230+ professions operate when workers have genuine voice.
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- Job Categories Grid -->
+                <div class="job-categories-grid" id="jobCategoriesGrid">
+                    <!-- Categories will be dynamically loaded -->
+                </div>
+                
+                <!-- Job Comparison Interface -->
+                <div class="job-comparison-container" id="jobComparisonContainer">
+                    <!-- Comparison view will be loaded here -->
+                </div>
+                
+                <!-- Jobs Chat Widget -->
+                <div class="chat-widget jobs-chat-widget" id="jobsChatWidget">
+                    <button class="chat-toggle" onclick="toggleJobsChat(event)" aria-label="Toggle jobs chat">
+                        <i class="fas fa-comment-dots"></i>
+                        <span data-translate="jobs_chat_btn">Ask about specific jobs</span>
+                    </button>
+                    <div class="chat-window" id="jobsChatWindow">
+                        <div class="chat-header">
+                            <h4 data-translate="jobs_chat_title">Profession Research Assistant</h4>
+                            <button class="chat-close" onclick="toggleJobsChat(event)" aria-label="Close chat">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </div>
+                        <div class="chat-messages" id="jobsChatMessages">
+                            <div class="chat-empty-state">
+                                <!-- V31: Clean custom SVG icon - Green gradient briefcase -->
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" class="chat-icon" style="width: 5rem; height: 5rem; display: block; margin: 0 auto 1.5rem auto;">
+                                  <defs>
+                                    <linearGradient id="jobsGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                      <stop offset="0%" style="stop-color:#48bb78;stop-opacity:1" />
+                                      <stop offset="100%" style="stop-color:#38a169;stop-opacity:1" />
+                                    </linearGradient>
+                                  </defs>
+                                  <!-- Briefcase body -->
+                                  <rect x="20" y="40" width="60" height="40" rx="4" ry="4" fill="url(#jobsGradient)" stroke="none"/>
+                                  <!-- Briefcase handle -->
+                                  <path d="M 40 40 L 40 30 Q 40 25 45 25 L 55 25 Q 60 25 60 30 L 60 40" 
+                                        fill="none" stroke="url(#jobsGradient)" stroke-width="4" stroke-linecap="round"/>
+                                  <!-- Lock/clasp -->
+                                  <rect x="47" y="50" width="6" height="12" rx="1" fill="white" opacity="0.9"/>
+                                </svg>
+                                <p>Welcome! I'm your AI-powered profession research assistant.</p>
+                                <p style="font-size: 0.9rem; margin-top: 0.5rem; font-weight: normal;">Ask me about any job or profession to learn how it works in democratic workplaces versus traditional hierarchies.</p>
+                            </div>
+                        </div>
+                        <div class="chat-input-container">
+                            <textarea 
+                                id="jobsChatInput" 
+                                class="chat-input"
+                                placeholder="Ask about any profession..."
+                                data-translate-placeholder="jobs_chat_placeholder"
+                                aria-label="Chat input"
+                                rows="1"
+                            ></textarea>
+                            <button class="chat-send" onclick="sendJobsMessage()" aria-label="Send message">
+                                <i class="fas fa-paper-plane"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Ethical Business Finder Section -->
+        <section id="ethical-business" class="ethical-business-section section">
+            <div class="ethical-business-container">
+                <!-- Header -->
+                <div class="ethical-business-header">
+                    <div class="ethical-business-badge">
+                        <i class="fas fa-handshake"></i>
+                        <span>Ethical Business Finder</span>
+                    </div>
+                    <h2 class="ethical-business-title">Support Democratic Workplaces</h2>
+                    <p class="ethical-business-subtitle">Discover worker cooperatives and ethical businesses in your community</p>
+                    <p class="ethical-business-description">
+                        Find businesses that prioritize worker ownership, fair wages, and community impact. 
+                        Support companies that align with your values.
+                    </p>
+                </div>
+
+                <!-- Personalization Prompt (shown when NOT enabled) -->
+                <div id="ethicalBusinessPrompt" class="ethical-business-prompt">
+                    <div class="ethical-business-prompt-icon">
+                        <i class="fas fa-map-marked-alt"></i>
+                    </div>
+                    <h3>Enable Personalization to Find Local Businesses</h3>
+                    <p>
+                        To show you worker cooperatives and ethical businesses near you, 
+                        we need your location (postcode/ZIP code).
+                    </p>
+
+                    <div class="ethical-business-prompt-features">
+                        <h4>What You'll Get:</h4>
+                        <ul>
+                            <li>
+                                <i class="fas fa-check-circle"></i>
+                                <span>Worker-owned cooperatives in your area</span>
+                            </li>
+                            <li>
+                                <i class="fas fa-check-circle"></i>
+                                <span>Ethical businesses committed to fair practices</span>
+                            </li>
+                            <li>
+                                <i class="fas fa-check-circle"></i>
+                                <span>Community services and social enterprises</span>
+                            </li>
+                            <li>
+                                <i class="fas fa-check-circle"></i>
+                                <span>Support businesses that align with your values</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <button class="ethical-business-prompt-button" onclick="openPersonalizationModal()">
+                        <i class="fas fa-magic"></i>
+                        <span>Enable Personalization</span>
+                    </button>
+
+                    <p class="ethical-business-prompt-privacy">
+                        <i class="fas fa-shield-alt"></i>
+                        Your location is encrypted and stored only on your device. Never shared.
+                    </p>
+                </div>
+
+                <!-- Ethical Business Interface (shown when enabled) -->
+                <div id="ethicalBusinessInterface" class="ethical-business-interface">
+                    <!-- Current Location Display -->
+                    <div class="current-location">
+                        <div class="current-location-info">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span id="currentLocationText">Loading location...</span>
+                        </div>
+                        <button class="change-location" onclick="changeLocation()">
+                            <i class="fas fa-edit"></i> Change Location
+                        </button>
+                    </div>
+
+                    <!-- Search Controls -->
+                    <div class="ethical-business-search">
+                        <h3>
+                            <i class="fas fa-search"></i>
+                            Find Businesses
+                        </h3>
+
+                        <div class="search-controls">
+                            <div class="search-input-group">
+                                <i class="fas fa-search"></i>
+                                <input 
+                                    type="text" 
+                                    id="businessSearchInput" 
+                                    placeholder="Search by name, type, or category..."
+                                    aria-label="Search businesses"
+                                >
+                            </div>
+                            <button class="search-button" onclick="searchBusinesses()">
+                                <i class="fas fa-search"></i>
+                                <span>Search</span>
+                            </button>
+                        </div>
+
+                        <div class="search-filters">
+                            <button class="filter-chip active" data-filter="all" onclick="filterBusinesses('all')">
+                                All Types
+                            </button>
+                            <button class="filter-chip" data-filter="cooperative" onclick="filterBusinesses('cooperative')">
+                                🤝 Cooperatives
+                            </button>
+                            <button class="filter-chip" data-filter="ethical_business" onclick="filterBusinesses('ethical_business')">
+                                ✅ Ethical Business
+                            </button>
+                            <button class="filter-chip" data-filter="community_service" onclick="filterBusinesses('community_service')">
+                                🆘 Community Service
+                            </button>
+                            <button class="filter-chip" data-filter="social_enterprise" onclick="filterBusinesses('social_enterprise')">
+                                🌱 Social Enterprise
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Results Grid -->
+                    <div id="ethicalBusinessResults" class="ethical-business-results">
+                        <!-- Business cards will be loaded here dynamically -->
+                    </div>
+
+                    <!-- Loading State -->
+                    <div id="businessLoadingState" class="loading-state" style="display: none;">
+                        <div class="loading-spinner"></div>
+                        <p>Finding ethical businesses in your area...</p>
+                    </div>
+
+                    <!-- No Results State -->
+                    <div id="businessNoResults" class="no-results" style="display: none;">
+                        <div class="no-results-icon">
+                            <i class="fas fa-store-slash"></i>
+                        </div>
+                        <h3>No Businesses Found</h3>
+                        <p>
+                            We couldn't find any businesses matching your criteria in this area yet. 
+                            Help us grow our database!
+                        </p>
+                        <button class="submit-business-btn" onclick="showContactForm()">
+                            <i class="fas fa-plus-circle"></i>
+                            <span>Submit a Business</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- AI Assistant Chat Widget -->
+                <div id="ethicalBusinessChatWidget" class="ethical-business-chat-widget">
+                    <div class="chat-widget-header">
+                        <div class="chat-widget-title">
+                            <i class="fas fa-robot"></i>
+                            <span>AI Assistant - Ask Me Anything!</span>
+                        </div>
+                        <div class="chat-widget-subtitle">
+                            Powered by self-hosted Llama 3 • 100% Private • Conversations stored on YOUR device
+                        </div>
+                    </div>
+
+                    <div class="chat-widget-body">
+                        <div id="ethicalBusinessChatMessages" class="chat-messages">
+                            <!-- Messages will be added here dynamically -->
+                        </div>
+                    </div>
+
+                    <div class="chat-widget-footer">
+                        <div class="chat-input-container">
+                            <textarea 
+                                id="ethicalBusinessChatInput" 
+                                class="chat-input"
+                                placeholder="Ask about cooperatives, ethical businesses, or how to find them..."
+                                rows="2"
+                                aria-label="Chat with AI assistant"
+                            ></textarea>
+                            <button 
+                                id="ethicalBusinessChatSend" 
+                                class="chat-send-btn"
+                                aria-label="Send message"
+                            >
+                                <i class="fas fa-paper-plane"></i>
+                            </button>
+                        </div>
+                        <div class="chat-widget-actions">
+                            <button 
+                                id="ethicalBusinessChatClear" 
+                                class="chat-action-btn"
+                                title="Clear conversation history"
+                            >
+                                <i class="fas fa-trash-alt"></i>
+                                <span>Clear History</span>
+                            </button>
+                            <div class="chat-privacy-badge">
+                                <i class="fas fa-lock"></i>
+                                <span>Private & Encrypted</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer" role="contentinfo">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3 class="footer-title" data-translate="footer_about">About</h3>
+                    <p data-translate="footer_about_text">
+                        Workforce Democracy Project is a non-partisan educational resource 
+                        exploring democratic workplaces and government transparency. 
+                        Completely free, privacy-first, and ad-free forever.
+                    </p>
+                </div>
+                
+                <div class="footer-section">
+                    <h3 class="footer-title" data-translate="footer_privacy">Privacy & Security</h3>
+                    <ul class="footer-links">
+                        <li><a href="privacy.html" data-translate="footer_privacy_policy">Personalization & Privacy</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3 class="footer-title" data-translate="footer_connect">Connect</h3>
+                    <p data-translate="footer_connect_text">
+                        Questions? Suggestions? We'd love to hear from you.
+                    </p>
+                    <button class="btn btn-secondary" onclick="showContactForm()" data-translate="footer_contact">
+                        Contact Us
+                    </button>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p class="copyright">
+                    &copy; 2025 Workforce Democracy Project. 
+                    <span data-translate="footer_rights">All content freely available under Creative Commons.</span>
+                </p>
+                <p class="footer-note">
+                    <i class="fas fa-shield-alt"></i>
+                    <span data-translate="footer_tracking">Zero tracking. Zero ads. Complete privacy.</span>
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Modal Container -->
+    <div class="modal-overlay" id="modalOverlay" onclick="closeModal()"></div>
+    <div class="modal-container" id="modalContainer"></div>
+
+    <!-- Language Selector Modal -->
+    <div class="modal-overlay" id="languageModalOverlay" onclick="closeLanguageModal()"></div>
+    <div class="language-modal" id="languageModal">
+        <div class="language-modal-header">
+            <h2 class="language-modal-title">
+                <i class="fas fa-globe"></i>
+                <span data-translate="language_modal_title">Select Language</span>
+            </h2>
+            <button class="language-modal-close" onclick="closeLanguageModal()" aria-label="Close language selector">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="language-modal-content">
+            <button class="language-option" data-lang="en" onclick="selectLanguageFromModal('en')">
+                <span class="language-flag">🇬🇧</span>
+                <span class="language-name">English</span>
+            </button>
+            <button class="language-option" data-lang="es" onclick="selectLanguageFromModal('es')">
+                <span class="language-flag">🇪🇸</span>
+                <span class="language-name">Español</span>
+            </button>
+            <button class="language-option" data-lang="fr" onclick="selectLanguageFromModal('fr')">
+                <span class="language-flag">🇫🇷</span>
+                <span class="language-name">Français</span>
+            </button>
+            <button class="language-option" data-lang="de" onclick="selectLanguageFromModal('de')">
+                <span class="language-flag">🇩🇪</span>
+                <span class="language-name">Deutsch</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- Loading Indicator -->
+    <div class="loading-indicator" id="loadingIndicator">
+        <div class="spinner"></div>
+        <p data-translate="loading">Loading...</p>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <script src="js/security.js?v=20250122-HORIZONTAL-TABS"></script>
+    <script src="js/language.js?v=20250122-HORIZONTAL-TABS"></script>
+    <script src="js/charts.js?v=20250122-HORIZONTAL-TABS"></script>
+    <script src="js/civic-data-loader.js"></script>
+<script src="js/civic.js?v=20250122-SCROLL-FIX"></script>
+    <script src="js/civic-voting.js?v=20250122-HORIZONTAL-TABS"></script>
+    <script src="js/jobs.js?v=20250122-HORIZONTAL-TABS"></script>
+    <script src="js/collapsible.js?v=20250122-HORIZONTAL-TABS"></script>
+    <script src="js/personalization.js?v=20250123-V15-COMPLETE-FIX"></script>
+    <script src="js/ethical-business.js?v=20250123-ETHICAL"></script>
+    <script src="js/ethical-business-chat.js?v=20250123-WELCOME-MSG-FIX"></script>
+    <script src="js/chat-input-scroll.js?v=20250124-OPTIMIZED"></script>
+    <script src="js/main.js?v=20250123-TOUR-REDESIGN"></script>
+    
+    <!-- V24: No force-svg script needed - SVGs are inline! -->
+
+    <!-- Initialize Sections -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Display personal dashboard
+            if (document.getElementById('personalDashboardContainer')) {
+                displayPersonalDashboard();
+            }
+            
+            // Display upcoming bills
+            if (document.getElementById('upcomingBillsContainer')) {
+                displayUpcomingBills();
+            }
+            
+            // Display all bills
+            if (document.getElementById('billsListContainer')) {
+                displayBillsList('all');
+            }
+        });
+    </script>
+
+    <!-- Service Worker DISABLED - Causing reload loop and preventing updates -->
+    <script>
+        // V24 - Service Worker completely disabled to fix issues
+        // Was causing: double modal loads, slow loading, prevented CSS updates
+        if ('serviceWorker' in navigator) {
+            // Unregister any existing service workers
+            navigator.serviceWorker.getRegistrations().then(function(registrations) {
+                for(let registration of registrations) {
+                    registration.unregister();
+                    console.log('Service worker unregistered');
+                }
+            });
+        }
+        
+        // Clear any old caches one time only
+        if ('caches' in window && !sessionStorage.getItem('caches-cleared-v42w')) {
+            caches.keys().then(function(cacheNames) {
+                Promise.all(
+                    cacheNames.map(function(cacheName) {
+                        return caches.delete(cacheName);
+                    })
+                ).then(function() {
+                    sessionStorage.setItem('caches-cleared-v42w', 'true');
+                    console.log('V42W: Old caches cleared');
+                });
+            });
+        }
+    </script>
+    
+    <!-- V29: Diagnostic disabled for clean test -->
+    <!-- <script src="js/simple-diagnostic-v28.js"></script> -->
+</body>
+</html>

@@ -1,0 +1,66 @@
+/**
+ * FORMS & INPUTS
+ * Version: 37.11.4-PHASE3C-PRIORITY
+ * Date: 2025-01-14
+ * 
+ * Form inputs, text areas, select dropdowns, and labels.
+ * Provides consistent styling with accessibility focus states.
+ * 
+ * Dependencies:
+ * - variables.css (design tokens)
+ * 
+ * Components:
+ * - input[type="text|search|email"] - Text input fields
+ * - textarea - Multi-line text areas
+ * - select - Dropdown menus with custom arrow
+ * - label - Form field labels
+ * 
+ * Accessibility: 
+ * - Minimum 44px touch targets
+ * - Clear focus indicators
+ * - High contrast borders
+ */
+
+/* ============================================
+   FORMS & INPUTS
+   ============================================ */
+input[type="text"],
+input[type="search"],
+input[type="email"],
+select,
+textarea {
+  width: 100%;
+  padding: var(--space-md);
+  font-size: var(--font-size-base);
+  font-family: inherit;
+  color: var(--text);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  transition: all var(--transition-fast);
+  min-height: 44px;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(243, 156, 18, 0.15);
+}
+
+select {
+  cursor: pointer;
+  appearance: none;
+  background-image: url('data:image/svg+xml,<svg width="12" height="8" xmlns="http://www.w3.org/2000/svg"><path d="M1 1l5 5 5-5" stroke="%232D3047" stroke-width="2" fill="none"/></svg>');
+  background-repeat: no-repeat;
+  background-position: right var(--space-md) center;
+  padding-right: var(--space-2xl);
+}
+
+label {
+  display: block;
+  font-weight: var(--font-weight-medium);
+  margin-bottom: var(--space-sm);
+  color: var(--text);
+}

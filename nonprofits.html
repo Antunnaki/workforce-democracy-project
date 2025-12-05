@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nonprofit Explorer - Workforce Democracy Project</title>
+    <meta name="description" content="Search and explore nonprofit organizations. Find help, verify ethical businesses, and discover community resources. Powered by ProPublica's IRS data.">
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/nonprofit-explorer.css">
+    
+    <!-- V36.9.11: Form Validation Styles (Task #17) -->
+    <link rel="stylesheet" href="css/form-validation.css?v=36.9.11-VALIDATION">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    
+    <!-- PWA -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#2563eb">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="images/site-logo-v2.svg">
+    <!-- V36.8.5: Grey Text Fix - Comprehensive Override -->
+    <link rel="stylesheet" href="css/grey-text-fix.css?v=20251031-V36.8.5-GREY-FIX">
+    
+    <!-- V36.8.5: Contrast Fix - Header, Chat, Overall Visibility -->
+    <link rel="stylesheet" href="css/contrast-fix-v36.8.5.css?v=20251031-V36.8.5-CONTRAST-FIX">
+</head>
+<body>
+    <!-- Header -->
+    <header class="site-header" role="banner">
+        <div class="container">
+            <div class="header-content">
+                <div class="brand">
+                    <h1 class="site-title">
+                        <a href="index.html">
+                            <img src="images/site-logo-v2.svg" alt="Workforce Democracy Project" class="site-logo">
+                            <span class="title-text">Workforce Democracy Project</span>
+                        </a>
+                    </h1>
+                    <p class="establishment">Est. Oct 2025</p>
+                </div>
+                
+                <!-- Desktop Navigation -->
+                <nav class="desktop-nav" role="navigation">
+                    <ul class="nav-list">
+                        <li><a href="index.html#civic">🗳️ Civic Engagement</a></li>
+                        <li><a href="index.html#jobs">💼 Explore Jobs</a></li>
+                        <li><a href="index.html#ethical-business">🤝 Ethical Businesses</a></li>
+                        <li><a href="nonprofits.html" class="active">🏥 Find Help</a></li>
+                        <li><a href="learning.html">📚 Learn</a></li>
+                        <li><a href="faq.html">💡 FAQ</a></li>
+                        <li><a href="help.html">❓ Help & Guide</a></li>
+                        <li><a href="privacy.html">🔒 Privacy</a></li>
+                        <li><a href="philosophies.html">🌟 Philosophies</a></li>
+                        <li><a href="donate.html">💝 Support</a></li>
+                    </ul>
+                </nav>
+                
+                <!-- Mobile Controls -->
+                <div class="mobile-controls">
+                    <button class="menu-toggle" id="menuToggle" aria-label="Toggle mobile menu">
+                        <span class="hamburger"></span>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Mobile Navigation -->
+            <nav class="mobile-nav" id="mobileNav">
+                <ul class="nav-list">
+                    <li><a href="index.html#civic">🗳️ Civic Engagement</a></li>
+                    <li><a href="index.html#jobs">💼 Explore Jobs</a></li>
+                    <li><a href="index.html#ethical-business">🤝 Ethical Businesses</a></li>
+                    <li><a href="nonprofits.html" class="active">🏥 Find Help</a></li>
+                    <li><a href="learning.html">📚 Learn</a></li>
+                    <li><a href="faq.html">💡 FAQ</a></li>
+                    <li><a href="help.html">❓ Help & Guide</a></li>
+                    <li><a href="privacy.html">🔒 Privacy</a></li>
+                    <li><a href="philosophies.html">🌟 Philosophies</a></li>
+                    <li><a href="donate.html">💝 Support</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- V37.8.7: Redirect Notice - Community Services Now on Homepage -->
+    <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 1.5rem 0; box-shadow: 0 2px 10px rgba(0,0,0,0.15);">
+        <div class="container" style="max-width: 1200px; margin: 0 auto; padding: 0 2rem;">
+            <div style="display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; flex-wrap: wrap;">
+                <div style="flex: 1; min-width: 250px;">
+                    <h3 style="margin: 0 0 0.5rem 0; font-size: 1.35rem; font-weight: 700; display: flex; align-items: center; gap: 0.75rem;">
+                        <span style="font-size: 2rem;">✨</span>
+                        <span>Community Services Now on Homepage!</span>
+                    </h3>
+                    <p style="margin: 0; font-size: 1rem; opacity: 0.95; line-height: 1.5;">
+                        Find local help, browse by category, or search by ZIP code — all in one convenient place on our homepage.
+                    </p>
+                </div>
+                <a href="index.html#ethical-business" style="display: inline-flex; align-items: center; gap: 0.75rem; padding: 1rem 2rem; background: white; color: #667eea; border-radius: 12px; text-decoration: none; font-weight: 700; font-size: 1.05rem; box-shadow: 0 4px 12px rgba(0,0,0,0.15); transition: all 0.3s ease; white-space: nowrap;">
+                    <span>🏠</span>
+                    <span>Go to Community Services</span>
+                    <span>→</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="nonprofit-explorer-main">
+        <!-- Hero Section -->
+        <section class="nonprofit-hero">
+            <div class="container">
+                <h1 class="page-title">
+                    <i class="fas fa-hands-helping"></i>
+                    Nonprofit Explorer
+                </h1>
+                <p class="page-subtitle">
+                    Search 1.8+ million nonprofits. Find help, verify organizations, and discover community resources.
+                </p>
+                <p class="data-source">
+                    <i class="fas fa-database"></i> 
+                    Powered by <strong>ProPublica's IRS Nonprofit Database</strong> - Real, verified data
+                </p>
+            </div>
+        </section>
+
+        <!-- Emergency Resources Banner -->
+        <section class="emergency-banner">
+            <div class="container">
+                <div class="emergency-content">
+                    <div class="emergency-icon">
+                        <i class="fas fa-exclamation-circle"></i>
+                    </div>
+                    <div class="emergency-text">
+                        <h2>Need Help Right Now?</h2>
+                        <p>Quick access to crisis support, food banks, housing assistance, and emergency services</p>
+                    </div>
+                    <button class="btn-emergency" id="showEmergencyResources">
+                        <i class="fas fa-heart"></i> Find Emergency Help
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Search Section -->
+        <section class="search-section">
+            <div class="container">
+                <div class="search-container">
+                    <div class="search-box">
+                        <i class="fas fa-search search-icon"></i>
+                        <input 
+                            type="text" 
+                            id="nonprofitSearch" 
+                            class="search-input"
+                            placeholder="Search by organization name (e.g., Red Cross, Habitat for Humanity)..."
+                            autocomplete="off"
+                        >
+                        <button class="btn-clear" id="clearSearch" style="display: none;">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                    
+                    <div class="search-filters">
+                        <button class="filter-btn active" data-category="all">
+                            <i class="fas fa-globe"></i> All Nonprofits
+                        </button>
+                        <button class="filter-btn" data-category="healthcare">
+                            <i class="fas fa-heartbeat"></i> Healthcare
+                        </button>
+                        <button class="filter-btn" data-category="housing">
+                            <i class="fas fa-home"></i> Housing
+                        </button>
+                        <button class="filter-btn" data-category="food">
+                            <i class="fas fa-utensils"></i> Food Banks
+                        </button>
+                        <button class="filter-btn" data-category="education">
+                            <i class="fas fa-graduation-cap"></i> Education
+                        </button>
+                        <button class="filter-btn" data-category="environment">
+                            <i class="fas fa-leaf"></i> Environment
+                        </button>
+                        <button class="filter-btn" data-category="human-services">
+                            <i class="fas fa-hands"></i> Human Services
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Results Section -->
+        <section class="results-section">
+            <div class="container">
+                <!-- Loading State -->
+                <div class="loading-state" id="loadingState" style="display: none;">
+                    <div class="spinner"></div>
+                    <p>Searching nonprofits...</p>
+                </div>
+
+                <!-- Empty State -->
+                <div class="empty-state" id="emptyState">
+                    <i class="fas fa-search"></i>
+                    <h3>Start Your Search</h3>
+                    <p>Enter an organization name or click on a category to explore nonprofits</p>
+                    <div class="example-searches">
+                        <p><strong>Try searching:</strong></p>
+                        <button class="example-btn" data-query="red cross">Red Cross</button>
+                        <button class="example-btn" data-query="habitat for humanity">Habitat for Humanity</button>
+                        <button class="example-btn" data-query="feeding america">Feeding America</button>
+                        <button class="example-btn" data-query="goodwill">Goodwill</button>
+                    </div>
+                </div>
+
+                <!-- Results Header -->
+                <div class="results-header" id="resultsHeader" style="display: none;">
+                    <h2 class="results-count" id="resultsCount">Found 0 organizations</h2>
+                    <div class="results-actions">
+                        <button class="btn-secondary" id="exportResults">
+                            <i class="fas fa-download"></i> Export Results
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Results Grid -->
+                <div class="results-grid" id="resultsGrid"></div>
+
+                <!-- Load More -->
+                <div class="load-more-container" id="loadMoreContainer" style="display: none;">
+                    <button class="btn-load-more" id="loadMoreBtn">
+                        <i class="fas fa-chevron-down"></i> Load More Results
+                    </button>
+                </div>
+
+                <!-- Error State -->
+                <div class="error-state" id="errorState" style="display: none;">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <h3>Oops! Something went wrong</h3>
+                    <p id="errorMessage">Unable to fetch nonprofit data. Please try again.</p>
+                    <button class="btn-primary" id="retryBtn">
+                        <i class="fas fa-redo"></i> Try Again
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Featured Categories Section -->
+        <section class="featured-categories" id="featuredCategories">
+            <div class="container">
+                <h2 class="section-title">Browse by Category</h2>
+                <div class="categories-grid">
+                    <div class="category-card" data-category="healthcare">
+                        <i class="fas fa-heartbeat"></i>
+                        <h3>Healthcare & Medical</h3>
+                        <p>Hospitals, clinics, health research, and medical assistance</p>
+                        <button class="btn-category" data-query="healthcare">Explore</button>
+                    </div>
+                    <div class="category-card" data-category="housing">
+                        <i class="fas fa-home"></i>
+                        <h3>Housing & Shelter</h3>
+                        <p>Homeless services, affordable housing, emergency shelter</p>
+                        <button class="btn-category" data-query="housing">Explore</button>
+                    </div>
+                    <div class="category-card" data-category="food">
+                        <i class="fas fa-utensils"></i>
+                        <h3>Food Banks & Nutrition</h3>
+                        <p>Food pantries, meal programs, hunger relief organizations</p>
+                        <button class="btn-category" data-query="food bank">Explore</button>
+                    </div>
+                    <div class="category-card" data-category="mental-health">
+                        <i class="fas fa-brain"></i>
+                        <h3>Mental Health</h3>
+                        <p>Counseling services, crisis intervention, support groups</p>
+                        <button class="btn-category" data-query="mental health">Explore</button>
+                    </div>
+                    <div class="category-card" data-category="education">
+                        <i class="fas fa-graduation-cap"></i>
+                        <h3>Education & Literacy</h3>
+                        <p>Schools, scholarships, tutoring, educational programs</p>
+                        <button class="btn-category" data-query="education">Explore</button>
+                    </div>
+                    <div class="category-card" data-category="employment">
+                        <i class="fas fa-briefcase"></i>
+                        <h3>Job Training & Employment</h3>
+                        <p>Workforce development, job placement, career counseling</p>
+                        <button class="btn-category" data-query="employment training">Explore</button>
+                    </div>
+                    <div class="category-card" data-category="legal">
+                        <i class="fas fa-balance-scale"></i>
+                        <h3>Legal Aid</h3>
+                        <p>Free legal services, advocacy, civil rights support</p>
+                        <button class="btn-category" data-query="legal aid">Explore</button>
+                    </div>
+                    <div class="category-card" data-category="crisis">
+                        <i class="fas fa-phone-volume"></i>
+                        <h3>Crisis Support</h3>
+                        <p>Hotlines, domestic violence, addiction recovery, emergency aid</p>
+                        <button class="btn-category" data-query="crisis">Explore</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- How It Works Section -->
+        <section class="how-it-works">
+            <div class="container">
+                <h2 class="section-title">How It Works</h2>
+                <div class="steps-grid">
+                    <div class="step-card">
+                        <div class="step-number">1</div>
+                        <i class="fas fa-search"></i>
+                        <h3>Search or Browse</h3>
+                        <p>Enter an organization name or browse by category to find nonprofits</p>
+                    </div>
+                    <div class="step-card">
+                        <div class="step-number">2</div>
+                        <i class="fas fa-info-circle"></i>
+                        <h3>View Details</h3>
+                        <p>See verified IRS data including mission, financials, and contact information</p>
+                    </div>
+                    <div class="step-card">
+                        <div class="step-number">3</div>
+                        <i class="fas fa-phone-alt"></i>
+                        <h3>Connect & Get Help</h3>
+                        <p>Reach out directly via website, phone, or visit their location</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Organization Detail Modal -->
+    <div class="modal" id="orgModal" style="display: none;">
+        <div class="modal-overlay" id="modalOverlay"></div>
+        <div class="modal-content">
+            <button class="modal-close" id="modalClose">
+                <i class="fas fa-times"></i>
+            </button>
+            <div class="modal-body" id="modalBody">
+                <!-- Dynamic content loaded here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Emergency Resources Modal -->
+    <div class="modal" id="emergencyModal" style="display: none;">
+        <div class="modal-overlay" id="emergencyModalOverlay"></div>
+        <div class="modal-content emergency-modal-content">
+            <button class="modal-close" id="emergencyModalClose">
+                <i class="fas fa-times"></i>
+            </button>
+            <div class="modal-body">
+                <div class="emergency-modal-header">
+                    <i class="fas fa-heart-pulse"></i>
+                    <h2>Emergency Resources</h2>
+                    <p>Quick access to immediate help and support services</p>
+                </div>
+                
+                <div class="emergency-resources-grid">
+                    <div class="emergency-resource-card">
+                        <i class="fas fa-phone-alt"></i>
+                        <h3>National Crisis Hotlines</h3>
+                        <ul>
+                            <li><strong>988</strong> - Suicide & Crisis Lifeline</li>
+                            <li><strong>1-800-799-7233</strong> - Domestic Violence</li>
+                            <li><strong>1-800-662-4357</strong> - Substance Abuse (SAMHSA)</li>
+                            <li><strong>988</strong> then Press 1 - Veterans Crisis Line</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="emergency-resource-card">
+                        <i class="fas fa-home"></i>
+                        <h3>Housing & Shelter</h3>
+                        <button class="btn-resource" data-query="homeless shelter">Find Shelters</button>
+                        <button class="btn-resource" data-query="housing assistance">Housing Assistance</button>
+                        <button class="btn-resource" data-query="transitional housing">Transitional Housing</button>
+                    </div>
+                    
+                    <div class="emergency-resource-card">
+                        <i class="fas fa-utensils"></i>
+                        <h3>Food & Nutrition</h3>
+                        <button class="btn-resource" data-query="food bank">Food Banks</button>
+                        <button class="btn-resource" data-query="meals on wheels">Meal Programs</button>
+                        <button class="btn-resource" data-query="food pantry">Food Pantries</button>
+                    </div>
+                    
+                    <div class="emergency-resource-card">
+                        <i class="fas fa-heartbeat"></i>
+                        <h3>Healthcare</h3>
+                        <button class="btn-resource" data-query="free clinic">Free Clinics</button>
+                        <button class="btn-resource" data-query="community health">Community Health</button>
+                        <button class="btn-resource" data-query="medical assistance">Medical Assistance</button>
+                    </div>
+                    
+                    <div class="emergency-resource-card">
+                        <i class="fas fa-brain"></i>
+                        <h3>Mental Health</h3>
+                        <button class="btn-resource" data-query="mental health">Mental Health Services</button>
+                        <button class="btn-resource" data-query="counseling">Counseling</button>
+                        <button class="btn-resource" data-query="support group">Support Groups</button>
+                    </div>
+                    
+                    <div class="emergency-resource-card">
+                        <i class="fas fa-briefcase"></i>
+                        <h3>Employment & Training</h3>
+                        <button class="btn-resource" data-query="job training">Job Training</button>
+                        <button class="btn-resource" data-query="employment services">Employment Services</button>
+                        <button class="btn-resource" data-query="career">Career Counseling</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Workforce Democracy Project</h3>
+                    <p>Empowering communities through transparency, education, and access to resources.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="nonprofits.html">Find Help</a></li>
+                        <li><a href="learning.html">Learn</a></li>
+                        <li><a href="privacy.html">Privacy</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Data Source</h4>
+                    <p>Nonprofit data provided by <a href="https://projects.propublica.org/nonprofits/" target="_blank" rel="noopener">ProPublica Nonprofit Explorer</a></p>
+                    <p><small>IRS Form 990 data updated regularly</small></p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Workforce Democracy Project. Est. Oct 2025.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="js/nonprofit-explorer.js"></script>
+    <script src="js/main.js"></script>
+    <!-- V36.9.11: Form Validation (Task #17) -->
+    <script src="js/form-validator.js?v=36.9.11-VALIDATION" defer></script>
+</body>
+</html>

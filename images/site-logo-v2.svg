@@ -1,0 +1,164 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" role="img" aria-label="Workforce Democracy Project Logo">
+  <defs>
+    <!-- Warm gradient palette -->
+    <linearGradient id="warmGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#FF9A56;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#FFB86C;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#F4A261;stop-opacity:1" />
+    </linearGradient>
+    
+    <linearGradient id="blueGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#4A90E2;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#5BA3F5;stop-opacity:1" />
+    </linearGradient>
+    
+    <linearGradient id="greenGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#7FB069;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#96C97E;stop-opacity:1" />
+    </linearGradient>
+    
+    <linearGradient id="purpleGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#9B6FCC;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#B589D6;stop-opacity:1" />
+    </linearGradient>
+    
+    <!-- Subtle glow effect -->
+    <filter id="softGlow">
+      <feGaussianBlur stdDeviation="1.5" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    
+    <!-- Shadow for depth -->
+    <filter id="dropShadow">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="2"/>
+      <feOffset dx="0" dy="2" result="offsetblur"/>
+      <feComponentTransfer>
+        <feFuncA type="linear" slope="0.3"/>
+      </feComponentTransfer>
+      <feMerge>
+        <feMergeNode/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  
+  <!-- Background circle with subtle gradient -->
+  <circle cx="60" cy="60" r="55" fill="none" stroke="url(#warmGradient)" stroke-width="2" opacity="0.3"/>
+  
+  <!-- Main circle representing unity -->
+  <g filter="url(#softGlow)">
+    <circle cx="60" cy="60" r="48" fill="none" stroke="url(#warmGradient)" stroke-width="3.5" stroke-linecap="round" stroke-dasharray="0"/>
+    
+    <!-- Connection lines forming network (subtle) -->
+    <g opacity="0.2">
+      <line x1="60" y1="15" x2="60" y2="105" stroke="url(#blueGradient)" stroke-width="1"/>
+      <line x1="15" y1="60" x2="105" y2="60" stroke="url(#greenGradient)" stroke-width="1"/>
+      <line x1="26" y1="26" x2="94" y2="94" stroke="url(#purpleGradient)" stroke-width="1"/>
+      <line x1="94" y1="26" x2="26" y2="94" stroke="url(#warmGradient)" stroke-width="1"/>
+    </g>
+    
+    <!-- 8 detailed people figures in circle -->
+    <!-- Each person has more detail: head, body, arms, legs -->
+    
+    <!-- Person 1: Top (Blue - Civic) -->
+    <g transform="translate(60, 15)" filter="url(#dropShadow)">
+      <circle cx="0" cy="0" r="5" fill="url(#blueGradient)"/>
+      <circle cx="0" cy="0" r="5" fill="none" stroke="#fff" stroke-width="1"/>
+      <!-- Body -->
+      <rect x="-2" y="5" width="4" height="10" rx="2" fill="url(#blueGradient)" opacity="0.9"/>
+      <!-- Arms -->
+      <path d="M -4 7 L -6 10 M 4 7 L 6 10" stroke="url(#blueGradient)" stroke-width="2" stroke-linecap="round"/>
+      <!-- Legs -->
+      <path d="M -1 15 L -3 20 M 1 15 L 3 20" stroke="url(#blueGradient)" stroke-width="2" stroke-linecap="round"/>
+    </g>
+    
+    <!-- Person 2: Top-right (Green - Growth) -->
+    <g transform="translate(94, 26)" filter="url(#dropShadow)">
+      <circle cx="0" cy="0" r="5" fill="url(#greenGradient)"/>
+      <circle cx="0" cy="0" r="5" fill="none" stroke="#fff" stroke-width="1"/>
+      <rect x="-2" y="5" width="4" height="10" rx="2" fill="url(#greenGradient)" opacity="0.9"/>
+      <path d="M -4 7 L -6 10 M 4 7 L 6 10" stroke="url(#greenGradient)" stroke-width="2" stroke-linecap="round"/>
+      <path d="M -1 15 L -3 20 M 1 15 L 3 20" stroke="url(#greenGradient)" stroke-width="2" stroke-linecap="round"/>
+    </g>
+    
+    <!-- Person 3: Right (Purple - Empowerment) -->
+    <g transform="translate(105, 60)" filter="url(#dropShadow)">
+      <circle cx="0" cy="0" r="5" fill="url(#purpleGradient)"/>
+      <circle cx="0" cy="0" r="5" fill="none" stroke="#fff" stroke-width="1"/>
+      <rect x="-2" y="5" width="4" height="10" rx="2" fill="url(#purpleGradient)" opacity="0.9"/>
+      <path d="M -4 7 L -6 10 M 4 7 L 6 10" stroke="url(#purpleGradient)" stroke-width="2" stroke-linecap="round"/>
+      <path d="M -1 15 L -3 20 M 1 15 L 3 20" stroke="url(#purpleGradient)" stroke-width="2" stroke-linecap="round"/>
+    </g>
+    
+    <!-- Person 4: Bottom-right (Orange - Warmth) -->
+    <g transform="translate(94, 94)" filter="url(#dropShadow)">
+      <circle cx="0" cy="0" r="5" fill="url(#warmGradient)"/>
+      <circle cx="0" cy="0" r="5" fill="none" stroke="#fff" stroke-width="1"/>
+      <rect x="-2" y="5" width="4" height="10" rx="2" fill="url(#warmGradient)" opacity="0.9"/>
+      <path d="M -4 7 L -6 10 M 4 7 L 6 10" stroke="url(#warmGradient)" stroke-width="2" stroke-linecap="round"/>
+      <path d="M -1 15 L -3 20 M 1 15 L 3 20" stroke="url(#warmGradient)" stroke-width="2" stroke-linecap="round"/>
+    </g>
+    
+    <!-- Person 5: Bottom (Blue - Unity) -->
+    <g transform="translate(60, 105)" filter="url(#dropShadow)">
+      <circle cx="0" cy="0" r="5" fill="url(#blueGradient)"/>
+      <circle cx="0" cy="0" r="5" fill="none" stroke="#fff" stroke-width="1"/>
+      <rect x="-2" y="5" width="4" height="10" rx="2" fill="url(#blueGradient)" opacity="0.9"/>
+      <path d="M -4 7 L -6 10 M 4 7 L 6 10" stroke="url(#blueGradient)" stroke-width="2" stroke-linecap="round"/>
+      <path d="M -1 15 L -3 20 M 1 15 L 3 20" stroke="url(#blueGradient)" stroke-width="2" stroke-linecap="round"/>
+    </g>
+    
+    <!-- Person 6: Bottom-left (Green - Cooperation) -->
+    <g transform="translate(26, 94)" filter="url(#dropShadow)">
+      <circle cx="0" cy="0" r="5" fill="url(#greenGradient)"/>
+      <circle cx="0" cy="0" r="5" fill="none" stroke="#fff" stroke-width="1"/>
+      <rect x="-2" y="5" width="4" height="10" rx="2" fill="url(#greenGradient)" opacity="0.9"/>
+      <path d="M -4 7 L -6 10 M 4 7 L 6 10" stroke="url(#greenGradient)" stroke-width="2" stroke-linecap="round"/>
+      <path d="M -1 15 L -3 20 M 1 15 L 3 20" stroke="url(#greenGradient)" stroke-width="2" stroke-linecap="round"/>
+    </g>
+    
+    <!-- Person 7: Left (Purple - Participation) -->
+    <g transform="translate(15, 60)" filter="url(#dropShadow)">
+      <circle cx="0" cy="0" r="5" fill="url(#purpleGradient)"/>
+      <circle cx="0" cy="0" r="5" fill="none" stroke="#fff" stroke-width="1"/>
+      <rect x="-2" y="5" width="4" height="10" rx="2" fill="url(#purpleGradient)" opacity="0.9"/>
+      <path d="M -4 7 L -6 10 M 4 7 L 6 10" stroke="url(#purpleGradient)" stroke-width="2" stroke-linecap="round"/>
+      <path d="M -1 15 L -3 20 M 1 15 L 3 20" stroke="url(#purpleGradient)" stroke-width="2" stroke-linecap="round"/>
+    </g>
+    
+    <!-- Person 8: Top-left (Orange - Welcome) -->
+    <g transform="translate(26, 26)" filter="url(#dropShadow)">
+      <circle cx="0" cy="0" r="5" fill="url(#warmGradient)"/>
+      <circle cx="0" cy="0" r="5" fill="none" stroke="#fff" stroke-width="1"/>
+      <rect x="-2" y="5" width="4" height="10" rx="2" fill="url(#warmGradient)" opacity="0.9"/>
+      <path d="M -4 7 L -6 10 M 4 7 L 6 10" stroke="url(#warmGradient)" stroke-width="2" stroke-linecap="round"/>
+      <path d="M -1 15 L -3 20 M 1 15 L 3 20" stroke="url(#warmGradient)" stroke-width="2" stroke-linecap="round"/>
+    </g>
+    
+    <!-- Center: Democratic table / gathering point -->
+    <g transform="translate(60, 60)">
+      <!-- Circular table representing democracy -->
+      <circle cx="0" cy="0" r="12" fill="url(#warmGradient)" opacity="0.2"/>
+      <circle cx="0" cy="0" r="12" fill="none" stroke="url(#warmGradient)" stroke-width="2.5"/>
+      
+      <!-- Center star representing shared goals -->
+      <g>
+        <!-- 5-pointed star for participation, voice, representation -->
+        <path d="M 0,-8 L 2,-3 L 7,-2 L 3,2 L 4,7 L 0,4 L -4,7 L -3,2 L -7,-2 L -2,-3 Z" 
+              fill="url(#warmGradient)" 
+              stroke="#fff" 
+              stroke-width="1"
+              filter="url(#softGlow)"/>
+      </g>
+      
+      <!-- Connecting dots suggesting conversation/interaction -->
+      <circle cx="-8" cy="0" r="1.5" fill="#FF9A56" opacity="0.8"/>
+      <circle cx="8" cy="0" r="1.5" fill="#FF9A56" opacity="0.8"/>
+      <circle cx="0" cy="-8" r="1.5" fill="#FFB86C" opacity="0.8"/>
+      <circle cx="0" cy="8" r="1.5" fill="#F4A261" opacity="0.8"/>
+    </g>
+  </g>
+</svg>

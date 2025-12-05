@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Privacy & Data Management - Workforce Democracy Project">
+    <meta name="keywords" content="privacy, data protection, security, encryption, GDPR">
+    <title>Privacy & Data Management - Workforce Democracy Project</title>
+    
+    <!-- Privacy-Respecting Resources -->
+    <!-- Font Awesome via jsDelivr (ethical, privacy-respecting CDN) -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    
+    <!-- Privacy-Respecting Fonts (system fonts, no tracking) -->
+    <link rel="stylesheet" href="css/fonts.css?v=20250122-PRIVACY-FONTS">
+    
+    <!-- Main Stylesheet -->
+    <link rel="stylesheet" href="css/main.css?v=20250122-220000-SW-FIX">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+</head>
+<body>
+    <!-- Skip Link -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <!-- Header -->
+    <header class="site-header" role="banner">
+        <div class="container">
+            <div class="header-content">
+                <div class="brand">
+                    <h1 class="site-title">
+                        <a href="index.html">
+                            <img src="images/site-logo.svg" alt="Workforce Democracy Project" class="site-logo">
+                            <span>Workforce Democracy</span>
+                        </a>
+                    </h1>
+                </div>
+                
+                <nav class="desktop-nav" role="navigation" aria-label="Main navigation">
+                    <ul class="nav-list">
+                        <li><a href="index.html#civic" data-translate="nav_civic">🗳️ Civic Engagement & Transparency</a></li>
+                        <li><a href="index.html#jobs">💼 Explore Jobs</a></li>
+                        <li><a href="index.html#ethical-business">🤝 Ethical Businesses</a></li>
+                        <li><a href="learning.html">📚 Learn</a></li>
+                        <li><a href="faq.html">💡 FAQ</a></li>
+                        <li><a href="privacy.html" class="active">🔒 Personalization & Privacy</a></li>
+                        <li><a href="philosophies.html">🌟 Our Philosophies</a></li>
+                    </ul>
+                </nav>
+                
+                <!-- Mobile Menu Toggle -->
+                <button class="mobile-menu-toggle" onclick="toggleMobileMenu()" aria-label="Toggle menu">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Mobile Navigation -->
+        <nav class="mobile-nav" id="mobileNav" role="navigation" aria-label="Mobile navigation">
+            <ul class="mobile-nav-list">
+                <li><a href="index.html#civic" onclick="closeMobileMenu()" data-translate="nav_civic">🗳️ Civic Engagement & Transparency</a></li>
+                <li><a href="index.html#jobs" onclick="closeMobileMenu()">💼 Explore Jobs</a></li>
+                <li><a href="index.html#ethical-business" onclick="closeMobileMenu()">🤝 Ethical Businesses</a></li>
+                <li><a href="learning.html" onclick="closeMobileMenu()">📚 Learn</a></li>
+                <li><a href="faq.html" onclick="closeMobileMenu()">💡 FAQ</a></li>
+                <li><a href="privacy.html" onclick="closeMobileMenu()" class="active">🔒 Personalization & Privacy</a></li>
+                <li><a href="philosophies.html" onclick="closeMobileMenu()">🌟 Our Philosophies</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main id="main-content">
+        <!-- Privacy Section -->
+        <section id="privacy" class="privacy-section section">
+            <div class="container">
+                <header class="section-header">
+                    <h2 class="section-title">
+                        <span class="icon">🔒</span>
+                        <span>Privacy & Data Management</span>
+                    </h2>
+                    <p class="section-subtitle">
+                        Your privacy is our highest priority. Here's everything you need to know about how we protect your data.
+                    </p>
+                </header>
+
+                <!-- 🔒 FORTRESS-LEVEL SECURITY BANNER (V32.7) -->
+                <div class="privacy-controls-wrapper" style="margin: 2rem 0; padding: 2rem; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 16px; box-shadow: 0 8px 24px rgba(102, 126, 234, 0.3);">
+                    <div style="max-width: 900px; margin: 0 auto;">
+                        <h3 class="privacy-title-white" style="color: #ffffff; margin: 0 0 1.25rem 0; display: flex; align-items: center; gap: 0.75rem; font-size: 1.75rem; font-weight: 700; text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);">
+                            🔒 Your Political Data is Protected
+                        </h3>
+                        
+                        <div style="background: rgba(255,255,255,0.15); backdrop-filter: blur(10px); padding: 1.5rem; border-radius: 12px; margin-bottom: 1.5rem;">
+                            <p style="margin: 0 0 1rem 0; color: white; line-height: 1.7; font-size: 1.05rem;">
+                                All your votes, searches, and chat history are <strong>encrypted with military-grade AES-256</strong> and stored 
+                                <strong>only on your device</strong>. We never see your political data. The encryption key never leaves your device.
+                            </p>
+                            <p style="margin: 0; color: rgba(255,255,255,0.95); font-size: 0.975rem; line-height: 1.6;">
+                                Your political preferences are <strong>extremely valuable</strong> to campaigns and data brokers. 
+                                That's why we built fortress-level protection to keep them safe from anyone trying to access, profile, or exploit your political views.
+                            </p>
+                        </div>
+                        
+                        <div style="background: rgba(0,0,0,0.2); padding: 1.25rem; border-radius: 10px; margin-bottom: 1.5rem; border-left: 4px solid rgba(255,255,255,0.5);">
+                            <h4 style="color: #ffffff; margin: 0 0 0.75rem 0; font-size: 1.15rem; font-weight: 600; text-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);">
+                                🛡️ What's Protected:
+                            </h4>
+                            <ul style="margin: 0; padding-left: 1.5rem; color: rgba(255,255,255,0.95); line-height: 1.8;">
+                                <li>All your votes on bills (Yes, No, Abstain)</li>
+                                <li>All chat conversations (candidates, bills, court)</li>
+                                <li>All search queries and research history</li>
+                                <li>All tracked representatives</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Personalization & Privacy Section -->
+                <div id="personalization" class="personalization-section" style="margin: 3rem 0; scroll-margin-top: 100px;">
+                    <h3 style="color: #FFE66D; margin-bottom: 1.5rem; font-size: 1.75rem;">✨ Personalization & Privacy</h3>
+                    <p style="color: #2d3748; margin-bottom: 1rem; line-height: 1.6; font-size: 1.1rem; font-weight: 500;">
+                        One simple choice enables ALL personalization features—while maintaining complete privacy. All data stays on YOUR device only.
+                    </p>
+                    <p style="color: #4a5568; margin-bottom: 2rem; line-height: 1.6;">
+                        No accounts. No tracking. No servers. Just a better experience tailored to your interests.
+                    </p>
+                    
+                    <!-- Current Status Card -->
+                    <div id="personalization-status-card" style="padding: 2rem; background: linear-gradient(135deg, rgba(30, 45, 60, 0.95) 0%, rgba(25, 35, 50, 0.95) 100%); border-radius: 12px; border: 2px solid rgba(74, 144, 226, 0.5); margin-bottom: 2rem;">
+                        <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1.5rem;">
+                            <div style="flex: 1; min-width: 250px;">
+                                <h4 style="color: #FFE66D; margin-bottom: 0.5rem; font-size: 1.25rem;">
+                                    <i class="fas fa-info-circle"></i> Current Status
+                                </h4>
+                                <p id="personalization-status-text" style="color: rgba(255, 255, 255, 0.98); margin: 0; font-size: 1.1rem;">
+                                    <!-- Dynamically updated by JavaScript -->
+                                </p>
+                            </div>
+                            <div>
+                                <button id="personalization-toggle-btn" class="btn" onclick="togglePersonalization()" style="min-width: 200px;">
+                                    <!-- Dynamically updated by JavaScript -->
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- How It Works (Expandable) -->
+                    <div class="collapsible-explanation" style="margin-bottom: 2rem;">
+                        <div class="explanation-header" onclick="toggleExplanation('how-it-works')" style="padding: 1.5rem; background: linear-gradient(135deg, rgba(30, 45, 60, 0.95) 0%, rgba(25, 35, 50, 0.95) 100%); border-radius: 8px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; border: 2px solid rgba(74, 144, 226, 0.3);">
+                            <h4 style="color: #FFE66D; margin: 0; font-size: 1.2rem;">
+                                <i class="fas fa-question-circle"></i> How Does Personalization Work?
+                            </h4>
+                            <i class="fas fa-chevron-down toggle-icon" id="how-it-works-icon" style="color: #4A90E2; transition: transform 0.3s;"></i>
+                        </div>
+                        <div class="explanation-content" id="how-it-works-content" onclick="toggleExplanation('how-it-works')" style="max-height: 0; overflow: hidden; transition: max-height 0.4s ease; cursor: pointer;" title="Click anywhere to close">
+                            <div style="padding: 2rem; background: linear-gradient(135deg, rgba(30, 45, 60, 0.85) 0%, rgba(25, 35, 50, 0.85) 100%); border-radius: 0 0 8px 8px; border: 2px solid rgba(74, 144, 226, 0.3); border-top: none;">
+                                <p style="color: rgba(255, 255, 255, 0.98); line-height: 1.8; margin-bottom: 1.5rem;">
+                                    When personalization is enabled, we track your interactions <strong>only on your device</strong> to provide better recommendations:
+                                </p>
+                                
+                                <h5 style="color: #FFE66D; margin-top: 1.5rem; margin-bottom: 1rem;">🎯 Features You Get (All-in-One)</h5>
+                                <ul style="color: rgba(255, 255, 255, 0.98); margin-left: 1.5rem; line-height: 1.8;">
+                                    <li>🗳️ <strong>Local Representatives Tracker:</strong> Find and track your elected officials</li>
+                                    <li>🤝 <strong>Ethical Business Finder:</strong> Discover worker cooperatives near you</li>
+                                    <li>📊 <strong>Civic Voting Tracker:</strong> Track your votes on bills and legislation</li>
+                                    <li>📚 <strong>Learning Progress:</strong> Get personalized content recommendations</li>
+                                </ul>
+                                
+                                <h5 style="color: #FFE66D; margin-top: 1.5rem; margin-bottom: 1rem;">📍 What Data We Need</h5>
+                                <ul style="color: rgba(255, 255, 255, 0.98); margin-left: 1.5rem; line-height: 1.8;">
+                                    <li><strong>Your Postcode/ZIP Code</strong> (optional) - For local representatives and ethical businesses</li>
+                                    <li><strong>Your Votes on Bills</strong> - To show alignment with representatives</li>
+                                    <li><strong>Topics You View</strong> - To recommend relevant content</li>
+                                    <li><strong>Questions You Ask</strong> - To improve responses</li>
+                                </ul>
+                                
+                                <h5 style="color: #FFE66D; margin-top: 1.5rem; margin-bottom: 1rem;">💡 Simple Plain English</h5>
+                                <p style="color: rgba(255, 255, 255, 0.98); line-height: 1.8; margin-bottom: 1rem;">
+                                    When you enable personalization:
+                                </p>
+                                <ul style="color: rgba(255, 255, 255, 0.98); margin-left: 1.5rem; line-height: 1.8;">
+                                    <li>✅ You enter your postcode <strong>once</strong> (optional - you can skip it)</li>
+                                    <li>✅ We show you businesses and representatives near you</li>
+                                    <li>✅ We remember which bills you vote on</li>
+                                    <li>✅ We recommend content based on what you've viewed</li>
+                                    <li>✅ All data is encrypted and stored <strong>only on your device</strong></li>
+                                    <li>✅ We never see, collect, or store your data on our servers</li>
+                                    <li>✅ You can delete everything with one click, anytime</li>
+                                </ul>
+                                
+                                <h5 style="color: #FFE66D; margin-top: 1.5rem; margin-bottom: 1rem;">🔒 Privacy Guarantees</h5>
+                                <ul style="color: rgba(255, 255, 255, 0.98); margin-left: 1.5rem; line-height: 1.8;">
+                                    <li>✅ <strong>All data encrypted</strong> with AES-256-GCM on your device</li>
+                                    <li>✅ <strong>Never sent to our servers</strong> or any third party</li>
+                                    <li>✅ <strong>No signup required</strong> - works immediately with no accounts</li>
+                                    <li>✅ <strong>Delete anytime</strong> with one click (secure 3-pass wipe)</li>
+                                    <li>✅ <strong>Export your data</strong> anytime as JSON to review</li>
+                                    <li>✅ <strong>No cross-site tracking</strong> - isolated to this website only</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Device Sync (Expandable) -->
+                    <div class="collapsible-explanation" style="margin-bottom: 2rem;">
+                        <div class="explanation-header" onclick="toggleExplanation('device-sync')" style="padding: 1.5rem; background: linear-gradient(135deg, rgba(30, 45, 60, 0.95) 0%, rgba(25, 35, 50, 0.95) 100%); border-radius: 8px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; border: 2px solid rgba(127, 176, 105, 0.3);">
+                            <h4 style="color: #FFE66D; margin: 0; font-size: 1.2rem;">
+                                <i class="fas fa-sync-alt"></i> Sync Across Your Devices (Local WiFi)
+                            </h4>
+                            <i class="fas fa-chevron-down toggle-icon" id="device-sync-icon" style="color: #7FB069; transition: transform 0.3s;"></i>
+                        </div>
+                        <div class="explanation-content" id="device-sync-content" onclick="toggleExplanation('device-sync')" style="max-height: 0; overflow: hidden; transition: max-height 0.4s ease; cursor: pointer;" title="Click anywhere to close">
+                            <div style="padding: 2rem; background: linear-gradient(135deg, rgba(30, 45, 60, 0.85) 0%, rgba(25, 35, 50, 0.85) 100%); border-radius: 0 0 8px 8px; border: 2px solid rgba(127, 176, 105, 0.3); border-top: none;">
+                                <div style="background: rgba(255, 206, 84, 0.15); padding: 1rem; border-radius: 6px; margin-bottom: 1.5rem; border-left: 4px solid #FFCE54;">
+                                    <p style="color: rgba(255, 255, 255, 0.98); margin: 0;">
+                                        <strong><i class="fas fa-info-circle"></i> Note:</strong> Device sync is completely optional and only works when your devices are on the same WiFi network. <strong>No cloud servers involved.</strong>
+                                    </p>
+                                </div>
+                                
+                                <h5 style="color: #FFE66D; margin-top: 1.5rem; margin-bottom: 1rem;">🔄 How Local WiFi Sync Works</h5>
+                                <p style="color: rgba(255, 255, 255, 0.98); line-height: 1.8; margin-bottom: 1rem;">
+                                    Device sync uses <strong>WebRTC peer-to-peer technology</strong> to connect your devices directly to each other on your local network:
+                                </p>
+                                <ol style="color: rgba(255, 255, 255, 0.98); margin-left: 1.5rem; line-height: 1.8;">
+                                    <li><strong>Discovery:</strong> Devices on same WiFi network detect each other automatically</li>
+                                    <li><strong>Encrypted Connection:</strong> Direct peer-to-peer connection established (no internet required)</li>
+                                    <li><strong>Data Transfer:</strong> Your personalization data syncs between devices</li>
+                                    <li><strong>Verification:</strong> You confirm which devices to trust</li>
+                                </ol>
+                                
+                                <h5 style="color: #FFE66D; margin-top: 1.5rem; margin-bottom: 1rem;">🛡️ Security & Privacy</h5>
+                                <ul style="color: rgba(255, 255, 255, 0.98); margin-left: 1.5rem; line-height: 1.8;">
+                                    <li>✅ <strong>Direct device-to-device</strong> - no data goes through our servers</li>
+                                    <li>✅ <strong>End-to-end encrypted</strong> - only your devices can decrypt the data</li>
+                                    <li>✅ <strong>Local network only</strong> - devices must be on same WiFi</li>
+                                    <li>✅ <strong>Manual approval</strong> - you choose which devices to trust</li>
+                                    <li>✅ <strong>No internet required</strong> - works completely offline</li>
+                                    <li>✅ <strong>Revoke anytime</strong> - remove trusted devices instantly</li>
+                                </ul>
+                                
+                                <h5 style="color: #FFE66D; margin-top: 1.5rem; margin-bottom: 1rem;">⚡ Enable Sync</h5>
+                                <div style="text-align: center; margin-top: 1.5rem;">
+                                    <button id="enable-sync-btn" class="btn btn-primary" onclick="enableDeviceSync()" style="min-width: 250px;">
+                                        <i class="fas fa-sync-alt"></i> Enable Device Sync
+                                    </button>
+                                    <p style="color: rgba(255, 255, 255, 0.7); font-size: 0.9rem; margin-top: 1rem;">
+                                        Requires personalization to be enabled
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Granular Data Deletion Controls (V32.7.5) -->
+                    <div style="padding: 2rem; background: linear-gradient(135deg, rgba(45, 25, 25, 0.98) 0%, rgba(35, 20, 20, 0.98) 100%); border-radius: 12px; border: 2px solid rgba(255, 107, 107, 0.6);">
+                        <h4 style="color: #FF6B6B; margin-bottom: 1rem; font-size: 1.25rem;">
+                            <i class="fas fa-trash-alt"></i> Delete Your Data
+                        </h4>
+                        <p style="color: rgba(255, 255, 255, 0.98); margin-bottom: 1.5rem; line-height: 1.6;">
+                            Choose what to delete. All deletions use secure 3-pass military-grade wipe (DOD 5220.22-M standard).
+                        </p>
+                        
+                        <!-- Delete Voting Data Only -->
+                        <div style="margin-bottom: 1.5rem; padding: 1.25rem; background: rgba(0,0,0,0.4); border-radius: 8px; border-left: 4px solid #FF6B6B;">
+                            <h5 style="color: #ffffff; margin: 0 0 0.5rem 0; font-size: 1.1rem; font-weight: 600;">
+                                🗳️ Voting Data Only
+                            </h5>
+                            <p style="color: rgba(255, 255, 255, 0.9); margin: 0 0 1rem 0; font-size: 0.95rem; line-height: 1.5;">
+                                Delete only your bill votes and voting history. Keeps your chat conversations, location, and other personalization data.
+                            </p>
+                            <button class="btn btn-danger" onclick="deleteVotingDataOnly()" style="width: 100%; max-width: 300px; background: #e74c3c; border-color: #e74c3c; color: #ffffff; font-weight: 600;">
+                                <i class="fas fa-vote-yea"></i> Delete Voting Data Only
+                            </button>
+                        </div>
+                        
+                        <!-- Delete All Political Data -->
+                        <div style="margin-bottom: 1.5rem; padding: 1.25rem; background: rgba(0,0,0,0.4); border-radius: 8px; border-left: 4px solid #ff4444;">
+                            <h5 style="color: #ffffff; margin: 0 0 0.5rem 0; font-size: 1.1rem; font-weight: 600;">
+                                💣 All Political Data
+                            </h5>
+                            <p style="color: rgba(255, 255, 255, 0.9); margin: 0 0 1rem 0; font-size: 0.95rem; line-height: 1.5;">
+                                Delete ALL votes, chat conversations, searches, and tracked representatives. Keeps your location and personalization preferences.
+                            </p>
+                            <button class="btn btn-danger" onclick="deleteAllPoliticalData()" style="width: 100%; max-width: 300px; background: #dc3545; border-color: #dc3545; color: #ffffff; font-weight: 700;">
+                                <i class="fas fa-bomb"></i> Delete All Political Data
+                            </button>
+                        </div>
+                        
+                        <!-- Delete Everything -->
+                        <div style="padding: 1.25rem; background: rgba(0,0,0,0.4); border-radius: 8px; border-left: 4px solid #ff3333;">
+                            <h5 style="color: #ffffff; margin: 0 0 0.5rem 0; font-size: 1.1rem; font-weight: 600;">
+                                🗑️ Everything (Complete Reset)
+                            </h5>
+                            <p style="color: rgba(255, 255, 255, 0.9); margin: 0 0 1rem 0; font-size: 0.95rem; line-height: 1.5;">
+                                Delete ALL data including votes, chats, location, preferences, learning progress, and personalization settings. Complete factory reset.
+                            </p>
+                            <button class="btn btn-danger" onclick="deletePersonalizationData()" style="width: 100%; max-width: 300px; background: #c82333; border-color: #c82333; color: #ffffff; font-weight: 700; text-transform: uppercase;">
+                                <i class="fas fa-eraser"></i> Delete Everything
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Data Management Controls -->
+                <div class="data-management-controls" style="margin: 3rem 0;">
+                    <h3 style="color: #FFE66D; margin-bottom: 1.5rem; font-size: 1.75rem;">📊 Your Data, Your Control</h3>
+                    <p style="color: #2d3748; margin-bottom: 2rem; line-height: 1.6; font-weight: 500;">
+                        You have complete control over your data. Export it, review it, or delete it permanently at any time.
+                    </p>
+                    
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem;">
+                        <!-- Export Data Card -->
+                        <div style="padding: 2rem; background: linear-gradient(135deg, rgba(30, 45, 60, 0.95) 0%, rgba(25, 35, 50, 0.95) 100%); border-radius: 12px; border: 2px solid rgba(74, 144, 226, 0.5);">
+                            <div style="font-size: 3rem; margin-bottom: 1rem;">📥</div>
+                            <h4 style="color: #FFE66D; margin-bottom: 0.75rem; font-size: 1.25rem;">Export Your Data</h4>
+                            <p style="color: rgba(255, 255, 255, 0.98); margin-bottom: 1.5rem; line-height: 1.6;">
+                                Download all your data in a standard JSON format. Review everything we've stored on your device.
+                            </p>
+                            <button class="btn btn-primary" onclick="exportUserData()" style="width: 100%;">
+                                <i class="fas fa-download"></i> Export Data (JSON)
+                            </button>
+                        </div>
+
+                        <!-- View Stored Data Card -->
+                        <div style="padding: 2rem; background: linear-gradient(135deg, rgba(30, 45, 60, 0.95) 0%, rgba(25, 35, 50, 0.95) 100%); border-radius: 12px; border: 2px solid rgba(74, 144, 226, 0.5);">
+                            <div style="font-size: 3rem; margin-bottom: 1rem;">🔍</div>
+                            <h4 style="color: #FFE66D; margin-bottom: 0.75rem; font-size: 1.25rem;">View Stored Data</h4>
+                            <p style="color: rgba(255, 255, 255, 0.98); margin-bottom: 1.5rem; line-height: 1.6;">
+                                See exactly what data is stored in your browser. Complete transparency, no hidden information.
+                            </p>
+                            <button class="btn btn-secondary" onclick="viewStoredData()" style="width: 100%;">
+                                <i class="fas fa-eye"></i> View All Data
+                            </button>
+                        </div>
+
+                        <!-- Delete Data Card -->
+                        <div style="padding: 2rem; background: linear-gradient(135deg, rgba(30, 45, 60, 0.95) 0%, rgba(25, 35, 50, 0.95) 100%); border-radius: 12px; border: 2px solid rgba(255, 107, 107, 0.5);">
+                            <div style="font-size: 3rem; margin-bottom: 1rem;">🗑️</div>
+                            <h4 style="color: #FF6B6B; margin-bottom: 0.75rem; font-size: 1.25rem;">Delete All Data</h4>
+                            <p style="color: rgba(255, 255, 255, 0.98); margin-bottom: 1.5rem; line-height: 1.6;">
+                                Permanently delete all your data using DOD 5220.22-M standard (3-pass overwrite). Cannot be undone.
+                            </p>
+                            <button class="btn btn-danger" onclick="deleteUserData()" style="width: 100%; background: #FF6B6B; border-color: #FF6B6B;">
+                                <i class="fas fa-trash-alt"></i> Delete All Data
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Privacy Protection Details -->
+                <div class="privacy-details" style="margin: 3rem 0;">
+                    <h3 style="color: #FFE66D; margin-bottom: 1.5rem; font-size: 1.75rem;">🔐 How We Protect Your Privacy</h3>
+                    
+                    <!-- Encryption (V32.7 Fortress-Level) -->
+                    <div style="margin-bottom: 2rem; padding: 1.5rem; background: linear-gradient(135deg, rgba(30, 45, 60, 0.95) 0%, rgba(25, 35, 50, 0.95) 100%); border-radius: 8px; border-left: 4px solid #4A90E2;">
+                        <h4 style="color: #FFE66D; margin-bottom: 1rem; font-size: 1.25rem;">
+                            <i class="fas fa-lock"></i> Fortress-Level Encryption (V32.7)
+                        </h4>
+                        <p style="color: rgba(255, 255, 255, 0.98); margin-bottom: 1rem; line-height: 1.6;">
+                            All data stored on your device is encrypted using <strong>AES-256-GCM</strong>, the same encryption standard used by governments and military organizations worldwide. <strong>Your encryption key never leaves your device.</strong>
+                        </p>
+                        <ul style="color: rgba(255, 255, 255, 0.98); margin-left: 1.5rem; line-height: 1.8;">
+                            <li><strong>Algorithm:</strong> AES-256-GCM (Advanced Encryption Standard with Galois/Counter Mode)</li>
+                            <li><strong>Key Derivation:</strong> PBKDF2-SHA-256 with 600,000 iterations (OWASP 2025 standard)</li>
+                            <li><strong>Random Salt:</strong> 16-byte cryptographically secure random salt per encryption</li>
+                            <li><strong>Initialization Vector:</strong> 12-byte random IV for each operation (prevents pattern detection)</li>
+                            <li><strong>Implementation:</strong> Web Crypto API (native browser security, hardware-accelerated)</li>
+                            <li><strong>Key Storage:</strong> Device-only, never transmitted or stored on servers</li>
+                            <li><strong>Data Categories:</strong> Political votes, chat history, searches, and preferences all encrypted separately</li>
+                        </ul>
+                        <div style="margin-top: 1rem; padding: 1rem; background: rgba(102, 126, 234, 0.15); border-radius: 6px; border-left: 3px solid #667eea;">
+                            <p style="color: rgba(255, 255, 255, 0.95); margin: 0; font-size: 0.95rem; line-height: 1.6;">
+                                <strong><i class="fas fa-shield-alt"></i> Why This Matters:</strong> Politicians, campaigns, and data brokers would pay significant amounts for your political preferences. Our encryption ensures that even if someone gained physical access to your device, your political data would be completely unreadable without your encryption key.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Client-Side Storage -->
+                    <div style="margin-bottom: 2rem; padding: 1.5rem; background: linear-gradient(135deg, rgba(30, 45, 60, 0.95) 0%, rgba(25, 35, 50, 0.95) 100%); border-radius: 8px; border-left: 4px solid #7FB069;">
+                        <h4 style="color: #FFE66D; margin-bottom: 1rem; font-size: 1.25rem;">
+                            <i class="fas fa-database"></i> Client-Side Storage Only
+                        </h4>
+                        <p style="color: rgba(255, 255, 255, 0.98); margin-bottom: 1rem; line-height: 1.6;">
+                            <strong>All your data stays on your device.</strong> We use browser localStorage, which means:
+                        </p>
+                        <ul style="color: rgba(255, 255, 255, 0.98); margin-left: 1.5rem; line-height: 1.8;">
+                            <li>✅ No data sent to our servers or any third parties</li>
+                            <li>✅ Data is only accessible from your browser on your device</li>
+                            <li>✅ No cloud storage, no external databases</li>
+                            <li>✅ You control when data is created, viewed, or deleted</li>
+                            <li>✅ Data is automatically isolated by domain (same-origin policy)</li>
+                        </ul>
+                    </div>
+
+                    <!-- Zero Tracking -->
+                    <div style="margin-bottom: 2rem; padding: 1.5rem; background: linear-gradient(135deg, rgba(30, 45, 60, 0.95) 0%, rgba(25, 35, 50, 0.95) 100%); border-radius: 8px; border-left: 4px solid #FFE66D;">
+                        <h4 style="color: #FFE66D; margin-bottom: 1rem; font-size: 1.25rem;">
+                            <i class="fas fa-shield-alt"></i> Zero Tracking Guarantee
+                        </h4>
+                        <p style="color: rgba(255, 255, 255, 0.98); margin-bottom: 1rem; line-height: 1.6;">
+                            <strong>We don't track you. Period.</strong> This website is completely free from:
+                        </p>
+                        <ul style="color: rgba(255, 255, 255, 0.98); margin-left: 1.5rem; line-height: 1.8;">
+                            <li>❌ No Google Analytics or tracking scripts</li>
+                            <li>❌ No Facebook Pixel or social media tracking</li>
+                            <li>❌ No third-party cookies or fingerprinting</li>
+                            <li>❌ No user behavior analytics or heatmaps</li>
+                            <li>❌ No advertising networks or data brokers</li>
+                            <li>✅ Content Security Policy (CSP) prevents unauthorized scripts</li>
+                        </ul>
+                    </div>
+
+                    <!-- Anti-Fingerprinting -->
+                    <div style="margin-bottom: 2rem; padding: 1.5rem; background: linear-gradient(135deg, rgba(30, 45, 60, 0.95) 0%, rgba(25, 35, 50, 0.95) 100%); border-radius: 8px; border-left: 4px solid #4ECDC4;">
+                        <h4 style="color: #FFE66D; margin-bottom: 1rem; font-size: 1.25rem;">
+                            <i class="fas fa-fingerprint"></i> Anti-Fingerprinting Protection
+                        </h4>
+                        <p style="color: rgba(255, 255, 255, 0.98); margin-bottom: 1rem; line-height: 1.6;">
+                            We protect you from browser fingerprinting techniques used by trackers:
+                        </p>
+                        <ul style="color: rgba(255, 255, 255, 0.98); margin-left: 1.5rem; line-height: 1.8;">
+                            <li><strong>Canvas Fingerprinting:</strong> Noise injection to prevent unique identification</li>
+                            <li><strong>Timing Attacks:</strong> Reduced timing precision to prevent profiling</li>
+                            <li><strong>Plugin Enumeration:</strong> Blocked to prevent device fingerprinting</li>
+                            <li><strong>Font Detection:</strong> Limited to prevent unique signatures</li>
+                        </ul>
+                    </div>
+
+                    <!-- Secure Deletion -->
+                    <div style="margin-bottom: 2rem; padding: 1.5rem; background: linear-gradient(135deg, rgba(30, 45, 60, 0.95) 0%, rgba(25, 35, 50, 0.95) 100%); border-radius: 8px; border-left: 4px solid #FF6B6B;">
+                        <h4 style="color: #FFE66D; margin-bottom: 1rem; font-size: 1.25rem;">
+                            <i class="fas fa-eraser"></i> Secure Data Deletion
+                        </h4>
+                        <p style="color: rgba(255, 255, 255, 0.98); margin-bottom: 1rem; line-height: 1.6;">
+                            When you delete your data, it's <strong>permanently destroyed</strong> using military-grade deletion:
+                        </p>
+                        <ul style="color: rgba(255, 255, 255, 0.98); margin-left: 1.5rem; line-height: 1.8;">
+                            <li><strong>DOD 5220.22-M Standard:</strong> 3-pass overwrite process</li>
+                            <li><strong>Pass 1:</strong> Overwrite with zeros (0x00)</li>
+                            <li><strong>Pass 2:</strong> Overwrite with ones (0xFF)</li>
+                            <li><strong>Pass 3:</strong> Overwrite with random data</li>
+                            <li><strong>Result:</strong> Data is completely unrecoverable</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- What Data We Store -->
+                <div class="what-we-store" style="margin: 3rem 0;">
+                    <h3 style="color: #FFE66D; margin-bottom: 1.5rem; font-size: 1.75rem;">📋 What Data We Store (On Your Device)</h3>
+                    <p style="color: #2d3748; margin-bottom: 2rem; line-height: 1.6; font-weight: 500;">
+                        Here's a complete list of what data may be stored in your browser's localStorage (if you use these features):
+                    </p>
+                    
+                    <div style="display: grid; gap: 1.5rem;">
+                        <div style="padding: 1.5rem; background: linear-gradient(135deg, rgba(30, 45, 60, 0.95) 0%, rgba(25, 35, 50, 0.95) 100%); border-radius: 8px;">
+                            <h4 style="color: #FFE66D; margin-bottom: 0.75rem;">🗳️ Civic Voting Tracker (Optional)</h4>
+                            <ul style="color: rgba(255, 255, 255, 0.98); margin-left: 1.5rem; line-height: 1.8;">
+                                <li>Your votes on bills (Yes/No/Abstain)</li>
+                                <li>Selected district/area (self-reported)</li>
+                                <li>Voting timestamps and engagement statistics</li>
+                                <li>Representative alignment calculations</li>
+                            </ul>
+                        </div>
+
+                        <div style="padding: 1.5rem; background: linear-gradient(135deg, rgba(30, 45, 60, 0.95) 0%, rgba(25, 35, 50, 0.95) 100%); border-radius: 8px;">
+                            <h4 style="color: #FFE66D; margin-bottom: 0.75rem;">❓ FAQ Interactions (Optional)</h4>
+                            <ul style="color: rgba(255, 255, 255, 0.98); margin-left: 1.5rem; line-height: 1.8;">
+                                <li>Questions you've viewed</li>
+                                <li>Helpful/Not helpful votes</li>
+                                <li>Questions you've submitted (stored locally for review)</li>
+                            </ul>
+                        </div>
+
+                        <div style="padding: 1.5rem; background: linear-gradient(135deg, rgba(30, 45, 60, 0.95) 0%, rgba(25, 35, 50, 0.95) 100%); border-radius: 8px;">
+                            <h4 style="color: #FFE66D; margin-bottom: 0.75rem;">🌐 Language Preference</h4>
+                            <ul style="color: rgba(255, 255, 255, 0.98); margin-left: 1.5rem; line-height: 1.8;">
+                                <li>Your selected language (EN, ES, FR, DE)</li>
+                                <li>No personal information collected</li>
+                            </ul>
+                        </div>
+
+                        <div style="padding: 1.5rem; background: linear-gradient(135deg, rgba(30, 45, 60, 0.95) 0%, rgba(25, 35, 50, 0.95) 100%); border-radius: 8px;">
+                            <h4 style="color: #FFE66D; margin-bottom: 0.75rem;">📍 Local Resources (Optional, If Enabled)</h4>
+                            <ul style="color: rgba(255, 255, 255, 0.98); margin-left: 1.5rem; line-height: 1.8;">
+                                <li>Your postcode/ZIP (only if you provide it)</li>
+                                <li>Search radius preference</li>
+                                <li>Business submissions (pending approval)</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Legal Compliance -->
+                <div class="legal-compliance" style="margin: 3rem 0;">
+                    <h3 style="color: #FFE66D; margin-bottom: 1.5rem; font-size: 1.75rem;">⚖️ Legal Compliance</h3>
+                    
+                    <div style="padding: 2rem; background: linear-gradient(135deg, rgba(30, 45, 60, 0.95) 0%, rgba(25, 35, 50, 0.95) 100%); border-radius: 12px; border: 2px solid rgba(74, 144, 226, 0.5);">
+                        <h4 style="color: #FFE66D; margin-bottom: 1rem; font-size: 1.25rem;">🇪🇺 GDPR Compliant</h4>
+                        <p style="color: rgba(255, 255, 255, 0.98); margin-bottom: 1rem; line-height: 1.6;">
+                            We comply with the European Union's General Data Protection Regulation (GDPR):
+                        </p>
+                        <ul style="color: rgba(255, 255, 255, 0.98); margin-left: 1.5rem; line-height: 1.8;">
+                            <li>✅ <strong>Right to Access:</strong> View all your stored data anytime</li>
+                            <li>✅ <strong>Right to Export:</strong> Download your data in portable format</li>
+                            <li>✅ <strong>Right to Erasure:</strong> Permanently delete all your data</li>
+                            <li>✅ <strong>Data Minimization:</strong> We only store what's necessary for functionality</li>
+                            <li>✅ <strong>Privacy by Design:</strong> Client-side storage prevents data breaches</li>
+                            <li>✅ <strong>Consent:</strong> All features are opt-in, nothing automatic</li>
+                        </ul>
+                    </div>
+
+                    <div style="padding: 2rem; background: linear-gradient(135deg, rgba(30, 45, 60, 0.95) 0%, rgba(25, 35, 50, 0.95) 100%); border-radius: 12px; border: 2px solid rgba(74, 144, 226, 0.5); margin-top: 1.5rem;">
+                        <h4 style="color: #FFE66D; margin-bottom: 1rem; font-size: 1.25rem;">🇺🇸 CCPA Compliant</h4>
+                        <p style="color: rgba(255, 255, 255, 0.98); margin-bottom: 1rem; line-height: 1.6;">
+                            We comply with the California Consumer Privacy Act (CCPA):
+                        </p>
+                        <ul style="color: rgba(255, 255, 255, 0.98); margin-left: 1.5rem; line-height: 1.8;">
+                            <li>✅ We don't sell personal information (we don't collect it!)</li>
+                            <li>✅ You can request deletion of your data at any time</li>
+                            <li>✅ You can access all data we store (it's on your device)</li>
+                            <li>✅ No discrimination for exercising privacy rights</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Contact for Privacy Questions -->
+                <div class="privacy-contact" style="margin: 3rem 0; padding: 2rem; background: linear-gradient(135deg, rgba(30, 45, 60, 0.95) 0%, rgba(25, 35, 50, 0.95) 100%); border-radius: 12px; text-align: center;">
+                    <h3 style="color: #FFE66D; margin-bottom: 1rem; font-size: 1.5rem;">❓ Questions About Privacy?</h3>
+                    <p style="color: rgba(255, 255, 255, 0.98); margin-bottom: 1.5rem; line-height: 1.6;">
+                        We're happy to answer any questions about how we protect your privacy and manage your data.
+                    </p>
+                    <button class="btn btn-primary" onclick="showContactForm()">
+                        <i class="fas fa-envelope"></i> Contact Us About Privacy
+                    </button>
+                </div>
+
+                <!-- Last Updated -->
+                <div style="text-align: center; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid rgba(0, 0, 0, 0.1);">
+                    <p style="color: #718096; font-size: 0.9rem;">
+                        <i class="fas fa-calendar"></i> Last Updated: January 24, 2025 (V32.7.6 - Contrast Fixes)
+                    </p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer" role="contentinfo">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3 class="footer-title">About</h3>
+                    <p>
+                        Workforce Democracy Project is a non-partisan educational resource 
+                        exploring democratic workplaces and government transparency. 
+                        Completely free, privacy-first, and ad-free forever.
+                    </p>
+                </div>
+                
+                <div class="footer-section">
+                    <h3 class="footer-title">Privacy & Security</h3>
+                    <ul class="footer-links">
+                        <li><a href="privacy.html">Privacy Policy</a></li>
+                        <li><a href="#" onclick="exportUserData()">Export Your Data</a></li>
+                        <li><a href="#" onclick="deleteUserData()">Delete All Data</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3 class="footer-title">Connect</h3>
+                    <p>
+                        Questions? Suggestions? We'd love to hear from you.
+                    </p>
+                    <button class="btn btn-secondary" onclick="showContactForm()">
+                        Contact Us
+                    </button>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p class="copyright">
+                    &copy; 2025 Workforce Democracy Project. 
+                    <span>All content freely available under Creative Commons.</span>
+                </p>
+                <p class="footer-note">
+                    <i class="fas fa-shield-alt"></i>
+                    <span>Zero tracking. Zero ads. Complete privacy.</span>
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="js/security.js?v=20250121-v42g-unified-headers"></script>
+    <script src="js/personalization.js?v=20250123-UNIFIED"></script>
+    <script src="js/main.js?v=20250121-FINAL-ALL-DEVICES"></script>
+    
+    <script>
+        // View stored data function
+        function viewStoredData() {
+            const allData = {};
+            
+            // Collect all localStorage data
+            for (let i = 0; i < localStorage.length; i++) {
+                const key = localStorage.key(i);
+                try {
+                    allData[key] = JSON.parse(localStorage.getItem(key));
+                } catch (e) {
+                    allData[key] = localStorage.getItem(key);
+                }
+            }
+            
+            // Display in modal
+            const dataDisplay = document.createElement('div');
+            dataDisplay.style.cssText = 'max-height: 400px; overflow-y: auto; background: #1a1a1a; padding: 1rem; border-radius: 8px; color: #fff; font-family: monospace; font-size: 0.9rem; white-space: pre-wrap;';
+            dataDisplay.textContent = JSON.stringify(allData, null, 2);
+            
+            // Show modal
+            if (typeof showModal === 'function') {
+                showModal('Your Stored Data', dataDisplay.outerHTML + '<p style="margin-top: 1rem; color: #ccc; font-size: 0.9rem;">This is all the data stored in your browser\'s localStorage for this website.</p>');
+            } else {
+                alert('Stored Data:\n\n' + JSON.stringify(allData, null, 2));
+            }
+        }
+    </script>
+</body>
+</html>

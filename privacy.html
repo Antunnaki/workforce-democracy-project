@@ -1,0 +1,837 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Essential Meta Tags -->
+    <meta name="description" content="Privacy & Data Management - Workforce Democracy Project. Learn about our privacy-first approach, AES-256-GCM encryption, local data storage, zero tracking policy, and GDPR compliance. Your data stays on your device.">
+    <meta name="keywords" content="privacy, data protection, security, encryption, GDPR, AES-256-GCM, local storage, zero tracking, privacy-first, data sovereignty">
+    <meta name="author" content="Workforce Democracy Project">
+    <meta name="theme-color" content="#FF6B35">
+    
+    <!-- Privacy-First Approach -->
+    <meta name="robots" content="index, follow">
+    <meta name="googlebot" content="index, follow">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    
+    <!-- Open Graph (Enhanced for Social Sharing) -->
+    <meta property="og:title" content="Privacy & Data Management | Workforce Democracy Project">
+    <meta property="og:description" content="Privacy-first platform with AES-256-GCM encryption, local data storage, and zero tracking. Your data stays on your device. Complete transparency and control.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://workforcedemocracyproject.org/privacy.html">
+    <meta property="og:image" content="https://workforcedemocracyproject.org/images/social-preview.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Workforce Democracy Project - Privacy-First Platform">
+    <meta property="og:site_name" content="Workforce Democracy Project">
+    <meta property="og:locale" content="en_US">
+    
+    <!-- Twitter Card (Enhanced for X/Twitter Sharing) -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Privacy & Data Management | Workforce Democracy Project">
+    <meta name="twitter:description" content="Privacy-first platform: AES-256-GCM encryption, local storage, zero tracking. Your data stays on YOUR device.">
+    <meta name="twitter:image" content="https://workforcedemocracyproject.org/images/social-preview.jpg">
+    <meta name="twitter:image:alt" content="Workforce Democracy Project - Privacy First">
+    <meta name="twitter:site" content="@WorkforceDemocracy">
+    <meta name="twitter:creator" content="@WorkforceDemocracy">
+    
+    <!-- No Tracking -->
+    <meta name="google-analytics" content="no">
+    <meta name="facebook-domain-verification" content="no">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://workforcedemocracyproject.org/privacy.html">
+    
+    <title>Privacy & Data Management - Workforce Democracy Project</title>
+    
+    <!-- V36.9.10: Performance - Preload Critical Assets -->
+    <link rel="preload" href="css/main.css?v=20250124-CLICKABLE-LOGO" as="style">
+    <link rel="preload" href="images/site-logo-v2.svg" as="image" type="image/svg+xml">
+    
+    <!-- Self-Hosted Resources (No External Dependencies) -->
+    <link rel="stylesheet" href="css/fonts.css?v=20250124-NOEXTERNAL">
+    <link rel="stylesheet" href="css/main.css?v=20250124-CLICKABLE-LOGO">
+    <link rel="stylesheet" href="css/unified-color-scheme.css?v=20250124-CLICKABLE-LOGO">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    
+    <style>
+        /* Privacy Page Specific Styles - Following Design System */
+        .privacy-section {
+            background: var(--section-civic);
+        }
+        
+        .privacy-hero {
+            background: var(--primary-gradient);
+            color: var(--text-inverse);
+            padding: 3rem 0;
+            margin-bottom: 3rem;
+            border-radius: 16px;
+        }
+        
+        .privacy-card {
+            background: var(--surface);
+            border: 1px solid var(--surface-border);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow-sm);
+            transition: all 0.3s ease;
+        }
+        
+        .privacy-card:hover {
+            box-shadow: var(--shadow-md);
+            transform: translateY(-2px);
+        }
+        
+        .privacy-card-header {
+            color: var(--primary);
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+        
+        .privacy-card-content {
+            color: var(--text-primary);
+            line-height: 1.7;
+        }
+        
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .feature-card {
+            background: var(--surface);
+            border: 2px solid var(--surface-border);
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        
+        .feature-card:hover {
+            border-color: var(--primary);
+            box-shadow: var(--shadow-md);
+            transform: translateY(-4px);
+        }
+        
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        
+        .feature-title {
+            color: var(--primary);
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+        }
+        
+        .feature-description {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+        
+        .alert-card {
+            background: linear-gradient(135deg, rgba(245, 87, 108, 0.1) 0%, rgba(255, 101, 117, 0.1) 100%);
+            border: 2px solid var(--error);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .alert-header {
+            color: var(--error);
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .btn-primary {
+            background: var(--btn-primary-bg);
+            color: var(--text-inverse);
+            box-shadow: var(--btn-primary-shadow);
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--btn-primary-hover-shadow);
+        }
+        
+        .btn-secondary {
+            background: var(--btn-secondary-bg);
+            color: var(--btn-secondary-text);
+            border: 2px solid var(--btn-secondary-border);
+        }
+        
+        .btn-secondary:hover {
+            background: var(--btn-secondary-hover-bg);
+            color: var(--btn-secondary-hover-text);
+        }
+        
+        .btn-danger {
+            background: var(--error);
+            color: var(--text-inverse);
+        }
+        
+        .btn-danger:hover {
+            background: #e53e3e;
+            transform: translateY(-2px);
+        }
+        
+        .section-intro {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            line-height: 1.7;
+            margin-bottom: 2rem;
+        }
+        
+        .tech-specs {
+            background: var(--surface-hover);
+            padding: 1rem;
+            border-radius: 8px;
+            border-left: 4px solid var(--primary);
+            margin: 1rem 0;
+        }
+        
+        .tech-specs ul {
+            color: var(--text-secondary);
+            line-height: 1.8;
+            margin-left: 1.5rem;
+        }
+        
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+        
+        .status-enabled {
+            background: rgba(72, 187, 120, 0.1);
+            color: var(--success);
+        }
+        
+        .status-disabled {
+            background: rgba(245, 101, 117, 0.1);
+            color: var(--error);
+        }
+    </style>
+    <!-- V36.8.5: Grey Text Fix - Comprehensive Override -->
+    <link rel="stylesheet" href="css/grey-text-fix.css?v=20251031-V36.8.5-GREY-FIX">
+    
+    <!-- V36.8.5: Contrast Fix - Header, Chat, Overall Visibility -->
+    <link rel="stylesheet" href="css/contrast-fix-v36.8.5.css?v=20251031-V36.8.5-CONTRAST-FIX">
+</head>
+<body>
+    <!-- Skip Link -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <!-- Header -->
+    <header class="site-header" role="banner">
+        <div class="container">
+            <div class="header-content">
+                <div class="brand">
+                    <h1 class="site-title">
+                        <a href="index.html" aria-label="Go to homepage">
+                            <img src="images/site-logo-v2.svg" alt="Workforce Democracy Project" class="site-logo">
+                            <span class="title-text">Workforce Democracy Project</span>
+                        </a>
+                    </h1>
+                    <p class="establishment">Est. Oct 2025</p>
+                </div>
+                
+                <nav class="desktop-nav" role="navigation" aria-label="Main navigation">
+                    <ul class="nav-list">
+                        <li><a href="index.html#civic">🗳️ Civic Engagement & Transparency</a></li>
+                        <li><a href="index.html#jobs">💼 Explore Jobs</a></li>
+                        <li><a href="index.html#ethical-business">🤝 Ethical Businesses</a></li>
+                        <li><a href="learning.html">📚 Learn</a></li>
+                        <li><a href="faq.html">💡 FAQ</a></li>
+                        <li><a href="privacy.html" class="active">🔒 Personalization & Privacy</a></li>
+                        <li><a href="philosophies.html">🌟 Our Philosophies</a></li>
+                    </ul>
+                </nav>
+                
+                <button class="mobile-menu-toggle" onclick="toggleMobileMenu()" aria-label="Toggle menu">
+                    <span></span>
+                </button>
+            </div>
+        </div>
+        
+        <nav class="mobile-nav" id="mobileNav" role="navigation" aria-label="Mobile navigation">
+            <ul class="mobile-nav-list">
+                <li><a href="index.html#civic" onclick="closeMobileMenu()">🗳️ Civic Engagement & Transparency</a></li>
+                <li><a href="index.html#jobs" onclick="closeMobileMenu()">💼 Explore Jobs</a></li>
+                <li><a href="index.html#ethical-business" onclick="closeMobileMenu()">🤝 Ethical Businesses</a></li>
+                <li><a href="learning.html" onclick="closeMobileMenu()">📚 Learn</a></li>
+                <li><a href="faq.html" onclick="closeMobileMenu()">💡 FAQ</a></li>
+                <li><a href="privacy.html" onclick="closeMobileMenu()" class="active">🔒 Personalization & Privacy</a></li>
+                <li><a href="philosophies.html" onclick="closeMobileMenu()">🌟 Our Philosophies</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main id="main-content">
+        <!-- Privacy Section -->
+        <section class="privacy-section section">
+            <div class="container">
+                <!-- Hero Header -->
+                <div class="privacy-hero">
+                    <div style="max-width: 900px; margin: 0 auto; text-align: center;">
+                        <h1 style="font-size: 2.5rem; font-weight: 800; margin-bottom: 1rem;">
+                            🔒 Your Data, Your Control
+                        </h1>
+                        <p style="font-size: 1.25rem; opacity: 0.95; margin-bottom: 0;">
+                            Zero tracking. Zero ads. Complete privacy. Your data never leaves your device.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Fortress-Level Security Card -->
+                <div class="privacy-card">
+                    <div class="privacy-card-header">
+                        🛡️ Fortress-Level Security (V32.7)
+                    </div>
+                    <div class="privacy-card-content">
+                        <p style="font-size: 1.1rem; margin-bottom: 1.5rem;">
+                            All your votes, searches, and chat history are <strong>encrypted with military-grade AES-256</strong> and stored 
+                            <strong>only on your device</strong>. We never see your political data. The encryption key never leaves your device.
+                        </p>
+                        <p style="margin-bottom: 1.5rem;">
+                            Your political preferences are <strong>extremely valuable</strong> to campaigns and data brokers. 
+                            That's why we built fortress-level protection to keep them safe from anyone trying to access, profile, or exploit your political views.
+                        </p>
+                        
+                        <h4 style="color: var(--primary); margin-top: 1.5rem; margin-bottom: 1rem; font-size: 1.15rem;">
+                            🛡️ What's Protected:
+                        </h4>
+                        <ul style="color: var(--text-secondary); line-height: 1.8; margin-left: 1.5rem;">
+                            <li>All your votes on bills (Yes, No, Abstain)</li>
+                            <li>All chat conversations (candidates, bills, court)</li>
+                            <li>All search queries and research history</li>
+                            <li>All tracked representatives</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Personalization Status Card -->
+                <div class="privacy-card">
+                    <div class="privacy-card-header">
+                        ⚙️ Personalization & Privacy
+                    </div>
+                    <div class="privacy-card-content">
+                        <p class="section-intro">
+                            One simple choice enables ALL personalization features—while maintaining complete privacy. All data stays on YOUR device only.
+                        </p>
+                        
+                        <div style="background: var(--surface-hover); padding: 1.5rem; border-radius: 8px; margin-bottom: 1.5rem; border: 2px solid var(--border-light);">
+                            <h4 style="color: var(--primary); margin-bottom: 0.75rem;">
+                                <i class="fas fa-info-circle"></i> Current Status
+                            </h4>
+                            <div id="personalization-status-display">
+                                <!-- Dynamically updated by JavaScript -->
+                            </div>
+                            <button id="personalization-toggle-btn" class="btn btn-primary" onclick="togglePersonalization()" style="margin-top: 1rem;">
+                                <!-- Dynamically updated by JavaScript -->
+                            </button>
+                        </div>
+                        
+                        <p style="color: var(--text-secondary); line-height: 1.7;">
+                            No accounts. No tracking. No servers. Just a better experience tailored to your interests.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Data Management Features Grid -->
+                <h2 style="color: var(--primary); font-size: 2rem; font-weight: 700; margin: 3rem 0 2rem 0; text-align: center;">
+                    📊 Your Data, Your Control
+                </h2>
+                
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">📥</div>
+                        <h3 class="feature-title">Export Your Data</h3>
+                        <p class="feature-description">
+                            Download all your data in standard JSON format. Review everything stored on your device.
+                        </p>
+                        <button class="btn btn-primary" onclick="exportUserData()" style="margin-top: 1rem; width: 100%;">
+                            <i class="fas fa-download"></i> Export Data
+                        </button>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">🔍</div>
+                        <h3 class="feature-title">View Stored Data</h3>
+                        <p class="feature-description">
+                            See exactly what data is in your browser. Complete transparency, no hidden information.
+                        </p>
+                        <button class="btn btn-secondary" onclick="viewStoredData()" style="margin-top: 1rem; width: 100%;">
+                            <i class="fas fa-eye"></i> View All Data
+                        </button>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">🗑️</div>
+                        <h3 class="feature-title">Delete Data</h3>
+                        <p class="feature-description">
+                            Permanently delete your data using military-grade 3-pass deletion standard.
+                        </p>
+                        <button class="btn btn-danger" onclick="showDeleteOptions()" style="margin-top: 1rem; width: 100%;">
+                            <i class="fas fa-trash-alt"></i> Delete Data
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Granular Deletion Options -->
+                <div id="delete-options" style="display: none; margin-top: 2rem;">
+                    <div class="alert-card">
+                        <div class="alert-header">
+                            <i class="fas fa-exclamation-triangle"></i> Delete Your Data
+                        </div>
+                        <p style="color: var(--text-primary); margin-bottom: 1.5rem;">
+                            Choose what to delete. All deletions use secure 3-pass military-grade wipe (DOD 5220.22-M standard).
+                        </p>
+                        
+                        <div style="display: grid; gap: 1rem;">
+                            <div style="background: var(--surface); padding: 1.25rem; border-radius: 8px; border-left: 4px solid var(--warning);">
+                                <h4 style="color: var(--text-primary); margin: 0 0 0.5rem 0; font-size: 1.1rem;">
+                                    🗳️ Voting Data Only
+                                </h4>
+                                <p style="color: var(--text-secondary); margin: 0 0 1rem 0; font-size: 0.95rem;">
+                                    Delete only your bill votes and voting history. Keeps chat conversations, location, and personalization.
+                                </p>
+                                <button class="btn btn-danger" onclick="deleteVotingDataOnly()">
+                                    <i class="fas fa-vote-yea"></i> Delete Voting Data Only
+                                </button>
+                            </div>
+                            
+                            <div style="background: var(--surface); padding: 1.25rem; border-radius: 8px; border-left: 4px solid var(--error);">
+                                <h4 style="color: var(--text-primary); margin: 0 0 0.5rem 0; font-size: 1.1rem;">
+                                    💣 All Political Data
+                                </h4>
+                                <p style="color: var(--text-secondary); margin: 0 0 1rem 0; font-size: 0.95rem;">
+                                    Delete ALL votes, chats, searches, and representatives. Keeps location and personalization preferences.
+                                </p>
+                                <button class="btn btn-danger" onclick="deleteAllPoliticalData()">
+                                    <i class="fas fa-bomb"></i> Delete All Political Data
+                                </button>
+                            </div>
+                            
+                            <div style="background: var(--surface); padding: 1.25rem; border-radius: 8px; border-left: 4px solid #c82333;">
+                                <h4 style="color: var(--text-primary); margin: 0 0 0.5rem 0; font-size: 1.1rem;">
+                                    🗑️ Everything (Complete Reset)
+                                </h4>
+                                <p style="color: var(--text-secondary); margin: 0 0 1rem 0; font-size: 0.95rem;">
+                                    Delete ALL data including votes, chats, location, preferences, and settings. Complete factory reset.
+                                </p>
+                                <button class="btn btn-danger" onclick="deletePersonalizationData()" style="font-weight: 700;">
+                                    <i class="fas fa-eraser"></i> DELETE EVERYTHING
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Encryption Details -->
+                <div class="privacy-card">
+                    <div class="privacy-card-header">
+                        🔐 Military-Grade Encryption
+                    </div>
+                    <div class="privacy-card-content">
+                        <p style="margin-bottom: 1rem;">
+                            All data stored on your device is encrypted using <strong>AES-256-GCM</strong>, the same encryption standard 
+                            used by governments and military organizations worldwide. <strong>Your encryption key never leaves your device.</strong>
+                        </p>
+                        
+                        <div class="tech-specs">
+                            <ul>
+                                <li><strong>Algorithm:</strong> AES-256-GCM (Advanced Encryption Standard with Galois/Counter Mode)</li>
+                                <li><strong>Key Derivation:</strong> PBKDF2-SHA-256 with 600,000 iterations (OWASP 2025 standard)</li>
+                                <li><strong>Random Salt:</strong> 16-byte cryptographically secure random salt per encryption</li>
+                                <li><strong>Initialization Vector:</strong> 12-byte random IV for each operation (prevents pattern detection)</li>
+                                <li><strong>Implementation:</strong> Web Crypto API (native browser security, hardware-accelerated)</li>
+                                <li><strong>Key Storage:</strong> Device-only, never transmitted or stored on servers</li>
+                            </ul>
+                        </div>
+                        
+                        <div style="background: rgba(102, 126, 234, 0.1); padding: 1rem; border-radius: 8px; border-left: 4px solid var(--primary); margin-top: 1rem;">
+                            <p style="color: var(--text-primary); margin: 0;">
+                                <strong><i class="fas fa-shield-alt"></i> Why This Matters:</strong> Politicians, campaigns, and data brokers 
+                                would pay significant amounts for your political preferences. Our encryption ensures that even if someone gained 
+                                physical access to your device, your political data would be completely unreadable without your encryption key.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Zero Tracking -->
+                <div class="privacy-card">
+                    <div class="privacy-card-header">
+                        🚫 Zero Tracking Guarantee
+                    </div>
+                    <div class="privacy-card-content">
+                        <p style="margin-bottom: 1rem; font-size: 1.1rem;">
+                            <strong>We don't track you. Period.</strong> This website is completely free from:
+                        </p>
+                        <ul style="color: var(--text-secondary); line-height: 1.8; margin-left: 1.5rem;">
+                            <li>❌ No Google Analytics or tracking scripts</li>
+                            <li>❌ No Facebook Pixel or social media tracking</li>
+                            <li>❌ No third-party cookies or fingerprinting</li>
+                            <li>❌ No user behavior analytics or heatmaps</li>
+                            <li>❌ No advertising networks or data brokers</li>
+                            <li>✅ Content Security Policy (CSP) prevents unauthorized scripts</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- What Data We Store -->
+                <div class="privacy-card">
+                    <div class="privacy-card-header">
+                        📋 What Data We Store (On Your Device)
+                    </div>
+                    <div class="privacy-card-content">
+                        <p style="margin-bottom: 1.5rem; color: var(--text-secondary);">
+                            Here's a complete list of what data may be stored in your browser's localStorage (if you use these features):
+                        </p>
+                        
+                        <div style="display: grid; gap: 1rem;">
+                            <div style="background: var(--surface-hover); padding: 1rem; border-radius: 8px;">
+                                <h4 style="color: var(--primary); margin-bottom: 0.5rem;">🗳️ Civic Voting Tracker (Optional)</h4>
+                                <ul style="color: var(--text-secondary); line-height: 1.7; margin-left: 1.5rem;">
+                                    <li>Your votes on bills (Yes/No/Abstain)</li>
+                                    <li>Selected district/area (self-reported)</li>
+                                    <li>Voting timestamps and engagement statistics</li>
+                                    <li>Representative alignment calculations</li>
+                                </ul>
+                            </div>
+                            
+                            <div style="background: var(--surface-hover); padding: 1rem; border-radius: 8px;">
+                                <h4 style="color: var(--primary); margin-bottom: 0.5rem;">💬 Chat History (Optional)</h4>
+                                <ul style="color: var(--text-secondary); line-height: 1.7; margin-left: 1.5rem;">
+                                    <li>All chat conversations (candidates, bills, court)</li>
+                                    <li>Questions you've asked</li>
+                                    <li>Research queries and search history</li>
+                                </ul>
+                            </div>
+                            
+                            <div style="background: var(--surface-hover); padding: 1rem; border-radius: 8px;">
+                                <h4 style="color: var(--primary); margin-bottom: 0.5rem;">📍 Location & Preferences (Optional)</h4>
+                                <ul style="color: var(--text-secondary); line-height: 1.7; margin-left: 1.5rem;">
+                                    <li>Your postcode/ZIP (only if you provide it)</li>
+                                    <li>Language preference (EN, ES, FR, DE)</li>
+                                    <li>Tracked representatives list</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- FAQ Personalization System (V32.8.6) -->
+                <div class="privacy-card">
+                    <div class="privacy-card-header">
+                        🎯 FAQ Personalization System (V32.8.6)
+                    </div>
+                    <div class="privacy-card-content">
+                        <p style="margin-bottom: 1.5rem; color: var(--text-secondary);">
+                            Our FAQ page includes an intelligent personalization system that adapts to your interests and knowledge level. 
+                            <strong>Everything happens in your browser—no data ever sent to servers.</strong>
+                        </p>
+                        
+                        <h4 style="color: var(--primary); margin-top: 1.5rem; margin-bottom: 1rem; font-size: 1.15rem;">
+                            🧠 How It Works:
+                        </h4>
+                        
+                        <div style="display: grid; gap: 1rem; margin-bottom: 1.5rem;">
+                            <div style="background: var(--surface-hover); padding: 1rem; border-radius: 8px; border-left: 4px solid #667eea;">
+                                <h5 style="color: var(--primary); margin-bottom: 0.5rem; font-size: 1rem;">
+                                    📊 Dynamic Question Ordering
+                                </h5>
+                                <p style="color: var(--text-secondary); margin: 0; line-height: 1.7;">
+                                    FAQs automatically reorder based on your activity in Civic Engagement, Job Search, and Ethical Business chat systems. 
+                                    Questions related to topics you've explored are prioritized. Unviewed questions get an extra relevance boost to ensure you discover new content.
+                                </p>
+                            </div>
+                            
+                            <div style="background: var(--surface-hover); padding: 1rem; border-radius: 8px; border-left: 4px solid #48bb78;">
+                                <h5 style="color: var(--primary); margin-bottom: 0.5rem; font-size: 1rem;">
+                                    🎓 Knowledge Level Detection
+                                </h5>
+                                <p style="color: var(--text-secondary); margin: 0; line-height: 1.7;">
+                                    The system analyzes your chat messages across all features to detect your knowledge level (beginner, intermediate, advanced). 
+                                    It looks for advanced terminology like "cooperative," "governance," "stakeholder" versus simple terms like "what," "how," "help." 
+                                    FAQ responses automatically adjust complexity without you needing to specify your expertise.
+                                </p>
+                            </div>
+                            
+                            <div style="background: var(--surface-hover); padding: 1rem; border-radius: 8px; border-left: 4px solid #f4a261;">
+                                <h5 style="color: var(--primary); margin-bottom: 0.5rem; font-size: 1rem;">
+                                    💬 Per-Question Chat Widgets
+                                </h5>
+                                <p style="color: var(--text-secondary); margin: 0; line-height: 1.7;">
+                                    Each FAQ has its own dedicated chat widget for contextual follow-up questions. Chat history is preserved per question 
+                                    using stable IDs (e.g., 'econ-001', 'work-002'), so even if question text changes over time, your conversation history remains intact.
+                                    Each chat understands the context of its specific FAQ to provide relevant, targeted answers.
+                                </p>
+                            </div>
+                        </div>
+                        
+                        <h4 style="color: var(--primary); margin-top: 1.5rem; margin-bottom: 1rem; font-size: 1.15rem;">
+                            🔒 Privacy & Data Storage:
+                        </h4>
+                        
+                        <div class="tech-specs">
+                            <ul>
+                                <li><strong>FAQ Interaction History:</strong> Stored as <code>wdp_faq_history</code> in localStorage</li>
+                                <li><strong>Per-Question Chat:</strong> Stored as <code>wdp_faq_chat_{faqId}</code> (e.g., <code>wdp_faq_chat_econ-001</code>)</li>
+                                <li><strong>Interest Analysis:</strong> Calculated in real-time from existing civic/jobs/ethical chat histories</li>
+                                <li><strong>Knowledge Level:</strong> Detected on-the-fly, not stored separately</li>
+                                <li><strong>Encryption:</strong> All FAQ chat data protected by AES-256-GCM encryption</li>
+                                <li><strong>Server Communication:</strong> Zero—all processing happens in your browser</li>
+                            </ul>
+                        </div>
+                        
+                        <div style="background: rgba(102, 126, 234, 0.1); padding: 1rem; border-radius: 8px; border-left: 4px solid var(--primary); margin-top: 1.5rem;">
+                            <p style="color: var(--text-primary); margin: 0;">
+                                <strong><i class="fas fa-user-shield"></i> Invisible Personalization:</strong> The FAQ personalization works completely behind the scenes. 
+                                You'll never see prompts asking your knowledge level or preferences—the system learns from your natural behavior. 
+                                Questions reorder automatically, chat responses adapt to your expertise, and everything feels seamlessly tailored without any setup.
+                            </p>
+                        </div>
+                        
+                        <h4 style="color: var(--primary); margin-top: 1.5rem; margin-bottom: 1rem; font-size: 1.15rem;">
+                            🗂️ Category Color Coding:
+                        </h4>
+                        <p style="color: var(--text-secondary); margin-bottom: 1rem;">
+                            FAQs are organized into color-coded categories for easy navigation:
+                        </p>
+                        <ul style="color: var(--text-secondary); line-height: 1.8; margin-left: 1.5rem;">
+                            <li><span style="color: #f4a261; font-weight: 600;">🟡 Gold</span> - Economic Impact (home values, retirement, innovation)</li>
+                            <li><span style="color: #48bb78; font-weight: 600;">🟢 Green</span> - Workplace Democracy (decision-making, wages)</li>
+                            <li><span style="color: #667eea; font-weight: 600;">🟣 Purple</span> - Governance & Structure (participation, transition)</li>
+                            <li><span style="color: #ff9a56; font-weight: 600;">🟠 Orange</span> - Community Impact (local effects, finding businesses)</li>
+                            <li><span style="color: #4299e1; font-weight: 600;">🔵 Blue</span> - Privacy & Security (data protection)</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Legal Compliance -->
+                <div class="privacy-card">
+                    <div class="privacy-card-header">
+                        ⚖️ Legal Compliance
+                    </div>
+                    <div class="privacy-card-content">
+                        <h4 style="color: var(--primary); margin-bottom: 1rem;">🇪🇺 GDPR Compliant</h4>
+                        <p style="margin-bottom: 1rem; color: var(--text-secondary);">
+                            We comply with the European Union's General Data Protection Regulation (GDPR):
+                        </p>
+                        <ul style="color: var(--text-secondary); line-height: 1.7; margin-left: 1.5rem; margin-bottom: 2rem;">
+                            <li>✅ <strong>Right to Access:</strong> View all your stored data anytime</li>
+                            <li>✅ <strong>Right to Export:</strong> Download your data in portable format</li>
+                            <li>✅ <strong>Right to Erasure:</strong> Permanently delete all your data</li>
+                            <li>✅ <strong>Data Minimization:</strong> We only store what's necessary for functionality</li>
+                            <li>✅ <strong>Privacy by Design:</strong> Client-side storage prevents data breaches</li>
+                            <li>✅ <strong>Consent:</strong> All features are opt-in, nothing automatic</li>
+                        </ul>
+                        
+                        <h4 style="color: var(--primary); margin-bottom: 1rem;">🇺🇸 CCPA Compliant</h4>
+                        <p style="margin-bottom: 1rem; color: var(--text-secondary);">
+                            We comply with the California Consumer Privacy Act (CCPA):
+                        </p>
+                        <ul style="color: var(--text-secondary); line-height: 1.7; margin-left: 1.5rem;">
+                            <li>✅ We don't sell personal information (we don't collect it!)</li>
+                            <li>✅ You can request deletion of your data at any time</li>
+                            <li>✅ You can access all data we store (it's on your device)</li>
+                            <li>✅ No discrimination for exercising privacy rights</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Contact -->
+                <div class="privacy-card" style="text-align: center;">
+                    <div class="privacy-card-header" style="justify-content: center;">
+                        ❓ Questions About Privacy?
+                    </div>
+                    <div class="privacy-card-content">
+                        <p style="margin-bottom: 1.5rem;">
+                            We're happy to answer any questions about how we protect your privacy and manage your data.
+                        </p>
+                        <button class="btn btn-primary" onclick="showContactForm()">
+                            <i class="fas fa-envelope"></i> Contact Us About Privacy
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Last Updated -->
+                <div style="text-align: center; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border-light);">
+                    <p style="color: var(--text-tertiary); font-size: 0.9rem;">
+                        <i class="fas fa-calendar"></i> Last Updated: January 24, 2025 (V32.7.8 - Clean Redesign)
+                    </p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer" role="contentinfo">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3 class="footer-title">About</h3>
+                    <p>
+                        Workforce Democracy Project is a non-partisan educational resource 
+                        exploring democratic workplaces and government transparency. 
+                        Completely free, privacy-first, and ad-free forever.
+                    </p>
+                </div>
+                
+                <div class="footer-section">
+                    <h3 class="footer-title">Privacy & Security</h3>
+                    <ul class="footer-links">
+                        <li><a href="privacy.html">Privacy Policy</a></li>
+                        <li><a href="analytics.html">📊 Your Analytics Dashboard</a></li>
+                        <li><a href="#" onclick="exportUserData()">Export Your Data</a></li>
+                        <li><a href="#" onclick="deleteUserData()">Delete All Data</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3 class="footer-title">Connect</h3>
+                    <p>
+                        Questions? Suggestions? We'd love to hear from you.
+                    </p>
+                    <button class="btn btn-secondary" onclick="showContactForm()">
+                        Contact Us
+                    </button>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p class="copyright">
+                    &copy; 2025 Workforce Democracy Project. 
+                    <span>All content freely available under Creative Commons.</span>
+                </p>
+                <p class="footer-note">
+                    <i class="fas fa-shield-alt"></i>
+                    <span>Zero tracking. Zero ads. Complete privacy.</span>
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="js/security.js?v=20250121-v42g-unified-headers"></script>
+    <script src="js/personalization.js?v=20250123-UNIFIED"></script>
+    <script src="js/main.js?v=20250124-RACE-CONDITION-FIX"></script>
+    
+    <script>
+        // Initialize personalization status display
+        function initializePersonalizationStatus() {
+            const statusDisplay = document.getElementById('personalization-status-display');
+            const toggleBtn = document.getElementById('personalization-toggle-btn');
+            
+            if (!statusDisplay || !toggleBtn) return;
+            
+            const isEnabled = localStorage.getItem('wdp_personalization_enabled') === 'true';
+            
+            if (isEnabled) {
+                const consentDate = localStorage.getItem('wdp_personalization_consent_date');
+                const dateStr = consentDate ? new Date(consentDate).toLocaleDateString() : 'Unknown';
+                
+                statusDisplay.innerHTML = `
+                    <span class="status-badge status-enabled">
+                        <i class="fas fa-check-circle"></i> Personalization Enabled
+                    </span>
+                    <p style="margin-top: 0.75rem; color: var(--text-secondary); font-size: 0.95rem;">
+                        Active since ${dateStr}
+                    </p>
+                `;
+                
+                toggleBtn.className = 'btn btn-secondary';
+                toggleBtn.innerHTML = '<i class="fas fa-toggle-on"></i> Disable Personalization';
+            } else {
+                statusDisplay.innerHTML = `
+                    <span class="status-badge status-disabled">
+                        <i class="fas fa-times-circle"></i> Personalization Disabled
+                    </span>
+                    <p style="margin-top: 0.75rem; color: var(--text-secondary); font-size: 0.95rem;">
+                        No data is being tracked
+                    </p>
+                `;
+                
+                toggleBtn.className = 'btn btn-primary';
+                toggleBtn.innerHTML = '<i class="fas fa-toggle-off"></i> Enable Personalization';
+            }
+        }
+        
+        // Show/hide delete options
+        function showDeleteOptions() {
+            const deleteOptions = document.getElementById('delete-options');
+            if (deleteOptions.style.display === 'none') {
+                deleteOptions.style.display = 'block';
+                deleteOptions.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            } else {
+                deleteOptions.style.display = 'none';
+            }
+        }
+        
+        // View stored data function
+        function viewStoredData() {
+            const allData = {};
+            
+            for (let i = 0; i < localStorage.length; i++) {
+                const key = localStorage.key(i);
+                try {
+                    allData[key] = JSON.parse(localStorage.getItem(key));
+                } catch (e) {
+                    allData[key] = localStorage.getItem(key);
+                }
+            }
+            
+            const dataDisplay = document.createElement('div');
+            dataDisplay.style.cssText = 'max-height: 400px; overflow-y: auto; background: #1a1a1a; padding: 1rem; border-radius: 8px; color: #fff; font-family: monospace; font-size: 0.9rem; white-space: pre-wrap;';
+            dataDisplay.textContent = JSON.stringify(allData, null, 2);
+            
+            if (typeof showModal === 'function') {
+                showModal('Your Stored Data', dataDisplay.outerHTML + '<p style="margin-top: 1rem; color: #ccc; font-size: 0.9rem;">This is all the data stored in your browser for this website.</p>');
+            } else {
+                alert('Stored Data:\n\n' + JSON.stringify(allData, null, 2));
+            }
+        }
+        
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            initializePersonalizationStatus();
+        });
+    </script>
+    <!-- V36.9.10: In-House Privacy-First Analytics -->
+    <script src="js/analytics-tracker.js?v=36.9.10-INHOUSE" defer></script>
+</body>
+</html>

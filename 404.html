@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Essential Meta Tags -->
+    <meta name="description" content="Page Not Found - Workforce Democracy Project. Let's get you back on track.">
+    <meta name="robots" content="noindex, nofollow">
+    
+    <title>Page Not Found (404) - Workforce Democracy Project</title>
+    
+    <!-- V36.9.10: Performance - Preload Critical Assets -->
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+    <link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
+    <link rel="preload" href="css/main.css" as="style">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="alternate icon" type="image/png" href="favicon.png">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    
+    <!-- Main Stylesheets -->
+    <link rel="stylesheet" href="css/fonts.css">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/unified-color-scheme.css">
+    
+    <!-- V36.9.11: Form Validation Styles (Task #17) -->
+    <link rel="stylesheet" href="css/form-validation.css?v=36.9.11-VALIDATION">
+    
+    <style>
+        .error-404-page {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        
+        .error-404-container {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+        
+        .error-404-content {
+            background: white;
+            border-radius: 24px;
+            padding: 3rem 2rem;
+            max-width: 600px;
+            width: 100%;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            text-align: center;
+        }
+        
+        .error-404-emoji {
+            font-size: 6rem;
+            margin-bottom: 1.5rem;
+            animation: bounce 2s ease-in-out infinite;
+        }
+        
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        .error-404-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #1a202c;
+            margin-bottom: 1rem;
+        }
+        
+        .error-404-subtitle {
+            font-size: 1.125rem;
+            color: #718096;
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+        
+        .error-404-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+        
+        .error-404-actions .btn {
+            padding: 1rem 2rem;
+            font-size: 1.125rem;
+            border-radius: 12px;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+        }
+        
+        .btn-secondary {
+            background: white;
+            color: #667eea;
+            border: 2px solid #667eea;
+        }
+        
+        .btn-secondary:hover {
+            background: #f7fafc;
+            transform: translateY(-2px);
+        }
+        
+        .helpful-links {
+            background: #f7fafc;
+            border-radius: 16px;
+            padding: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .helpful-links-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #2d3748;
+            margin-bottom: 1rem;
+        }
+        
+        .helpful-links-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+        }
+        
+        .helpful-link {
+            background: white;
+            padding: 1rem;
+            border-radius: 12px;
+            text-decoration: none;
+            color: #4a5568;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .helpful-link:hover {
+            background: #667eea;
+            color: white;
+            transform: translateY(-4px);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.2);
+        }
+        
+        .helpful-link i {
+            font-size: 1.5rem;
+        }
+        
+        .search-section {
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 2px solid #e2e8f0;
+        }
+        
+        .search-section h3 {
+            font-size: 1.125rem;
+            color: #2d3748;
+            margin-bottom: 1rem;
+        }
+        
+        .search-input-container {
+            position: relative;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+        
+        .search-input {
+            width: 100%;
+            padding: 1rem 1rem 1rem 3rem;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+        
+        .search-input:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+        
+        .search-icon {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #a0aec0;
+        }
+        
+        @media (max-width: 768px) {
+            .error-404-title {
+                font-size: 2rem;
+            }
+            
+            .error-404-emoji {
+                font-size: 4rem;
+            }
+            
+            .helpful-links-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+<body class="error-404-page">
+    <div class="error-404-container">
+        <div class="error-404-content">
+            <!-- Error Icon -->
+            <div class="error-404-emoji">😊</div>
+            
+            <!-- Error Message -->
+            <h1 class="error-404-title">Oops! Page Not Found</h1>
+            <p class="error-404-subtitle">
+                We couldn't find the page you're looking for. It might have been moved, deleted, or maybe never existed. Let's get you back on track! 💙
+            </p>
+            
+            <!-- Primary Actions -->
+            <div class="error-404-actions">
+                <a href="/" class="btn btn-primary">
+                    <i class="fas fa-home"></i>
+                    Go to Homepage
+                </a>
+                <a href="javascript:history.back()" class="btn btn-secondary">
+                    <i class="fas fa-arrow-left"></i>
+                    Go Back
+                </a>
+            </div>
+            
+            <!-- Helpful Links -->
+            <div class="helpful-links">
+                <h3 class="helpful-links-title">Popular Pages</h3>
+                <div class="helpful-links-grid">
+                    <a href="/#civic" class="helpful-link">
+                        <i class="fas fa-landmark"></i>
+                        <span>Civic</span>
+                    </a>
+                    <a href="/#jobs" class="helpful-link">
+                        <i class="fas fa-briefcase"></i>
+                        <span>Jobs</span>
+                    </a>
+                    <a href="/learning.html" class="helpful-link">
+                        <i class="fas fa-book"></i>
+                        <span>Learning</span>
+                    </a>
+                    <a href="/faq.html" class="helpful-link">
+                        <i class="fas fa-question-circle"></i>
+                        <span>FAQ</span>
+                    </a>
+                    <a href="/help.html" class="helpful-link">
+                        <i class="fas fa-life-ring"></i>
+                        <span>Help</span>
+                    </a>
+                    <a href="/privacy.html" class="helpful-link">
+                        <i class="fas fa-shield-alt"></i>
+                        <span>Privacy</span>
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Search Section -->
+            <div class="search-section">
+                <h3>Or search for what you need:</h3>
+                <div class="search-input-container">
+                    <i class="fas fa-search search-icon"></i>
+                    <input type="search" 
+                           class="search-input" 
+                           placeholder="Search the site..." 
+                           id="error-search"
+                           onkeypress="if(event.key==='Enter'){window.location.href='/?q='+encodeURIComponent(this.value)}">
+                </div>
+                <p style="margin-top: 0.5rem; font-size: 0.875rem; color: #a0aec0;">
+                    Press Enter to search
+                </p>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Simple Footer -->
+    <footer style="background: rgba(0,0,0,0.2); color: white; text-align: center; padding: 2rem;">
+        <p style="margin: 0; opacity: 0.9;">
+            &copy; 2025 Workforce Democracy Project
+        </p>
+        <p style="margin: 0.5rem 0 0 0; opacity: 0.7; font-size: 0.875rem;">
+            <i class="fas fa-shield-alt"></i> Zero tracking. Zero ads. Complete privacy.
+        </p>
+    </footer>
+    <!-- V36.9.10: In-House Privacy-First Analytics -->
+    <script src="js/analytics-tracker.js?v=36.9.10-INHOUSE" defer></script>
+    <!-- V36.9.11: Form Validation (Task #17) -->
+    <script src="js/form-validator.js?v=36.9.11-VALIDATION" defer></script>
+</body>
+</html>

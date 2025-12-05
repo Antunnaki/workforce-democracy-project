@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" role="img" aria-label="Collaboration Over Competition">
+  <defs>
+    <linearGradient id="collabGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#7FB069;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#5D8A47;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Puzzle pieces fitting together perfectly -->
+  <circle cx="100" cy="100" r="90" fill="#F5F5DC" opacity="0.2"/>
+  
+  <!-- Left puzzle piece -->
+  <path d="M 50 70 L 90 70 L 90 85 Q 95 85 95 90 Q 95 95 90 95 L 90 110 Q 90 115 85 115 L 70 115 Q 65 115 65 110 L 65 85 Q 65 80 60 80 Q 55 80 55 85 L 55 110 Q 55 115 50 115 L 50 70 Z" 
+        fill="url(#collabGrad)" stroke="#5D8A47" stroke-width="3"/>
+  
+  <!-- Right puzzle piece -->
+  <path d="M 95 70 L 150 70 L 150 115 Q 150 115 145 115 L 110 115 L 110 100 Q 105 100 105 95 Q 105 90 110 90 L 110 70 Z" 
+        fill="#CD853F" stroke="#8B6F47" stroke-width="3"/>
+  
+  <!-- Bottom left puzzle piece -->
+  <path d="M 50 120 L 90 120 L 90 135 Q 95 135 95 140 Q 95 145 90 145 L 90 160 L 50 160 L 50 120 Z" 
+        fill="#A0826D" stroke="#8B6F47" stroke-width="3"/>
+  
+  <!-- Bottom right puzzle piece -->
+  <path d="M 95 120 L 150 120 L 150 160 L 110 160 L 110 145 Q 105 145 105 140 Q 105 135 110 135 L 110 120 Z" 
+        fill="#4A90E2" stroke="#357ABD" stroke-width="3"/>
+  
+  <!-- Handshake in center where pieces meet -->
+  <g transform="translate(100, 100) scale(0.4)">
+    <path d="M -30 0 L -20 -10 L -10 -5 L 0 0 L 10 -5 L 20 -10 L 30 0" 
+          fill="none" stroke="#FFD700" stroke-width="6" stroke-linecap="round"/>
+    <circle cx="-25" cy="-5" r="8" fill="#FFD700"/>
+    <circle cx="25" cy="-5" r="8" fill="#FFD700"/>
+  </g>
+  
+  <!-- Unity circle connecting all -->
+  <circle cx="100" cy="100" r="70" fill="none" stroke="#FFD700" stroke-width="2" stroke-dasharray="5,5" opacity="0.5"/>
+</svg>

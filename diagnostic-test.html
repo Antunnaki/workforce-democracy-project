@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diagnostic Test - V36.12.0</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .test-section {
+            background: white;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .test-box {
+            margin: 10px 0;
+            padding: 15px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+        }
+        .dark-bg {
+            background: #1e3a8a;
+            padding: 20px;
+            border-radius: 10px;
+        }
+        .purple-bg {
+            background: #581c87;
+            padding: 20px;
+            border-radius: 10px;
+        }
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: #ffffff;
+            text-shadow: 0 2px 6px rgba(0,0,0,0.5);
+        }
+        .stat-label {
+            font-size: 0.875rem;
+            font-weight: 700;
+            color: #ffffff;
+            text-transform: uppercase;
+        }
+        code {
+            background: #f0f0f0;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: monospace;
+        }
+        .success {
+            color: green;
+            font-weight: bold;
+        }
+        .error {
+            color: red;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1>🔬 Diagnostic Test Page - V36.12.0</h1>
+    
+    <div class="test-section">
+        <h2>Test 1: Dark Blue Background (Federal Stats)</h2>
+        <div class="test-box dark-bg">
+            <div class="stat-number">2</div>
+            <div class="stat-label">Federal</div>
+        </div>
+        <p><strong>Expected:</strong> White text visible on dark blue background</p>
+        <p><strong>Actual:</strong> <span id="test1-result">Checking...</span></p>
+    </div>
+    
+    <div class="test-section">
+        <h2>Test 2: Purple Background (State Stats)</h2>
+        <div class="test-box purple-bg">
+            <div class="stat-number">5</div>
+            <div class="stat-label">State</div>
+        </div>
+        <p><strong>Expected:</strong> White text visible on purple background</p>
+        <p><strong>Actual:</strong> <span id="test2-result">Checking...</span></p>
+    </div>
+    
+    <div class="test-section">
+        <h2>Test 3: Simulated #civicResults Container</h2>
+        <div id="civicResults">
+            <div style="background: linear-gradient(135deg, #5b21b6 0%, #7c3aed 100%); padding: 2rem; border-radius: 12px;">
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 1rem;">
+                    <div style="background: #1e3a8a; padding: 1.25rem; border-radius: 10px; text-align: center; border: 3px solid #3b82f6;">
+                        <div style="font-size: 2.5rem; font-weight: 800; color: #ffffff; text-shadow: 0 2px 6px rgba(0,0,0,0.5);">2</div>
+                        <div style="font-size: 0.875rem; font-weight: 700; color: #ffffff; text-transform: uppercase; text-shadow: 0 1px 3px rgba(0,0,0,0.4);">Federal</div>
+                    </div>
+                    <div style="background: #581c87; padding: 1.25rem; border-radius: 10px; text-align: center; border: 3px solid #a855f7;">
+                        <div style="font-size: 2.5rem; font-weight: 800; color: #ffffff; text-shadow: 0 2px 6px rgba(0,0,0,0.5);">5</div>
+                        <div style="font-size: 0.875rem; font-weight: 700; color: #ffffff; text-transform: uppercase; text-shadow: 0 1px 3px rgba(0,0,0,0.4);">State</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <p><strong>Expected:</strong> Numbers "2" and "5" in white</p>
+        <p><strong>Actual:</strong> <span id="test3-result">Checking...</span></p>
+    </div>
+    
+    <div class="test-section">
+        <h2>🔍 CSS Diagnostics</h2>
+        <div id="css-diagnostics">
+            <p>Loading CSS file analysis...</p>
+        </div>
+    </div>
+    
+    <div class="test-section">
+        <h2>📋 Computed Styles</h2>
+        <div id="computed-styles">
+            <p>Analyzing computed styles...</p>
+        </div>
+    </div>
+    
+    <script>
+        // Check computed colors
+        function checkColor(elementId, testId) {
+            const el = document.getElementById(elementId);
+            if (!el) {
+                document.getElementById(testId).innerHTML = '<span class="error">Element not found</span>';
+                return;
+            }
+            
+            const computed = window.getComputedStyle(el);
+            const color = computed.color;
+            const rgb = color.match(/\d+/g);
+            
+            if (rgb) {
+                const [r, g, b] = rgb.map(Number);
+                const isWhite = r > 200 && g > 200 && b > 200;
+                const isDark = r < 100 && g < 100 && b < 100;
+                
+                if (isWhite) {
+                    document.getElementById(testId).innerHTML = `<span class="success">✅ WHITE (${color})</span>`;
+                } else if (isDark) {
+                    document.getElementById(testId).innerHTML = `<span class="error">❌ DARK (${color})</span>`;
+                } else {
+                    document.getElementById(testId).innerHTML = `<span class="error">⚠️ UNEXPECTED (${color})</span>`;
+                }
+            }
+        }
+        
+        // Analyze CSS files
+        function analyzeCSS() {
+            const stylesheets = Array.from(document.styleSheets);
+            let html = '<ul>';
+            
+            stylesheets.forEach(sheet => {
+                try {
+                    const href = sheet.href || 'inline';
+                    const filename = href.split('/').pop() || 'inline';
+                    html += `<li><code>${filename}</code> - ${sheet.cssRules ? sheet.cssRules.length : '0'} rules</li>`;
+                } catch(e) {
+                    html += `<li><code>${sheet.href || 'inline'}</code> - Cannot access (CORS)</li>`;
+                }
+            });
+            
+            html += '</ul>';
+            html += `<p><strong>Total stylesheets:</strong> ${stylesheets.length}</p>`;
+            
+            // Check for specific files
+            const hasGreyTextFix = stylesheets.some(s => s.href && s.href.includes('grey-text-fix'));
+            const hasContrastFix = stylesheets.some(s => s.href && s.href.includes('contrast-fix'));
+            const hasNuclearFix = stylesheets.some(s => s.href && s.href.includes('nuclear-fix'));
+            
+            html += '<h3>Key Files:</h3><ul>';
+            html += `<li>grey-text-fix.css: ${hasGreyTextFix ? '<span class="success">✅ LOADED</span>' : '<span class="error">❌ NOT FOUND</span>'}</li>`;
+            html += `<li>contrast-fix-v36.12.0.css: ${hasContrastFix ? '<span class="success">✅ LOADED</span>' : '<span class="error">❌ NOT FOUND</span>'}</li>`;
+            html += `<li>civic-stats-nuclear-fix.css: ${hasNuclearFix ? '<span class="success">✅ LOADED</span>' : '<span class="error">❌ NOT FOUND</span>'}</li>`;
+            html += '</ul>';
+            
+            document.getElementById('css-diagnostics').innerHTML = html;
+        }
+        
+        // Analyze computed styles
+        function analyzeComputedStyles() {
+            const testEl = document.querySelector('#civicResults div[style*="font-size: 2.5rem"]');
+            if (!testEl) {
+                document.getElementById('computed-styles').innerHTML = '<p class="error">Test element not found</p>';
+                return;
+            }
+            
+            const computed = window.getComputedStyle(testEl);
+            const color = computed.color;
+            const textShadow = computed.textShadow;
+            const fontWeight = computed.fontWeight;
+            
+            let html = '<table border="1" cellpadding="10"><tr><th>Property</th><th>Value</th><th>Status</th></tr>';
+            html += `<tr><td>color</td><td><code>${color}</code></td><td>${color.includes('255') ? '<span class="success">✅ WHITE</span>' : '<span class="error">❌ NOT WHITE</span>'}</td></tr>`;
+            html += `<tr><td>text-shadow</td><td><code>${textShadow}</code></td><td>${textShadow !== 'none' ? '<span class="success">✅ SET</span>' : '<span class="error">❌ NONE</span>'}</td></tr>`;
+            html += `<tr><td>font-weight</td><td><code>${fontWeight}</code></td><td>${fontWeight >= 700 ? '<span class="success">✅ BOLD</span>' : '⚠️ NOT BOLD'}</td></tr>`;
+            html += '</table>';
+            
+            // Show all CSS rules affecting this element
+            html += '<h3>CSS Rules Applied:</h3>';
+            html += '<p><small>Open DevTools → Elements → Styles to see full cascade</small></p>';
+            
+            document.getElementById('computed-styles').innerHTML = html;
+        }
+        
+        // Run tests after page load
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                checkColor(document.querySelector('.test-box.dark-bg .stat-number'), 'test1-result');
+                checkColor(document.querySelector('.test-box.purple-bg .stat-number'), 'test2-result');
+                checkColor(document.querySelector('#civicResults div[style*="font-size: 2.5rem"]'), 'test3-result');
+                analyzeCSS();
+                analyzeComputedStyles();
+            }, 500);
+        });
+    </script>
+</body>
+</html>

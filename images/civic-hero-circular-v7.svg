@@ -1,0 +1,111 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="800" height="500">
+  <defs>
+    <!-- Artistic gradient backgrounds -->
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#e8f4f8;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#f0f8ff;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#d0e8f0;stop-opacity:1" />
+    </linearGradient>
+    
+    <radialGradient id="glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" style="stop-color:#fff;stop-opacity:0.6" />
+      <stop offset="100%" style="stop-color:#4a90e2;stop-opacity:0" />
+    </radialGradient>
+    
+    <!-- Artistic circle gradients -->
+    <radialGradient id="circleGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" style="stop-color:#ffffff;stop-opacity:1" />
+      <stop offset="70%" style="stop-color:#f8fcff;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#e8f4f8;stop-opacity:1" />
+    </radialGradient>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="800" height="500" fill="url(#bg)"/>
+  
+  <!-- Center artistic glow -->
+  <circle cx="400" cy="250" r="200" fill="url(#glow)"/>
+  
+  <!-- Flowing accountability ring (softer, more organic) -->
+  <circle cx="400" cy="250" r="165" fill="none" stroke="#4a90e2" stroke-width="2" stroke-dasharray="15 8" opacity="0.3"/>
+  <circle cx="400" cy="250" r="155" fill="none" stroke="#7fb069" stroke-width="1.5" stroke-dasharray="8 12" opacity="0.2"/>
+  
+  <!-- ARTISTIC FLOWING CONNECTIONS - Curved, wave-like paths -->
+  <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <!-- Primary flowing connections (warm orange) -->
+    <g stroke="#f4a623" stroke-width="3.5" opacity="0.5">
+      <!-- Citizens to Representatives - flowing curve -->
+      <path d="M 365,135 Q 310,200 265,320" stroke-dasharray="8 6"/>
+      <!-- Citizens to Court - flowing curve -->
+      <path d="M 435,135 Q 490,200 535,320" stroke-dasharray="8 6"/>
+      <!-- Representatives to Court - gentle wave -->
+      <path d="M 315,355 Q 400,340 485,355" stroke-dasharray="8 6"/>
+    </g>
+    
+    <!-- Secondary flowing connections (green - integration) -->
+    <g stroke="#7fb069" stroke-width="2.5" opacity="0.35">
+      <!-- Return flows - more organic curves -->
+      <path d="M 270,325 Q 330,230 360,140" stroke-dasharray="5 8"/>
+      <path d="M 530,325 Q 470,230 440,140" stroke-dasharray="5 8"/>
+      <path d="M 480,350 Q 400,365 320,350" stroke-dasharray="5 8"/>
+    </g>
+    
+    <!-- Tertiary subtle connections (blue - harmony) -->
+    <g stroke="#4a90e2" stroke-width="1.5" opacity="0.2">
+      <!-- Inner flowing connections -->
+      <path d="M 380,145 Q 350,250 280,340" stroke-dasharray="3 10"/>
+      <path d="M 420,145 Q 450,250 520,340" stroke-dasharray="3 10"/>
+      <path d="M 290,360 Q 400,380 510,360" stroke-dasharray="3 10"/>
+    </g>
+  </g>
+  
+  <!-- TOP: Citizens -->
+  <g transform="translate(400, 110)">
+    <!-- Artistic circle with gradient -->
+    <circle cx="0" cy="0" r="52" fill="url(#circleGlow)" stroke="#4a90e2" stroke-width="2.5" opacity="0.95"/>
+    <!-- Icon -->
+    <text y="-15" font-family="Arial, sans-serif" font-size="36" fill="#4a90e2" text-anchor="middle">👥</text>
+    <!-- Text CENTERED in circle -->
+    <text y="20" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#4a90e2" text-anchor="middle" letter-spacing="0.5">CITIZENS</text>
+  </g>
+  
+  <!-- BOTTOM LEFT: Representatives -->
+  <g transform="translate(260, 350)">
+    <!-- Artistic circle with gradient -->
+    <circle cx="0" cy="0" r="52" fill="url(#circleGlow)" stroke="#4a90e2" stroke-width="2.5" opacity="0.95"/>
+    <!-- Icon -->
+    <text y="-12" font-family="Arial, sans-serif" font-size="36" fill="#4a90e2" text-anchor="middle">🏛️</text>
+    <!-- Text CENTERED in circle -->
+    <text y="22" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#4a90e2" text-anchor="middle" letter-spacing="0.5">REPS</text>
+  </g>
+  
+  <!-- BOTTOM RIGHT: Court -->
+  <g transform="translate(540, 350)">
+    <!-- Artistic circle with gradient -->
+    <circle cx="0" cy="0" r="52" fill="url(#circleGlow)" stroke="#4a90e2" stroke-width="2.5" opacity="0.95"/>
+    <!-- Icon -->
+    <text y="-12" font-family="Arial, sans-serif" font-size="36" fill="#4a90e2" text-anchor="middle">⚖️</text>
+    <!-- Text CENTERED in circle -->
+    <text y="22" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#4a90e2" text-anchor="middle" letter-spacing="0.5">COURT</text>
+  </g>
+  
+  <!-- Center text - artistic styling -->
+  <g opacity="0.9">
+    <text x="400" y="238" font-family="Arial, sans-serif" font-size="17" font-weight="600" fill="#4a90e2" text-anchor="middle" letter-spacing="1">MUTUAL</text>
+    <text x="400" y="258" font-family="Arial, sans-serif" font-size="17" font-weight="600" fill="#4a90e2" text-anchor="middle" letter-spacing="1">ACCOUNTABILITY</text>
+  </g>
+  
+  <!-- Artistic flowing particles/dots (optional visual enhancement) -->
+  <g fill="#4a90e2" opacity="0.15">
+    <circle cx="350" cy="190" r="3"/>
+    <circle cx="450" cy="190" r="3"/>
+    <circle cx="290" cy="280" r="2.5"/>
+    <circle cx="510" cy="280" r="2.5"/>
+    <circle cx="370" cy="310" r="2"/>
+    <circle cx="430" cy="310" r="2"/>
+  </g>
+  
+  <!-- Bottom banner - more artistic with subtle gradient -->
+  <rect x="80" y="453" width="640" height="37" rx="18" fill="white" opacity="0.85" stroke="#4a90e2" stroke-width="2"/>
+  <text x="400" y="478" font-family="Arial, sans-serif" font-size="13.5" font-weight="600" fill="#4a90e2" text-anchor="middle" letter-spacing="0.3">Everyone Accountable to Everyone - Seamless Integration</text>
+</svg>

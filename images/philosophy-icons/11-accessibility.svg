@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" role="img" aria-label="Accessibility">
+  <defs>
+    <linearGradient id="accessGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#4A90E2;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#357ABD;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Universal access symbol with open doors -->
+  <circle cx="100" cy="100" r="90" fill="#F5F5DC" opacity="0.2"/>
+  
+  <!-- Accessibility symbol person -->
+  <circle cx="100" cy="60" r="15" fill="url(#accessGrad)"/>
+  
+  <!-- Body/wheelchair -->
+  <circle cx="100" cy="110" r="35" fill="none" stroke="url(#accessGrad)" stroke-width="6"/>
+  <path d="M 100 75 L 100 95" stroke="url(#accessGrad)" stroke-width="8" stroke-linecap="round"/>
+  <path d="M 100 90 L 125 85" stroke="url(#accessGrad)" stroke-width="6" stroke-linecap="round"/>
+  <path d="M 100 100 L 75 120" stroke="url(#accessGrad)" stroke-width="6" stroke-linecap="round"/>
+  
+  <!-- Wheels -->
+  <circle cx="100" cy="110" r="8" fill="url(#accessGrad)"/>
+  
+  <!-- Open doors on sides -->
+  <path d="M 40 60 L 40 140 L 45 140 L 50 135 L 50 65 L 45 60 Z" 
+        fill="#CD853F" stroke="#8B6F47" stroke-width="2" opacity="0.7"/>
+  <path d="M 160 60 L 160 140 L 155 140 L 150 135 L 150 65 L 155 60 Z" 
+        fill="#CD853F" stroke="#8B6F47" stroke-width="2" opacity="0.7"/>
+  
+  <!-- Welcoming arrows -->
+  <path d="M 30 100 L 50 90 L 50 95 L 65 95 L 65 105 L 50 105 L 50 110 Z" fill="#7FB069" opacity="0.8"/>
+  <path d="M 170 100 L 150 90 L 150 95 L 135 95 L 135 105 L 150 105 L 150 110 Z" fill="#7FB069" opacity="0.8"/>
+  
+  <!-- Heart (inclusion) -->
+  <path d="M 100 150 Q 95 145 92 147 Q 89 149 91 154 L 100 162 L 109 154 Q 111 149 108 147 Q 105 145 100 150 Z" 
+        fill="#FF6347" opacity="0.8"/>
+</svg>

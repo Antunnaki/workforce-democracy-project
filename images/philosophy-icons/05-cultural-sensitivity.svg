@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" role="img" aria-label="Cultural Sensitivity">
+  <defs>
+    <linearGradient id="diversityGrad1" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#CD853F;stop-opacity:1" />
+      <stop offset="33%" style="stop-color:#A0826D;stop-opacity:1" />
+      <stop offset="66%" style="stop-color:#8B6F47;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#B8956A;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Rainbow of diverse hands reaching together -->
+  <circle cx="100" cy="100" r="90" fill="#F5F5DC" opacity="0.2"/>
+  
+  <!-- Central unity symbol -->
+  <circle cx="100" cy="100" r="25" fill="url(#diversityGrad1)" opacity="0.6"/>
+  
+  <!-- Diverse hands reaching toward center -->
+  <!-- Hand 1 - Top -->
+  <path d="M 100 30 L 95 50 L 90 52 L 88 48 L 92 30 L 95 28 Z" fill="#CD853F" stroke="#8B6F47" stroke-width="1.5"/>
+  <path d="M 95 50 L 98 52 L 97 48 Z" fill="#CD853F"/>
+  <path d="M 98 52 L 101 54 L 100 50 Z" fill="#CD853F"/>
+  <path d="M 101 54 L 104 52 L 103 48 Z" fill="#CD853F"/>
+  
+  <!-- Hand 2 - Top Right -->
+  <path d="M 150 50 L 130 70 L 128 75 L 132 76 L 152 58 L 154 55 Z" fill="#A0826D" stroke="#8B6F47" stroke-width="1.5"/>
+  
+  <!-- Hand 3 - Right -->
+  <path d="M 170 100 L 150 105 L 148 110 L 152 112 L 172 108 L 174 105 Z" fill="#8B6F47" stroke="#5D4E37" stroke-width="1.5"/>
+  
+  <!-- Hand 4 - Bottom Right -->
+  <path d="M 150 150 L 130 130 L 125 128 L 124 132 L 142 152 L 145 154 Z" fill="#B8956A" stroke="#8B6F47" stroke-width="1.5"/>
+  
+  <!-- Hand 5 - Bottom -->
+  <path d="M 100 170 L 95 150 L 90 148 L 88 152 L 92 170 L 95 172 Z" fill="#CD853F" stroke="#8B6F47" stroke-width="1.5"/>
+  
+  <!-- Hand 6 - Bottom Left -->
+  <path d="M 50 150 L 70 130 L 75 128 L 76 132 L 58 152 L 55 154 Z" fill="#A0826D" stroke="#8B6F47" stroke-width="1.5"/>
+  
+  <!-- Hand 7 - Left -->
+  <path d="M 30 100 L 50 105 L 52 110 L 48 112 L 28 108 L 26 105 Z" fill="#8B6F47" stroke="#5D4E37" stroke-width="1.5"/>
+  
+  <!-- Hand 8 - Top Left -->
+  <path d="M 50 50 L 70 70 L 72 75 L 68 76 L 48 58 L 46 55 Z" fill="#B8956A" stroke="#8B6F47" stroke-width="1.5"/>
+  
+  <!-- Hearts connecting -->
+  <path d="M 100 95 L 102 100 L 100 102 L 98 100 Z" fill="#FFD700" opacity="0.8"/>
+</svg>

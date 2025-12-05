@@ -1,0 +1,100 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" role="img" aria-label="Human Dignity">
+  <defs>
+    <linearGradient id="dignityGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#E8D174;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#D4A574;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Circle of equal people - all at same level -->
+  <circle cx="100" cy="100" r="90" fill="#F5F5DC" opacity="0.2"/>
+  
+  <!-- Central equality symbol -->
+  <circle cx="100" cy="100" r="35" fill="url(#dignityGrad)" opacity="0.3"/>
+  
+  <!-- Equal sign in center -->
+  <rect x="85" y="95" width="30" height="4" rx="2" fill="#8B7355"/>
+  <rect x="85" y="103" width="30" height="4" rx="2" fill="#8B7355"/>
+  
+  <!-- 8 equal people standing in circle - all same size, all same level -->
+  <!-- Top person -->
+  <g transform="translate(100, 45)">
+    <circle cx="0" cy="0" r="8" fill="#CD853F"/>
+    <rect x="-5" y="8" width="10" height="18" rx="2" fill="#A0826D"/>
+    <line x1="-5" y1="13" x2="-10" y2="18" stroke="#A0826D" stroke-width="3" stroke-linecap="round"/>
+    <line x1="5" y1="13" x2="10" y2="18" stroke="#A0826D" stroke-width="3" stroke-linecap="round"/>
+  </g>
+  
+  <!-- Top-right person -->
+  <g transform="translate(142, 65)">
+    <circle cx="0" cy="0" r="8" fill="#CD853F"/>
+    <rect x="-5" y="8" width="10" height="18" rx="2" fill="#A0826D"/>
+    <line x1="-5" y1="13" x2="-10" y2="18" stroke="#A0826D" stroke-width="3" stroke-linecap="round"/>
+    <line x1="5" y1="13" x2="10" y2="18" stroke="#A0826D" stroke-width="3" stroke-linecap="round"/>
+  </g>
+  
+  <!-- Right person -->
+  <g transform="translate(155, 100)">
+    <circle cx="0" cy="0" r="8" fill="#CD853F"/>
+    <rect x="-5" y="8" width="10" height="18" rx="2" fill="#A0826D"/>
+    <line x1="-5" y1="13" x2="-10" y2="18" stroke="#A0826D" stroke-width="3" stroke-linecap="round"/>
+    <line x1="5" y1="13" x2="10" y2="18" stroke="#A0826D" stroke-width="3" stroke-linecap="round"/>
+  </g>
+  
+  <!-- Bottom-right person -->
+  <g transform="translate(142, 135)">
+    <circle cx="0" cy="0" r="8" fill="#CD853F"/>
+    <rect x="-5" y="8" width="10" height="18" rx="2" fill="#A0826D"/>
+    <line x1="-5" y1="13" x2="-10" y2="18" stroke="#A0826D" stroke-width="3" stroke-linecap="round"/>
+    <line x1="5" y1="13" x2="10" y2="18" stroke="#A0826D" stroke-width="3" stroke-linecap="round"/>
+  </g>
+  
+  <!-- Bottom person -->
+  <g transform="translate(100, 155)">
+    <circle cx="0" cy="0" r="8" fill="#CD853F"/>
+    <rect x="-5" y="8" width="10" height="18" rx="2" fill="#A0826D"/>
+    <line x1="-5" y1="13" x2="-10" y2="18" stroke="#A0826D" stroke-width="3" stroke-linecap="round"/>
+    <line x1="5" y1="13" x2="10" y2="18" stroke="#A0826D" stroke-width="3" stroke-linecap="round"/>
+  </g>
+  
+  <!-- Bottom-left person -->
+  <g transform="translate(58, 135)">
+    <circle cx="0" cy="0" r="8" fill="#CD853F"/>
+    <rect x="-5" y="8" width="10" height="18" rx="2" fill="#A0826D"/>
+    <line x1="-5" y1="13" x2="-10" y2="18" stroke="#A0826D" stroke-width="3" stroke-linecap="round"/>
+    <line x1="5" y1="13" x2="10" y2="18" stroke="#A0826D" stroke-width="3" stroke-linecap="round"/>
+  </g>
+  
+  <!-- Left person -->
+  <g transform="translate(45, 100)">
+    <circle cx="0" cy="0" r="8" fill="#CD853F"/>
+    <rect x="-5" y="8" width="10" height="18" rx="2" fill="#A0826D"/>
+    <line x1="-5" y1="13" x2="-10" y2="18" stroke="#A0826D" stroke-width="3" stroke-linecap="round"/>
+    <line x1="5" y1="13" x2="10" y2="18" stroke="#A0826D" stroke-width="3" stroke-linecap="round"/>
+  </g>
+  
+  <!-- Top-left person -->
+  <g transform="translate(58, 65)">
+    <circle cx="0" cy="0" r="8" fill="#CD853F"/>
+    <rect x="-5" y="8" width="10" height="18" rx="2" fill="#A0826D"/>
+    <line x1="-5" y1="13" x2="-10" y2="18" stroke="#A0826D" stroke-width="3" stroke-linecap="round"/>
+    <line x1="5" y1="13" x2="10" y2="18" stroke="#A0826D" stroke-width="3" stroke-linecap="round"/>
+  </g>
+  
+  <!-- Connection circle showing unity and equality -->
+  <circle cx="100" cy="100" r="55" fill="none" stroke="url(#dignityGrad)" stroke-width="3" opacity="0.6"/>
+  
+  <!-- Hearts between people (respect and dignity) -->
+  <path d="M 100 35 L 102 38 L 100 40 L 98 38 Z" fill="#FF6347" opacity="0.7"/>
+  <path d="M 145 60 L 147 63 L 145 65 L 143 63 Z" fill="#FF6347" opacity="0.7"/>
+  <path d="M 160 100 L 162 103 L 160 105 L 158 103 Z" fill="#FF6347" opacity="0.7"/>
+  <path d="M 145 140 L 147 143 L 145 145 L 143 143 Z" fill="#FF6347" opacity="0.7"/>
+  <path d="M 100 165 L 102 168 L 100 170 L 98 168 Z" fill="#FF6347" opacity="0.7"/>
+  <path d="M 55 140 L 57 143 L 55 145 L 53 143 Z" fill="#FF6347" opacity="0.7"/>
+  <path d="M 40 100 L 42 103 L 40 105 L 38 103 Z" fill="#FF6347" opacity="0.7"/>
+  <path d="M 55 60 L 57 63 L 55 65 L 53 63 Z" fill="#FF6347" opacity="0.7"/>
+  
+  <!-- Text banner at bottom -->
+  <rect x="60" y="175" width="80" height="16" rx="8" fill="#8B7355" opacity="0.8"/>
+  <text x="100" y="186" text-anchor="middle" font-family="Inter, sans-serif" font-size="11" font-weight="bold" fill="#F5F5DC">EQUAL WORTH</text>
+</svg>

@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" role="img" aria-label="Information Belongs to Everyone">
+  <defs>
+    <linearGradient id="infoGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#4A90E2;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#357ABD;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Globe with open book and breaking chains -->
+  <circle cx="100" cy="100" r="90" fill="#F5F5DC" opacity="0.2"/>
+  
+  <!-- Globe -->
+  <circle cx="100" cy="100" r="50" fill="url(#infoGrad)" opacity="0.4" stroke="#357ABD" stroke-width="3"/>
+  
+  <!-- Latitude lines -->
+  <ellipse cx="100" cy="100" rx="50" ry="15" fill="none" stroke="#357ABD" stroke-width="1.5" opacity="0.6"/>
+  <ellipse cx="100" cy="100" rx="50" ry="30" fill="none" stroke="#357ABD" stroke-width="1.5" opacity="0.6"/>
+  
+  <!-- Longitude line -->
+  <ellipse cx="100" cy="100" rx="15" ry="50" fill="none" stroke="#357ABD" stroke-width="1.5" opacity="0.6"/>
+  
+  <!-- Open book on globe -->
+  <path d="M 85 90 L 85 110 L 95 110 L 95 90 Z" fill="#F5F5DC" stroke="#8B7355" stroke-width="2"/>
+  <path d="M 105 90 L 105 110 L 115 110 L 115 90 Z" fill="#F5F5DC" stroke="#8B7355" stroke-width="2"/>
+  <path d="M 95 90 L 100 87 L 105 90" fill="none" stroke="#8B7355" stroke-width="2"/>
+  
+  <!-- Text lines on book -->
+  <line x1="87" y1="95" x2="93" y2="95" stroke="#4A90E2" stroke-width="1"/>
+  <line x1="87" y1="100" x2="93" y2="100" stroke="#4A90E2" stroke-width="1"/>
+  <line x1="107" y1="95" x2="113" y2="95" stroke="#4A90E2" stroke-width="1"/>
+  <line x1="107" y1="100" x2="113" y2="100" stroke="#4A90E2" stroke-width="1"/>
+  
+  <!-- Broken chains (freedom) -->
+  <g opacity="0.7">
+    <circle cx="60" cy="80" r="6" fill="none" stroke="#8B7355" stroke-width="3"/>
+    <circle cx="72" cy="80" r="6" fill="none" stroke="#8B7355" stroke-width="3"/>
+    <line x1="63" y1="77" x2="69" y2="77" stroke="#8B7355" stroke-width="3" stroke-linecap="round"/>
+    
+    <circle cx="140" cy="80" r="6" fill="none" stroke="#8B7355" stroke-width="3"/>
+    <circle cx="128" cy="80" r="6" fill="none" stroke="#8B7355" stroke-width="3"/>
+    <line x1="137" y1="77" x2="131" y2="77" stroke="#8B7355" stroke-width="3" stroke-linecap="round"/>
+  </g>
+  
+  <!-- Radiating knowledge -->
+  <path d="M 100 40 L 98 30 L 100 33 L 102 30 Z" fill="#FFD700" opacity="0.7"/>
+  <path d="M 145 65 L 155 58 L 150 62 L 157 65 Z" fill="#FFD700" opacity="0.7"/>
+  <path d="M 55 65 L 45 58 L 50 62 L 43 65 Z" fill="#FFD700" opacity="0.7"/>
+  <path d="M 145 135 L 155 142 L 150 138 L 157 135 Z" fill="#FFD700" opacity="0.7"/>
+  <path d="M 55 135 L 45 142 L 50 138 L 43 135 Z" fill="#FFD700" opacity="0.7"/>
+  <path d="M 100 160 L 98 170 L 100 167 L 102 170 Z" fill="#FFD700" opacity="0.7"/>
+  
+  <!-- Free symbol -->
+  <text x="100" y="170" text-anchor="middle" font-family="Inter, sans-serif" font-size="16" font-weight="bold" fill="#7FB069">FREE</text>
+</svg>

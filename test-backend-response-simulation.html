@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Backend Response Simulation - Citation Debug</title>
+    <link rel="stylesheet" href="css/citations.css">
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 30px;
+            background: #0f172a;
+            color: #f1f5f9;
+        }
+        .header {
+            background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+            padding: 40px;
+            border-radius: 16px;
+            margin-bottom: 30px;
+            box-shadow: 0 20px 60px rgba(59, 130, 246, 0.3);
+        }
+        h1 {
+            margin: 0 0 10px 0;
+            font-size: 32px;
+            color: white;
+        }
+        .subtitle {
+            color: #e0e7ff;
+            font-size: 14px;
+        }
+        .main-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        .panel {
+            background: #1e293b;
+            border-radius: 12px;
+            padding: 25px;
+            border: 1px solid #334155;
+        }
+        .panel-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #fbbf24;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .backend-response {
+            background: #0f172a;
+            border: 2px solid #3b82f6;
+            border-radius: 8px;
+            padding: 20px;
+            font-family: 'Courier New', monospace;
+            font-size: 13px;
+            white-space: pre-wrap;
+            color: #94a3b8;
+            max-height: 400px;
+            overflow-y: auto;
+            margin-bottom: 15px;
+        }
+        .frontend-render {
+            background: #0f172a;
+            border: 2px solid #10b981;
+            border-radius: 8px;
+            padding: 20px;
+            min-height: 200px;
+            color: #f1f5f9;
+            line-height: 1.8;
+        }
+        .debug-console {
+            background: #000;
+            border: 2px solid #6366f1;
+            border-radius: 8px;
+            padding: 20px;
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+            max-height: 500px;
+            overflow-y: auto;
+            color: #10b981;
+        }
+        .log-entry {
+            margin: 5px 0;
+            padding: 5px 0;
+            border-bottom: 1px solid #1e293b;
+        }
+        .log-entry:last-child {
+            border-bottom: none;
+        }
+        .log-level {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 10px;
+            font-weight: bold;
+            margin-right: 8px;
+        }
+        .log-info { background: #3b82f6; color: white; }
+        .log-success { background: #10b981; color: white; }
+        .log-warning { background: #f59e0b; color: white; }
+        .log-error { background: #ef4444; color: white; }
+        .test-button {
+            background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            margin: 5px;
+            transition: transform 0.2s;
+        }
+        .test-button:hover {
+            transform: scale(1.05);
+        }
+        .test-button:active {
+            transform: scale(0.95);
+        }
+        .citation-analysis {
+            background: #1e293b;
+            border-radius: 8px;
+            padding: 15px;
+            margin-top: 15px;
+            border-left: 4px solid #fbbf24;
+        }
+        .analysis-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 8px 0;
+            font-size: 14px;
+        }
+        .analysis-icon {
+            font-size: 20px;
+        }
+        .code-highlight {
+            background: #1e293b;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            color: #fbbf24;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🔬 Backend Response Simulation Test</h1>
+        <div class="subtitle">
+            Simulating actual backend /api/backend/query responses to debug citation rendering<br>
+            Version: V36.11.12 | Testing: markdown-renderer.js + citation-renderer.js integration
+        </div>
+    </div>
+
+    <div style="margin-bottom: 20px; text-align: center;">
+        <button class="test-button" onclick="runTest('simple')">Test 1: Simple Citation</button>
+        <button class="test-button" onclick="runTest('multiple')">Test 2: Multiple Citations</button>
+        <button class="test-button" onclick="runTest('complex')">Test 3: Complex (Bold + Citations)</button>
+        <button class="test-button" onclick="runTest('realworld')">Test 4: Real-World Response</button>
+        <button class="test-button" onclick="clearDebug()">Clear Debug Log</button>
+    </div>
+
+    <div class="main-grid">
+        <!-- Left side: Backend response -->
+        <div class="panel">
+            <div class="panel-title">
+                <span>📡</span>
+                <span>Backend Response (Raw)</span>
+            </div>
+            <div class="backend-response" id="backend-response">
+                Click a test button above to see the raw backend response...
+            </div>
+            <button class="test-button" onclick="copyBackendResponse()" style="width: 100%;">
+                📋 Copy Backend Response
+            </button>
+        </div>
+
+        <!-- Right side: Frontend render -->
+        <div class="panel">
+            <div class="panel-title">
+                <span>🖥️</span>
+                <span>Frontend Render (Processed)</span>
+            </div>
+            <div class="frontend-render" id="frontend-render">
+                Click a test button above to see the rendered output...
+            </div>
+            <div class="citation-analysis" id="citation-analysis" style="display:none;">
+                <!-- Analysis will be inserted here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Debug console (full width) -->
+    <div class="panel" style="margin-top: 20px;">
+        <div class="panel-title">
+            <span>🐛</span>
+            <span>Debug Console (Processing Pipeline)</span>
+        </div>
+        <div class="debug-console" id="debug-console">
+            Waiting for test execution...
+        </div>
+    </div>
+
+    <!-- Load scripts -->
+    <script src="js/citation-renderer.js"></script>
+    <script src="js/markdown-renderer.js"></script>
+
+    <script>
+        // Test data simulating actual backend responses
+        const testData = {
+            simple: `Adams was indicted[1] on federal charges.
+
+Sources:
+1. ProPublica - Federal Indictment Against Eric Adams
+   URL: https://www.propublica.org/adams-indictment`,
+
+            multiple: `The Infrastructure Investment and Jobs Act[1] was passed in November 2021[2] with bipartisan support[3].
+
+Sources:
+1. Congress.gov - H.R.3684 Bill Status
+   URL: https://www.congress.gov/bill/117th-congress/house-bill/3684
+2. BBC News - Infrastructure Bill Timeline
+   URL: https://www.bbc.com/news/infrastructure-2021
+3. ProPublica - Bipartisan Voting Record
+   URL: https://www.propublica.org/bipartisan-votes`,
+
+            complex: `Adams was **indicted**[1] on federal charges. The __controversial__ case[2] involves alleged *corruption* and bribery[3].
+
+Sources:
+1. ProPublica - Federal Indictment
+   URL: https://www.propublica.org/adams-indictment
+2. BBC News - Controversy Details
+   URL: https://www.bbc.com/news/adams-controversy
+3. The Intercept - Bribery Allegations
+   URL: https://theintercept.com/adams-bribery`,
+
+            realworld: `Eric Adams, the current **Mayor of New York City**[1], was indicted in September 2024 on federal corruption charges[2]. The __historic indictment__ makes him the first sitting NYC mayor to face federal criminal charges[3].
+
+The charges include:
+- **Wire fraud**[4]
+- *Bribery and corruption*[5]
+- Soliciting illegal foreign campaign contributions[6]
+
+Adams has maintained his **innocence** and stated he will continue serving as mayor[7].
+
+Sources:
+1. New York City Government - Official Biography
+   URL: https://www.nyc.gov/office-of-the-mayor/bio
+2. ProPublica - Federal Indictment Details
+   URL: https://www.propublica.org/article/eric-adams-indicted
+3. Democracy Now - Historic Indictment Coverage
+   URL: https://www.democracynow.org/2024/9/26/eric_adams_indicted
+4. DOJ - Wire Fraud Charges
+   URL: https://www.justice.gov/usao-sdny/pr/adams-indictment
+5. The Intercept - Bribery Investigation
+   URL: https://theintercept.com/2024/09/adams-bribery
+6. BBC News - Campaign Finance Violations
+   URL: https://www.bbc.com/news/world-us-canada-adams-charges
+7. NBC New York - Adams Statement
+   URL: https://www.nbcnewyork.com/news/local/adams-statement`
+        };
+
+        let debugLog = [];
+
+        function log(level, message, data = null) {
+            const timestamp = new Date().toLocaleTimeString();
+            debugLog.push({ level, message, data, timestamp });
+            
+            const consoleDiv = document.getElementById('debug-console');
+            const entry = document.createElement('div');
+            entry.className = 'log-entry';
+            
+            let icon = '';
+            switch(level) {
+                case 'info': icon = 'ℹ️'; break;
+                case 'success': icon = '✅'; break;
+                case 'warning': icon = '⚠️'; break;
+                case 'error': icon = '❌'; break;
+            }
+            
+            entry.innerHTML = `
+                <span class="log-level log-${level}">${icon} ${level.toUpperCase()}</span>
+                <span style="color: #64748b;">[${timestamp}]</span>
+                <span style="color: #f1f5f9;">${message}</span>
+                ${data ? `<pre style="margin: 5px 0 0 100px; color: #94a3b8; font-size: 11px;">${typeof data === 'object' ? JSON.stringify(data, null, 2) : data}</pre>` : ''}
+            `;
+            
+            consoleDiv.appendChild(entry);
+            consoleDiv.scrollTop = consoleDiv.scrollHeight;
+        }
+
+        function clearDebug() {
+            debugLog = [];
+            document.getElementById('debug-console').innerHTML = '<div style="color: #64748b;">Debug log cleared. Run a test to see output...</div>';
+        }
+
+        function copyBackendResponse() {
+            const text = document.getElementById('backend-response').textContent;
+            navigator.clipboard.writeText(text);
+            alert('Backend response copied to clipboard!');
+        }
+
+        function analyzeCitations(renderDiv) {
+            const analysis = [];
+            
+            // Check 1: Look for placeholder text
+            const text = renderDiv.textContent;
+            const hasPlaceholder = text.includes('CITE') || text.includes('_CITATION') || text.includes('◊◊');
+            analysis.push({
+                check: 'Placeholder text visible',
+                status: hasPlaceholder ? 'FAIL' : 'PASS',
+                icon: hasPlaceholder ? '❌' : '✅',
+                details: hasPlaceholder ? 'Found placeholder text in output' : 'No placeholders found'
+            });
+            
+            // Check 2: Count <sup> elements
+            const supElements = renderDiv.querySelectorAll('sup');
+            const supCount = supElements.length;
+            analysis.push({
+                check: '<sup> elements present',
+                status: supCount > 0 ? 'PASS' : 'FAIL',
+                icon: supCount > 0 ? '✅' : '❌',
+                details: `Found ${supCount} citation superscript${supCount !== 1 ? 's' : ''}`
+            });
+            
+            // Check 3: Check for literal [1] [2] [3] in main text
+            const mainText = text.split('Sources')[0];
+            const literalCitations = mainText.match(/\[\d+\]/g);
+            analysis.push({
+                check: 'No literal [1] in main text',
+                status: !literalCitations ? 'PASS' : 'FAIL',
+                icon: !literalCitations ? '✅' : '❌',
+                details: literalCitations ? `Found literal: ${literalCitations.join(', ')}` : 'All citations converted'
+            });
+            
+            // Check 4: Check <strong> for bold
+            const strongElements = renderDiv.querySelectorAll('strong');
+            analysis.push({
+                check: 'Bold markdown converted',
+                status: 'INFO',
+                icon: '📝',
+                details: `Found ${strongElements.length} <strong> element${strongElements.length !== 1 ? 's' : ''}`
+            });
+            
+            // Check 5: Check <em> for italic
+            const emElements = renderDiv.querySelectorAll('em');
+            analysis.push({
+                check: 'Italic markdown converted',
+                status: 'INFO',
+                icon: '📝',
+                details: `Found ${emElements.length} <em> element${emElements.length !== 1 ? 's' : ''}`
+            });
+            
+            // Check 6: Check Sources section
+            const hasSources = text.includes('Sources');
+            analysis.push({
+                check: 'Sources section present',
+                status: hasSources ? 'PASS' : 'FAIL',
+                icon: hasSources ? '✅' : '❌',
+                details: hasSources ? 'Sources section rendered' : 'No sources found'
+            });
+            
+            return analysis;
+        }
+
+        function displayAnalysis(analysis) {
+            const analysisDiv = document.getElementById('citation-analysis');
+            analysisDiv.style.display = 'block';
+            
+            analysisDiv.innerHTML = '<h4 style="margin: 0 0 15px 0; color: #fbbf24;">Citation Analysis Results</h4>' +
+                analysis.map(item => `
+                    <div class="analysis-item">
+                        <span class="analysis-icon">${item.icon}</span>
+                        <div style="flex: 1;">
+                            <div style="font-weight: 600;">${item.check}</div>
+                            <div style="font-size: 12px; color: #94a3b8;">${item.details}</div>
+                        </div>
+                        <span class="code-highlight">${item.status}</span>
+                    </div>
+                `).join('');
+        }
+
+        function runTest(testName) {
+            log('info', `🚀 Starting test: ${testName}`);
+            
+            // Get backend response
+            const backendResponse = testData[testName];
+            if (!backendResponse) {
+                log('error', `Test ${testName} not found`);
+                return;
+            }
+            
+            // Display backend response
+            document.getElementById('backend-response').textContent = backendResponse;
+            log('info', 'Backend response loaded', {
+                length: backendResponse.length,
+                hasCitations: /\[\d+\]/.test(backendResponse),
+                hasSources: backendResponse.includes('Sources:')
+            });
+            
+            // Process through pipeline
+            log('info', 'Processing through markdown-renderer.js...');
+            
+            try {
+                // Step 1: Parse markdown and citations
+                const parsed = window.parseMarkdownAndCitations(backendResponse);
+                log('success', 'parseMarkdownAndCitations() completed', {
+                    mainTextLength: parsed.mainText.length,
+                    sourcesCount: parsed.sources.length,
+                    uniqueId: parsed.uniqueId
+                });
+                
+                // Step 2: Render to div
+                const renderDiv = document.getElementById('frontend-render');
+                renderDiv.innerHTML = parsed.mainText;
+                log('success', 'Main text rendered to DOM');
+                
+                // Step 3: Add sources
+                if (parsed.sources && parsed.sources.length > 0) {
+                    const sourcesHTML = window.generateSourcesHTML(parsed.sources, parsed.uniqueId);
+                    renderDiv.innerHTML += sourcesHTML;
+                    log('success', `Sources section rendered (${parsed.sources.length} sources)`);
+                }
+                
+                // Step 4: Analyze results
+                log('info', 'Analyzing rendered output...');
+                const analysis = analyzeCitations(renderDiv);
+                displayAnalysis(analysis);
+                
+                const failures = analysis.filter(a => a.status === 'FAIL');
+                if (failures.length === 0) {
+                    log('success', '🎉 All checks passed! Citations rendering correctly.');
+                } else {
+                    log('error', `⚠️ ${failures.length} check(s) failed`, 
+                        failures.map(f => f.check));
+                }
+                
+                // Step 5: Log HTML structure
+                log('info', 'Final HTML structure', {
+                    innerHTML: renderDiv.innerHTML.substring(0, 200) + '...',
+                    supCount: renderDiv.querySelectorAll('sup').length,
+                    strongCount: renderDiv.querySelectorAll('strong').length,
+                    emCount: renderDiv.querySelectorAll('em').length
+                });
+                
+            } catch (error) {
+                log('error', 'Exception during processing', {
+                    message: error.message,
+                    stack: error.stack
+                });
+            }
+        }
+
+        // Auto-run simple test on load
+        window.addEventListener('DOMContentLoaded', () => {
+            log('info', '🔬 Citation Debug Test initialized');
+            log('info', 'Scripts loaded:', {
+                citationRenderer: typeof window.convertCitationsToHTML !== 'undefined',
+                markdownRenderer: typeof window.parseMarkdownAndCitations !== 'undefined'
+            });
+            
+            setTimeout(() => {
+                log('info', 'Running initial test...');
+                runTest('simple');
+            }, 500);
+        });
+    </script>
+</body>
+</html>

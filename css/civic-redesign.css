@@ -1,0 +1,781 @@
+/* ============================================
+   CIVIC ENGAGEMENT & TRANSPARENCY
+   Streamlined Tabbed Interface with Hero Illustration
+   ============================================ */
+
+/* Hero Illustration (Large, Prominent, Friendly) */
+.civic-hero {
+  max-width: 1000px;
+  margin: 0 auto 2rem auto;
+  padding: 0 var(--space-md);
+}
+
+.civic-hero-image {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: var(--radius-lg);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+  /* Ensure image is visible and prominent */
+  min-height: 200px;
+}
+
+/* Mobile: Optimized for small screens */
+@media (max-width: 767px) {
+  .civic-hero {
+    margin-bottom: 1.5rem;
+    padding: 0 var(--space-sm);
+  }
+  
+  .civic-hero-image {
+    min-height: 180px;
+    max-height: 280px;
+    object-fit: contain;
+    width: 100%;
+  }
+  
+  /* Make dropdowns and inputs mobile-friendly size */
+  .civic-select {
+    flex: 1 1 100%;
+    font-size: 14px;
+    padding: 10px 12px;
+    min-height: 44px;
+    max-height: 44px;
+    height: 44px;
+  }
+  
+  .civic-select option {
+    font-size: 14px;
+    padding: 10px 8px;
+  }
+  
+  .civic-search {
+    font-size: 14px;
+    padding: 10px 12px;
+    min-height: 44px;
+    max-height: 44px;
+    height: 44px;
+  }
+  
+  .civic-search-btn {
+    padding: 8px 14px;
+    font-size: 13px;
+    min-height: 40px;
+  }
+}
+
+/* Tablet: Optimal sizing */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .civic-hero {
+    margin-bottom: 2.5rem;
+  }
+  
+  .civic-hero-image {
+    min-height: 300px;
+    max-height: 450px;
+    object-fit: contain;
+  }
+}
+
+/* Desktop: Even larger hero */
+@media (min-width: 1024px) {
+  .civic-hero {
+    margin-bottom: 3rem;
+  }
+  
+  .civic-hero-image {
+    min-height: 350px;
+    max-height: 500px;
+    object-fit: contain;
+  }
+}
+
+/* Header Text (Below Hero) */
+.civic-header-text {
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto 3rem auto;
+  padding: 0 var(--space-md);
+}
+
+.civic-title {
+  font-size: var(--font-size-3xl);
+  font-weight: var(--font-weight-extrabold);
+  color: var(--text);
+  margin: 0 0 var(--space-md) 0;
+  line-height: 1.2;
+}
+
+@media (min-width: 768px) {
+  .civic-title {
+    font-size: var(--font-size-4xl);
+  }
+}
+
+.civic-subtitle {
+  font-size: var(--font-size-base);
+  color: var(--text-secondary);
+  line-height: var(--line-height-relaxed);
+  margin: 0;
+}
+
+@media (min-width: 768px) {
+  .civic-subtitle {
+    font-size: var(--font-size-lg);
+  }
+}
+
+/* ============================================
+   PROMINENT TAB NAVIGATION (Impossible to Miss!)
+   ============================================ */
+
+.civic-tabs {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* Mobile: 2 columns */
+  gap: var(--space-md);
+  margin: 0 auto 2rem auto;
+  padding: var(--space-lg);
+  background: rgba(102, 126, 234, 0.05);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  max-width: 1400px;
+  border: 2px solid rgba(102, 126, 234, 0.2);
+  position: relative;
+  justify-items: center; /* V36.1.0: Center items within grid cells */
+}
+
+/* Glowing effect to draw attention */
+.civic-tabs::before {
+  content: '';
+  position: absolute;
+  top: -4px;
+  left: -4px;
+  right: -4px;
+  bottom: -4px;
+  background: linear-gradient(135deg, #4a90e2, #f4a623);
+  border-radius: var(--radius-lg);
+  z-index: -1;
+  opacity: 0.3;
+  animation: pulse-glow 3s ease-in-out infinite;
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    opacity: 0.2;
+  }
+  50% {
+    opacity: 0.4;
+  }
+}
+
+/* Individual Tab Button - Mobile First */
+.civic-tab {
+  width: 100%;
+  min-height: 70px; /* Mobile: Compact for 3-column */
+  padding: 0.625rem 0.5rem;
+  background: white;
+  border: 2px solid rgba(74, 144, 226, 0.2);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.375rem; /* Tighter for mobile 3-column */
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  text-decoration: none;
+}
+
+.civic-tab:hover {
+  background: linear-gradient(135deg, rgba(74, 144, 226, 0.1) 0%, rgba(244, 166, 35, 0.1) 100%);
+  border-color: rgba(74, 144, 226, 0.5);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(74, 144, 226, 0.2);
+}
+
+.civic-tab.active {
+  background: linear-gradient(135deg, #4a90e2 0%, #667eea 100%);
+  border-color: #4a90e2;
+  color: white;
+  box-shadow: 0 8px 20px rgba(74, 144, 226, 0.4);
+  transform: scale(1.05);
+}
+
+/* Tab Icon - Mobile First */
+.tab-icon {
+  font-size: 1.5rem; /* Mobile: 24px for 3-column layout */
+  line-height: 1;
+  transition: transform 0.3s ease;
+  filter: drop-shadow(0 2px 6px rgba(0,0,0,0.15));
+}
+
+.civic-tab:hover .tab-icon {
+  transform: scale(1.1);
+}
+
+.civic-tab.active .tab-icon {
+  transform: scale(1.05);
+  filter: drop-shadow(0 3px 8px rgba(255, 255, 255, 0.5));
+}
+
+/* Tab Label - Mobile First */
+.tab-label {
+  font-size: 0.75rem; /* Mobile: 12px for 3-column readability */
+  font-weight: 600;
+  color: inherit;
+  transition: color 0.3s ease;
+  line-height: 1.2;
+  word-wrap: break-word;
+  max-width: 100%;
+}
+
+.civic-tab.active .tab-label {
+  color: white;
+  font-weight: 700;
+}
+
+
+/* ============================================
+   RESPONSIVE GRID SYSTEM
+   ============================================ */
+
+/* Large phones (375px+): 3 columns with 6 tabs */
+@media (min-width: 375px) {
+  .civic-tabs {
+    grid-template-columns: repeat(3, 1fr); /* V36.1.0: 3 columns for 6 tabs (3x2 grid) */
+  }
+  
+  /* V36.1.0: Reset any manual positioning - let grid auto-flow work */
+  .civic-tab {
+    grid-column: auto;
+  }
+}
+
+/* Tablets (768px+): 3 columns (6 tabs = 2 rows of 3) */
+@media (min-width: 768px) {
+  .civic-tabs {
+    grid-template-columns: repeat(3, 1fr); /* V36.1.0: 3 columns for 6 tabs */
+    gap: 1rem;
+    padding: 1.25rem;
+  }
+  
+  .civic-tab {
+    min-height: 100px;
+    padding: 1rem 0.75rem;
+    gap: 0.5rem;
+    grid-column: auto; /* V36.1.0: Auto-flow for proper centering */
+  }
+  
+  .tab-icon {
+    font-size: 2rem;
+  }
+  
+  .tab-label {
+    font-size: 0.875rem;
+  }
+}
+
+/* Small Desktop (1024px+): 6 columns (perfect for 6 tabs in 1 row) */
+@media (min-width: 1024px) {
+  .civic-tabs {
+    grid-template-columns: repeat(6, 1fr); /* V36.1.0: 6 columns for 6 tabs */
+  }
+  
+  .civic-tab {
+    min-height: 110px;
+    padding: 1.25rem 1rem;
+  }
+  
+  .tab-icon {
+    font-size: 2.5rem;
+  }
+  
+  .tab-label {
+    font-size: 0.95rem;
+    line-height: 1.3;
+  }
+}
+
+/* Medium Desktop (1280px+): 6 columns with more spacing */
+@media (min-width: 1280px) {
+  .civic-tabs {
+    grid-template-columns: repeat(6, 1fr); /* V36.1.0: 6 columns for 6 tabs */
+    gap: 1.25rem;
+    padding: 1.5rem;
+  }
+}
+
+/* Large Desktop (1440px+): 6 columns (perfect for 6 tabs) */
+@media (min-width: 1440px) {
+  .civic-tabs {
+    grid-template-columns: repeat(6, 1fr); /* V36.1.0: 6 columns for 6 tabs */
+  }
+}
+
+/* Extra Large Desktop (1920px+): 6 columns with max comfort */
+@media (min-width: 1920px) {
+  .civic-tabs {
+    grid-template-columns: repeat(6, 1fr); /* V36.1.0: 6 columns for 6 tabs */
+    gap: 1.5rem;
+    padding: 2rem;
+  }
+}
+
+/* Mobile-specific adjustments */
+@media (max-width: 374px) {
+  /* Keep 2 columns for very small phones */
+  .civic-tabs {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  /* Panel and controls */
+  .civic-panel {
+    padding: var(--space-md);
+  }
+  
+  .civic-controls-compact {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+}
+
+/* ============================================
+   TAB PANELS (Content Areas)
+   ============================================ */
+
+.civic-tab-panels {
+  margin: 0 auto;
+  max-width: 1200px;
+}
+
+.civic-panel {
+  display: none;
+  padding: var(--space-xl);
+  background: var(--background);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  animation: fadeIn 0.4s ease;
+}
+
+.civic-panel.active {
+  display: block;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Panel Intro */
+.panel-intro {
+  margin-bottom: var(--space-xl);
+  padding: var(--space-lg);
+  background: linear-gradient(135deg, rgba(102, 126, 234, 0.08) 0%, rgba(102, 126, 234, 0.04) 100%);
+  border-left: 4px solid var(--primary);
+  border-radius: var(--radius-md);
+}
+
+/* Center dashboard panel intro */
+#dashboard-panel .panel-intro {
+  text-align: center;
+  border-left: none;
+  border-top: 4px solid var(--primary);
+}
+
+.panel-intro h3 {
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--text);
+  margin: 0 0 var(--space-sm) 0;
+}
+
+.panel-intro p {
+  font-size: var(--font-size-base);
+  color: var(--text-secondary);
+  line-height: var(--line-height-relaxed);
+  margin: 0;
+}
+
+/* Compact Controls (Streamlined) */
+.civic-controls-compact {
+  display: flex;
+  gap: var(--space-md);
+  margin-bottom: var(--space-xl);
+  flex-wrap: wrap;
+}
+
+.civic-select {
+  flex: 1 1 200px;
+  padding: 10px 12px;
+  font-size: 15px;
+  min-height: 42px;
+  max-height: 42px;
+  height: 42px;
+  border: 2px solid var(--border);
+  border-radius: var(--radius-md);
+  background: rgba(255, 255, 255, 0.98);
+  color: #1a1a1a;
+  transition: border-color 0.3s ease;
+  cursor: pointer;
+  position: relative;
+  z-index: 100;
+}
+
+/* Ensure dropdown options are readable */
+.civic-select option {
+  background: white;
+  color: #1a1a1a;
+  padding: 8px;
+}
+
+/* Focus state - consolidated */
+.civic-select:focus {
+  border-color: #4a90e2;
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.1);
+  z-index: 200;
+}
+
+.civic-search {
+  flex: 1 1 300px;
+  padding: 10px 12px;
+  font-size: 15px;
+  border: 2px solid var(--border);
+  border-radius: var(--radius-md);
+  background: rgba(255, 255, 255, 0.98);
+  color: #1a1a1a;
+  transition: border-color 0.3s ease;
+}
+
+.civic-search::placeholder {
+  color: #666;
+  opacity: 1;
+}
+
+.civic-search:focus {
+  border-color: #4a90e2;
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.1);
+}
+
+.civic-search-btn {
+  padding: var(--space-md) var(--space-xl);
+  background: linear-gradient(135deg, #4a90e2 0%, #667eea 100%);
+  border: none;
+  border-radius: var(--radius-md);
+  color: white;
+  font-weight: var(--font-weight-semibold);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+}
+
+.civic-search-btn:hover {
+  background: linear-gradient(135deg, #667eea 0%, #4a90e2 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(74, 144, 226, 0.3);
+}
+
+/* Content Containers - Dynamic Height Based on Content */
+.bills-container,
+.representatives-container,
+.court-container,
+.dashboard-container,
+#billsListContainer,
+#upcomingBillsContainer,
+#civicResults,
+#courtContainer,
+#personalDashboardContainer,
+#candidateResults {
+  /* Default: no min-height to avoid blank space */
+  min-height: 0;
+  transition: min-height 0.3s ease, padding 0.3s ease;
+}
+
+/* Modern browsers: Use :has selector for content detection */
+.bills-container:has(.bill-voting-card),
+.representatives-container:has(.representative-card),
+.court-container:has(.court-decision-card),
+.dashboard-container:has(.dashboard-stats),
+#billsListContainer:has(.bill-voting-card),
+#upcomingBillsContainer:has(.bill-voting-card),
+#civicResults:has(.representative-card),
+#courtContainer:has(.court-decision-card),
+#personalDashboardContainer:has(.dashboard-stats),
+#candidateResults:has(.candidate-card) {
+  min-height: 400px;
+}
+
+/* Fallback: JavaScript-added class for older browsers */
+.bills-container.has-content,
+.representatives-container.has-content,
+.court-container.has-content,
+.dashboard-container.has-content,
+#billsListContainer.has-content,
+#upcomingBillsContainer.has-content,
+#civicResults.has-content,
+#courtContainer.has-content,
+#personalDashboardContainer.has-content,
+#candidateResults.has-content {
+  min-height: 400px;
+}
+
+/* Empty State */
+.empty-state {
+  text-align: center;
+  padding: var(--space-2xl);
+  color: var(--text-secondary);
+}
+
+.empty-icon {
+  font-size: 4rem;
+  display: block;
+  margin-bottom: var(--space-md);
+  opacity: 0.5;
+}
+
+.empty-state p {
+  font-size: var(--font-size-lg);
+  line-height: var(--line-height-relaxed);
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+/* ============================================
+   RESPONSIVE ADJUSTMENTS
+   ============================================ */
+
+/* REMOVED: Consolidated into main mobile section above (line 277) */
+
+/* ============================================
+   ACCESSIBILITY
+   ============================================ */
+
+.civic-tab:focus-visible {
+  outline: 3px solid #4a90e2;
+  outline-offset: 2px;
+}
+
+
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .civic-tab {
+    border-width: 3px;
+  }
+  
+  .civic-tab.active {
+    border-width: 4px;
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .civic-tab,
+  .civic-panel {
+    transition: none;
+    animation: none;
+  }
+  
+  .civic-tabs::before {
+    animation: none;
+  }
+}
+
+/* ============================================
+   CANDIDATE CHAT WIDGET (Candidates Panel)
+   ============================================ */
+
+.candidate-chat-widget {
+  background: white;
+  border: 2px solid rgba(102, 126, 234, 0.15);
+  border-radius: var(--radius-lg);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  margin-top: var(--space-xl);
+  overflow: hidden;
+}
+
+.chat-widget-header {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  padding: var(--space-lg);
+  color: white;
+}
+
+.chat-widget-title {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-bold);
+  margin-bottom: var(--space-xs);
+}
+
+.chat-widget-title i {
+  font-size: 1.5rem;
+}
+
+.chat-widget-subtitle {
+  font-size: var(--font-size-sm);
+  opacity: 0.95;
+  line-height: 1.5;
+}
+
+.chat-widget-body {
+  background: #ffffff;
+  padding: var(--space-lg);
+  max-height: 500px;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.candidate-chat-widget .chat-widget-body .chat-messages {
+  background: #ffffff;
+  min-height: 300px;
+}
+
+.chat-widget-footer {
+  background: #f8f9fd;
+  padding: var(--space-lg);
+  border-top: 1px solid rgba(102, 126, 234, 0.1);
+}
+
+.chat-widget-footer .chat-input-container {
+  display: flex;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-md);
+}
+
+.chat-widget-footer .chat-input {
+  flex: 1;
+  padding: var(--space-md);
+  border: 2px solid rgba(102, 126, 234, 0.2);
+  border-radius: var(--radius-md);
+  font-size: var(--font-size-base);
+  resize: vertical;
+  min-height: 60px;
+  font-family: inherit;
+  transition: border-color 0.3s ease;
+}
+
+.chat-widget-footer .chat-input:focus {
+  outline: none;
+  border-color: #667eea;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.chat-widget-footer .chat-send-btn {
+  padding: var(--space-md) var(--space-lg);
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 60px;
+}
+
+.chat-widget-footer .chat-send-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+}
+
+.chat-widget-footer .chat-send-btn i {
+  font-size: 1.25rem;
+}
+
+.chat-widget-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--space-md);
+  flex-wrap: wrap;
+}
+
+.chat-action-btn {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+  padding: var(--space-sm) var(--space-md);
+  background: white;
+  border: 1px solid rgba(102, 126, 234, 0.2);
+  border-radius: var(--radius-md);
+  color: var(--text-secondary);
+  font-size: var(--font-size-sm);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.chat-action-btn:hover {
+  border-color: #667eea;
+  color: #667eea;
+  background: rgba(102, 126, 234, 0.05);
+}
+
+.chat-privacy-badge {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+  padding: var(--space-sm) var(--space-md);
+  background: rgba(72, 187, 120, 0.1);
+  border-radius: var(--radius-md);
+  color: #48bb78;
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+}
+
+.chat-privacy-badge i {
+  font-size: 1rem;
+}
+
+/* Mobile adjustments for candidate chat */
+@media (max-width: 767px) {
+  .candidate-chat-widget {
+    margin-top: var(--space-lg);
+  }
+  
+  .chat-widget-header {
+    padding: var(--space-md);
+  }
+  
+  .chat-widget-title {
+    font-size: var(--font-size-lg);
+  }
+  
+  .chat-widget-body {
+    padding: var(--space-md);
+    max-height: 400px;
+  }
+  
+  .chat-widget-footer {
+    padding: var(--space-md);
+  }
+  
+  .chat-widget-footer .chat-input {
+    min-height: 50px;
+    font-size: 14px;
+  }
+  
+  .chat-widget-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  .chat-action-btn,
+  .chat-privacy-badge {
+    justify-content: center;
+  }
+}
+
+/* Civic Redesign CSS - Version 233500-2X2-SCROLL - 2x2 Grid Layout with Auto-Scroll */

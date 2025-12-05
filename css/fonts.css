@@ -1,0 +1,66 @@
+/**
+ * PRIVACY-RESPECTING FONT STACK
+ * 
+ * This file provides a font stack that doesn't rely on Google Fonts
+ * or other tracking services. We use system fonts that are already 
+ * installed on user devices for maximum privacy and performance.
+ * 
+ * These fonts provide excellent coverage across all modern devices:
+ * - macOS: San Francisco (system-ui)
+ * - iOS: San Francisco (system-ui)
+ * - Windows: Segoe UI
+ * - Android: Roboto
+ * - Linux: Various (Ubuntu, Cantarell, etc.)
+ */
+
+:root {
+  --font-family-base: 
+    system-ui,
+    -apple-system,
+    'Segoe UI',
+    'Roboto',
+    'Helvetica Neue',
+    'Arial',
+    'Noto Sans',
+    'Liberation Sans',
+    sans-serif,
+    'Apple Color Emoji',
+    'Segoe UI Emoji',
+    'Segoe UI Symbol',
+    'Noto Color Emoji';
+}
+
+body {
+  font-family: var(--font-family-base);
+}
+
+/**
+ * Font Weight Classes
+ * System fonts support these weights natively
+ */
+.font-light { font-weight: 300; }
+.font-normal { font-weight: 400; }
+.font-medium { font-weight: 500; }
+.font-semibold { font-weight: 600; }
+.font-bold { font-weight: 700; }
+.font-extrabold { font-weight: 800; }
+
+/**
+ * OPTIONAL: Self-hosted Inter font subset (for future use)
+ * Uncomment and add font files if you want to self-host Inter
+ * Download from: https://rsms.me/inter/ (variable font for size efficiency)
+ */
+
+/*
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url('../fonts/Inter-Variable.woff2') format('woff2');
+}
+
+:root {
+  --font-family-base: 'Inter', system-ui, -apple-system, sans-serif;
+}
+*/

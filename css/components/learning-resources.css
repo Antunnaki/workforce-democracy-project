@@ -1,0 +1,303 @@
+/**
+ * LEARNING RESOURCES
+ * Version: 37.11.4-PHASE3C
+ * Date: 2025-01-14
+ * 
+ * Resource cards with filters, video thumbnails, study info, and metadata.
+ * Supports videos, articles, studies, and interactive content types.
+ * 
+ * Dependencies:
+ * - variables.css (design tokens)
+ * - buttons.css (button styles)
+ * 
+ * Components:
+ * - .resource-filters - Filter buttons for content types
+ * - .resources-grid - Responsive grid (1-2 columns)
+ * - .resource-card - Individual resource with type badges
+ * - .video-thumbnail - Video preview with play overlay
+ * - .study-info - Research study metadata
+ */
+
+/* ============================================
+   LEARNING RESOURCES
+   ============================================ */
+.resource-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-md);
+  justify-content: center;
+  margin-bottom: var(--space-2xl);
+}
+
+.resource-filters .filter-btn {
+  padding: var(--space-sm) var(--space-lg);
+  background: var(--surface);
+  color: var(--text-primary);
+  border: 2px solid var(--border-light);
+  border-radius: var(--radius-full);
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.resource-filters .filter-btn:hover {
+  background: var(--primary);
+  color: white;
+  border-color: var(--primary);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+}
+
+.resource-filters .filter-btn.active {
+  background: var(--primary-gradient);
+  color: white;
+  border-color: var(--primary);
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+  transform: translateY(-2px);
+}
+
+.resources-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-sm);
+  margin: 0 auto;
+}
+
+/* Tablet: 2 columns */
+@media (min-width: 768px) {
+  .resources-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-lg);
+  }
+}
+
+.resource-card {
+  background: var(--surface);
+  border-radius: var(--radius-md);
+  padding: var(--space-sm);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.06);
+  transition: all var(--transition-fast);
+  border: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+/* Tablet: increase padding slightly */
+@media (min-width: 768px) {
+  .resource-card {
+    padding: var(--space-md);
+  }
+}
+
+.resource-card:hover {
+  box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+  transform: translateY(-2px);
+  border-color: var(--primary);
+}
+
+/* Resource Type Badge */
+.resource-type-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-xs);
+  padding: var(--space-xs) var(--space-sm);
+  background: var(--background);
+  border-radius: var(--radius-sm);
+  font-size: var(--font-size-xs);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: var(--space-sm);
+  width: fit-content;
+}
+
+.resource-card.videos .resource-type-badge {
+  background: rgba(243, 156, 18, 0.15);
+  color: var(--secondary-dark);
+}
+
+.resource-card.articles .resource-type-badge {
+  background: rgba(93, 173, 226, 0.15);
+  color: var(--accent-dark);
+}
+
+.resource-card.studies .resource-type-badge {
+  background: rgba(44, 62, 80, 0.1);
+  color: var(--primary);
+}
+
+.resource-card.interactive .resource-type-badge {
+  background: rgba(133, 193, 233, 0.2);
+  color: var(--accent);
+}
+
+/* Resource Title */
+.resource-card h3 {
+  font-size: var(--font-size-base);
+  line-height: var(--line-height-tight);
+  margin: 0 0 var(--space-xs) 0;
+  color: var(--text);
+  font-weight: 600;
+}
+
+@media (min-width: 768px) {
+  .resource-card h3 {
+    font-size: var(--font-size-lg);
+    margin: 0 0 var(--space-sm) 0;
+  }
+}
+
+/* Resource Description */
+.resource-description {
+  font-size: var(--font-size-sm);
+  line-height: var(--line-height-normal);
+  color: var(--text-secondary);
+  margin: 0 0 var(--space-sm) 0;
+  flex-grow: 1;
+}
+
+/* Video Thumbnail */
+.video-thumbnail {
+  position: relative;
+  width: 100%;
+  margin: var(--space-sm) 0;
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  aspect-ratio: 16 / 9;
+  background: var(--background);
+  max-height: 180px;
+}
+
+@media (min-width: 768px) {
+  .video-thumbnail {
+    max-height: 220px;
+  }
+}
+
+.video-thumbnail img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.play-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.3);
+  cursor: pointer;
+  transition: background var(--transition-fast);
+}
+
+.play-overlay:hover {
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.play-overlay i {
+  font-size: 2.5rem;
+  color: white;
+  opacity: 0.9;
+  transition: all var(--transition-fast);
+}
+
+@media (min-width: 768px) {
+  .play-overlay i {
+    font-size: 3rem;
+  }
+}
+
+.play-overlay:hover i {
+  opacity: 1;
+  transform: scale(1.1);
+}
+
+/* Study Info */
+.study-info {
+  background: var(--background);
+  padding: var(--space-sm);
+  border-radius: var(--radius-sm);
+  margin: var(--space-sm) 0;
+  font-size: var(--font-size-sm);
+}
+
+.study-info p {
+  margin: 0 0 var(--space-xs) 0;
+  line-height: var(--line-height-normal);
+}
+
+.study-info strong {
+  color: var(--text);
+  font-weight: 600;
+}
+
+.study-info ul {
+  margin: var(--space-sm) 0;
+  padding-left: var(--space-lg);
+}
+
+.study-info li {
+  margin: var(--space-xs) 0;
+  line-height: var(--line-height-normal);
+  color: var(--text-secondary);
+}
+
+/* Resource Meta */
+.resource-meta {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding-top: var(--space-sm);
+  margin-top: auto;
+  border-top: 1px solid var(--border);
+  font-size: var(--font-size-xs);
+  color: var(--text-secondary);
+}
+
+.resource-meta span {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+}
+
+.resource-meta i {
+  font-size: var(--font-size-xs);
+  opacity: 0.7;
+}
+
+/* Button Link */
+.btn-link {
+  background: transparent;
+  color: var(--primary);
+  border: none;
+  padding: var(--space-sm) 0;
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-xs);
+  transition: all var(--transition-fast);
+  margin-top: auto;
+}
+
+.btn-link:hover {
+  color: var(--primary-dark);
+  gap: var(--space-sm);
+}
+
+.btn-link i {
+  font-size: var(--font-size-xs);
+  transition: transform var(--transition-fast);
+}
+
+.btn-link:hover i {
+  transform: translateX(4px);
+}

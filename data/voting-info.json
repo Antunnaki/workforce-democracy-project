@@ -1,0 +1,983 @@
+{
+  "version": "1.0.0",
+  "lastUpdated": "2025-01-27",
+  "countries": {
+    "USA": {
+      "countryCode": "US",
+      "countryName": "United States of America",
+      "flagEmoji": "🇺🇸",
+      "eligibility": {
+        "title": "Who Can Vote?",
+        "requirements": [
+          "U.S. citizen",
+          "18 years or older on Election Day",
+          "Meet your state's residency requirements",
+          "Not currently serving a felony sentence (varies by state)"
+        ],
+        "officialLink": "https://www.usa.gov/who-can-vote",
+        "notes": "Requirements vary by state. Some states allow 17-year-olds to vote in primaries if they'll be 18 by the general election."
+      },
+      "registration": {
+        "title": "How to Register to Vote",
+        "steps": [
+          "Check if you're already registered at vote.gov/am-i-registered",
+          "Register online, by mail, or in person",
+          "Provide proof of identity and residence",
+          "Submit registration before your state's deadline"
+        ],
+        "officialLinks": {
+          "primary": "https://vote.gov",
+          "registerOnline": "https://www.eac.gov/voters/register-and-vote-in-your-state",
+          "checkRegistration": "https://vote.gov/am-i-registered"
+        },
+        "deadlines": "Varies by state - typically 15-30 days before Election Day. Some states offer same-day registration.",
+        "notes": "Each state has different registration requirements. Visit your state's election website for specific information."
+      },
+      "votingMethods": {
+        "title": "How to Vote",
+        "methods": [
+          {
+            "type": "In-Person on Election Day",
+            "description": "Vote at your assigned polling place on Election Day",
+            "requirements": "Valid photo ID required in many states",
+            "link": "https://www.vote411.org"
+          },
+          {
+            "type": "Early Voting",
+            "description": "Vote in person before Election Day during the early voting period",
+            "requirements": "Available in most states, dates vary by state",
+            "link": "https://www.eac.gov/voters/voting-early"
+          },
+          {
+            "type": "Absentee/Mail-In Voting",
+            "description": "Request a ballot to vote by mail",
+            "requirements": "Request deadline varies by state (typically 1-2 weeks before Election Day)",
+            "link": "https://www.vote.org/absentee-voting-rules/"
+          }
+        ]
+      },
+      "pollingLocations": {
+        "title": "Where to Vote",
+        "howToFind": [
+          "Use vote.org polling place locator",
+          "Contact your local election office",
+          "Check your voter registration confirmation",
+          "Call 1-866-OUR-VOTE (1-866-687-8683) for assistance"
+        ],
+        "officialLinks": {
+          "locator": "https://www.vote.org/polling-place-locator/",
+          "helpline": "tel:1-866-687-8683"
+        },
+        "notes": "Your polling location is based on your registered address. It may change between elections."
+      },
+      "requiredDocuments": {
+        "title": "Required ID Documents",
+        "description": "ID requirements vary significantly by state",
+        "acceptedIds": [
+          "State-issued driver's license or ID card",
+          "U.S. passport",
+          "Military ID",
+          "Tribal ID",
+          "Student ID (in some states)",
+          "Utility bill or bank statement (in some states)"
+        ],
+        "officialLink": "https://www.ncsl.org/elections-and-campaigns/voter-id",
+        "notes": "Some states have strict photo ID laws, while others have no ID requirement. Check your state's specific rules."
+      },
+      "importantDates": {
+        "title": "Important Election Dates",
+        "description": "Federal elections are held on the first Tuesday after the first Monday in November",
+        "generalElection": "First Tuesday after first Monday in November (even-numbered years)",
+        "presidentialElection": "Every 4 years (2024, 2028, 2032, etc.)",
+        "midtermElection": "Every 4 years, between presidential elections (2026, 2030, etc.)",
+        "notes": "Primaries and local elections have different dates. Check with your state election office."
+      },
+      "accessibility": {
+        "title": "Voting Accessibility",
+        "services": [
+          "Wheelchair-accessible polling places required by law",
+          "Curbside voting available in many locations",
+          "Accessible voting machines with audio ballots",
+          "Language assistance in jurisdictions with significant language minority populations",
+          "Assistance from a person of your choice (except your employer or union representative)"
+        ],
+        "officialLink": "https://www.ada.gov/topics/voting/",
+        "helpline": "1-866-OUR-VOTE (1-866-687-8683)"
+      },
+      "additionalResources": {
+        "title": "Additional Voting Resources",
+        "resources": [
+          {
+            "name": "USA.gov Voting Information",
+            "url": "https://www.usa.gov/how-to-vote",
+            "description": "Official U.S. government voting portal"
+          },
+          {
+            "name": "Vote.org",
+            "url": "https://www.vote.org",
+            "description": "Register to vote, check registration, find polling places"
+          },
+          {
+            "name": "Vote411.org (League of Women Voters)",
+            "url": "https://www.vote411.org",
+            "description": "Voter guides, candidate information, polling locations"
+          },
+          {
+            "name": "Election Assistance Commission",
+            "url": "https://www.eac.gov/voters",
+            "description": "Federal voting resources and state-specific information"
+          },
+          {
+            "name": "National Association of Secretaries of State",
+            "url": "https://www.nass.org/can-i-vote",
+            "description": "Links to all state election websites"
+          },
+          {
+            "name": "Ballotpedia",
+            "url": "https://ballotpedia.org",
+            "description": "Information on candidates, elections, and ballot measures"
+          }
+        ]
+      },
+      "stateSpecificNote": "Voting laws vary significantly by state. Always check your state's Secretary of State or election office website for the most accurate information."
+    },
+    "MEXICO": {
+      "countryCode": "MX",
+      "countryName": "México",
+      "flagEmoji": "🇲🇽",
+      "eligibility": {
+        "title": "¿Quién Puede Votar? / Who Can Vote?",
+        "requirements": [
+          "Ciudadano mexicano (Mexican citizen)",
+          "18 años cumplidos (18 years or older)",
+          "Estar inscrito en el Padrón Electoral (Registered in the Electoral Registry)",
+          "Contar con Credencial para Votar vigente (Valid Voter ID Card - INE)"
+        ],
+        "officialLink": "https://www.ine.mx/credencial/",
+        "notes": "La Credencial para Votar con fotografía (INE) es el documento oficial de identificación electoral."
+      },
+      "registration": {
+        "title": "Cómo Obtener tu Credencial para Votar / How to Get Your Voter ID",
+        "steps": [
+          "Acudir a un Módulo de Atención Ciudadana del INE (Visit an INE Citizen Service Module)",
+          "Presentar acta de nacimiento y comprobante de domicilio (Provide birth certificate and proof of address)",
+          "Proporcionar datos biométricos (huellas, foto, firma) (Provide biometric data)",
+          "Recoger tu credencial después de 1-2 meses (Pick up your credential after 1-2 months)"
+        ],
+        "officialLinks": {
+          "primary": "https://www.ine.mx",
+          "modules": "https://www.ine.mx/credencial/ubicacion-de-modulos/",
+          "checkRegistration": "https://listanominal.ine.mx/scpln/"
+        },
+        "deadlines": "Los trámites de credencialización cierran varios meses antes de cada elección federal (Registration closes several months before federal elections)",
+        "notes": "La Credencial para Votar es gratuita y también sirve como identificación oficial para otros trámites."
+      },
+      "votingMethods": {
+        "title": "Cómo Votar / How to Vote",
+        "methods": [
+          {
+            "type": "Votación en Casilla (Polling Station Voting)",
+            "description": "Vota en persona en tu casilla asignada el día de la elección",
+            "requirements": "Credencial para Votar vigente con fotografía (INE)",
+            "link": "https://www.ine.mx/voto-y-elecciones/"
+          },
+          {
+            "type": "Voto desde el Extranjero (Vote from Abroad)",
+            "description": "Los mexicanos en el extranjero pueden votar por correo, internet, o en embajadas/consulados",
+            "requirements": "Registro en el padrón de electores residentes en el extranjero",
+            "link": "https://www.ine.mx/voto-y-elecciones/voto-de-los-mexicanos-en-el-extranjero/"
+          }
+        ]
+      },
+      "pollingLocations": {
+        "title": "Dónde Votar / Where to Vote",
+        "howToFind": [
+          "Consulta tu casilla en el INE: https://www.ine.mx/voto-y-elecciones/",
+          "Revisa tu Credencial para Votar (tu casilla está impresa en ella)",
+          "Llama al INE: 800 433 2000",
+          "Usa la app INE Móvil"
+        ],
+        "officialLinks": {
+          "locator": "https://ubicatucasilla.ine.mx/",
+          "helpline": "tel:800-433-2000"
+        },
+        "notes": "Tu casilla electoral está determinada por tu domicilio registrado en tu Credencial para Votar."
+      },
+      "requiredDocuments": {
+        "title": "Documento Requerido / Required Document",
+        "description": "Para votar en México necesitas tu Credencial para Votar vigente",
+        "acceptedIds": [
+          "Credencial para Votar con fotografía (INE) vigente - OBLIGATORIO"
+        ],
+        "officialLink": "https://www.ine.mx/credencial/",
+        "notes": "La Credencial para Votar es el ÚNICO documento aceptado para votar. Debe estar vigente (no vencida)."
+      },
+      "importantDates": {
+        "title": "Fechas Importantes / Important Dates",
+        "description": "Las elecciones federales se llevan a cabo cada 6 años (presidenciales) y cada 3 años (legislativas)",
+        "presidentialElection": "Cada 6 años (2024, 2030, 2036, etc.)",
+        "legislativeElection": "Cada 3 años (elecciones intermedias: 2027, 2030, etc.)",
+        "notes": "Las elecciones federales generalmente se realizan el primer domingo de junio. Las elecciones estatales y municipales varían."
+      },
+      "accessibility": {
+        "title": "Accesibilidad Electoral / Voting Accessibility",
+        "services": [
+          "Casillas especiales con acceso para sillas de ruedas",
+          "Asistencia de acompañantes en la casilla",
+          "Plantillas braille para personas con discapacidad visual",
+          "Lengua de señas mexicana en materiales oficiales",
+          "Mamparas accesibles para personas con movilidad reducida"
+        ],
+        "officialLink": "https://www.ine.mx/voto-y-elecciones/accesibilidad/",
+        "helpline": "800 433 2000"
+      },
+      "additionalResources": {
+        "title": "Recursos Adicionales / Additional Resources",
+        "resources": [
+          {
+            "name": "Instituto Nacional Electoral (INE)",
+            "url": "https://www.ine.mx",
+            "description": "Sitio oficial del organismo electoral federal de México"
+          },
+          {
+            "name": "Ubica tu Casilla",
+            "url": "https://ubicatucasilla.ine.mx/",
+            "description": "Encuentra tu casilla electoral"
+          },
+          {
+            "name": "Lista Nominal",
+            "url": "https://listanominal.ine.mx/scpln/",
+            "description": "Verifica que estés en la lista nominal de electores"
+          },
+          {
+            "name": "Voto de Mexicanos en el Extranjero",
+            "url": "https://www.votoextranjero.mx",
+            "description": "Información para votar desde fuera de México"
+          },
+          {
+            "name": "App INE Móvil",
+            "url": "https://www.ine.mx/ine-movil/",
+            "description": "Descarga la aplicación oficial del INE"
+          },
+          {
+            "name": "Transparencia INE",
+            "url": "https://www.ine.mx/transparencia/",
+            "description": "Acceso a información pública del INE"
+          }
+        ]
+      },
+      "stateSpecificNote": "Los Organismos Públicos Locales Electorales (OPLES) administran las elecciones estatales y municipales. Consulta el sitio web del instituto electoral de tu estado para elecciones locales."
+    },
+    "AUSTRALIA": {
+      "countryCode": "AU",
+      "countryName": "Australia",
+      "flagEmoji": "🇦🇺",
+      "eligibility": {
+        "title": "Who Can Vote?",
+        "requirements": [
+          "Australian citizen",
+          "18 years or older",
+          "Enrolled to vote"
+        ],
+        "officialLink": "https://www.aec.gov.au/enrol/",
+        "notes": "Voting is compulsory for all eligible Australian citizens. If you're 18 or older, you must enrol and vote."
+      },
+      "registration": {
+        "title": "How to Enrol to Vote",
+        "steps": [
+          "Check if you're already enrolled at aec.gov.au/check",
+          "Enrol online using your driver's licence or Australian passport",
+          "Update your enrolment if you've changed address",
+          "16 and 17 year olds can enrol now and will automatically be added to the roll when they turn 18"
+        ],
+        "officialLinks": {
+          "primary": "https://www.aec.gov.au/enrol/",
+          "enrolOnline": "https://www.aec.gov.au/enrol/enrol-online/",
+          "checkEnrolment": "https://check.aec.gov.au/"
+        },
+        "deadlines": "Enrol by 8pm on the closing date (typically 8 days after the election is called)",
+        "notes": "You must keep your enrolment details up to date. It's compulsory to enrol if you're eligible."
+      },
+      "votingMethods": {
+        "title": "How to Vote",
+        "methods": [
+          {
+            "type": "In-Person on Election Day",
+            "description": "Vote at any polling place in your state or territory on Election Day (Saturday)",
+            "requirements": "Have your name marked off the electoral roll",
+            "link": "https://www.aec.gov.au/election/ways-to-vote.htm"
+          },
+          {
+            "type": "Early Voting",
+            "description": "Vote early at an early voting centre from about 2 weeks before Election Day",
+            "requirements": "No reason required - available to all voters",
+            "link": "https://www.aec.gov.au/election/ways-to-vote.htm"
+          },
+          {
+            "type": "Postal Voting",
+            "description": "Apply for a postal vote if you can't attend a polling place",
+            "requirements": "Apply at least 3 business days before Election Day",
+            "link": "https://www.aec.gov.au/election/postal.htm"
+          },
+          {
+            "type": "Interstate Voting",
+            "description": "Vote at an interstate voting centre if you're temporarily outside your state",
+            "requirements": "Available at selected locations",
+            "link": "https://www.aec.gov.au/election/interstate-voting.htm"
+          },
+          {
+            "type": "Overseas Voting",
+            "description": "Vote at Australian embassies, high commissions and consulates, or by post",
+            "requirements": "Register for overseas voting before the election",
+            "link": "https://www.aec.gov.au/election/overseas.htm"
+          }
+        ]
+      },
+      "pollingLocations": {
+        "title": "Where to Vote",
+        "howToFind": [
+          "Use the AEC Polling Place Finder: aec.gov.au/where",
+          "Download the AEC Mobile App",
+          "Call the AEC: 13 23 26",
+          "You can vote at ANY polling place in your state/territory"
+        ],
+        "officialLinks": {
+          "locator": "https://www.aec.gov.au/where/",
+          "helpline": "tel:132326"
+        },
+        "notes": "On federal election day, you can vote at any polling place in your state or territory - you're not restricted to one location."
+      },
+      "requiredDocuments": {
+        "title": "Required ID Documents",
+        "description": "Generally, you don't need ID to vote in Australia",
+        "acceptedIds": [
+          "No ID required if you're on the electoral roll",
+          "ID may be required if voting by declaration vote or if your name is not on the roll at your polling place"
+        ],
+        "officialLink": "https://www.aec.gov.au/FAQs/Voting_Australia.htm",
+        "notes": "Australia has a simpler voting process than many countries. Your name is simply marked off the electoral roll."
+      },
+      "importantDates": {
+        "title": "Important Election Dates",
+        "description": "Federal elections must be held at least every 3 years",
+        "generalElection": "Usually held on a Saturday between August and November",
+        "notes": "The Prime Minister calls the election date. State and territory elections are run by their respective electoral commissions."
+      },
+      "accessibility": {
+        "title": "Voting Accessibility",
+        "services": [
+          "Wheelchair-accessible polling places",
+          "Telephone voting service for blind or low vision voters",
+          "Assistance from polling officials or a person of your choice",
+          "Magnifying sheets and low vision aids available",
+          "Priority access for voters with disabilities or mobility issues",
+          "Silent elector registration for voters at risk of violence"
+        ],
+        "officialLink": "https://www.aec.gov.au/election/accessible.htm",
+        "helpline": "13 23 26"
+      },
+      "additionalResources": {
+        "title": "Additional Voting Resources",
+        "resources": [
+          {
+            "name": "Australian Electoral Commission (AEC)",
+            "url": "https://www.aec.gov.au",
+            "description": "Official electoral commission for federal elections"
+          },
+          {
+            "name": "AEC Polling Place Finder",
+            "url": "https://www.aec.gov.au/where/",
+            "description": "Find polling places near you"
+          },
+          {
+            "name": "Check Your Enrolment",
+            "url": "https://check.aec.gov.au/",
+            "description": "Verify your electoral enrolment"
+          },
+          {
+            "name": "AEC Tally Room",
+            "url": "https://www.aec.gov.au/election/tally-room.htm",
+            "description": "Live election results on election night"
+          },
+          {
+            "name": "How to Vote Cards",
+            "url": "https://www.aec.gov.au/election/candidates/how-to-vote-cards.htm",
+            "description": "Information about candidate how-to-vote cards"
+          },
+          {
+            "name": "Electoral Education Centre",
+            "url": "https://www.aec.gov.au/education/",
+            "description": "Learn about Australian democracy and elections"
+          }
+        ]
+      },
+      "compulsoryVoting": {
+        "title": "Compulsory Voting in Australia",
+        "description": "Voting is compulsory for all enrolled Australian citizens 18 years and over",
+        "penalties": "You may receive a fine if you don't vote without a valid reason",
+        "validReasons": [
+          "Serious illness or accident",
+          "Religious beliefs preventing you from voting",
+          "You were more than 20km from a polling place",
+          "You were outside Australia",
+          "You were serving a prison sentence",
+          "Natural disaster, weather, or transport issues"
+        ],
+        "officialLink": "https://www.aec.gov.au/FAQs/Voting_Australia.htm#compulsory",
+        "notes": "If you don't vote and don't have a valid reason, you'll receive a penalty notice with a fine. The fine is AUD $20 if paid within 21 days."
+      },
+      "stateSpecificNote": "State and territory elections are administered by their respective electoral commissions. Visit your state/territory electoral commission website for local election information."
+    },
+    "GERMANY": {
+      "countryCode": "DE",
+      "countryName": "Germany / Deutschland",
+      "flagEmoji": "🇩🇪",
+      "eligibility": {
+        "title": "Wer darf wählen? / Who Can Vote?",
+        "requirements": [
+          "German citizen / Deutscher Staatsbürger",
+          "18 years or older / 18 Jahre oder älter",
+          "Registered at least 3 months before election / Mindestens 3 Monate vor der Wahl gemeldet",
+          "Not excluded from voting / Nicht vom Wahlrecht ausgeschlossen"
+        ],
+        "officialLink": "https://www.bundeswahlleiter.de/en/",
+        "notes": "EU citizens can vote in local and European Parliament elections. Only German citizens can vote in federal (Bundestag) elections."
+      },
+      "registration": {
+        "title": "Wahlberechtigung / Voter Registration",
+        "steps": [
+          "Registration is automatic when you register your address (Anmeldung) / Anmeldung beim Einwohnermeldeamt genügt",
+          "You will receive a Wahlbenachrichtigung (polling card) by mail / Sie erhalten automatisch eine Wahlbenachrichtigung",
+          "Check your Wahlbenachrichtigung for your polling station / Prüfen Sie Ihre Wahlbenachrichtigung für Ihr Wahllokal",
+          "If you don't receive it, contact your local election office / Bei Nichterhalt: Wahlamt kontaktieren"
+        ],
+        "officialLinks": {
+          "primary": "https://www.bundeswahlleiter.de",
+          "registerOnline": "https://www.bundeswahlleiter.de/en/bundestagswahlen.html",
+          "checkRegistration": "https://www.bundeswahlleiter.de/en/service/kontakt.html"
+        },
+        "deadlines": "Automatic registration through address registration. Absentee ballot requests must be submitted by the Friday before election (usually 18:00).",
+        "notes": "Germany has automatic voter registration. You don't need to actively register if you're registered at your address (Anmeldung)."
+      },
+      "votingMethods": {
+        "title": "Wie kann ich wählen? / How to Vote",
+        "methods": [
+          {
+            "type": "In-Person Voting / Urnenwahl",
+            "description": "Vote at your assigned polling station on election day (Sunday)",
+            "requirements": "Bring your Wahlbenachrichtigung and ID card (Personalausweis)",
+            "link": "https://www.bundeswahlleiter.de/en/bundestagswahlen/2021/informationen-waehler.html"
+          },
+          {
+            "type": "Absentee Ballot / Briefwahl",
+            "description": "Vote by mail using a Briefwahlunterlagen (postal voting documents)",
+            "requirements": "Request by Friday before election at 18:00. Can request online, by mail, or in person.",
+            "link": "https://www.bundeswahlleiter.de/en/bundestagswahlen/2021/informationen-waehler/briefwahl.html"
+          },
+          {
+            "type": "Voting from Abroad / Wählen im Ausland",
+            "description": "German citizens living abroad can vote if registered in electoral roll",
+            "requirements": "Must apply for inclusion in electoral register (Wählerverzeichnis)",
+            "link": "https://www.bundeswahlleiter.de/en/service/auslandsdeutsche.html"
+          }
+        ]
+      },
+      "pollingLocations": {
+        "title": "Wo kann ich wählen? / Where to Vote",
+        "howToFind": [
+          "Check your Wahlbenachrichtigung for your assigned polling station / Wahlbenachrichtigung prüfen",
+          "Contact your local Rathaus (town hall) / Kontakt zum örtlichen Rathaus",
+          "Call your local Wahlamt (election office) / Wahlamt anrufen",
+          "Polling stations are usually in schools, community centers, or public buildings / Meist in Schulen oder öffentlichen Gebäuden"
+        ],
+        "officialLinks": {
+          "locator": "https://www.bundeswahlleiter.de/en/service/kontakt.html",
+          "helpline": "Contact your local Wahlamt"
+        },
+        "notes": "Your polling station (Wahllokal) is printed on your Wahlbenachrichtigung. Elections are always on Sundays, typically 8:00-18:00."
+      },
+      "requiredDocuments": {
+        "title": "Benötigte Dokumente / Required Documents",
+        "description": "You need your Wahlbenachrichtigung and an ID document",
+        "acceptedIds": [
+          "Wahlbenachrichtigung (polling card) - RECOMMENDED",
+          "Personalausweis (German ID card) - REQUIRED if no Wahlbenachrichtigung",
+          "Reisepass (German passport) - Alternative ID",
+          "If you lost your Wahlbenachrichtigung, bring ID and they'll look you up"
+        ],
+        "officialLink": "https://www.bundeswahlleiter.de/en/bundestagswahlen.html",
+        "notes": "The Wahlbenachrichtigung is not legally required but makes voting much faster. Always bring some form of ID."
+      },
+      "importantDates": {
+        "title": "Wichtige Termine / Important Dates",
+        "description": "Federal elections (Bundestagswahl) are held every 4 years on Sundays",
+        "presidentialElection": "Bundespräsident is elected every 5 years by Federal Convention (not direct vote)",
+        "generalElection": "Bundestagswahl (Federal Parliament) every 4 years, typically in September or October",
+        "notes": "Elections are always on Sundays. European Parliament elections every 5 years. State elections (Landtagswahlen) vary by state."
+      },
+      "accessibility": {
+        "title": "Barrierefreiheit / Voting Accessibility",
+        "services": [
+          "Wheelchair-accessible polling stations (Rollstuhlgerecht)",
+          "Assistance available at polling stations (Wahlhelfer)",
+          "Braille ballot templates for visually impaired voters (Stimmzettelschablonen)",
+          "Vote-by-mail option for those unable to visit polling stations (Briefwahl)",
+          "Sign language interpreters can be requested (Gebärdensprachdolmetscher)"
+        ],
+        "officialLink": "https://www.bundeswahlleiter.de/en/service/kontakt.html",
+        "helpline": "Contact your local Wahlamt"
+      },
+      "additionalResources": {
+        "title": "Weitere Informationen / Additional Resources",
+        "resources": [
+          {
+            "name": "Bundeswahlleiter (Federal Returning Officer)",
+            "url": "https://www.bundeswahlleiter.de/en/",
+            "description": "Official federal election information in English and German"
+          },
+          {
+            "name": "Wahl-O-Mat",
+            "url": "https://www.wahl-o-mat.de",
+            "description": "Interactive tool to compare your views with parties (German only)"
+          },
+          {
+            "name": "Deutscher Bundestag",
+            "url": "https://www.bundestag.de/en/",
+            "description": "German Federal Parliament official website"
+          },
+          {
+            "name": "Make it German",
+            "url": "https://www.make-it-in-germany.com/en/living-in-germany/everyday-life/elections",
+            "description": "Elections guide for internationals"
+          },
+          {
+            "name": "Deutschland.de Voting Info",
+            "url": "https://www.deutschland.de/en/topic/politics/germany-elections-democracy",
+            "description": "Overview of German democratic system"
+          }
+        ]
+      },
+      "stateSpecificNote": "State elections (Landtagswahlen) and local elections (Kommunalwahlen) are administered by state electoral authorities. Rules may vary slightly by state (Bundesland)."
+    },
+    "FRANCE": {
+      "countryCode": "FR",
+      "countryName": "France / République française",
+      "flagEmoji": "🇫🇷",
+      "eligibility": {
+        "title": "Qui peut voter ? / Who Can Vote?",
+        "requirements": [
+          "French citizen / Citoyen français",
+          "18 years or older / 18 ans ou plus",
+          "Registered on electoral roll / Inscrit sur les listes électorales",
+          "Full civil and political rights / Jouir de ses droits civils et politiques"
+        ],
+        "officialLink": "https://www.service-public.fr/particuliers/vosdroits/F1937",
+        "notes": "EU citizens can vote in European and municipal elections. Only French citizens vote in presidential and legislative elections."
+      },
+      "registration": {
+        "title": "Inscription électorale / Voter Registration",
+        "steps": [
+          "Register online at service-public.fr or in person at your mairie (town hall) / Inscription en ligne ou à la mairie",
+          "Provide proof of identity and residence / Fournir justificatif d'identité et de domicile",
+          "Registration deadline: 6 weeks before election / Limite d'inscription : 6 semaines avant",
+          "Receive electoral card (carte électorale) by mail / Recevoir la carte d'électeur par courrier"
+        ],
+        "officialLinks": {
+          "primary": "https://www.service-public.fr/particuliers/vosdroits/F1367",
+          "registerOnline": "https://www.service-public.fr/particuliers/vosdroits/R16396",
+          "checkRegistration": "https://www.service-public.fr/particuliers/vosdroits/services-en-ligne-et-formulaires/ISE"
+        },
+        "deadlines": "Must register at least 6 weeks before an election. Online registration possible year-round.",
+        "notes": "Registration is not automatic. You must actively register at your mairie or online via service-public.fr."
+      },
+      "votingMethods": {
+        "title": "Comment voter ? / How to Vote",
+        "methods": [
+          {
+            "type": "In-Person Voting / Vote en personne",
+            "description": "Vote at your assigned bureau de vote on election day (Sunday)",
+            "requirements": "Bring carte d'électeur and ID (carte d'identité or passport)",
+            "link": "https://www.service-public.fr/particuliers/vosdroits/F1604"
+          },
+          {
+            "type": "Proxy Voting / Vote par procuration",
+            "description": "Authorize someone to vote on your behalf if you cannot vote in person",
+            "requirements": "Must be done in advance at police station, gendarmerie, or consulate",
+            "link": "https://www.service-public.fr/particuliers/vosdroits/F1604"
+          },
+          {
+            "type": "Voting from Abroad / Vote à l'étranger",
+            "description": "French citizens abroad can vote at consulates or embassy",
+            "requirements": "Must register on consular electoral roll",
+            "link": "https://www.diplomatie.gouv.fr/fr/services-aux-francais/voter-a-l-etranger/"
+          }
+        ]
+      },
+      "pollingLocations": {
+        "title": "Où voter ? / Where to Vote",
+        "howToFind": [
+          "Check your carte d'électeur for your bureau de vote / Vérifier la carte d'électeur",
+          "Visit your local mairie (town hall) / Visiter la mairie",
+          "Check online at service-public.fr / Vérifier en ligne",
+          "Call your mairie / Appeler la mairie"
+        ],
+        "officialLinks": {
+          "locator": "https://www.service-public.fr/particuliers/vosdroits/services-en-ligne-et-formulaires/ISE",
+          "helpline": "Contact your local mairie"
+        },
+        "notes": "Your bureau de vote (polling station) is assigned based on your address. Elections are on Sundays, usually 8:00-20:00 (may close earlier in small towns)."
+      },
+      "requiredDocuments": {
+        "title": "Documents requis / Required Documents",
+        "description": "You need your electoral card and an official ID",
+        "acceptedIds": [
+          "Carte d'électeur (electoral card) - RECOMMENDED",
+          "Carte d'identité nationale (national ID card) - REQUIRED",
+          "Passport (French passport) - Alternative",
+          "Carte vitale with photo - Sometimes accepted",
+          "If you lost your carte d'électeur, bring ID and they'll verify your registration"
+        ],
+        "officialLink": "https://www.service-public.fr/particuliers/vosdroits/F1937",
+        "notes": "The carte d'électeur speeds up the process but official photo ID is always required."
+      },
+      "importantDates": {
+        "title": "Dates importantes / Important Dates",
+        "description": "Presidential elections every 5 years, legislative elections every 5 years",
+        "presidentialElection": "Élection présidentielle every 5 years (2022, 2027, 2032, etc.) - Two rounds",
+        "generalElection": "Élections législatives (National Assembly) every 5 years, shortly after presidential",
+        "notes": "Presidential elections have two rounds (2 weeks apart) if no candidate gets 50%+. Legislative elections also use two-round system. All elections on Sundays."
+      },
+      "accessibility": {
+        "title": "Accessibilité / Voting Accessibility",
+        "services": [
+          "Wheelchair-accessible polling stations (Bureaux de vote accessibles)",
+          "Assistance available (right to be accompanied / droit d'être accompagné)",
+          "Braille information and templates (Information et gabarits en braille)",
+          "Proxy voting for those unable to travel (Vote par procuration)",
+          "Priority access for persons with disabilities (Accès prioritaire)"
+        ],
+        "officialLink": "https://www.service-public.fr/particuliers/vosdroits/F1604",
+        "helpline": "Contact your local mairie"
+      },
+      "additionalResources": {
+        "title": "Ressources supplémentaires / Additional Resources",
+        "resources": [
+          {
+            "name": "Service-Public.fr - Elections",
+            "url": "https://www.service-public.fr/particuliers/vosdroits/N47",
+            "description": "Official French government electoral information"
+          },
+          {
+            "name": "Ministère de l'Intérieur - Elections",
+            "url": "https://www.interieur.gouv.fr/Elections",
+            "description": "Ministry of Interior election portal"
+          },
+          {
+            "name": "Check Your Registration / Vérifier votre inscription",
+            "url": "https://www.service-public.fr/particuliers/vosdroits/services-en-ligne-et-formulaires/ISE",
+            "description": "Verify your electoral registration online"
+          },
+          {
+            "name": "Election Results / Résultats des élections",
+            "url": "https://www.resultats-elections.interieur.gouv.fr/",
+            "description": "Official election results portal"
+          },
+          {
+            "name": "French Citizens Abroad",
+            "url": "https://www.diplomatie.gouv.fr/fr/services-aux-francais/voter-a-l-etranger/",
+            "description": "Voting information for French citizens living abroad"
+          }
+        ]
+      },
+      "stateSpecificNote": "France is divided into départements, but electoral administration is centralized. Municipal elections (élections municipales) are local but follow national rules."
+    },
+    "CANADA": {
+      "countryCode": "CA",
+      "countryName": "Canada",
+      "flagEmoji": "🇨🇦",
+      "eligibility": {
+        "title": "Who Can Vote?",
+        "requirements": [
+          "Canadian citizen",
+          "18 years or older on election day",
+          "Prove your identity and address"
+        ],
+        "officialLink": "https://www.elections.ca/content.aspx?section=vot&dir=faq&document=faqvot&lang=e#a3",
+        "notes": "You don't need to be registered in advance - you can register at the polls on election day with proper ID."
+      },
+      "registration": {
+        "title": "How to Register to Vote",
+        "steps": [
+          "Register online at elections.ca",
+          "Update your information when you file taxes (automatic)",
+          "Register in person when getting or renewing your driver's license",
+          "Register at the polls on election day (same-day registration)"
+        ],
+        "officialLinks": {
+          "primary": "https://www.elections.ca",
+          "registerOnline": "https://ereg.elections.ca/CWelcome.aspx?lang=e",
+          "checkRegistration": "https://ereg.elections.ca/CWelcome.aspx?lang=e"
+        },
+        "deadlines": "No deadline! You can register to vote up to and including election day.",
+        "notes": "Canada has same-day voter registration. You can register when you vote on election day."
+      },
+      "votingMethods": {
+        "title": "How to Vote",
+        "methods": [
+          {
+            "type": "Advance Voting",
+            "description": "Vote early at advance polling stations (Friday-Monday, 9 days before election)",
+            "requirements": "Bring proof of identity and address",
+            "link": "https://www.elections.ca/content.aspx?section=vot&dir=vote&document=index&lang=e"
+          },
+          {
+            "type": "Election Day Voting",
+            "description": "Vote at your assigned polling station on election day (Monday)",
+            "requirements": "Bring proof of identity and address",
+            "link": "https://www.elections.ca/content.aspx?section=vot&dir=ids&document=index&lang=e"
+          },
+          {
+            "type": "Vote by Mail / Special Ballot",
+            "description": "Request a mail-in ballot from Elections Canada",
+            "requirements": "Apply online or in person at an Elections Canada office",
+            "link": "https://www.elections.ca/content.aspx?section=vot&dir=vote&document=index&lang=e#mail"
+          },
+          {
+            "type": "Voting from Abroad",
+            "description": "Canadian citizens living abroad can vote by mail",
+            "requirements": "Register as an international elector",
+            "link": "https://www.elections.ca/content.aspx?section=vot&dir=ab&document=index&lang=e"
+          }
+        ]
+      },
+      "pollingLocations": {
+        "title": "Where to Vote",
+        "howToFind": [
+          "Use the Elections Canada Voter Information Service: 1-800-463-6868",
+          "Check your Voter Information Card for your polling station",
+          "Visit elections.ca to find your polling place",
+          "Text 'VOTE' to 1-866-556-3868"
+        ],
+        "officialLinks": {
+          "locator": "https://www.elections.ca/Scripts/vis/FindED?L=e&QID=-1&PAGEID=20",
+          "helpline": "tel:1-800-463-6868"
+        },
+        "notes": "Your polling station is listed on your Voter Information Card mailed to you before the election. Federal elections are always on Mondays."
+      },
+      "requiredDocuments": {
+        "title": "Required ID Documents",
+        "description": "You need to prove your identity and address to vote",
+        "acceptedIds": [
+          "Option 1: One piece of ID with photo, name, and address (driver's license)",
+          "Option 2: Two pieces of ID with your name (health card + utility bill)",
+          "Option 3: Take an oath and have someone vouch for you (both must be from same polling division)",
+          "Accepted: Driver's license, health card, Canadian passport, birth certificate, utility bills, bank statements, government letters"
+        ],
+        "officialLink": "https://www.elections.ca/content.aspx?section=vot&dir=ids&document=index&lang=e",
+        "notes": "Elections Canada accepts 45+ types of ID. If you don't have ID, you can still vote by taking an oath and having another registered voter vouch for you."
+      },
+      "importantDates": {
+        "title": "Important Election Dates",
+        "description": "Federal elections must be held at least every 4 years (fixed election date law)",
+        "presidentialElection": "Canada has a Prime Minister (not President). The PM is the leader of the party with the most seats.",
+        "generalElection": "Federal elections are held every 4 years on the 3rd Monday in October (or earlier if government falls)",
+        "notes": "Provincial elections are managed by provinces. Municipal elections vary by municipality."
+      },
+      "accessibility": {
+        "title": "Voting Accessibility",
+        "services": [
+          "All polling stations are wheelchair accessible or have alternatives nearby",
+          "Magnifying sheets and large print ballots available",
+          "Braille alphabet cards and tactile ballot templates",
+          "Sign language interpreters available upon request",
+          "You can bring someone to help you vote",
+          "Curbside voting if you can't enter the polling station",
+          "Vote by mail if you cannot visit a polling station"
+        ],
+        "officialLink": "https://www.elections.ca/content.aspx?section=vot&dir=vote&document=index&lang=e#access",
+        "helpline": "1-800-463-6868"
+      },
+      "additionalResources": {
+        "title": "Additional Voting Resources",
+        "resources": [
+          {
+            "name": "Elections Canada",
+            "url": "https://www.elections.ca",
+            "description": "Official federal electoral organization"
+          },
+          {
+            "name": "Voter Information Service",
+            "url": "https://www.elections.ca/Scripts/vis/FindED?L=e&QID=-1&PAGEID=20",
+            "description": "Find your polling station and electoral district"
+          },
+          {
+            "name": "Online Voter Registration",
+            "url": "https://ereg.elections.ca/CWelcome.aspx?lang=e",
+            "description": "Register or update your voter information"
+          },
+          {
+            "name": "Election Results",
+            "url": "https://www.elections.ca/content.aspx?section=ele&document=index&lang=e",
+            "description": "View past and current election results"
+          },
+          {
+            "name": "Provincial Electoral Agencies",
+            "url": "https://www.elections.ca/content.aspx?section=res&dir=loi/fed/cea/links&document=index&lang=e",
+            "description": "Links to provincial and territorial election agencies"
+          }
+        ]
+      },
+      "stateSpecificNote": "Provincial and territorial elections are managed by separate provincial electoral agencies. Municipal elections vary by province and municipality."
+    },
+    "UK": {
+      "countryCode": "GB",
+      "countryName": "United Kingdom",
+      "flagEmoji": "🇬🇧",
+      "eligibility": {
+        "title": "Who Can Vote?",
+        "requirements": [
+          "British, Irish or qualifying Commonwealth citizen",
+          "18 years or older (or 16+ in Scotland and Wales for some elections)",
+          "Registered to vote",
+          "Resident at an address in the UK (or British citizen living abroad for less than 15 years)"
+        ],
+        "officialLink": "https://www.gov.uk/voting-in-the-uk/who-can-vote",
+        "notes": "EU citizens can vote in local elections in England, Scotland and Wales, and all elections in Northern Ireland."
+      },
+      "registration": {
+        "title": "How to Register to Vote",
+        "steps": [
+          "Register online at gov.uk/register-to-vote (takes 5 minutes)",
+          "Provide your National Insurance number",
+          "Give your current address",
+          "Deadline is usually 12 working days before an election"
+        ],
+        "officialLinks": {
+          "primary": "https://www.gov.uk/register-to-vote",
+          "registerOnline": "https://www.gov.uk/register-to-vote",
+          "checkRegistration": "https://www.gov.uk/electoral-register"
+        },
+        "deadlines": "Register by 12 working days before an election. Register for a postal vote by 11 working days before. Register for a proxy vote by 6 working days before.",
+        "notes": "You need to register separately for each type of election if you move. Registration is online and takes about 5 minutes."
+      },
+      "votingMethods": {
+        "title": "How to Vote",
+        "methods": [
+          {
+            "type": "In-Person Voting",
+            "description": "Vote at your local polling station on election day (Thursday)",
+            "requirements": "From May 2023: Photo ID required in England, Wales, Northern Ireland (not Scotland yet)",
+            "link": "https://www.gov.uk/voting-in-the-uk"
+          },
+          {
+            "type": "Postal Vote",
+            "description": "Receive ballot papers by post and return them by election day",
+            "requirements": "Apply by 11 working days before election",
+            "link": "https://www.gov.uk/government/publications/apply-for-a-postal-vote"
+          },
+          {
+            "type": "Proxy Vote",
+            "description": "Appoint someone to vote on your behalf",
+            "requirements": "Apply by 6 working days before election (emergency proxy until 5pm on election day)",
+            "link": "https://www.gov.uk/government/publications/apply-for-a-proxy-vote"
+          },
+          {
+            "type": "Voting from Abroad",
+            "description": "British citizens abroad can vote for up to 15 years after leaving UK",
+            "requirements": "Register as an overseas voter",
+            "link": "https://www.gov.uk/voting-in-the-uk"
+          }
+        ]
+      },
+      "pollingLocations": {
+        "title": "Where to Vote",
+        "howToFind": [
+          "Check your poll card (sent before election) for your polling station",
+          "Use the gov.uk polling station finder",
+          "Contact your local Electoral Registration Office",
+          "Call the Electoral Commission helpline: 0333 103 1928"
+        ],
+        "officialLinks": {
+          "locator": "https://www.electoralcommission.org.uk/i-am-a/voter",
+          "helpline": "tel:0333-103-1928"
+        },
+        "notes": "Polling stations are usually in schools, community centers, or local halls. They're open 7am-10pm on election day (Thursday)."
+      },
+      "requiredDocuments": {
+        "title": "Required ID Documents",
+        "description": "From May 2023: Photo ID required to vote in England, Wales, and Northern Ireland (not Scotland)",
+        "acceptedIds": [
+          "Passport (UK, EU, Commonwealth)",
+          "Driving licence (UK, EU, EEA)",
+          "Blue Badge",
+          "Older Person's Bus Pass",
+          "Disabled Person's Bus Pass",
+          "Oyster 60+ Card",
+          "Freedom Pass",
+          "Scottish National Entitlement Card (with photo)",
+          "Anonymous Elector's Photo ID",
+          "Voter Authority Certificate (free from local council)",
+          "SCOTLAND: No photo ID required (yet)"
+        ],
+        "officialLink": "https://www.gov.uk/how-to-vote/photo-id-youll-need",
+        "notes": "If you don't have photo ID, you can apply for a free Voter Authority Certificate from your local council."
+      },
+      "importantDates": {
+        "title": "Important Election Dates",
+        "description": "General elections must be held every 5 years maximum",
+        "presidentialElection": "UK has a Prime Minister (not President). The PM is leader of the party with most MPs.",
+        "generalElection": "General elections for House of Commons every 5 years (or earlier if Parliament is dissolved)",
+        "notes": "Elections are always on Thursdays. Local elections vary by area. Scottish Parliament, Welsh Senedd, and Northern Ireland Assembly have separate elections."
+      },
+      "accessibility": {
+        "title": "Voting Accessibility",
+        "services": [
+          "All polling stations must be accessible or provide assistance",
+          "Tactile voting device for blind and partially sighted voters",
+          "Large print ballot papers available",
+          "Assistance from polling staff or companion",
+          "Postal vote available if you can't get to polling station",
+          "Proxy vote if someone else needs to vote for you"
+        ],
+        "officialLink": "https://www.gov.uk/voting-in-the-uk/voting-if-youre-disabled",
+        "helpline": "0333 103 1928"
+      },
+      "additionalResources": {
+        "title": "Additional Voting Resources",
+        "resources": [
+          {
+            "name": "Gov.UK Voting Information",
+            "url": "https://www.gov.uk/voting-in-the-uk",
+            "description": "Official UK government voting portal"
+          },
+          {
+            "name": "The Electoral Commission",
+            "url": "https://www.electoralcommission.org.uk/i-am-a/voter",
+            "description": "Independent body that oversees elections"
+          },
+          {
+            "name": "Register to Vote",
+            "url": "https://www.gov.uk/register-to-vote",
+            "description": "Online voter registration (5 minutes)"
+          },
+          {
+            "name": "Check if You're Registered",
+            "url": "https://www.gov.uk/electoral-register",
+            "description": "Verify your voter registration status"
+          },
+          {
+            "name": "UK Parliament",
+            "url": "https://www.parliament.uk/about/how/elections-and-voting/",
+            "description": "Information about elections and voting"
+          },
+          {
+            "name": "About My Vote",
+            "url": "https://www.aboutmyvote.co.uk",
+            "description": "Electoral Commission voter information site"
+          }
+        ]
+      },
+      "stateSpecificNote": "Scotland, Wales, and Northern Ireland have devolved governments with separate elections. Local elections are managed by local authorities. Rules may differ between England, Scotland, Wales, and Northern Ireland."
+    }
+  }
+}

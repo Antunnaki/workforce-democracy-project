@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Citation Click Diagnostic Test</title>
+    <link rel="stylesheet" href="css/citations.css">
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 2rem;
+            background: #f8fafc;
+        }
+        
+        .test-section {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        h1 {
+            color: #1e293b;
+            margin-bottom: 1rem;
+        }
+        
+        h2 {
+            color: #475569;
+            font-size: 1.25rem;
+            margin-bottom: 1rem;
+        }
+        
+        .test-message {
+            line-height: 1.7;
+            color: #374151;
+            margin-bottom: 1rem;
+        }
+        
+        #console-log {
+            background: #1e293b;
+            color: #10b981;
+            padding: 1rem;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.875rem;
+            max-height: 400px;
+            overflow-y: auto;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+        
+        .status {
+            padding: 0.75rem 1rem;
+            border-radius: 8px;
+            margin: 1rem 0;
+            font-weight: 500;
+        }
+        
+        .status.info {
+            background: #dbeafe;
+            color: #1e40af;
+            border: 1px solid #bfdbfe;
+        }
+        
+        .status.success {
+            background: #d1fae5;
+            color: #065f46;
+            border: 1px solid #a7f3d0;
+        }
+        
+        .status.warning {
+            background: #fef3c7;
+            color: #92400e;
+            border: 1px solid #fde68a;
+        }
+        
+        button {
+            background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            margin-right: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        button:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+        }
+        
+        button:active {
+            transform: translateY(0);
+        }
+        
+        .legend {
+            background: #f1f5f9;
+            padding: 1rem;
+            border-radius: 8px;
+            margin: 1rem 0;
+            border-left: 4px solid #3b82f6;
+        }
+        
+        .legend strong {
+            color: #1e293b;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+        
+        .overlay-test {
+            position: relative;
+            padding: 2rem;
+            background: #e0f2fe;
+            border-radius: 8px;
+            margin: 1rem 0;
+        }
+        
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.1);
+            z-index: 10;
+            pointer-events: none;
+        }
+        
+        .overlay.blocking {
+            pointer-events: auto;
+        }
+        
+        .content-under-overlay {
+            position: relative;
+            z-index: 5;
+        }
+    </style>
+</head>
+<body>
+    <h1>🔬 Citation Click Diagnostic Test</h1>
+    
+    <div class="status info">
+        <strong>📋 Test Purpose:</strong> Diagnose why citation click handlers aren't working on VPS deployment
+    </div>
+
+    <!-- Test 1: Basic Citation Clicks -->
+    <div class="test-section">
+        <h2>Test 1: Basic Citation Clicks</h2>
+        <div class="legend">
+            <strong>Expected Behavior:</strong>
+            Clicking citation numbers (1, 2, 3) should open URLs and log to console below
+        </div>
+        
+        <div id="test1-message" class="test-message">
+            This is a test message with citations<sup class="citation-link" data-source-index="0" style="color: #667eea; cursor: pointer; font-weight: 600;">1</sup> 
+            that should be clickable<sup class="citation-link" data-source-index="1" style="color: #667eea; cursor: pointer; font-weight: 600;">2</sup>. 
+            We need to verify they work properly<sup class="citation-link" data-source-index="2" style="color: #667eea; cursor: pointer; font-weight: 600;">3</sup>.
+        </div>
+        
+        <button onclick="attachTest1Handlers()">Attach Click Handlers</button>
+        <button onclick="clearLog()">Clear Console</button>
+    </div>
+
+    <!-- Test 2: Z-Index / Overlay Test -->
+    <div class="test-section">
+        <h2>Test 2: Overlay Blocking Test</h2>
+        <div class="legend">
+            <strong>Test:</strong> Citations under non-blocking overlay (pointer-events: none)
+        </div>
+        
+        <div class="overlay-test">
+            <div class="overlay" id="overlay1"></div>
+            <div class="content-under-overlay">
+                Citations under overlay<sup class="citation-link" data-source-index="0" style="color: #667eea; cursor: pointer; font-weight: 600;">1</sup> 
+                should still work<sup class="citation-link" data-source-index="1" style="color: #667eea; cursor: pointer; font-weight: 600;">2</sup>.
+            </div>
+        </div>
+        
+        <button onclick="toggleOverlayBlocking()">Toggle Overlay Blocking</button>
+        <span id="overlay-status" style="margin-left: 1rem; font-weight: 600;"></span>
+    </div>
+
+    <!-- Test 3: Multiple Handler Attachments -->
+    <div class="test-section">
+        <h2>Test 3: Handler Attachment Race Condition</h2>
+        <div class="legend">
+            <strong>Test:</strong> Check if handlers are being attached multiple times or removed after attachment
+        </div>
+        
+        <div id="test3-message" class="test-message">
+            Race condition test<sup class="citation-link" data-source-index="0" style="color: #667eea; cursor: pointer; font-weight: 600;">1</sup> 
+            with multiple attachments<sup class="citation-link" data-source-index="1" style="color: #667eea; cursor: pointer; font-weight: 600;">2</sup>.
+        </div>
+        
+        <button onclick="attachTest3Handlers()">Attach Handlers Once</button>
+        <button onclick="attachTest3HandlersMultiple()">Attach 5 Times (Test Duplicate)</button>
+        <button onclick="removeTest3Handlers()">Remove All Handlers</button>
+    </div>
+
+    <!-- Test 4: Window.open() Popup Blocker Test -->
+    <div class="test-section">
+        <h2>Test 4: Popup Blocker Test</h2>
+        <div class="legend">
+            <strong>Test:</strong> Check if window.open() is being blocked by browser
+        </div>
+        
+        <button onclick="testWindowOpen()">Test window.open() Directly</button>
+        <button onclick="testWindowOpenDelayed()">Test window.open() After 1s Delay</button>
+        <div id="popup-result" class="status info" style="display: none; margin-top: 1rem;"></div>
+    </div>
+
+    <!-- Console Log Display -->
+    <div class="test-section">
+        <h2>📊 Console Output</h2>
+        <div id="console-log">Waiting for test interactions...\n</div>
+    </div>
+
+    <script>
+        // Mock sources for testing
+        const testSources = [
+            { url: 'https://www.theguardian.com/test-article-1', title: 'Test Article 1', source: 'The Guardian' },
+            { url: 'https://www.bbc.com/news/test-2', title: 'Test Article 2', source: 'BBC' },
+            { url: 'https://www.reuters.com/test-3', title: 'Test Article 3', source: 'Reuters' }
+        ];
+
+        // Enhanced console logging
+        function log(message) {
+            const consoleDiv = document.getElementById('console-log');
+            const timestamp = new Date().toLocaleTimeString();
+            consoleDiv.textContent += `[${timestamp}] ${message}\n`;
+            consoleDiv.scrollTop = consoleDiv.scrollHeight;
+            console.log(message); // Also log to browser console
+        }
+
+        function clearLog() {
+            document.getElementById('console-log').textContent = 'Console cleared.\n';
+        }
+
+        // Test 1: Basic Citation Clicks
+        function attachTest1Handlers() {
+            log('🔧 Test 1: Attaching click handlers...');
+            const element = document.getElementById('test1-message');
+            attachCitationClickHandlers(element, testSources);
+            log('✅ Test 1: Handlers attached successfully');
+        }
+
+        // Test 2: Overlay Blocking
+        let overlayBlocking = false;
+        function toggleOverlayBlocking() {
+            const overlay = document.getElementById('overlay1');
+            overlayBlocking = !overlayBlocking;
+            
+            if (overlayBlocking) {
+                overlay.classList.add('blocking');
+                overlay.style.pointerEvents = 'auto';
+                document.getElementById('overlay-status').textContent = '🔴 Overlay BLOCKING clicks';
+                document.getElementById('overlay-status').style.color = '#dc2626';
+                log('🔴 Overlay now BLOCKING clicks (pointer-events: auto)');
+            } else {
+                overlay.classList.remove('blocking');
+                overlay.style.pointerEvents = 'none';
+                document.getElementById('overlay-status').textContent = '✅ Overlay NOT blocking';
+                document.getElementById('overlay-status').style.color = '#16a34a';
+                log('✅ Overlay NOT blocking clicks (pointer-events: none)');
+            }
+        }
+        toggleOverlayBlocking(); // Initialize
+
+        // Test 3: Multiple Handler Attachments
+        let test3HandlerCount = 0;
+        function attachTest3Handlers() {
+            log('🔧 Test 3: Attaching handlers (single)...');
+            const element = document.getElementById('test3-message');
+            attachCitationClickHandlers(element, testSources);
+            test3HandlerCount++;
+            log(`✅ Test 3: Handlers attached (total attachments: ${test3HandlerCount})`);
+        }
+
+        function attachTest3HandlersMultiple() {
+            log('🔧 Test 3: Attaching handlers 5 times to test duplicates...');
+            for (let i = 0; i < 5; i++) {
+                attachTest3Handlers();
+            }
+        }
+
+        function removeTest3Handlers() {
+            log('🗑️ Test 3: Removing handlers by cloning element...');
+            const element = document.getElementById('test3-message');
+            const clone = element.cloneNode(true);
+            element.parentNode.replaceChild(clone, element);
+            test3HandlerCount = 0;
+            log('✅ Test 3: All handlers removed (element cloned)');
+        }
+
+        // Test 4: Window.open() Tests
+        function testWindowOpen() {
+            log('🪟 Test 4: Testing window.open() directly...');
+            try {
+                const newWindow = window.open('https://www.google.com', '_blank', 'noopener,noreferrer');
+                if (newWindow) {
+                    log('✅ Test 4: window.open() SUCCESS - popup opened');
+                    document.getElementById('popup-result').textContent = '✅ Popup opened successfully!';
+                    document.getElementById('popup-result').className = 'status success';
+                    document.getElementById('popup-result').style.display = 'block';
+                    setTimeout(() => newWindow.close(), 2000);
+                } else {
+                    log('🚫 Test 4: window.open() BLOCKED - popup blocker active');
+                    document.getElementById('popup-result').textContent = '🚫 Popup was BLOCKED by browser';
+                    document.getElementById('popup-result').className = 'status warning';
+                    document.getElementById('popup-result').style.display = 'block';
+                }
+            } catch (err) {
+                log(`❌ Test 4: window.open() ERROR - ${err.message}`);
+                document.getElementById('popup-result').textContent = `❌ Error: ${err.message}`;
+                document.getElementById('popup-result').className = 'status warning';
+                document.getElementById('popup-result').style.display = 'block';
+            }
+        }
+
+        function testWindowOpenDelayed() {
+            log('⏰ Test 4: Testing window.open() after 1 second delay...');
+            document.getElementById('popup-result').textContent = '⏰ Waiting 1 second...';
+            document.getElementById('popup-result').className = 'status info';
+            document.getElementById('popup-result').style.display = 'block';
+            
+            setTimeout(() => {
+                testWindowOpen();
+                log('⏰ Test 4: Delayed window.open() completed');
+            }, 1000);
+        }
+
+        // CORE CITATION CLICK HANDLER (from universal-chat.js with enhanced logging)
+        function attachCitationClickHandlers(element, sources) {
+            const citationLinks = element.querySelectorAll('.citation-link');
+            log(`🔗 [HANDLER] Found ${citationLinks.length} citation links`);
+            log(`📊 [HANDLER] Available sources: ${sources.length}`);
+            
+            citationLinks.forEach((link, linkIndex) => {
+                log(`🔧 [HANDLER] Setting up link ${linkIndex + 1}: text="${link.textContent}", index="${link.getAttribute('data-source-index')}"`);
+                
+                link.addEventListener('click', (e) => {
+                    log(`🖱️ [CLICK] CLICK EVENT FIRED! Target: ${e.target.textContent}`);
+                    
+                    e.preventDefault();
+                    e.stopPropagation();
+                    
+                    const sourceIndex = parseInt(link.getAttribute('data-source-index'));
+                    log(`🔢 [CLICK] Source index: ${sourceIndex}`);
+                    
+                    if (sourceIndex >= 0 && sourceIndex < sources.length) {
+                        const source = sources[sourceIndex];
+                        log(`✅ [CLICK] Opening URL: ${source.url}`);
+                        log(`📄 [CLICK] Source: ${source.title} (${source.source})`);
+                        
+                        try {
+                            const newWindow = window.open(source.url, '_blank', 'noopener,noreferrer');
+                            if (!newWindow) {
+                                log(`🚫 [CLICK] window.open() BLOCKED by popup blocker!`);
+                                alert(`Citation URL: ${source.url}\n\nPlease allow popups or copy this URL.`);
+                            } else {
+                                log(`🎉 [CLICK] Window opened successfully!`);
+                            }
+                        } catch (err) {
+                            log(`❌ [CLICK] window.open() ERROR: ${err.message}`);
+                            alert(`Error opening citation. URL: ${source.url}`);
+                        }
+                    } else {
+                        log(`❌ [CLICK] Invalid source index ${sourceIndex}, sources length: ${sources.length}`);
+                    }
+                });
+                
+                log(`✅ [HANDLER] Handler attached for link ${linkIndex + 1}`);
+            });
+            
+            log(`🎉 [HANDLER] All ${citationLinks.length} citation handlers attached!`);
+        }
+
+        // Auto-attach handlers for overlay test
+        window.addEventListener('DOMContentLoaded', () => {
+            log('🚀 Page loaded - attaching overlay test handlers...');
+            const overlayTest = document.querySelector('.overlay-test .content-under-overlay');
+            attachCitationClickHandlers(overlayTest, testSources);
+            log('✅ Overlay test handlers attached\n');
+        });
+    </script>
+</body>
+</html>

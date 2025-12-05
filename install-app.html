@@ -1,0 +1,1031 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Install Our App - Workforce Democracy Project</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="alternate icon" type="image/png" href="favicon.png">
+    
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="manifest.json">
+    
+    <!-- Main Site CSS (same as index.html) -->
+    <link rel="stylesheet" href="css/fonts.css">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/unified-color-scheme.css">
+    
+    <!-- Font Awesome with SRI (Subresource Integrity) - Security hardening 2025-01-25 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" 
+          integrity="sha256-HtsXJanqjKTc8vVQjO4YMhiqFoXkfBsjBWcX91T1jr8=" 
+          crossorigin="anonymous">
+    
+    <style>
+        /* Install App Page Specific Styles */
+        .install-page {
+            padding-top: 80px; /* Account for fixed header */
+        }
+        
+        .install-hero {
+            background: linear-gradient(135deg, #FF6B35 0%, #F4A261 100%);
+            color: white;
+            text-align: center;
+            padding: 4rem 2rem;
+        }
+        
+        .install-hero-icon {
+            font-size: 5rem;
+            margin-bottom: 1rem;
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+        
+        .install-hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+        
+        .install-hero-subtitle {
+            font-size: 1.25rem;
+            max-width: 700px;
+            margin: 0 auto 2rem;
+            opacity: 0.95;
+            line-height: 1.6;
+        }
+        
+        .install-button {
+            background: white;
+            color: #FF6B35;
+            border: none;
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            font-size: 1.125rem;
+            font-weight: 700;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s;
+        }
+        
+        .install-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 24px rgba(0, 0, 0, 0.3);
+        }
+        
+        .install-button i {
+            font-size: 1.5rem;
+        }
+        
+        /* Benefits Section */
+        .benefits-section {
+            padding: 4rem 2rem;
+            background: #FFF9F0;
+        }
+        
+        .container-narrow {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .section-title {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 3rem;
+            color: #2C3E50;
+        }
+        
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+        
+        .benefit-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 16px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            text-align: center;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        
+        .benefit-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+        }
+        
+        .benefit-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        
+        .benefit-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+            color: #2C3E50;
+        }
+        
+        .benefit-desc {
+            color: #5A6C7D;
+            line-height: 1.6;
+            font-size: 0.9375rem;
+        }
+        
+        /* Instructions Section */
+        .instructions-section {
+            padding: 4rem 2rem;
+            background: white;
+        }
+        
+        .platform-box {
+            background: white;
+            border: 2px solid #E5E5E5;
+            border-radius: 16px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .platform-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid #F0F0F0;
+        }
+        
+        .platform-icon {
+            font-size: 2.5rem;
+        }
+        
+        .platform-title {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: #2C3E50;
+            margin: 0;
+        }
+        
+        .steps-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .step-item {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            align-items: flex-start;
+        }
+        
+        .step-number {
+            flex-shrink: 0;
+            width: 36px;
+            height: 36px;
+            background: linear-gradient(135deg, #FF6B35 0%, #F4A261 100%);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.125rem;
+        }
+        
+        .step-content {
+            flex: 1;
+        }
+        
+        .step-title {
+            font-weight: 700;
+            color: #2C3E50;
+            margin-bottom: 0.25rem;
+        }
+        
+        .step-desc {
+            color: #5A6C7D;
+            line-height: 1.6;
+        }
+        
+        .note-box {
+            background: rgba(255, 107, 53, 0.1);
+            border-left: 4px solid #FF6B35;
+            padding: 1.25rem;
+            border-radius: 8px;
+            margin: 1.5rem 0;
+        }
+        
+        .note-box p {
+            margin: 0;
+            color: #2C3E50;
+        }
+        
+        /* FAQ Section */
+        .faq-section {
+            padding: 4rem 2rem;
+            background: #FFF9F0;
+        }
+        
+        .faq-list {
+            max-width: 800px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        
+        details {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 12px;
+            cursor: pointer;
+            border: 1px solid #E5E5E5;
+        }
+        
+        summary {
+            font-weight: 700;
+            font-size: 1.125rem;
+            color: #2C3E50;
+            cursor: pointer;
+            list-style: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        summary::-webkit-details-marker {
+            display: none;
+        }
+        
+        summary::before {
+            content: "▶";
+            color: #FF6B35;
+            font-size: 0.875rem;
+            transition: transform 0.3s;
+        }
+        
+        details[open] summary::before {
+            transform: rotate(90deg);
+        }
+        
+        details p {
+            margin-top: 1rem;
+            color: #5A6C7D;
+            line-height: 1.6;
+        }
+        
+        /* CTA Section */
+        .cta-section {
+            padding: 4rem 2rem;
+            background: linear-gradient(135deg, #FF6B35 0%, #F4A261 100%);
+            color: white;
+            text-align: center;
+        }
+        
+        .cta-section h2 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+        
+        .cta-section p {
+            font-size: 1.125rem;
+            max-width: 600px;
+            margin: 0 auto 2rem;
+            opacity: 0.95;
+            line-height: 1.6;
+        }
+        
+        /* Footer */
+        .install-footer {
+            background: #2c2c2c;
+            color: white;
+            padding: 2rem;
+            text-align: center;
+        }
+        
+        .install-footer a {
+            color: #FF6B35;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        
+        .install-footer a:hover {
+            text-decoration: underline;
+        }
+        
+        .install-footer p {
+            margin: 0.5rem 0;
+        }
+        
+        /* Auto-detected platform notice */
+        .platform-notice {
+            text-align: center;
+            margin-bottom: 2rem;
+            padding: 1rem;
+            background: rgba(255, 107, 53, 0.1);
+            border-radius: 8px;
+        }
+        
+        .platform-notice p {
+            margin: 0;
+            color: #2C3E50;
+            font-size: 1.125rem;
+        }
+        
+        .platform-notice strong {
+            color: #FF6B35;
+        }
+        
+        /* Install Prompt (floating) */
+        #installPrompt {
+            display: none;
+            position: fixed;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            background: linear-gradient(135deg, #FF6B35 0%, #F4A261 100%);
+            color: white;
+            padding: 1.25rem 2rem;
+            border-radius: 16px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            z-index: 10000;
+            animation: slideUp 0.3s ease-out;
+            max-width: 90%;
+        }
+        
+        @keyframes slideUp {
+            from {
+                transform: translateX(-50%) translateY(100px);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(-50%) translateY(0);
+                opacity: 1;
+            }
+        }
+        
+        .prompt-content {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        
+        .prompt-buttons {
+            display: flex;
+            gap: 0.75rem;
+            justify-content: center;
+        }
+        
+        .prompt-btn {
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            border: none;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .prompt-btn.primary {
+            background: white;
+            color: #FF6B35;
+        }
+        
+        .prompt-btn.primary:hover {
+            transform: scale(1.05);
+        }
+        
+        .prompt-btn.secondary {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+        }
+        
+        .prompt-btn.secondary:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .install-hero h1 {
+                font-size: 2rem;
+            }
+            
+            .install-hero-subtitle {
+                font-size: 1.125rem;
+            }
+            
+            .benefits-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+            
+            .platform-box {
+                padding: 1.5rem;
+            }
+            
+            #installPrompt {
+                left: 1rem;
+                right: 1rem;
+                transform: none;
+                bottom: 1rem;
+            }
+        }
+    </style>
+    <!-- V36.8.5: Grey Text Fix - Comprehensive Override -->
+    <link rel="stylesheet" href="css/grey-text-fix.css?v=20251031-V36.8.5-GREY-FIX">
+    
+    <!-- V36.8.5: Contrast Fix - Header, Chat, Overall Visibility -->
+    <link rel="stylesheet" href="css/contrast-fix-v36.8.5.css?v=20251031-V36.8.5-CONTRAST-FIX">
+</head>
+<body class="install-page">
+    <!-- Header (same as main site) -->
+    <header class="site-header" role="banner">
+        <div class="container">
+            <div class="header-content">
+                <div class="brand">
+                    <h1 class="site-title">
+                        <a href="index.html" aria-label="Go to homepage">
+                            <img src="images/site-logo-v2.svg" alt="Workforce Democracy Project" class="site-logo">
+                            <span class="title-text">Workforce Democracy Project</span>
+                        </a>
+                    </h1>
+                    <p class="establishment">Est. Oct 2025</p>
+                </div>
+                
+                <!-- Desktop Navigation -->
+                <nav class="desktop-nav" role="navigation" aria-label="Main navigation">
+                    <ul class="nav-list">
+                        <li><a href="index.html#civic">🗳️ Civic Engagement</a></li>
+                        <li><a href="index.html#jobs">💼 Explore Jobs</a></li>
+                        <li><a href="index.html#ethical-business">🤝 Ethical Businesses</a></li>
+                        <li><a href="learning.html">📚 Learn</a></li>
+                        <li><a href="faq.html">💡 FAQ</a></li>
+                        <li><a href="privacy.html">🔒 Privacy</a></li>
+                        <li><a href="install-app.html" class="install-app-link" style="background: linear-gradient(135deg, #FF6B35 0%, #F4A261 100%); color: white; padding: 0.5rem 1rem; border-radius: 8px; font-weight: 600;">📱 Install App</a></li>
+                        <li class="nav-language">
+                            <div class="language-selector desktop-language" id="desktopLanguageSelector">
+                                <button class="language-btn" id="languageBtnDesktop" aria-label="Select language">
+                                    <i class="fas fa-globe"></i>
+                                    <span id="currentLanguageDesktop">EN</span>
+                                </button>
+                            </div>
+                        </li>
+                    </ul>
+                </nav>
+                
+                <!-- Mobile Controls -->
+                <div class="mobile-controls">
+                    <div class="language-selector" id="languageSelector">
+                        <button class="language-btn" id="languageBtnMobile" aria-label="Select language">
+                            <i class="fas fa-globe"></i>
+                            <span id="currentLanguage">EN</span>
+                        </button>
+                    </div>
+                    
+                    <button class="mobile-menu-toggle" onclick="toggleMobileMenu()" aria-label="Toggle menu">
+                        <span></span>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Mobile Navigation -->
+            <nav class="mobile-nav" id="mobileNav" role="navigation" aria-label="Mobile navigation">
+                <ul class="mobile-nav-list">
+                    <li><a href="index.html#civic" onclick="closeMobileMenu()">🗳️ Civic Engagement</a></li>
+                    <li><a href="index.html#jobs" onclick="closeMobileMenu()">💼 Explore Jobs</a></li>
+                    <li><a href="index.html#ethical-business" onclick="closeMobileMenu()">🤝 Ethical Businesses</a></li>
+                    <li><a href="learning.html" onclick="closeMobileMenu()">📚 Learn</a></li>
+                    <li><a href="faq.html" onclick="closeMobileMenu()">💡 FAQ</a></li>
+                    <li><a href="privacy.html" onclick="closeMobileMenu()">🔒 Privacy</a></li>
+                    <li><a href="install-app.html" onclick="closeMobileMenu()" class="install-app-link" style="background: linear-gradient(135deg, #FF6B35 0%, #F4A261 100%); color: white; padding: 0.75rem 1.25rem; border-radius: 8px; font-weight: 600; display: block; text-align: center; margin-top: 1rem;">📱 Install App</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="install-hero">
+        <div class="install-hero-icon">📱</div>
+        <h1>Install Our App</h1>
+        <p class="install-hero-subtitle">
+            Add Workforce Democracy to your home screen for instant access. 
+            Works like a native app, but no app store needed!
+        </p>
+        <button id="installBtn" class="install-button" style="display: none;">
+            <i class="fas fa-download"></i>
+            <span>Install Now</span>
+        </button>
+    </section>
+
+    <!-- Benefits Section -->
+    <section class="benefits-section">
+        <div class="container-narrow">
+            <h2 class="section-title">Why Install?</h2>
+            
+            <div class="benefits-grid">
+                <div class="benefit-card">
+                    <div class="benefit-icon">⚡</div>
+                    <h3 class="benefit-title">Instant Access</h3>
+                    <p class="benefit-desc">
+                        Launch directly from your home screen—no need to open your browser and type a URL
+                    </p>
+                </div>
+                
+                <div class="benefit-card">
+                    <div class="benefit-icon">📴</div>
+                    <h3 class="benefit-title">Works Offline</h3>
+                    <p class="benefit-desc">
+                        Previously viewed content stays available even without internet connection
+                    </p>
+                </div>
+                
+                <div class="benefit-card">
+                    <div class="benefit-icon">🚀</div>
+                    <h3 class="benefit-title">Faster Loading</h3>
+                    <p class="benefit-desc">
+                        Cached resources load instantly for a smooth, app-like experience
+                    </p>
+                </div>
+                
+                <div class="benefit-card">
+                    <div class="benefit-icon">🔒</div>
+                    <h3 class="benefit-title">100% Private</h3>
+                    <p class="benefit-desc">
+                        No app store tracking or data collection—your privacy stays protected
+                    </p>
+                </div>
+                
+                <div class="benefit-card">
+                    <div class="benefit-icon">💾</div>
+                    <h3 class="benefit-title">Minimal Storage</h3>
+                    <p class="benefit-desc">
+                        Uses far less space than traditional apps and updates automatically
+                    </p>
+                </div>
+                
+                <div class="benefit-card">
+                    <div class="benefit-icon">🎨</div>
+                    <h3 class="benefit-title">Full-Screen Experience</h3>
+                    <p class="benefit-desc">
+                        No browser bars or distractions—just clean, focused content
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Instructions Section -->
+    <section class="instructions-section">
+        <div class="container-narrow">
+            <h2 class="section-title">How to Install</h2>
+            
+            <!-- Platform Detection Notice -->
+            <div class="platform-notice">
+                <p>
+                    <i class="fas fa-circle-info"></i>
+                    We've detected you're using <strong id="platformName">...</strong>
+                </p>
+            </div>
+            
+            <!-- iOS Instructions -->
+            <div class="platform-box" id="iosInstructions">
+                <div class="platform-header">
+                    <span class="platform-icon">🍎</span>
+                    <h3 class="platform-title">iPhone & iPad (Safari)</h3>
+                </div>
+                
+                <ol class="steps-list">
+                    <li class="step-item">
+                        <div class="step-number">1</div>
+                        <div class="step-content">
+                            <div class="step-title">Open in Safari</div>
+                            <div class="step-desc">
+                                Make sure you're using Safari browser (not Chrome). This feature only works in Safari on iOS.
+                            </div>
+                        </div>
+                    </li>
+                    
+                    <li class="step-item">
+                        <div class="step-number">2</div>
+                        <div class="step-content">
+                            <div class="step-title">Tap the Share Button</div>
+                            <div class="step-desc">
+                                Look for the share icon <i class="fas fa-share"></i> at the bottom (iPhone) or top right (iPad) of Safari
+                            </div>
+                        </div>
+                    </li>
+                    
+                    <li class="step-item">
+                        <div class="step-number">3</div>
+                        <div class="step-content">
+                            <div class="step-title">Select "Add to Home Screen"</div>
+                            <div class="step-desc">
+                                Scroll down in the share menu and tap <strong>"Add to Home Screen"</strong>
+                            </div>
+                        </div>
+                    </li>
+                    
+                    <li class="step-item">
+                        <div class="step-number">4</div>
+                        <div class="step-content">
+                            <div class="step-title">Tap "Add"</div>
+                            <div class="step-desc">
+                                You can edit the name if you want, then tap <strong>"Add"</strong> in the top right corner
+                            </div>
+                        </div>
+                    </li>
+                    
+                    <li class="step-item">
+                        <div class="step-number">5</div>
+                        <div class="step-content">
+                            <div class="step-title">Done! 🎉</div>
+                            <div class="step-desc">
+                                The app icon will appear on your home screen. Tap it anytime to launch!
+                            </div>
+                        </div>
+                    </li>
+                </ol>
+                
+                <div class="note-box">
+                    <p>
+                        <strong>Note:</strong> This feature only works in Safari on iOS. 
+                        If you're using Chrome or another browser, please open this page in Safari.
+                    </p>
+                </div>
+            </div>
+            
+            <!-- Android Instructions -->
+            <div class="platform-box" id="androidInstructions">
+                <div class="platform-header">
+                    <span class="platform-icon">🤖</span>
+                    <h3 class="platform-title">Android (Chrome, Edge, Firefox)</h3>
+                </div>
+                
+                <ol class="steps-list">
+                    <li class="step-item">
+                        <div class="step-number">1</div>
+                        <div class="step-content">
+                            <div class="step-title">Open in Chrome</div>
+                            <div class="step-desc">
+                                Visit this site in Chrome browser (or Edge/Firefox)
+                            </div>
+                        </div>
+                    </li>
+                    
+                    <li class="step-item">
+                        <div class="step-number">2</div>
+                        <div class="step-content">
+                            <div class="step-title">Look for Install Banner</div>
+                            <div class="step-desc">
+                                Chrome may show an "Install app" banner at the top or bottom. If you see it, tap <strong>"Install"</strong>
+                            </div>
+                        </div>
+                    </li>
+                    
+                    <li class="step-item">
+                        <div class="step-number">3</div>
+                        <div class="step-content">
+                            <div class="step-title">OR: Tap Menu (⋮)</div>
+                            <div class="step-desc">
+                                If no banner appears, tap the 3-dot menu icon in the top right corner
+                            </div>
+                        </div>
+                    </li>
+                    
+                    <li class="step-item">
+                        <div class="step-number">4</div>
+                        <div class="step-content">
+                            <div class="step-title">Select "Add to Home screen"</div>
+                            <div class="step-desc">
+                                Look for <strong>"Add to Home screen"</strong> or <strong>"Install app"</strong> in the menu
+                            </div>
+                        </div>
+                    </li>
+                    
+                    <li class="step-item">
+                        <div class="step-number">5</div>
+                        <div class="step-content">
+                            <div class="step-title">Confirm Installation</div>
+                            <div class="step-desc">
+                                Tap <strong>"Install"</strong> or <strong>"Add"</strong> in the confirmation dialog
+                            </div>
+                        </div>
+                    </li>
+                    
+                    <li class="step-item">
+                        <div class="step-number">6</div>
+                        <div class="step-content">
+                            <div class="step-title">Done! 🎉</div>
+                            <div class="step-desc">
+                                The app icon will appear on your home screen or app drawer!
+                            </div>
+                        </div>
+                    </li>
+                </ol>
+                
+                <div class="note-box">
+                    <p>
+                        <strong>Tip:</strong> Android may also show an install prompt automatically after you've visited the site a few times.
+                    </p>
+                </div>
+            </div>
+            
+            <!-- Desktop Instructions -->
+            <div class="platform-box" id="desktopInstructions">
+                <div class="platform-header">
+                    <span class="platform-icon">💻</span>
+                    <h3 class="platform-title">Desktop (Chrome, Edge)</h3>
+                </div>
+                
+                <ol class="steps-list">
+                    <li class="step-item">
+                        <div class="step-number">1</div>
+                        <div class="step-content">
+                            <div class="step-title">Open in Chrome or Edge</div>
+                            <div class="step-desc">
+                                Visit this site in Chrome or Microsoft Edge browser
+                            </div>
+                        </div>
+                    </li>
+                    
+                    <li class="step-item">
+                        <div class="step-number">2</div>
+                        <div class="step-content">
+                            <div class="step-title">Look for Install Icon</div>
+                            <div class="step-desc">
+                                Check the address bar (URL bar) for an install icon (⊕ or computer with down arrow)
+                            </div>
+                        </div>
+                    </li>
+                    
+                    <li class="step-item">
+                        <div class="step-number">3</div>
+                        <div class="step-content">
+                            <div class="step-title">Click "Install"</div>
+                            <div class="step-desc">
+                                Click the install icon, or open the menu (⋮) and select <strong>"Install Workforce Democracy..."</strong>
+                            </div>
+                        </div>
+                    </li>
+                    
+                    <li class="step-item">
+                        <div class="step-number">4</div>
+                        <div class="step-content">
+                            <div class="step-title">Confirm Installation</div>
+                            <div class="step-desc">
+                                Click <strong>"Install"</strong> in the popup dialog
+                            </div>
+                        </div>
+                    </li>
+                    
+                    <li class="step-item">
+                        <div class="step-number">5</div>
+                        <div class="step-content">
+                            <div class="step-title">Done! 🎉</div>
+                            <div class="step-desc">
+                                The app will open in its own window. Find it in your Start Menu or Applications folder!
+                            </div>
+                        </div>
+                    </li>
+                </ol>
+                
+                <div class="note-box">
+                    <p>
+                        <strong>Desktop Benefits:</strong> Opens in its own window without browser tabs, adds to taskbar/dock, and provides faster performance.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq-section">
+        <div class="container-narrow">
+            <h2 class="section-title">Frequently Asked Questions</h2>
+            
+            <div class="faq-list">
+                <details>
+                    <summary>Is this a real app?</summary>
+                    <p>
+                        Yes! It's called a Progressive Web App (PWA). It works exactly like a native app 
+                        but doesn't require the App Store or Google Play. PWAs update automatically, 
+                        use less storage, and respect your privacy.
+                    </p>
+                </details>
+                
+                <details>
+                    <summary>Does it cost anything?</summary>
+                    <p>
+                        No! It's completely free, just like our website. No subscriptions, 
+                        no in-app purchases, no ads. 100% free forever.
+                    </p>
+                </details>
+                
+                <details>
+                    <summary>How much storage does it use?</summary>
+                    <p>
+                        Very little! Usually less than 5MB. Traditional native apps can be 50-200MB or more. 
+                        PWAs are much more efficient.
+                    </p>
+                </details>
+                
+                <details>
+                    <summary>Will it work offline?</summary>
+                    <p>
+                        Yes! Pages you've already visited are cached, so you can access them without internet. 
+                        Loading new content requires a connection.
+                    </p>
+                </details>
+                
+                <details>
+                    <summary>Is my data private?</summary>
+                    <p>
+                        Absolutely! We don't track you, sell data, or use analytics. 
+                        Everything stays on your device. Check our 
+                        <a href="privacy.html" style="color: #FF6B35; text-decoration: underline;">Privacy Policy</a> 
+                        for details.
+                    </p>
+                </details>
+                
+                <details>
+                    <summary>How do I uninstall it?</summary>
+                    <p>
+                        <strong>iOS:</strong> Long-press the icon → Remove App<br>
+                        <strong>Android:</strong> Long-press the icon → Uninstall<br>
+                        <strong>Desktop:</strong> Right-click icon → Uninstall, or use Settings → Apps
+                    </p>
+                </details>
+                
+                <details>
+                    <summary>Will I get updates?</summary>
+                    <p>
+                        Yes! Updates happen automatically in the background. You don't need to do anything. 
+                        No app store approvals, no waiting—just instant updates when we improve the site.
+                    </p>
+                </details>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container-narrow">
+            <h2>Ready to Install?</h2>
+            <p>
+                Get instant access to democratic workplace resources and civic transparency 
+                tools right from your home screen.
+            </p>
+            <button id="installBtnBottom" class="install-button" style="display: none;">
+                <i class="fas fa-download"></i>
+                <span>Install Now</span>
+            </button>
+            <p style="margin-top: 1.5rem; opacity: 0.9; font-size: 0.9375rem;">
+                Or follow the instructions above for your device
+            </p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="install-footer">
+        <p>
+            <a href="index.html">← Back to Website</a>
+        </p>
+        <p style="opacity: 0.7; font-size: 0.875rem; margin-top: 1rem;">
+            © 2025 Workforce Democracy Project. Privacy-first, non-partisan education.
+        </p>
+    </footer>
+
+    <!-- Install Prompt (floating banner) -->
+    <div id="installPrompt">
+        <div class="prompt-content">
+            <div>
+                <strong style="display: block; margin-bottom: 0.5rem; font-size: 1.125rem;">
+                    Install Workforce Democracy App
+                </strong>
+                <p style="margin: 0; opacity: 0.9; font-size: 0.9375rem;">
+                    Get instant access from your home screen!
+                </p>
+            </div>
+            <div class="prompt-buttons">
+                <button class="prompt-btn primary" id="promptInstall">
+                    Install
+                </button>
+                <button class="prompt-btn secondary" id="promptDismiss">
+                    Not Now
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript for header (from main site) -->
+    <script src="js/main.js"></script>
+    <script src="js/language.js"></script>
+    
+    <!-- PWA Install Logic -->
+    <script>
+        let deferredPrompt;
+        const installBtn = document.getElementById('installBtn');
+        const installBtnBottom = document.getElementById('installBtnBottom');
+        const installPrompt = document.getElementById('installPrompt');
+        const promptInstall = document.getElementById('promptInstall');
+        const promptDismiss = document.getElementById('promptDismiss');
+        
+        // Detect platform and show appropriate instructions
+        function detectPlatform() {
+            const ua = navigator.userAgent.toLowerCase();
+            const platformName = document.getElementById('platformName');
+            const iosInstructions = document.getElementById('iosInstructions');
+            const androidInstructions = document.getElementById('androidInstructions');
+            const desktopInstructions = document.getElementById('desktopInstructions');
+            
+            if (/iphone|ipad|ipod/.test(ua)) {
+                platformName.textContent = 'iOS (iPhone/iPad)';
+                iosInstructions.style.display = 'block';
+                androidInstructions.style.display = 'none';
+                desktopInstructions.style.display = 'none';
+            } else if (/android/.test(ua)) {
+                platformName.textContent = 'Android';
+                iosInstructions.style.display = 'none';
+                androidInstructions.style.display = 'block';
+                desktopInstructions.style.display = 'none';
+            } else {
+                platformName.textContent = 'Desktop (Chrome/Edge)';
+                iosInstructions.style.display = 'none';
+                androidInstructions.style.display = 'none';
+                desktopInstructions.style.display = 'block';
+            }
+        }
+        
+        // Listen for install prompt
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
+            
+            // Show install buttons
+            installBtn.style.display = 'inline-flex';
+            installBtnBottom.style.display = 'inline-flex';
+            
+            // Show floating prompt after 5 seconds
+            setTimeout(() => {
+                installPrompt.style.display = 'block';
+            }, 5000);
+        });
+        
+        // Install button click handler
+        function triggerInstall() {
+            if (!deferredPrompt) {
+                alert('Install prompt not available. Please use your browser\'s menu to install.');
+                return;
+            }
+            
+            deferredPrompt.prompt();
+            deferredPrompt.userChoice.then((choiceResult) => {
+                if (choiceResult.outcome === 'accepted') {
+                    console.log('User accepted install');
+                    installPrompt.style.display = 'none';
+                } else {
+                    console.log('User dismissed install');
+                }
+                deferredPrompt = null;
+            });
+        }
+        
+        // Attach click handlers
+        installBtn.addEventListener('click', triggerInstall);
+        installBtnBottom.addEventListener('click', triggerInstall);
+        promptInstall.addEventListener('click', triggerInstall);
+        
+        promptDismiss.addEventListener('click', () => {
+            installPrompt.style.display = 'none';
+        });
+        
+        // Check if already installed
+        if (window.matchMedia('(display-mode: standalone)').matches) {
+            console.log('App is already installed');
+            if (installBtn) {
+                installBtn.innerHTML = '<i class="fas fa-check"></i><span>Already Installed</span>';
+                installBtn.disabled = true;
+                installBtn.style.opacity = '0.6';
+            }
+            if (installBtnBottom) {
+                installBtnBottom.innerHTML = '<i class="fas fa-check"></i><span>Already Installed</span>';
+                installBtnBottom.disabled = true;
+                installBtnBottom.style.opacity = '0.6';
+            }
+        }
+        
+        // Initialize platform detection
+        detectPlatform();
+    </script>
+</body>
+</html>

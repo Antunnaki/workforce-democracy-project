@@ -1,0 +1,80 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" role="img" aria-label="Workforce Democracy Project Logo">
+  <defs>
+    <linearGradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#4A90E2;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#7FB069;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#E8D174;stop-opacity:1" />
+    </linearGradient>
+    <filter id="logoGlow">
+      <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  
+  <!-- Circle of people representing workers -->
+  <g filter="url(#logoGlow)">
+    <!-- Outer circle -->
+    <circle cx="50" cy="50" r="45" fill="none" stroke="url(#logoGradient)" stroke-width="3"/>
+    
+    <!-- 8 people figures in circle -->
+    <!-- Top -->
+    <g transform="translate(50, 10)">
+      <circle cx="0" cy="0" r="4" fill="#4A90E2"/>
+      <path d="M -3 4 L -3 12 M 0 6 L 0 12 M 3 4 L 3 12" stroke="#4A90E2" stroke-width="1.5" stroke-linecap="round"/>
+    </g>
+    
+    <!-- Top-right -->
+    <g transform="translate(78, 22)">
+      <circle cx="0" cy="0" r="4" fill="#7FB069"/>
+      <path d="M -3 4 L -3 12 M 0 6 L 0 12 M 3 4 L 3 12" stroke="#7FB069" stroke-width="1.5" stroke-linecap="round"/>
+    </g>
+    
+    <!-- Right -->
+    <g transform="translate(90, 50)">
+      <circle cx="0" cy="0" r="4" fill="#E8D174"/>
+      <path d="M -3 4 L -3 12 M 0 6 L 0 12 M 3 4 L 3 12" stroke="#E8D174" stroke-width="1.5" stroke-linecap="round"/>
+    </g>
+    
+    <!-- Bottom-right -->
+    <g transform="translate(78, 78)">
+      <circle cx="0" cy="0" r="4" fill="#4A90E2"/>
+      <path d="M -3 4 L -3 12 M 0 6 L 0 12 M 3 4 L 3 12" stroke="#4A90E2" stroke-width="1.5" stroke-linecap="round"/>
+    </g>
+    
+    <!-- Bottom -->
+    <g transform="translate(50, 90)">
+      <circle cx="0" cy="0" r="4" fill="#7FB069"/>
+      <path d="M -3 4 L -3 12 M 0 6 L 0 12 M 3 4 L 3 12" stroke="#7FB069" stroke-width="1.5" stroke-linecap="round"/>
+    </g>
+    
+    <!-- Bottom-left -->
+    <g transform="translate(22, 78)">
+      <circle cx="0" cy="0" r="4" fill="#E8D174"/>
+      <path d="M -3 4 L -3 12 M 0 6 L 0 12 M 3 4 L 3 12" stroke="#E8D174" stroke-width="1.5" stroke-linecap="round"/>
+    </g>
+    
+    <!-- Left -->
+    <g transform="translate(10, 50)">
+      <circle cx="0" cy="0" r="4" fill="#4A90E2"/>
+      <path d="M -3 4 L -3 12 M 0 6 L 0 12 M 3 4 L 3 12" stroke="#4A90E2" stroke-width="1.5" stroke-linecap="round"/>
+    </g>
+    
+    <!-- Top-left -->
+    <g transform="translate(22, 22)">
+      <circle cx="0" cy="0" r="4" fill="#7FB069"/>
+      <path d="M -3 4 L -3 12 M 0 6 L 0 12 M 3 4 L 3 12" stroke="#7FB069" stroke-width="1.5" stroke-linecap="round"/>
+    </g>
+    
+    <!-- Center symbol - hands joined -->
+    <g transform="translate(50, 50)">
+      <!-- Three hands meeting in center -->
+      <path d="M 0 -8 L 0 0" stroke="url(#logoGradient)" stroke-width="2" stroke-linecap="round"/>
+      <path d="M -7 4 L 0 0" stroke="url(#logoGradient)" stroke-width="2" stroke-linecap="round"/>
+      <path d="M 7 4 L 0 0" stroke="url(#logoGradient)" stroke-width="2" stroke-linecap="round"/>
+      <circle cx="0" cy="0" r="3" fill="url(#logoGradient)"/>
+    </g>
+  </g>
+</svg>

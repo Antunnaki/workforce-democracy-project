@@ -1,0 +1,326 @@
+{
+  "version": "1.0.0",
+  "lastUpdated": "2025-01-13",
+  "vettingCriteria": {
+    "factualAccuracy": "High or Very High (Media Bias/Fact Check)",
+    "editorialTransparency": "Discloses funding sources",
+    "correctionsPolicy": "Publishes retractions when errors occur",
+    "paywall": "Free tier available or no paywall",
+    "independence": "Not state-controlled (or editorially independent if public-funded)",
+    "sourceAttribution": "Cites sources clearly"
+  },
+  "sources": [
+    {
+      "id": "propublica-us",
+      "name": "ProPublica",
+      "country": "usa",
+      "language": "en",
+      "category": ["civic", "government", "investigative"],
+      "bias": {
+        "rating": "Least Biased",
+        "factualAccuracy": "Very High",
+        "source": "Media Bias/Fact Check"
+      },
+      "businessModel": "Nonprofit (donations)",
+      "rss": "https://www.propublica.org/feeds/propublica/main",
+      "website": "https://www.propublica.org",
+      "description": "Independent nonprofit investigative journalism",
+      "paywall": false,
+      "verified": true,
+      "priority": 1
+    },
+    {
+      "id": "npr-us",
+      "name": "NPR",
+      "country": "usa",
+      "language": "en",
+      "category": ["civic", "government", "general"],
+      "bias": {
+        "rating": "Least Biased",
+        "factualAccuracy": "Very High",
+        "source": "Media Bias/Fact Check"
+      },
+      "businessModel": "Public + Donations",
+      "rss": "https://feeds.npr.org/1001/rss.xml",
+      "website": "https://www.npr.org",
+      "description": "National public radio with comprehensive news coverage",
+      "paywall": false,
+      "verified": true,
+      "priority": 2
+    },
+    {
+      "id": "ap-us",
+      "name": "Associated Press",
+      "country": "usa",
+      "language": "en",
+      "category": ["civic", "government", "general"],
+      "bias": {
+        "rating": "Least Biased",
+        "factualAccuracy": "Very High",
+        "source": "Media Bias/Fact Check"
+      },
+      "businessModel": "News cooperative",
+      "rss": "https://apnews.com/apf-topnews",
+      "website": "https://apnews.com",
+      "description": "Independent global news organization",
+      "paywall": false,
+      "verified": true,
+      "priority": 2
+    },
+    {
+      "id": "reuters-us",
+      "name": "Reuters",
+      "country": "usa",
+      "language": "en",
+      "category": ["civic", "government", "business"],
+      "bias": {
+        "rating": "Least Biased",
+        "factualAccuracy": "Very High",
+        "source": "Media Bias/Fact Check"
+      },
+      "businessModel": "Commercial",
+      "rss": "https://feeds.reuters.com/reuters/topNews",
+      "website": "https://www.reuters.com",
+      "description": "International news wire service",
+      "paywall": false,
+      "verified": true,
+      "priority": 2
+    },
+    {
+      "id": "the-intercept-us",
+      "name": "The Intercept",
+      "country": "usa",
+      "language": "en",
+      "category": ["civic", "government", "investigative"],
+      "bias": {
+        "rating": "Left",
+        "factualAccuracy": "High",
+        "source": "Media Bias/Fact Check"
+      },
+      "businessModel": "Nonprofit",
+      "rss": "https://theintercept.com/feed/",
+      "website": "https://theintercept.com",
+      "description": "Investigative journalism focused on national security, civil liberties",
+      "paywall": false,
+      "verified": true,
+      "priority": 3
+    },
+    {
+      "id": "bbc-uk",
+      "name": "BBC News",
+      "country": "uk",
+      "language": "en",
+      "category": ["civic", "government", "general"],
+      "bias": {
+        "rating": "Least Biased",
+        "factualAccuracy": "Very High",
+        "source": "Media Bias/Fact Check"
+      },
+      "businessModel": "Public funding (license fee)",
+      "rss": "https://feeds.bbci.co.uk/news/rss.xml",
+      "website": "https://www.bbc.com/news",
+      "description": "British public service broadcaster",
+      "paywall": false,
+      "verified": true,
+      "priority": 1
+    },
+    {
+      "id": "guardian-uk",
+      "name": "The Guardian",
+      "country": "uk",
+      "language": "en",
+      "category": ["civic", "government", "general"],
+      "bias": {
+        "rating": "Left-Center",
+        "factualAccuracy": "High",
+        "source": "Media Bias/Fact Check"
+      },
+      "businessModel": "Reader-supported (donations)",
+      "rss": "https://www.theguardian.com/international/rss",
+      "website": "https://www.theguardian.com",
+      "description": "British daily newspaper with global coverage",
+      "paywall": false,
+      "verified": true,
+      "priority": 1
+    },
+    {
+      "id": "opendemocracy-uk",
+      "name": "openDemocracy",
+      "country": "uk",
+      "language": "en",
+      "category": ["civic", "government", "democracy"],
+      "bias": {
+        "rating": "Left-Center",
+        "factualAccuracy": "High",
+        "source": "Media Bias/Fact Check"
+      },
+      "businessModel": "Nonprofit (donations)",
+      "rss": "https://www.opendemocracy.net/en/feed/",
+      "website": "https://www.opendemocracy.net",
+      "description": "Independent global media platform focused on democracy",
+      "paywall": false,
+      "verified": true,
+      "priority": 2
+    },
+    {
+      "id": "bureau-uk",
+      "name": "The Bureau of Investigative Journalism",
+      "country": "uk",
+      "language": "en",
+      "category": ["civic", "government", "investigative"],
+      "bias": {
+        "rating": "Least Biased",
+        "factualAccuracy": "Very High",
+        "source": "Media Bias/Fact Check"
+      },
+      "businessModel": "Nonprofit (donations)",
+      "rss": "https://www.thebureauinvestigates.com/feed",
+      "website": "https://www.thebureauinvestigates.com",
+      "description": "Independent investigative journalism organization",
+      "paywall": false,
+      "verified": true,
+      "priority": 2
+    },
+    {
+      "id": "abc-australia",
+      "name": "ABC News Australia",
+      "country": "australia",
+      "language": "en",
+      "category": ["civic", "government", "general"],
+      "bias": {
+        "rating": "Least Biased",
+        "factualAccuracy": "High",
+        "source": "Media Bias/Fact Check"
+      },
+      "businessModel": "Public funding",
+      "rss": "https://www.abc.net.au/news/feed/51120/rss.xml",
+      "website": "https://www.abc.net.au/news",
+      "description": "Australian public broadcaster",
+      "paywall": false,
+      "verified": true,
+      "priority": 1
+    },
+    {
+      "id": "guardian-australia",
+      "name": "The Guardian Australia",
+      "country": "australia",
+      "language": "en",
+      "category": ["civic", "government", "general"],
+      "bias": {
+        "rating": "Left-Center",
+        "factualAccuracy": "High",
+        "source": "Media Bias/Fact Check"
+      },
+      "businessModel": "Reader-supported (donations)",
+      "rss": "https://www.theguardian.com/au/rss",
+      "website": "https://www.theguardian.com/au",
+      "description": "Australian edition of The Guardian",
+      "paywall": false,
+      "verified": true,
+      "priority": 1
+    },
+    {
+      "id": "conversation-australia",
+      "name": "The Conversation AU",
+      "country": "australia",
+      "language": "en",
+      "category": ["civic", "government", "education"],
+      "bias": {
+        "rating": "Least Biased",
+        "factualAccuracy": "High",
+        "source": "Media Bias/Fact Check"
+      },
+      "businessModel": "University-funded",
+      "rss": "https://theconversation.com/au/articles.atom",
+      "website": "https://theconversation.com/au",
+      "description": "Academic journalism with expert analysis",
+      "paywall": false,
+      "verified": true,
+      "priority": 2
+    },
+    {
+      "id": "labor-notes-us",
+      "name": "Labor Notes",
+      "country": "usa",
+      "language": "en",
+      "category": ["labor", "workplace"],
+      "bias": {
+        "rating": "Left",
+        "factualAccuracy": "High",
+        "source": "Media Bias/Fact Check"
+      },
+      "businessModel": "Nonprofit (subscriptions + donations)",
+      "rss": "https://labornotes.org/rss.xml",
+      "website": "https://labornotes.org",
+      "description": "Voice of union activists focused on workplace democracy",
+      "paywall": false,
+      "verified": true,
+      "priority": 1
+    },
+    {
+      "id": "common-dreams-us",
+      "name": "Common Dreams",
+      "country": "usa",
+      "language": "en",
+      "category": ["civic", "government", "progressive"],
+      "bias": {
+        "rating": "Left",
+        "factualAccuracy": "High",
+        "source": "Media Bias/Fact Check"
+      },
+      "businessModel": "Nonprofit (donations)",
+      "rss": "https://www.commondreams.org/feed",
+      "website": "https://www.commondreams.org",
+      "description": "Progressive independent news outlet",
+      "paywall": false,
+      "verified": true,
+      "priority": 3
+    },
+    {
+      "id": "truthout-us",
+      "name": "Truthout",
+      "country": "usa",
+      "language": "en",
+      "category": ["civic", "government", "progressive"],
+      "bias": {
+        "rating": "Left",
+        "factualAccuracy": "High",
+        "source": "Media Bias/Fact Check"
+      },
+      "businessModel": "Nonprofit (donations)",
+      "rss": "https://truthout.org/feed/",
+      "website": "https://truthout.org",
+      "description": "Independent news and analysis",
+      "paywall": false,
+      "verified": true,
+      "priority": 3
+    }
+  ],
+  "categories": {
+    "civic": {
+      "name": "Civic & Government",
+      "description": "Policy, elections, transparency, accountability",
+      "icon": "🏛️"
+    },
+    "labor": {
+      "name": "Labor & Workplace",
+      "description": "Worker rights, unions, workplace democracy",
+      "icon": "💼"
+    },
+    "business": {
+      "name": "Ethical Business",
+      "description": "Cooperatives, B-Corps, corporate accountability",
+      "icon": "🌱"
+    },
+    "investigative": {
+      "name": "Investigative",
+      "description": "In-depth reporting and investigations",
+      "icon": "🔍"
+    },
+    "general": {
+      "name": "General News",
+      "description": "Broad news coverage",
+      "icon": "📰"
+    }
+  }
+}

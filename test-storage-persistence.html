@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>localStorage Persistence Test - GenSpark Diagnostic</title>
+    <style>
+        body {
+            font-family: system-ui, -apple-system, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background: #1a1a1a;
+            color: #fff;
+        }
+        .test-section {
+            background: #2a2a2a;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+            border: 2px solid #333;
+        }
+        button {
+            background: #0070f3;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 5px;
+        }
+        button:hover {
+            background: #0051cc;
+        }
+        .result {
+            background: #1e1e1e;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+        }
+        .success { color: #4ade80; }
+        .error { color: #f87171; }
+        .warning { color: #fbbf24; }
+        h1 {
+            color: #0070f3;
+        }
+        h2 {
+            color: #60a5fa;
+            margin-top: 0;
+        }
+        .info {
+            background: #1e3a8a;
+            padding: 15px;
+            border-radius: 6px;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>🧪 localStorage Persistence Test</h1>
+    <p>This test will help diagnose why localStorage data disappears on page reload.</p>
+
+    <div class="info">
+        <strong>🎯 Test Objective:</strong><br>
+        Determine if GenSpark hosting clears certain localStorage keys on page load.
+    </div>
+
+    <!-- TEST 1: Write and Immediate Read -->
+    <div class="test-section">
+        <h2>Test 1: Write & Immediate Read</h2>
+        <p>Set localStorage keys and immediately read them back (no reload)</p>
+        <button onclick="runTest1()">Run Test 1</button>
+        <div id="test1-result" class="result"></div>
+    </div>
+
+    <!-- TEST 2: Check After Reload -->
+    <div class="test-section">
+        <h2>Test 2: Persistence After Reload</h2>
+        <p>Check if values persist after page reload (F5)</p>
+        <button onclick="setTestData()">Step 1: Set Test Data</button>
+        <button onclick="checkTestData()">Step 2: Check Data (run after F5)</button>
+        <div id="test2-result" class="result"></div>
+    </div>
+
+    <!-- TEST 3: Different Key Patterns -->
+    <div class="test-section">
+        <h2>Test 3: Key Pattern Test</h2>
+        <p>Test if certain key naming patterns are cleared</p>
+        <button onclick="runTest3()">Run Test 3</button>
+        <div id="test3-result" class="result"></div>
+    </div>
+
+    <!-- TEST 4: Console Monitoring -->
+    <div class="test-section">
+        <h2>Test 4: Monitor localStorage Calls</h2>
+        <p>Intercept and log all localStorage operations</p>
+        <button onclick="startMonitoring()">Start Monitoring</button>
+        <button onclick="stopMonitoring()">Stop Monitoring</button>
+        <div id="test4-result" class="result"></div>
+    </div>
+
+    <script>
+        let monitoringActive = false;
+        let originalSetItem = localStorage.setItem;
+        let originalGetItem = localStorage.getItem;
+        let originalRemoveItem = localStorage.removeItem;
+        let originalClear = localStorage.clear;
+        let logs = [];
+
+        // TEST 1: Write and Immediate Read
+        function runTest1() {
+            const result = document.getElementById('test1-result');
+            result.innerHTML = '<div class="warning">Running Test 1...</div>';
+            
+            const testKeys = {
+                'wdp_username': 'test_user',
+                'wdp_password_hash': '1234567890abcdef',
+                'wdp_salt': 'salt123',
+                'wdp_user_data': '{"test": "data"}',
+                'test_normal_key': 'normal_value',
+                'another_test': '12345'
+            };
+            
+            let output = '<div class="success">✅ Writing keys...</div>';
+            
+            // Write all keys
+            Object.entries(testKeys).forEach(([key, value]) => {
+                localStorage.setItem(key, value);
+                output += `<div>Set: ${key} = ${value.substring(0, 20)}...</div>`;
+            });
+            
+            output += '<br><div class="success">✅ Reading keys back immediately...</div>';
+            
+            // Read all keys back
+            let allSuccess = true;
+            Object.entries(testKeys).forEach(([key, expectedValue]) => {
+                const actualValue = localStorage.getItem(key);
+                const match = actualValue === expectedValue;
+                if (!match) allSuccess = false;
+                
+                const className = match ? 'success' : 'error';
+                output += `<div class="${className}">${match ? '✅' : '❌'} ${key}: ${actualValue ? actualValue.substring(0, 20) + '...' : 'NULL'}</div>`;
+            });
+            
+            output += `<br><div class="${allSuccess ? 'success' : 'error'}"><strong>Result: ${allSuccess ? 'ALL KEYS READABLE' : 'SOME KEYS FAILED'}</strong></div>`;
+            result.innerHTML = output;
+        }
+
+        // TEST 2: Set data for reload test
+        function setTestData() {
+            const result = document.getElementById('test2-result');
+            
+            const testData = {
+                'persist_test_wdp_username': 'user123',
+                'persist_test_wdp_password': 'pass123',
+                'persist_test_normal': 'normal123',
+                'persist_test_timestamp': new Date().toISOString()
+            };
+            
+            Object.entries(testData).forEach(([key, value]) => {
+                localStorage.setItem(key, value);
+            });
+            
+            result.innerHTML = `
+                <div class="success">✅ Test data set!</div>
+                <div>Keys written: ${Object.keys(testData).length}</div>
+                <div>Timestamp: ${testData.persist_test_timestamp}</div>
+                <br>
+                <div class="warning"><strong>⚠️ NOW RELOAD THE PAGE (F5)</strong></div>
+                <div>After reload, click "Step 2: Check Data"</div>
+            `;
+        }
+
+        function checkTestData() {
+            const result = document.getElementById('test2-result');
+            
+            const testKeys = [
+                'persist_test_wdp_username',
+                'persist_test_wdp_password',
+                'persist_test_normal',
+                'persist_test_timestamp'
+            ];
+            
+            let output = '<div class="success">✅ Checking data after reload...</div><br>';
+            let foundCount = 0;
+            
+            testKeys.forEach(key => {
+                const value = localStorage.getItem(key);
+                const found = value !== null;
+                if (found) foundCount++;
+                
+                const className = found ? 'success' : 'error';
+                output += `<div class="${className}">${found ? '✅' : '❌'} ${key}: ${found ? value : 'MISSING'}</div>`;
+            });
+            
+            output += `<br><div class="${foundCount === testKeys.length ? 'success' : 'error'}">
+                <strong>Result: ${foundCount}/${testKeys.length} keys survived reload</strong>
+            </div>`;
+            
+            if (foundCount < testKeys.length) {
+                output += '<br><div class="error"><strong>🚨 STORAGE PERSISTENCE ISSUE DETECTED!</strong></div>';
+                output += '<div>Some keys were cleared on page reload.</div>';
+            }
+            
+            result.innerHTML = output;
+        }
+
+        // TEST 3: Pattern Test
+        function runTest3() {
+            const result = document.getElementById('test3-result');
+            result.innerHTML = '<div class="warning">Running Test 3...</div>';
+            
+            // Test different naming patterns
+            const patterns = [
+                { key: 'wdp_test1', value: 'value1', category: 'wdp_ prefix' },
+                { key: 'test_wdp_test2', value: 'value2', category: 'wdp in middle' },
+                { key: 'test3_wdp', value: 'value3', category: 'wdp suffix' },
+                { key: 'normal_key', value: 'value4', category: 'no wdp' },
+                { key: 'password_test', value: 'value5', category: 'password word' },
+                { key: 'username_test', value: 'value6', category: 'username word' },
+                { key: 'user_data_test', value: 'value7', category: 'user_data words' },
+            ];
+            
+            let output = '<div class="success">✅ Writing test patterns...</div><br>';
+            
+            patterns.forEach(({key, value}) => {
+                localStorage.setItem(key, value);
+            });
+            
+            output += '<div class="success">✅ Reading back immediately...</div><br>';
+            
+            patterns.forEach(({key, value, category}) => {
+                const actual = localStorage.getItem(key);
+                const match = actual === value;
+                const className = match ? 'success' : 'error';
+                output += `<div class="${className}">${match ? '✅' : '❌'} [${category}] ${key}: ${actual || 'NULL'}</div>`;
+            });
+            
+            output += '<br><div class="warning">⚠️ Now reload page and run this test again to see which patterns survive</div>';
+            result.innerHTML = output;
+        }
+
+        // TEST 4: Monitoring
+        function startMonitoring() {
+            if (monitoringActive) return;
+            
+            monitoringActive = true;
+            logs = [];
+            const result = document.getElementById('test4-result');
+            result.innerHTML = '<div class="success">✅ Monitoring started... Logs will appear below:</div><br><div id="monitor-logs"></div>';
+            
+            // Intercept setItem
+            localStorage.setItem = function(key, value) {
+                const log = `[SET] ${key} = ${String(value).substring(0, 50)}...`;
+                logs.push(log);
+                updateMonitorDisplay();
+                return originalSetItem.apply(this, arguments);
+            };
+            
+            // Intercept getItem
+            localStorage.getItem = function(key) {
+                const value = originalGetItem.apply(this, arguments);
+                const log = `[GET] ${key} → ${value ? String(value).substring(0, 30) + '...' : 'NULL'}`;
+                logs.push(log);
+                updateMonitorDisplay();
+                return value;
+            };
+            
+            // Intercept removeItem
+            localStorage.removeItem = function(key) {
+                const log = `[REMOVE] ${key}`;
+                logs.push(log);
+                console.warn('🔴 localStorage.removeItem called:', key);
+                console.trace();
+                updateMonitorDisplay();
+                return originalRemoveItem.apply(this, arguments);
+            };
+            
+            // Intercept clear
+            localStorage.clear = function() {
+                const log = `[CLEAR] ALL KEYS`;
+                logs.push(log);
+                console.error('🔴 localStorage.clear() called!');
+                console.trace();
+                updateMonitorDisplay();
+                return originalClear.apply(this, arguments);
+            };
+        }
+
+        function stopMonitoring() {
+            if (!monitoringActive) return;
+            
+            monitoringActive = false;
+            localStorage.setItem = originalSetItem;
+            localStorage.getItem = originalGetItem;
+            localStorage.removeItem = originalRemoveItem;
+            localStorage.clear = originalClear;
+            
+            const result = document.getElementById('test4-result');
+            result.innerHTML = '<div class="warning">⚠️ Monitoring stopped</div><br>' + document.getElementById('monitor-logs').innerHTML;
+        }
+
+        function updateMonitorDisplay() {
+            const monitorLogs = document.getElementById('monitor-logs');
+            if (monitorLogs) {
+                monitorLogs.innerHTML = logs.slice(-30).join('<br>');
+            }
+        }
+
+        // Auto-check on page load
+        window.addEventListener('DOMContentLoaded', () => {
+            console.log('🧪 Test page loaded');
+            console.log('📊 Current localStorage keys:', Object.keys(localStorage));
+            
+            // Check if this is a reload test
+            const hasTestData = localStorage.getItem('persist_test_timestamp');
+            if (hasTestData) {
+                const test2Result = document.getElementById('test2-result');
+                test2Result.innerHTML = '<div class="warning">⚠️ Test data found from previous session!</div><div>Click "Step 2: Check Data" to see results</div>';
+            }
+        });
+    </script>
+</body>
+</html>

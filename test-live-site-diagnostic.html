@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Live Site Diagnostic - Citation Debug</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 30px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        .container {
+            background: white;
+            border-radius: 16px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+        h1 {
+            color: #667eea;
+            margin: 0 0 10px 0;
+        }
+        .subtitle {
+            color: #666;
+            margin-bottom: 30px;
+        }
+        .diagnostic-section {
+            background: #f8f9fa;
+            border-left: 4px solid #667eea;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+        .diagnostic-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 15px;
+        }
+        .result {
+            font-family: 'Courier New', monospace;
+            background: #fff;
+            padding: 15px;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+            margin: 10px 0;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+        .pass {
+            border-left: 4px solid #10b981;
+            background: #f0fdf4;
+        }
+        .fail {
+            border-left: 4px solid #ef4444;
+            background: #fef2f2;
+        }
+        .warning {
+            border-left: 4px solid #f59e0b;
+            background: #fffbeb;
+        }
+        .status {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: bold;
+            margin-left: 10px;
+        }
+        .status.pass { background: #10b981; color: white; }
+        .status.fail { background: #ef4444; color: white; }
+        .status.warning { background: #f59e0b; color: white; }
+        .btn {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            margin: 5px;
+        }
+        .btn:hover {
+            background: #5568d3;
+        }
+        .code-block {
+            background: #1f2937;
+            color: #10b981;
+            padding: 15px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+            overflow-x: auto;
+            margin: 10px 0;
+        }
+        .issue-found {
+            background: #fef2f2;
+            border: 2px solid #ef4444;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        .issue-title {
+            color: #ef4444;
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .fix-instructions {
+            background: #f0fdf4;
+            border: 2px solid #10b981;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        .fix-title {
+            color: #10b981;
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔬 Live Site Citation Diagnostic</h1>
+        <div class="subtitle">
+            This page will diagnose exactly why citations aren't working on your live site
+        </div>
+
+        <div style="margin-bottom: 20px;">
+            <button class="btn" onclick="runDiagnostics()">🚀 Run Full Diagnostics</button>
+            <button class="btn" onclick="testMarkdownFunction()">🧪 Test Markdown Function</button>
+            <button class="btn" onclick="checkScriptVersion()">📋 Check Script Versions</button>
+        </div>
+
+        <div id="results"></div>
+    </div>
+
+    <script>
+        const resultsDiv = document.getElementById('results');
+
+        function log(title, content, status = 'pass') {
+            const section = document.createElement('div');
+            section.className = 'diagnostic-section';
+            section.innerHTML = `
+                <div class="diagnostic-title">
+                    ${title}
+                    <span class="status ${status}">${status.toUpperCase()}</span>
+                </div>
+                <div class="result ${status}">${content}</div>
+            `;
+            resultsDiv.appendChild(section);
+        }
+
+        function logCode(title, code) {
+            const section = document.createElement('div');
+            section.className = 'diagnostic-section';
+            section.innerHTML = `
+                <div class="diagnostic-title">${title}</div>
+                <div class="code-block">${code}</div>
+            `;
+            resultsDiv.appendChild(section);
+        }
+
+        function logIssue(title, description, fix) {
+            const section = document.createElement('div');
+            section.className = 'issue-found';
+            section.innerHTML = `
+                <div class="issue-title">❌ ${title}</div>
+                <div style="margin-bottom: 15px;">${description}</div>
+            `;
+            resultsDiv.appendChild(section);
+
+            if (fix) {
+                const fixSection = document.createElement('div');
+                fixSection.className = 'fix-instructions';
+                fixSection.innerHTML = `
+                    <div class="fix-title">✅ How to Fix</div>
+                    <div>${fix}</div>
+                `;
+                resultsDiv.appendChild(fixSection);
+            }
+        }
+
+        async function runDiagnostics() {
+            resultsDiv.innerHTML = '<h2>🔍 Running Diagnostics...</h2>';
+
+            // Check 1: Are scripts loaded?
+            log('Check 1: Scripts Loaded', checkScriptsLoaded(), 
+                typeof window.parseMarkdownAndCitations !== 'undefined' && 
+                typeof window.convertCitationsToHTML !== 'undefined' ? 'pass' : 'fail');
+
+            // Check 2: What version is loaded?
+            const versionCheck = checkScriptVersion();
+            log('Check 2: Script Version', versionCheck.message, versionCheck.status);
+
+            // Check 3: Test the function directly
+            const functionTest = testMarkdownFunction();
+            log('Check 3: Function Test', functionTest.message, functionTest.status);
+
+            // Check 4: Check for placeholder in function code
+            const placeholderCheck = checkPlaceholderInCode();
+            log('Check 4: Placeholder in Code', placeholderCheck.message, placeholderCheck.status);
+
+            // Check 5: Test actual processing
+            const processingTest = testActualProcessing();
+            log('Check 5: Actual Processing', processingTest.message, processingTest.status);
+
+            // Check 6: Inspect live chat widget
+            const chatCheck = inspectChatWidget();
+            log('Check 6: Chat Widget Inspection', chatCheck.message, chatCheck.status);
+
+            // Final analysis
+            analyzeDiagnostics();
+        }
+
+        function checkScriptsLoaded() {
+            const checks = [];
+            
+            if (typeof window.parseMarkdownAndCitations === 'function') {
+                checks.push('✅ parseMarkdownAndCitations() is loaded');
+            } else {
+                checks.push('❌ parseMarkdownAndCitations() NOT FOUND');
+            }
+
+            if (typeof window.convertCitationsToHTML === 'function') {
+                checks.push('✅ convertCitationsToHTML() is loaded');
+            } else {
+                checks.push('❌ convertCitationsToHTML() NOT FOUND');
+            }
+
+            if (typeof window.processInlineMarkdown === 'function') {
+                checks.push('✅ processInlineMarkdown() is loaded');
+            } else {
+                checks.push('❌ processInlineMarkdown() NOT FOUND');
+            }
+
+            if (typeof window.typewriterWithMarkdownAndCitations === 'function') {
+                checks.push('✅ typewriterWithMarkdownAndCitations() is loaded');
+            } else {
+                checks.push('❌ typewriterWithMarkdownAndCitations() NOT FOUND');
+            }
+
+            return checks.join('\n');
+        }
+
+        function checkScriptVersion() {
+            if (typeof window.processInlineMarkdown !== 'function') {
+                return {
+                    status: 'fail',
+                    message: '❌ processInlineMarkdown() not found - script not loaded'
+                };
+            }
+
+            // Get function source code
+            const functionCode = window.processInlineMarkdown.toString();
+
+            // Check for V36.11.12 placeholder
+            if (functionCode.includes('◊◊CITE')) {
+                return {
+                    status: 'pass',
+                    message: '✅ V36.11.12 detected - Uses ◊◊CITE placeholder\n\nFunction contains: ◊◊CITE (special character placeholder)'
+                };
+            } else if (functionCode.includes('__CITATION_')) {
+                return {
+                    status: 'fail',
+                    message: '❌ OLD VERSION detected - Uses __CITATION_ placeholder\n\n⚠️ This is V36.11.11 or earlier\n\nThe browser is loading the OLD cached version!'
+                };
+            } else {
+                return {
+                    status: 'warning',
+                    message: '⚠️ Cannot determine version - placeholder not found in code'
+                };
+            }
+        }
+
+        function testMarkdownFunction() {
+            if (typeof window.processInlineMarkdown !== 'function') {
+                return {
+                    status: 'fail',
+                    message: '❌ Function not available'
+                };
+            }
+
+            try {
+                const input = 'Test[1] with __bold__ text';
+                const output = window.processInlineMarkdown(input);
+
+                const checks = [];
+                
+                // Check if citation is preserved
+                if (output.includes('[1]')) {
+                    checks.push('✅ Citation [1] preserved');
+                } else if (output.includes('◊◊CITE0◊◊')) {
+                    checks.push('❌ Placeholder not restored - still shows ◊◊CITE0◊◊');
+                } else if (output.includes('CITATION')) {
+                    checks.push('❌ Placeholder leaked - shows CITATION text');
+                } else {
+                    checks.push('❌ Citation lost completely');
+                }
+
+                // Check if bold works
+                if (output.includes('<strong>bold</strong>')) {
+                    checks.push('✅ Bold __text__ converted correctly');
+                } else {
+                    checks.push('❌ Bold conversion failed');
+                }
+
+                const allPassed = checks.every(c => c.startsWith('✅'));
+
+                return {
+                    status: allPassed ? 'pass' : 'fail',
+                    message: `Input: "${input}"\nOutput: "${output}"\n\n${checks.join('\n')}`
+                };
+
+            } catch (error) {
+                return {
+                    status: 'fail',
+                    message: `❌ Error: ${error.message}`
+                };
+            }
+        }
+
+        function checkPlaceholderInCode() {
+            if (typeof window.processInlineMarkdown !== 'function') {
+                return {
+                    status: 'fail',
+                    message: '❌ Function not available'
+                };
+            }
+
+            const functionCode = window.processInlineMarkdown.toString();
+
+            // Extract the placeholder line
+            const lines = functionCode.split('\n');
+            const placeholderLine = lines.find(line => line.includes('placeholder') && line.includes('CITE'));
+
+            if (!placeholderLine) {
+                return {
+                    status: 'fail',
+                    message: '❌ Cannot find placeholder declaration in code'
+                };
+            }
+
+            const cleanLine = placeholderLine.trim();
+
+            if (cleanLine.includes('◊◊CITE')) {
+                return {
+                    status: 'pass',
+                    message: `✅ V36.11.12 code found:\n\n${cleanLine}\n\nUsing special character placeholder ◊`
+                };
+            } else {
+                return {
+                    status: 'fail',
+                    message: `❌ OLD code found:\n\n${cleanLine}\n\nStill using __CITATION_ placeholder`
+                };
+            }
+        }
+
+        function testActualProcessing() {
+            if (typeof window.parseMarkdownAndCitations !== 'function') {
+                return {
+                    status: 'fail',
+                    message: '❌ parseMarkdownAndCitations() not available'
+                };
+            }
+
+            try {
+                const testInput = `Test __bold__[1] text\n\nSources:\n1. Test Source`;
+                const result = window.parseMarkdownAndCitations(testInput);
+
+                const checks = [];
+
+                // Check mainText
+                if (result.mainText) {
+                    checks.push('✅ mainText returned');
+                    
+                    if (result.mainText.includes('<sup>')) {
+                        checks.push('✅ Citation converted to <sup>');
+                    } else if (result.mainText.includes('[1]')) {
+                        checks.push('⚠️ Citation still as [1] - not converted to <sup>');
+                    } else if (result.mainText.includes('CITE')) {
+                        checks.push('❌ Placeholder leaked into output');
+                    }
+
+                    if (result.mainText.includes('<strong>')) {
+                        checks.push('✅ Bold converted to <strong>');
+                    }
+                } else {
+                    checks.push('❌ No mainText returned');
+                }
+
+                // Check sources
+                if (result.sources && result.sources.length > 0) {
+                    checks.push(`✅ Sources parsed (${result.sources.length} found)`);
+                } else {
+                    checks.push('❌ Sources not parsed');
+                }
+
+                const allPassed = checks.every(c => c.startsWith('✅'));
+
+                return {
+                    status: allPassed ? 'pass' : (checks.some(c => c.startsWith('❌')) ? 'fail' : 'warning'),
+                    message: `${checks.join('\n')}\n\nMainText preview:\n${result.mainText?.substring(0, 200) || 'N/A'}`
+                };
+
+            } catch (error) {
+                return {
+                    status: 'fail',
+                    message: `❌ Error: ${error.message}\n\nStack: ${error.stack}`
+                };
+            }
+        }
+
+        function inspectChatWidget() {
+            // Try to find chat widget elements
+            const chatWidgets = [
+                'repsInlineChatWindow',
+                'courtInlineChatWindow',
+                'candidateChatMessages',
+                'billsChatMessagesTop',
+                'ethicalChatMessagesTop'
+            ];
+
+            const found = [];
+            const notFound = [];
+
+            chatWidgets.forEach(id => {
+                const element = document.getElementById(id);
+                if (element) {
+                    found.push(`✅ Found: ${id}`);
+                } else {
+                    notFound.push(`⚠️ Not found: ${id}`);
+                }
+            });
+
+            let message = '';
+            if (found.length > 0) {
+                message += 'Chat widgets found:\n' + found.join('\n');
+            }
+            if (notFound.length > 0) {
+                message += '\n\nNot on this page:\n' + notFound.join('\n');
+            }
+
+            if (found.length === 0) {
+                message = '⚠️ No chat widgets found on this page\n\nThis diagnostic must be run from the main site page with chat widgets.';
+            }
+
+            return {
+                status: found.length > 0 ? 'pass' : 'warning',
+                message: message
+            };
+        }
+
+        function analyzeDiagnostics() {
+            resultsDiv.innerHTML += '<h2>📊 Final Analysis</h2>';
+
+            // Determine the issue
+            const versionCheck = checkScriptVersion();
+
+            if (versionCheck.status === 'fail' && versionCheck.message.includes('OLD VERSION')) {
+                logIssue(
+                    'Browser is Loading OLD Cached Version',
+                    'Your browser has cached the old V36.11.11 version of markdown-renderer.js. Even though V36.11.12 is on the server, your browser is using the old file from cache.',
+                    `<strong>Solution: Update cache-busting parameter</strong>
+                    
+<div class="code-block">// Current (in index.html line 3549):
+&lt;script src="js/markdown-renderer.js?v=20251030-PHASE4-MARKDOWN"&gt;&lt;/script&gt;
+
+// Change to:
+&lt;script src="js/markdown-renderer.js?v=36.11.12"&gt;&lt;/script&gt;</div>
+
+<p><strong>Then:</strong></p>
+<ol>
+<li>Save index.html</li>
+<li>Upload to server</li>
+<li>Clear browser cache completely (Ctrl+Shift+Delete)</li>
+<li>Hard refresh (Ctrl+Shift+R)</li>
+<li>Re-run this diagnostic</li>
+</ol>`
+                );
+            } else if (versionCheck.status === 'pass') {
+                const section = document.createElement('div');
+                section.className = 'fix-instructions';
+                section.innerHTML = `
+                    <div class="fix-title">✅ V36.11.12 is Loaded!</div>
+                    <div>The correct version is loaded in this browser. If citations still don't work on the live site, the issue is elsewhere in the pipeline.</div>
+                `;
+                resultsDiv.appendChild(section);
+            }
+        }
+
+        // Auto-run on load
+        window.addEventListener('DOMContentLoaded', () => {
+            setTimeout(() => {
+                runDiagnostics();
+            }, 500);
+        });
+    </script>
+</body>
+</html>

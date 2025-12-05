@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Frequently Asked Questions - Workforce Democracy Project">
+    <meta name="keywords" content="FAQ, questions, workplace democracy, worker cooperatives">
+    <title>FAQ - Workforce Democracy Project</title>
+    
+    <!-- Self-Hosted Resources (No External Dependencies) -->
+    <link rel="stylesheet" href="css/fonts.css?v=20250124-FAQ-REBUILD">
+    
+    <!-- Main Stylesheet -->
+    <link rel="stylesheet" href="css/main.css?v=20250124-RACE-CONDITION-FIX">
+    <link rel="stylesheet" href="css/unified-color-scheme.css?v=20250124-CLICKABLE-LOGO">
+    
+    <!-- V36.9.11: Form Validation Styles (Task #17) -->
+    <link rel="stylesheet" href="css/form-validation.css?v=36.9.11-VALIDATION">
+    
+    <!-- FAQ Specific Styles -->
+    <link rel="stylesheet" href="css/faq-new.css?v=20250124-SEARCH-AND-RECOMMENDATIONS">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <!-- V36.8.5: Grey Text Fix - Comprehensive Override -->
+    <link rel="stylesheet" href="css/grey-text-fix.css?v=20251031-V36.8.5-GREY-FIX">
+    
+    <!-- V36.8.5: Contrast Fix - Header, Chat, Overall Visibility -->
+    <link rel="stylesheet" href="css/contrast-fix-v36.8.5.css?v=20251031-V36.8.5-CONTRAST-FIX">
+</head>
+<body>
+    <!-- Skip Link -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <!-- Header -->
+    <header class="site-header" role="banner">
+        <div class="container">
+            <div class="header-content">
+                <div class="brand">
+                    <h1 class="site-title">
+                        <a href="index.html" aria-label="Go to homepage">
+                            <img src="images/site-logo-v2.svg" alt="Workforce Democracy Project" class="site-logo">
+                            <span class="title-text">Workforce Democracy Project</span>
+                        </a>
+                    </h1>
+                    <p class="establishment">Est. Oct 2025</p>
+                </div>
+                
+                <nav class="desktop-nav" role="navigation" aria-label="Main navigation">
+                    <ul class="nav-list">
+                        <li><a href="index.html#civic" data-translate="nav_civic">🗳️ Civic Engagement & Transparency</a></li>
+                        <li><a href="index.html#jobs">💼 Explore Jobs</a></li>
+                        <li><a href="learning.html">📚 Learn</a></li>
+                        <li><a href="faq.html" class="active">💡 FAQ</a></li>
+                        <li><a href="privacy.html">🔒 Personalization & Privacy</a></li>
+                        <li><a href="philosophies.html">🌟 Our Philosophies</a></li>
+                    </ul>
+                </nav>
+                
+                <!-- Mobile Menu Toggle -->
+                <button class="mobile-menu-toggle" onclick="toggleMobileMenu()" aria-label="Toggle menu">
+                    <span></span>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Mobile Navigation -->
+        <nav class="mobile-nav" id="mobileNav" role="navigation" aria-label="Mobile navigation">
+            <ul class="mobile-nav-list">
+                <li><a href="index.html#civic" onclick="closeMobileMenu()" data-translate="nav_civic">🗳️ Civic Engagement & Transparency</a></li>
+                <li><a href="index.html#jobs" onclick="closeMobileMenu()">💼 Explore Jobs</a></li>
+                <li><a href="learning.html" onclick="closeMobileMenu()">📚 Learn</a></li>
+                <li><a href="faq.html" onclick="closeMobileMenu()" class="active">💡 FAQ</a></li>
+                <li><a href="privacy.html" onclick="closeMobileMenu()">🔒 Personalization & Privacy</a></li>
+                <li><a href="philosophies.html" onclick="closeMobileMenu()">🌟 Our Philosophies</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main id="main-content">
+        <!-- FAQ Section -->
+        <section id="faq" class="faq-section section">
+            <div class="container">
+                <header class="section-header">
+                    <div class="faq-header-icon">
+                        <span class="icon">💬</span>
+                    </div>
+                    <div class="faq-header-bubble">
+                        <h2 class="section-title">Frequently Asked Questions</h2>
+                        <p class="section-subtitle">
+                            Get personalized answers based on your interests. Questions are dynamically organized and include contextual chat support.
+                        </p>
+                    </div>
+                </header>
+                
+                <!-- Search Bar -->
+                <div class="faq-search-container">
+                    <div class="faq-search-wrapper">
+                        <span class="faq-search-icon">🔍</span>
+                        <input 
+                            type="text" 
+                            id="faqSearchInput" 
+                            class="faq-search-input" 
+                            placeholder="Search questions and answers..."
+                            aria-label="Search FAQs"
+                        >
+                        <button 
+                            id="faqClearSearch" 
+                            class="faq-clear-search" 
+                            style="display: none;"
+                            aria-label="Clear search"
+                        >✕</button>
+                    </div>
+                    <div id="faqSearchResults" class="faq-search-results"></div>
+                </div>
+                
+                <div id="faqContent">
+                    <!-- FAQ interface will be dynamically loaded -->
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer" role="contentinfo">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3 class="footer-title">About</h3>
+                    <p>
+                        Workforce Democracy Project is a non-partisan educational resource 
+                        exploring democratic workplaces and government transparency. 
+                        Completely free, privacy-first, and ad-free forever.
+                    </p>
+                </div>
+                
+                <div class="footer-section">
+                    <h3 class="footer-title">Privacy & Security</h3>
+                    <ul class="footer-links">
+                        <li><a href="privacy.html">Privacy Policy</a></li>
+                        <li><a href="#" onclick="exportUserData()">Export Your Data</a></li>
+                        <li><a href="#" onclick="deleteUserData()">Delete All Data</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3 class="footer-title">Connect</h3>
+                    <p>
+                        Questions? Suggestions? We'd love to hear from you.
+                    </p>
+                    <button class="btn btn-secondary" onclick="showContactForm()">
+                        Contact Us
+                    </button>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p class="copyright">
+                    &copy; 2025 Workforce Democracy Project. 
+                    <span>All content freely available under Creative Commons.</span>
+                </p>
+                <p class="footer-note">
+                    <i class="fas fa-shield-alt"></i>
+                    <span>Zero tracking. Zero ads. Complete privacy.</span>
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="js/main.js?v=20250124-RACE-CONDITION-FIX"></script>
+    <script src="js/faq-new.js?v=20250124-SEARCH-AND-RECOMMENDATIONS"></script>
+    <!-- V36.9.11: Form Validation (Task #17) -->
+    <script src="js/form-validator.js?v=36.9.11-VALIDATION" defer></script>
+</body>
+</html>

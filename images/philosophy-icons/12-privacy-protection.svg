@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" role="img" aria-label="Privacy Protection">
+  <defs>
+    <linearGradient id="privacyGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#5D4E37;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#3D2F24;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Shield with lock -->
+  <circle cx="100" cy="100" r="90" fill="#F5F5DC" opacity="0.2"/>
+  
+  <!-- Shield -->
+  <path d="M 100 30 L 140 50 L 140 100 Q 140 140 100 165 Q 60 140 60 100 L 60 50 Z" 
+        fill="url(#privacyGrad)" stroke="#8B7355" stroke-width="3"/>
+  
+  <!-- Shield decorative border -->
+  <path d="M 100 35 L 135 52 L 135 100 Q 135 135 100 158 Q 65 135 65 100 L 65 52 Z" 
+        fill="none" stroke="#B8956A" stroke-width="2" opacity="0.6"/>
+  
+  <!-- Lock body -->
+  <rect x="85" y="95" width="30" height="35" rx="3" fill="#8B7355" stroke="#5D4E37" stroke-width="2"/>
+  
+  <!-- Lock shackle -->
+  <path d="M 90 95 L 90 80 Q 90 70 100 70 Q 110 70 110 80 L 110 95" 
+        fill="none" stroke="#8B7355" stroke-width="6" stroke-linecap="round"/>
+  
+  <!-- Keyhole -->
+  <circle cx="100" cy="107" r="5" fill="#3D2F24"/>
+  <rect x="98" y="107" width="4" height="12" fill="#3D2F24"/>
+  
+  <!-- Lock icon shine -->
+  <circle cx="95" cy="102" r="2" fill="#B8956A" opacity="0.8"/>
+  
+  <!-- Shield emblem stars -->
+  <path d="M 100 55 L 102 60 L 107 60 L 103 63 L 105 68 L 100 65 L 95 68 L 97 63 L 93 60 L 98 60 Z" 
+        fill="#FFD700" opacity="0.8"/>
+  
+  <!-- Protective aura -->
+  <circle cx="100" cy="100" r="75" fill="none" stroke="#4A90E2" stroke-width="2" stroke-dasharray="5,5" opacity="0.4"/>
+</svg>

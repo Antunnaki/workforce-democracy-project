@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Essential Meta Tags -->
+    <meta name="description" content="Help & Navigation Guide - Learn how to use all features of Workforce Democracy Project. Comprehensive tutorials on voting guides, candidate search, bill tracking, community services, and democratic workplaces.">
+    <meta name="keywords" content="help, guide, tutorial, navigation, how to use, instructions, support, user guide, voting help, candidate search help">
+    <meta name="author" content="Workforce Democracy Project">
+    <meta name="theme-color" content="#FF6B35">
+    
+    <!-- Privacy-First Approach -->
+    <meta name="robots" content="index, follow">
+    <meta name="googlebot" content="index, follow">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    
+    <!-- Open Graph (Enhanced for Social Sharing) -->
+    <meta property="og:title" content="Help & Navigation Guide | Workforce Democracy Project">
+    <meta property="og:description" content="Comprehensive help guide and tutorials. Learn how to use voting guides, search candidates, track bills, find community services, and explore democratic workplaces.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://workforcedemocracyproject.org/help.html">
+    <meta property="og:image" content="https://workforcedemocracyproject.org/images/social-preview.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Workforce Democracy Project - Help & Navigation Guide">
+    <meta property="og:site_name" content="Workforce Democracy Project">
+    <meta property="og:locale" content="en_US">
+    
+    <!-- Twitter Card (Enhanced for X/Twitter Sharing) -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Help & Navigation Guide | Workforce Democracy Project">
+    <meta name="twitter:description" content="Learn how to use all platform features: voting guides, candidate search, bill tracking, community services, and more.">
+    <meta name="twitter:image" content="https://workforcedemocracyproject.org/images/social-preview.jpg">
+    <meta name="twitter:image:alt" content="Workforce Democracy Project - Help Guide">
+    <meta name="twitter:site" content="@WorkforceDemocracy">
+    <meta name="twitter:creator" content="@WorkforceDemocracy">
+    
+    <!-- No Tracking -->
+    <meta name="google-analytics" content="no">
+    <meta name="facebook-domain-verification" content="no">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://workforcedemocracyproject.org/help.html">
+    
+    <title>Help & Navigation Guide - Workforce Democracy Project</title>
+    
+    <!-- V36.9.10: Performance - Preload Critical Assets -->
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+    <link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
+    <link rel="preload" href="css/main.css?v=20250122-PRIVACY-FONTS" as="style">
+    <link rel="preload" href="images/site-logo-v2.svg" as="image" type="image/svg+xml">
+    
+    <!-- Stylesheets -->
+    <!-- Font Awesome with SRI (Subresource Integrity) - Security hardening 2025-01-25 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" 
+          integrity="sha256-HtsXJanqjKTc8vVQjO4YMhiqFoXkfBsjBWcX91T1jr8=" 
+          crossorigin="anonymous">
+    <link rel="stylesheet" href="css/fonts.css?v=20250122-PRIVACY-FONTS">
+    <link rel="stylesheet" href="css/main.css?v=20250124-CLICKABLE-LOGO">
+    <link rel="stylesheet" href="css/unified-color-scheme.css?v=20250124-CLICKABLE-LOGO">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    
+    <style>
+        .help-page {
+            background: linear-gradient(135deg, #1e2d3c 0%, #19232a 100%);
+            min-height: 100vh;
+            padding: 2rem 0;
+        }
+        
+        .help-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+        
+        .help-header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            border: 2px solid rgba(74, 144, 226, 0.3);
+        }
+        
+        .help-header h1 {
+            color: #E8D174;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+        }
+        
+        .help-header p {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 1.2rem;
+            line-height: 1.6;
+        }
+        
+        .help-section {
+            background: rgba(255, 255, 255, 0.98);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        .help-section h2 {
+            color: #4a90e2;
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            border-bottom: 2px solid #4a90e2;
+            padding-bottom: 0.5rem;
+        }
+        
+        .help-section h3 {
+            color: #2d5a8a;
+            font-size: 1.4rem;
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .help-section p {
+            color: #333;
+            line-height: 1.7;
+            margin-bottom: 1rem;
+        }
+        
+        .help-section ul, .help-section ol {
+            color: #333;
+            line-height: 1.7;
+            margin-left: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .help-section li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+        
+        .feature-card {
+            background: linear-gradient(135deg, rgba(74, 144, 226, 0.05) 0%, rgba(102, 126, 234, 0.05) 100%);
+            border: 2px solid rgba(74, 144, 226, 0.2);
+            border-radius: 8px;
+            padding: 1.5rem;
+        }
+        
+        .feature-card h4 {
+            color: #4a90e2;
+            font-size: 1.2rem;
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .feature-card p {
+            color: #555;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin: 0;
+        }
+        
+        .tip-box {
+            background: linear-gradient(135deg, rgba(232, 209, 116, 0.15) 0%, rgba(244, 166, 35, 0.15) 100%);
+            border-left: 4px solid #E8D174;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+        
+        .tip-box h4 {
+            color: #d4a017;
+            font-size: 1.1rem;
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .tip-box p {
+            color: #555;
+            margin: 0;
+        }
+        
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 1rem 2rem;
+            background: linear-gradient(135deg, #4a90e2 0%, #667eea 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            margin-top: 2rem;
+        }
+        
+        .back-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(74, 144, 226, 0.4);
+        }
+        
+        .quick-nav {
+            background: rgba(255, 255, 255, 0.98);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            position: sticky;
+            top: 1rem;
+            z-index: 100;
+        }
+        
+        .quick-nav h3 {
+            color: #4a90e2;
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+        }
+        
+        .quick-nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .quick-nav li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .quick-nav a {
+            color: #4a90e2;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem;
+            border-radius: 4px;
+            transition: background 0.2s ease;
+        }
+        
+        .quick-nav a:hover {
+            background: rgba(74, 144, 226, 0.1);
+        }
+        
+        @media (max-width: 768px) {
+            .help-header h1 {
+                font-size: 1.8rem;
+            }
+            
+            .help-header p {
+                font-size: 1rem;
+            }
+            
+            .help-section h2 {
+                font-size: 1.4rem;
+            }
+            
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .quick-nav {
+                position: static;
+            }
+        }
+    </style>
+    <!-- V36.8.5: Grey Text Fix - Comprehensive Override -->
+    <link rel="stylesheet" href="css/grey-text-fix.css?v=20251031-V36.8.5-GREY-FIX">
+    
+    <!-- V36.8.5: Contrast Fix - Header, Chat, Overall Visibility -->
+    <link rel="stylesheet" href="css/contrast-fix-v36.8.5.css?v=20251031-V36.8.5-CONTRAST-FIX">
+</head>
+<body>
+    <div class="help-page">
+        <div class="help-container">
+            <!-- Header -->
+            <div class="help-header">
+                <h1>
+                    <span>❓</span>
+                    Help & Navigation Guide
+                </h1>
+                <p>Welcome! This guide will help you navigate and use all features of the Workforce Democracy Project.</p>
+            </div>
+            
+            <!-- Quick Navigation -->
+            <div class="quick-nav">
+                <h3>Quick Navigation</h3>
+                <ul>
+                    <li><a href="#overview"><i class="fas fa-home"></i> Overview</a></li>
+                    <li><a href="#civic"><i class="fas fa-vote-yea"></i> Civic Engagement</a></li>
+                    <li><a href="#jobs"><i class="fas fa-briefcase"></i> Jobs Comparison</a></li>
+                    <li><a href="#learning"><i class="fas fa-book"></i> Learning Center</a></li>
+                    <li><a href="#tips"><i class="fas fa-lightbulb"></i> Tips & Tricks</a></li>
+                </ul>
+            </div>
+            
+            <!-- Overview Section -->
+            <div id="overview" class="help-section">
+                <h2><span>🏠</span> Website Overview</h2>
+                <p>The Workforce Democracy Project is a non-partisan educational platform designed to help you:</p>
+                <ul>
+                    <li><strong>Engage with civic processes</strong> - Vote on bills, track representatives, and explore Supreme Court decisions</li>
+                    <li><strong>Explore democratic workplaces</strong> - Compare traditional vs. democratic workplace structures across various professions</li>
+                    <li><strong>Learn about workplace democracy</strong> - Access educational resources and understand the philosophy behind democratic workplaces</li>
+                    <li><strong>Maintain privacy</strong> - All features respect your privacy with no tracking or data collection</li>
+                </ul>
+                
+                <h3>Navigation Bar</h3>
+                <p>The main navigation at the top of every page provides quick access to:</p>
+                <ul>
+                    <li><strong>🗳️ Civic Engagement & Transparency</strong> - Democracy toolkit</li>
+                    <li><strong>💼 Explore Jobs</strong> - Workplace comparisons</li>
+                    <li><strong>📚 Learn</strong> - Educational resources</li>
+                    <li><strong>💡 FAQ</strong> - Frequently asked questions</li>
+                    <li><strong>🔒 Personalization & Privacy</strong> - Privacy settings</li>
+                    <li><strong>🌟 Our Philosophies</strong> - Core principles (18 philosophies)</li>
+                </ul>
+            </div>
+            
+            <!-- Civic Engagement Section -->
+            <div id="civic" class="help-section">
+                <h2><span>🗳️</span> Civic Engagement & Transparency</h2>
+                <p>Your personal democracy toolkit with four powerful tabs:</p>
+                
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <h4><span>🗳️</span> Vote on Bills</h4>
+                        <p><strong>How to use:</strong> Select your country and government level (federal, state, or local). Browse current and upcoming bills, then cast your vote (Support, Oppose, or Neutral). The system tracks your positions to show alignment with representatives.</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <h4><span>👥</span> My Representatives</h4>
+                        <p><strong>How to use:</strong> Search for representatives by name, district, or location. View their voting records, see how their votes align with your positions, and track their legislative activity over time.</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <h4><span>⚖️</span> Supreme Court</h4>
+                        <p><strong>How to use:</strong> Select a country and court level (federal or state). Explore recent Supreme Court decisions, read summaries, understand legal reasoning, and see how rulings affect legislation.</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <h4><span>📊</span> My Dashboard</h4>
+                        <p><strong>How to use:</strong> View your voting history, see alignment percentages with representatives, track engagement statistics, and identify which officials best represent your values.</p>
+                    </div>
+                </div>
+                
+                <div class="tip-box">
+                    <h4><span>💡</span> Pro Tip: Tabs Navigation</h4>
+                    <p>On mobile devices, swipe left/right or tap tabs to switch between features. The tabs scroll horizontally for easy access. On desktop, simply click any tab to switch views.</p>
+                </div>
+                
+                <h3>Civic Features Explained</h3>
+                <ol>
+                    <li><strong>Country & Level Selection</strong> - Start by choosing your country (US, UK, Australia, etc.) and government level (federal, state/provincial, or local)</li>
+                    <li><strong>Bill Categories</strong> - Filter bills by topic: Education, Healthcare, Environment, Economy, Civil Rights, Labor, or Housing</li>
+                    <li><strong>Voting on Legislation</strong> - Cast your opinion on bills before they're voted on. Your positions are saved locally (no account needed)</li>
+                    <li><strong>Alignment Tracking</strong> - After voting on bills, the dashboard shows which representatives align with your positions</li>
+                    <li><strong>Representative Search</strong> - Find officials by name, district, or use the search tool to discover representatives</li>
+                    <li><strong>Court Decisions</strong> - Browse recent Supreme Court rulings with summaries and legal context</li>
+                </ol>
+            </div>
+            
+            <!-- Jobs Comparison Section -->
+            <div id="jobs" class="help-section">
+                <h2><span>💼</span> Jobs & Workplace Comparison</h2>
+                <p>Explore how your profession could look in a democratic workplace:</p>
+                
+                <h3>How to Use Job Comparisons</h3>
+                <ol>
+                    <li><strong>Browse Categories</strong> - Explore job categories like Healthcare, Technology, Education, Retail, Manufacturing, etc.</li>
+                    <li><strong>Select a Profession</strong> - Click on any profession to see detailed comparisons</li>
+                    <li><strong>Compare Structures</strong> - View side-by-side comparisons of:
+                        <ul>
+                            <li>Decision-making processes</li>
+                            <li>Profit sharing and compensation</li>
+                            <li>Work-life balance</li>
+                            <li>Career advancement opportunities</li>
+                            <li>Workplace culture</li>
+                        </ul>
+                    </li>
+                    <li><strong>Real-World Examples</strong> - See actual democratic companies and organizations in each field</li>
+                </ol>
+                
+                <div class="tip-box">
+                    <h4><span>💡</span> Pro Tip: Job Search</h4>
+                    <p>Use the search function to quickly find your specific profession. You can also use the chat widget to ask questions like "How would teaching work in a democratic school?"</p>
+                </div>
+                
+                <h3>Understanding Workplace Democracy</h3>
+                <p>Democratic workplaces typically feature:</p>
+                <ul>
+                    <li><strong>Worker ownership</strong> - Employees own shares or stakes in the company</li>
+                    <li><strong>Participatory decision-making</strong> - Workers have a voice in major company decisions</li>
+                    <li><strong>Profit sharing</strong> - Surplus/profits distributed among all workers</li>
+                    <li><strong>Elected leadership</strong> - Managers and executives may be elected by workers</li>
+                    <li><strong>Transparent operations</strong> - Open books policy and shared information</li>
+                </ul>
+            </div>
+            
+            <!-- Learning Center Section -->
+            <div id="learning" class="help-section">
+                <h2><span>📚</span> Learning Center</h2>
+                <p>Comprehensive educational resources to deepen your understanding:</p>
+                
+                <h3>What You'll Find</h3>
+                <ul>
+                    <li><strong>Articles & Guides</strong> - In-depth explorations of workplace democracy concepts</li>
+                    <li><strong>Case Studies</strong> - Real-world examples of successful democratic workplaces</li>
+                    <li><strong>Video Tutorials</strong> - Visual explanations of complex concepts</li>
+                    <li><strong>Research Papers</strong> - Academic studies and data on workplace democracy</li>
+                    <li><strong>Historical Context</strong> - Evolution of democratic workplace movements</li>
+                </ul>
+                
+                <h3>How to Navigate</h3>
+                <ol>
+                    <li>Click "📚 Learn" in the main navigation</li>
+                    <li>Browse topics or use the search function</li>
+                    <li>Filter by difficulty level (Beginner, Intermediate, Advanced)</li>
+                    <li>Bookmark articles for later reading</li>
+                    <li>Share resources with others</li>
+                </ol>
+            </div>
+            
+            <!-- Tips & Tricks Section -->
+            <div id="tips" class="help-section">
+                <h2><span>💡</span> Tips & Tricks</h2>
+                
+                <h3>Making the Most of Your Experience</h3>
+                
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <h4><span>📱</span> Mobile Usage</h4>
+                        <p>The site is fully responsive. On mobile, tabs scroll horizontally, dropdowns are optimized for touch, and all features work seamlessly on smaller screens.</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <h4><span>🔍</span> Search Tips</h4>
+                        <p>Use specific terms for better results. For representatives, include district numbers. For bills, use key topics or bill numbers.</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <h4><span>💬</span> Chat Widgets</h4>
+                        <p>Each section has a dedicated chat widget. Click the chat icon to ask questions specific to that feature (civic, jobs, etc.).</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <h4><span>🌐</span> Language Support</h4>
+                        <p>Use the language selector in the navigation to view content in your preferred language. Settings are saved locally.</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <h4><span>🔒</span> Privacy First</h4>
+                        <p>Your data stays on your device. No tracking, no accounts required. All features work with local storage only.</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <h4><span>⚡</span> Performance</h4>
+                        <p>For best performance, allow JavaScript and enable local storage. The site uses minimal resources and no ads.</p>
+                    </div>
+                </div>
+                
+                <div class="tip-box">
+                    <h4><span>🎯</span> Quick Start Guide</h4>
+                    <p><strong>New here?</strong> Start with the Civic Engagement section → Vote on Bills tab → Select your country and government level → Browse current bills and cast your first votes. Then check My Dashboard to see alignment tracking in action!</p>
+                </div>
+                
+                <h3>Keyboard Shortcuts</h3>
+                <ul>
+                    <li><strong>Tab</strong> - Navigate between interactive elements</li>
+                    <li><strong>Enter/Space</strong> - Activate buttons and links</li>
+                    <li><strong>Arrow Keys</strong> - Navigate within dropdowns and tabs</li>
+                    <li><strong>Escape</strong> - Close modals and popups</li>
+                </ul>
+                
+                <h3>Accessibility Features</h3>
+                <ul>
+                    <li>Full keyboard navigation support</li>
+                    <li>Screen reader compatible (ARIA labels)</li>
+                    <li>High contrast mode available</li>
+                    <li>Adjustable text sizes</li>
+                    <li>Focus indicators for navigation</li>
+                </ul>
+            </div>
+            
+            <!-- Getting Help Section -->
+            <div class="help-section">
+                <h2><span>🆘</span> Need More Help?</h2>
+                <p>If you can't find what you're looking for:</p>
+                <ul>
+                    <li><strong>FAQ Page</strong> - Visit our <a href="faq.html" style="color: #4a90e2;">Frequently Asked Questions</a> for common issues</li>
+                    <li><strong>Chat Widgets</strong> - Use the context-specific chat buttons on each section for immediate assistance</li>
+                    <li><strong>Philosophies Page</strong> - Learn about our <a href="philosophies.html" style="color: #4a90e2;">18 core philosophies</a> that guide this project</li>
+                    <li><strong>Privacy Page</strong> - Understand our <a href="privacy.html" style="color: #4a90e2;">privacy commitment</a> and how your data is protected</li>
+                </ul>
+                
+                <div class="tip-box">
+                    <h4><span>🔄</span> Refresh & Cache</h4>
+                    <p>If you experience any display issues, try refreshing the page (Ctrl+R or Cmd+R). For persistent issues, clear your browser cache and reload.</p>
+                </div>
+            </div>
+            
+            <!-- Back Button -->
+            <div style="text-align: center;">
+                <a href="index.html" class="back-btn">
+                    <i class="fas fa-arrow-left"></i>
+                    Back to Homepage
+                </a>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Footer -->
+    <footer class="site-footer" role="contentinfo">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3 class="footer-title">About</h3>
+                    <p>
+                        Workforce Democracy Project is a non-partisan educational resource 
+                        exploring democratic workplaces and government transparency. 
+                        Completely free, privacy-first, and ad-free forever.
+                    </p>
+                </div>
+                
+                <div class="footer-section">
+                    <h3 class="footer-title">Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="index.html#civic">Civic Engagement</a></li>
+                        <li><a href="index.html#jobs">Explore Jobs</a></li>
+                        <li><a href="learning.html">Learning Resources</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3 class="footer-title">Resources</h3>
+                    <ul class="footer-links">
+                        <li><a href="faq.html">FAQ</a></li>
+                        <li><a href="privacy.html">Privacy & Personalization</a></li>
+                        <li><a href="analytics.html">📊 Your Analytics Dashboard</a></li>
+                        <li><a href="philosophies.html">Our Philosophies</a></li>
+                        <li><a href="donate.html">Support Our Work</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p class="copyright">
+                    &copy; 2025 Workforce Democracy Project. 
+                    <span>All content freely available under Creative Commons.</span>
+                </p>
+                <p class="footer-note">
+                    <i class="fas fa-shield-alt"></i>
+                    <span>Zero tracking. Zero ads. Complete privacy.</span>
+                </p>
+            </div>
+        </div>
+    </footer>
+    <!-- V36.9.10: In-House Privacy-First Analytics -->
+    <script src="js/analytics-tracker.js?v=36.9.10-INHOUSE" defer></script>
+</body>
+</html>

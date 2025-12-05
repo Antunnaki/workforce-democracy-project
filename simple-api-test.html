@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple API Test</title>
+    <style>
+        body {
+            font-family: system-ui, sans-serif;
+            max-width: 600px;
+            margin: 2rem auto;
+            padding: 1rem;
+            background: #f8fafc;
+        }
+        .test-box {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        button {
+            background: #3b82f6;
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 6px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 1rem;
+        }
+        button:hover {
+            background: #2563eb;
+        }
+        #result {
+            margin-top: 1rem;
+            padding: 1rem;
+            border-radius: 6px;
+            background: #f1f5f9;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            font-family: monospace;
+            font-size: 0.875rem;
+        }
+        .error { background: #fee2e2; color: #991b1b; }
+        .success { background: #d1fae5; color: #065f46; }
+    </style>
+</head>
+<body>
+    <div class="test-box">
+        <h1>🧪 Simple API Test</h1>
+        <p>This will test the backend API with minimal code.</p>
+        
+        <button onclick="testAPI()">Test API Now</button>
+        
+        <div id="result"></div>
+    </div>
+
+    <script>
+        console.log('🧪 Simple API Test page loaded');
+        
+        async function testAPI() {
+            const resultDiv = document.getElementById('result');
+            resultDiv.className = '';
+            resultDiv.textContent = 'Testing... please wait...';
+            
+            const url = 'https://api.workforcedemocracyproject.org/api/representatives?zip=12061';
+            
+            console.log('🧪 Testing URL:', url);
+            
+            try {
+                console.log('🧪 Calling fetch...');
+                
+                const response = await fetch(url, {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    mode: 'cors'
+                });
+                
+                console.log('🧪 Response received:', response);
+                console.log('🧪 Status:', response.status);
+                console.log('🧪 OK:', response.ok);
+                
+                const text = await response.text();
+                console.log('🧪 Response text:', text);
+                
+                let data;
+                try {
+                    data = JSON.parse(text);
+                } catch {
+                    data = text;
+                }
+                
+                resultDiv.className = response.ok ? 'success' : 'error';
+                resultDiv.textContent = `Status: ${response.status}\n\nResponse:\n${JSON.stringify(data, null, 2)}`;
+                
+                console.log('✅ Test complete');
+                
+            } catch (error) {
+                console.error('❌ Test failed:', error);
+                console.error('❌ Error type:', error.constructor.name);
+                console.error('❌ Error message:', error.message);
+                
+                resultDiv.className = 'error';
+                resultDiv.textContent = `❌ ERROR\n\nType: ${error.constructor.name}\nMessage: ${error.message}\n\nThis usually means:\n- CORS is blocking the request\n- Backend is not running\n- Network connectivity issue`;
+            }
+        }
+    </script>
+</body>
+</html>

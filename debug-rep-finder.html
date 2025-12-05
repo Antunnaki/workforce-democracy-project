@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Representative Finder Debug</title>
+    <meta charset="UTF-8">
+    <style>
+        body {
+            font-family: system-ui, -apple-system, sans-serif;
+            max-width: 900px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+            background: #f3f4f6;
+        }
+        .debug-panel {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 12px;
+            margin-bottom: 1rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #1f2937;
+            margin-top: 0;
+        }
+        .status {
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            margin: 0.5rem 0;
+            font-weight: 600;
+        }
+        .status.success { background: #dcfce7; color: #166534; }
+        .status.error { background: #fee2e2; color: #991b1b; }
+        .status.info { background: #dbeafe; color: #1e40af; }
+        pre {
+            background: #1f2937;
+            color: #f3f4f6;
+            padding: 1rem;
+            border-radius: 6px;
+            overflow-x: auto;
+        }
+        button {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 1rem;
+            margin: 0.5rem 0.5rem 0.5rem 0;
+        }
+        button:hover {
+            background: #5568d3;
+        }
+    </style>
+</head>
+<body>
+    <h1>🔍 Representative Finder Debug Tool</h1>
+    
+    <div class="debug-panel">
+        <h2>Script Loading Test</h2>
+        <div id="scriptLoadStatus"></div>
+        <button onclick="testScriptLoading()">Test Script Loading</button>
+    </div>
+    
+    <div class="debug-panel">
+        <h2>Function Availability Test</h2>
+        <div id="functionStatus"></div>
+        <button onclick="testFunctions()">Test Functions</button>
+    </div>
+    
+    <div class="debug-panel">
+        <h2>Representative Finder Test</h2>
+        <div id="civicResults"></div>
+        <div id="repFinderStatus"></div>
+        <button onclick="testRepFinder()">Initialize Rep Finder</button>
+    </div>
+    
+    <div class="debug-panel">
+        <h2>Chat Toggle Test</h2>
+        <div class="inline-chat-section">
+            <button class="inline-chat-toggle" id="repsInlineChatToggle" onclick="testChatToggle()">
+                <span>💬</span> Test Chat Toggle
+                <span class="accordion-arrow">▼</span>
+            </button>
+            <div class="inline-chat-window" id="repsInlineChatWindow" style="display: none; padding: 1rem; background: #f3f4f6; margin-top: 0.5rem; border-radius: 8px;">
+                <p>Chat window content</p>
+            </div>
+        </div>
+        <div id="chatStatus"></div>
+    </div>
+    
+    <div class="debug-panel">
+        <h2>Console Logs</h2>
+        <pre id="consoleLogs"></pre>
+        <button onclick="clearLogs()">Clear Logs</button>
+    </div>
+    
+    <script>
+        // Capture console logs
+        let logs = [];
+        const originalLog = console.log;
+        const originalError = console.error;
+        
+        console.log = function(...args) {
+            logs.push(['LOG', ...args]);
+            updateLogs();
+            originalLog.apply(console, args);
+        };
+        
+        console.error = function(...args) {
+            logs.push(['ERROR', ...args]);
+            updateLogs();
+            originalError.apply(console, args);
+        };
+        
+        function updateLogs() {
+            document.getElementById('consoleLogs').textContent = logs.map(log => log.join(' ')).join('\n');
+        }
+        
+        function clearLogs() {
+            logs = [];
+            updateLogs();
+        }
+        
+        // Test script loading
+        function testScriptLoading() {
+            const status = document.getElementById('scriptLoadStatus');
+            let html = '<h3>Script Loading Results:</h3>';
+            
+            // Check if rep-finder-simple.js loaded
+            const scripts = Array.from(document.scripts);
+            const repFinderScript = scripts.find(s => s.src.includes('rep-finder-simple'));
+            
+            if (repFinderScript) {
+                html += `<div class="status success">✅ rep-finder-simple.js script tag found</div>`;
+                html += `<div class="status info">URL: ${repFinderScript.src}</div>`;
+            } else {
+                html += `<div class="status error">❌ rep-finder-simple.js script tag NOT found</div>`;
+            }
+            
+            // Check for inline-civic-chat.js
+            const civicChatScript = scripts.find(s => s.src.includes('inline-civic-chat'));
+            if (civicChatScript) {
+                html += `<div class="status success">✅ inline-civic-chat.js script tag found</div>`;
+                html += `<div class="status info">URL: ${civicChatScript.src}</div>`;
+            } else {
+                html += `<div class="status error">❌ inline-civic-chat.js script tag NOT found</div>`;
+            }
+            
+            status.innerHTML = html;
+        }
+        
+        // Test functions
+        function testFunctions() {
+            const status = document.getElementById('functionStatus');
+            let html = '<h3>Function Availability:</h3>';
+            
+            // Check toggleInlineChat
+            if (typeof toggleInlineChat === 'function') {
+                html += `<div class="status success">✅ toggleInlineChat() is defined</div>`;
+                html += `<div class="status info">Function: ${toggleInlineChat.toString().substring(0, 100)}...</div>`;
+            } else {
+                html += `<div class="status error">❌ toggleInlineChat() is NOT defined</div>`;
+            }
+            
+            // Check toggleJobsInlineChat
+            if (typeof toggleJobsInlineChat === 'function') {
+                html += `<div class="status success">✅ toggleJobsInlineChat() is defined</div>`;
+            } else {
+                html += `<div class="status error">❌ toggleJobsInlineChat() is NOT defined</div>`;
+            }
+            
+            // Check initRepFinder
+            if (typeof initRepFinder === 'function') {
+                html += `<div class="status success">✅ initRepFinder() is defined</div>`;
+            } else {
+                html += `<div class="status error">❌ initRepFinder() is NOT defined</div>`;
+            }
+            
+            status.innerHTML = html;
+        }
+        
+        // Test rep finder initialization
+        function testRepFinder() {
+            const status = document.getElementById('repFinderStatus');
+            status.innerHTML = '<div class="status info">⏳ Initializing...</div>';
+            
+            setTimeout(() => {
+                const container = document.getElementById('civicResults');
+                if (container && container.innerHTML.includes('Find Your Representatives')) {
+                    status.innerHTML = '<div class="status success">✅ Rep Finder initialized successfully!</div>';
+                } else {
+                    status.innerHTML = '<div class="status error">❌ Rep Finder did not initialize</div>';
+                    if (typeof initRepFinder === 'function') {
+                        status.innerHTML += '<div class="status info">Attempting manual initialization...</div>';
+                        initRepFinder();
+                    }
+                }
+            }, 500);
+        }
+        
+        // Test chat toggle
+        function testChatToggle() {
+            const chatWindow = document.getElementById('repsInlineChatWindow');
+            const status = document.getElementById('chatStatus');
+            
+            if (chatWindow.style.display === 'none') {
+                chatWindow.style.display = 'block';
+                status.innerHTML = '<div class="status success">✅ Chat opened manually</div>';
+            } else {
+                chatWindow.style.display = 'none';
+                status.innerHTML = '<div class="status info">✅ Chat closed manually</div>';
+            }
+            
+            // Try calling the function if it exists
+            if (typeof toggleInlineChat === 'function') {
+                status.innerHTML += '<div class="status info">Calling toggleInlineChat("reps")...</div>';
+                try {
+                    toggleInlineChat('reps');
+                    status.innerHTML += '<div class="status success">✅ Function called successfully</div>';
+                } catch(e) {
+                    status.innerHTML += `<div class="status error">❌ Error: ${e.message}</div>`;
+                }
+            } else {
+                status.innerHTML += '<div class="status error">❌ toggleInlineChat function not available</div>';
+            }
+        }
+        
+        // Auto-run tests on load
+        window.addEventListener('load', () => {
+            console.log('🔍 Debug page loaded');
+            setTimeout(() => {
+                testScriptLoading();
+                testFunctions();
+            }, 1000);
+        });
+    </script>
+    
+    <!-- Load the actual scripts -->
+    <script src="js/rep-finder-simple.js?v=36.11.4-CONTRAST-FIXES&t=1730586000" defer></script>
+    <script src="js/inline-civic-chat.js?v=20250125-V34.3.0-INITIAL" defer></script>
+</body>
+</html>

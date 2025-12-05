@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="800" height="500">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#e8f4f8;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#d0e8f0;stop-opacity:1" />
+    </linearGradient>
+    <radialGradient id="glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" style="stop-color:#fff;stop-opacity:0.4" />
+      <stop offset="100%" style="stop-color:#4a90e2;stop-opacity:0" />
+    </radialGradient>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="800" height="500" fill="url(#bg)"/>
+  
+  <!-- Center glow -->
+  <circle cx="400" cy="250" r="180" fill="url(#glow)"/>
+  
+  <!-- Accountability ring -->
+  <circle cx="400" cy="250" r="160" fill="none" stroke="#4a90e2" stroke-width="3" stroke-dasharray="10 5" opacity="0.4"/>
+  
+  <!-- TOP: Citizens -->
+  <g transform="translate(400, 110)">
+    <circle cx="0" cy="0" r="50" fill="white" stroke="#4a90e2" stroke-width="2"/>
+    <text y="-30" font-family="Arial, sans-serif" font-size="32" fill="#4a90e2" text-anchor="middle">👥</text>
+    <text y="55" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#4a90e2" text-anchor="middle">CITIZENS</text>
+  </g>
+  
+  <!-- BOTTOM LEFT: Representatives -->
+  <g transform="translate(260, 350)">
+    <circle cx="0" cy="0" r="50" fill="white" stroke="#4a90e2" stroke-width="2"/>
+    <text y="-25" font-family="Arial, sans-serif" font-size="32" fill="#4a90e2" text-anchor="middle">🏛️</text>
+    <text y="55" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#4a90e2" text-anchor="middle">REPS</text>
+  </g>
+  
+  <!-- BOTTOM RIGHT: Court -->
+  <g transform="translate(540, 350)">
+    <circle cx="0" cy="0" r="50" fill="white" stroke="#4a90e2" stroke-width="2"/>
+    <text y="-25" font-family="Arial, sans-serif" font-size="32" fill="#4a90e2" text-anchor="middle">⚖️</text>
+    <text y="55" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#4a90e2" text-anchor="middle">COURT</text>
+  </g>
+  
+  <!-- Connecting arrows -->
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#f4a623"/>
+    </marker>
+  </defs>
+  
+  <g stroke="#f4a623" stroke-width="3" fill="none" opacity="0.7" marker-end="url(#arrow)">
+    <path d="M 360,140 L 290,320"/>
+    <path d="M 440,140 L 510,320"/>
+    <path d="M 310,360 L 490,360"/>
+  </g>
+  
+  <!-- Center text -->
+  <text x="400" y="240" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#4a90e2" text-anchor="middle">MUTUAL</text>
+  <text x="400" y="260" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#4a90e2" text-anchor="middle">ACCOUNTABILITY</text>
+  
+  <!-- Bottom banner -->
+  <rect x="150" y="460" width="500" height="30" rx="15" fill="white" opacity="0.9" stroke="#4a90e2" stroke-width="2"/>
+  <text x="400" y="480" font-family="Arial, sans-serif" font-size="14" font-weight="600" fill="#4a90e2" text-anchor="middle">Everyone Accountable to Everyone</text>
+</svg>

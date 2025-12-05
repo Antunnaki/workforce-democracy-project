@@ -1,0 +1,177 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="800" height="500">
+  <defs>
+    <!-- Harmonious gradient backgrounds -->
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#e8f5f9;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#f3f8fb;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#dceef5;stop-opacity:1" />
+    </linearGradient>
+    
+    <radialGradient id="glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" style="stop-color:#fff;stop-opacity:0.7" />
+      <stop offset="100%" style="stop-color:#5ba3d0;stop-opacity:0" />
+    </radialGradient>
+    
+    <!-- Artistic circle gradients -->
+    <radialGradient id="circleGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" style="stop-color:#ffffff;stop-opacity:1" />
+      <stop offset="70%" style="stop-color:#fafcfd;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#eaf4f8;stop-opacity:1" />
+    </radialGradient>
+    
+    <!-- Magical textured gradient for connections (warm gold to amber) -->
+    <linearGradient id="magicOrange" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#ffa726;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#ffb74d;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#ff9800;stop-opacity:1" />
+    </linearGradient>
+    
+    <!-- Magical textured gradient (emerald green) -->
+    <linearGradient id="magicGreen" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#66bb6a;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#81c784;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#4caf50;stop-opacity:1" />
+    </linearGradient>
+    
+    <!-- Magical textured gradient (serene blue) -->
+    <linearGradient id="magicBlue" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#42a5f5;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#64b5f6;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#2196f3;stop-opacity:1" />
+    </linearGradient>
+    
+    <!-- Magical shimmer filter for sparkle effect -->
+    <filter id="shimmer">
+      <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="3" seed="2">
+        <animate attributeName="baseFrequency" values="0.9;1.2;0.9" dur="4s" repeatCount="indefinite"/>
+      </feTurbulence>
+      <feColorMatrix type="saturate" values="0.3"/>
+      <feBlend mode="screen" in="SourceGraphic"/>
+    </filter>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="800" height="500" fill="url(#bg)"/>
+  
+  <!-- Center artistic glow -->
+  <circle cx="400" cy="250" r="200" fill="url(#glow)"/>
+  
+  <!-- Flowing accountability ring (softer, more organic) -->
+  <circle cx="400" cy="250" r="165" fill="none" stroke="#5ba3d0" stroke-width="2" stroke-dasharray="15 8" opacity="0.25"/>
+  <circle cx="400" cy="250" r="155" fill="none" stroke="#66bb6a" stroke-width="1.5" stroke-dasharray="8 12" opacity="0.18"/>
+  
+  <!-- MAGICAL FLOWING CONNECTIONS - Textured wavy lines with shimmer -->
+  <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <!-- Primary magical connections (warm amber/gold) - Multiple layers for texture -->
+    <g opacity="0.6">
+      <!-- Main flowing path -->
+      <path d="M 365,135 Q 310,200 265,320" stroke="url(#magicOrange)" stroke-width="4" stroke-dasharray="12 6"/>
+      <path d="M 435,135 Q 490,200 535,320" stroke="url(#magicOrange)" stroke-width="4" stroke-dasharray="12 6"/>
+      <path d="M 315,355 Q 400,340 485,355" stroke="url(#magicOrange)" stroke-width="4" stroke-dasharray="12 6"/>
+      
+      <!-- Parallel glow layer (magical shimmer effect) -->
+      <path d="M 365,135 Q 310,200 265,320" stroke="#ffcc80" stroke-width="2" stroke-dasharray="8 8" opacity="0.5" filter="url(#shimmer)"/>
+      <path d="M 435,135 Q 490,200 535,320" stroke="#ffcc80" stroke-width="2" stroke-dasharray="8 8" opacity="0.5" filter="url(#shimmer)"/>
+      <path d="M 315,355 Q 400,340 485,355" stroke="#ffcc80" stroke-width="2" stroke-dasharray="8 8" opacity="0.5" filter="url(#shimmer)"/>
+      
+      <!-- Dotted sparkle trail -->
+      <path d="M 365,135 Q 310,200 265,320" stroke="#ffe0b2" stroke-width="1" stroke-dasharray="2 10" opacity="0.7"/>
+      <path d="M 435,135 Q 490,200 535,320" stroke="#ffe0b2" stroke-width="1" stroke-dasharray="2 10" opacity="0.7"/>
+      <path d="M 315,355 Q 400,340 485,355" stroke="#ffe0b2" stroke-width="1" stroke-dasharray="2 10" opacity="0.7"/>
+    </g>
+    
+    <!-- Secondary magical connections (emerald green) - Integration flow -->
+    <g opacity="0.5">
+      <!-- Main flowing path -->
+      <path d="M 270,325 Q 330,230 360,140" stroke="url(#magicGreen)" stroke-width="3" stroke-dasharray="10 8"/>
+      <path d="M 530,325 Q 470,230 440,140" stroke="url(#magicGreen)" stroke-width="3" stroke-dasharray="10 8"/>
+      <path d="M 480,350 Q 400,365 320,350" stroke="url(#magicGreen)" stroke-width="3" stroke-dasharray="10 8"/>
+      
+      <!-- Parallel glow layer -->
+      <path d="M 270,325 Q 330,230 360,140" stroke="#a5d6a7" stroke-width="1.5" stroke-dasharray="6 10" opacity="0.6" filter="url(#shimmer)"/>
+      <path d="M 530,325 Q 470,230 440,140" stroke="#a5d6a7" stroke-width="1.5" stroke-dasharray="6 10" opacity="0.6" filter="url(#shimmer)"/>
+      <path d="M 480,350 Q 400,365 320,350" stroke="#a5d6a7" stroke-width="1.5" stroke-dasharray="6 10" opacity="0.6" filter="url(#shimmer)"/>
+      
+      <!-- Dotted sparkle trail -->
+      <path d="M 270,325 Q 330,230 360,140" stroke="#c8e6c9" stroke-width="0.8" stroke-dasharray="2 12" opacity="0.7"/>
+      <path d="M 530,325 Q 470,230 440,140" stroke="#c8e6c9" stroke-width="0.8" stroke-dasharray="2 12" opacity="0.7"/>
+      <path d="M 480,350 Q 400,365 320,350" stroke="#c8e6c9" stroke-width="0.8" stroke-dasharray="2 12" opacity="0.7"/>
+    </g>
+    
+    <!-- Tertiary magical connections (serene blue) - Harmony flow -->
+    <g opacity="0.35">
+      <!-- Main flowing path -->
+      <path d="M 380,145 Q 350,250 280,340" stroke="url(#magicBlue)" stroke-width="2.5" stroke-dasharray="8 12"/>
+      <path d="M 420,145 Q 450,250 520,340" stroke="url(#magicBlue)" stroke-width="2.5" stroke-dasharray="8 12"/>
+      <path d="M 290,360 Q 400,380 510,360" stroke="url(#magicBlue)" stroke-width="2.5" stroke-dasharray="8 12"/>
+      
+      <!-- Parallel glow layer -->
+      <path d="M 380,145 Q 350,250 280,340" stroke="#90caf9" stroke-width="1.2" stroke-dasharray="5 14" opacity="0.6" filter="url(#shimmer)"/>
+      <path d="M 420,145 Q 450,250 520,340" stroke="#90caf9" stroke-width="1.2" stroke-dasharray="5 14" opacity="0.6" filter="url(#shimmer)"/>
+      <path d="M 290,360 Q 400,380 510,360" stroke="#90caf9" stroke-width="1.2" stroke-dasharray="5 14" opacity="0.6" filter="url(#shimmer)"/>
+      
+      <!-- Dotted sparkle trail -->
+      <path d="M 380,145 Q 350,250 280,340" stroke="#bbdefb" stroke-width="0.8" stroke-dasharray="1.5 14" opacity="0.7"/>
+      <path d="M 420,145 Q 450,250 520,340" stroke="#bbdefb" stroke-width="0.8" stroke-dasharray="1.5 14" opacity="0.7"/>
+      <path d="M 290,360 Q 400,380 510,360" stroke="#bbdefb" stroke-width="0.8" stroke-dasharray="1.5 14" opacity="0.7"/>
+    </g>
+    
+    <!-- Magical particle sparkles along paths -->
+    <g fill="#ffd54f" opacity="0.6">
+      <circle cx="338" cy="167" r="2.5"/>
+      <circle cx="370" cy="227" r="2"/>
+      <circle cx="287" cy="280" r="2.5"/>
+      <circle cx="462" cy="167" r="2.5"/>
+      <circle cx="430" cy="227" r="2"/>
+      <circle cx="513" cy="280" r="2.5"/>
+      <circle cx="360" cy="352" r="2"/>
+      <circle cx="440" cy="352" r="2"/>
+    </g>
+  </g>
+  
+  <!-- TOP: Citizens -->
+  <g transform="translate(400, 110)">
+    <!-- Artistic circle with gradient -->
+    <circle cx="0" cy="0" r="52" fill="url(#circleGlow)" stroke="#5ba3d0" stroke-width="2.5" opacity="0.95"/>
+    <!-- Icon -->
+    <text y="-13" font-family="Arial, sans-serif" font-size="36" fill="#5ba3d0" text-anchor="middle">👥</text>
+    <!-- Text PERFECTLY CENTERED in circle -->
+    <text y="22" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#5ba3d0" text-anchor="middle" letter-spacing="0.5">CITIZENS</text>
+  </g>
+  
+  <!-- BOTTOM LEFT: Representatives -->
+  <g transform="translate(260, 350)">
+    <!-- Artistic circle with gradient -->
+    <circle cx="0" cy="0" r="52" fill="url(#circleGlow)" stroke="#5ba3d0" stroke-width="2.5" opacity="0.95"/>
+    <!-- Icon -->
+    <text y="-10" font-family="Arial, sans-serif" font-size="36" fill="#5ba3d0" text-anchor="middle">🏛️</text>
+    <!-- Text PERFECTLY CENTERED in circle -->
+    <text y="24" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#5ba3d0" text-anchor="middle" letter-spacing="0.5">REPS</text>
+  </g>
+  
+  <!-- BOTTOM RIGHT: Court -->
+  <g transform="translate(540, 350)">
+    <!-- Artistic circle with gradient -->
+    <circle cx="0" cy="0" r="52" fill="url(#circleGlow)" stroke="#5ba3d0" stroke-width="2.5" opacity="0.95"/>
+    <!-- Icon -->
+    <text y="-10" font-family="Arial, sans-serif" font-size="36" fill="#5ba3d0" text-anchor="middle">⚖️</text>
+    <!-- Text PERFECTLY CENTERED in circle -->
+    <text y="24" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#5ba3d0" text-anchor="middle" letter-spacing="0.5">COURT</text>
+  </g>
+  
+  <!-- Center text - artistic styling with harmonious colors -->
+  <g opacity="0.85">
+    <text x="400" y="240" font-family="Arial, sans-serif" font-size="16" font-weight="600" fill="#5ba3d0" text-anchor="middle" letter-spacing="1.2">MUTUAL</text>
+    <text x="400" y="260" font-family="Arial, sans-serif" font-size="16" font-weight="600" fill="#5ba3d0" text-anchor="middle" letter-spacing="1.2">ACCOUNTABILITY</text>
+  </g>
+  
+  <!-- Artistic flowing particles/dots (subtle enhancement) -->
+  <g fill="#5ba3d0" opacity="0.12">
+    <circle cx="350" cy="190" r="2.5"/>
+    <circle cx="450" cy="190" r="2.5"/>
+    <circle cx="290" cy="280" r="2"/>
+    <circle cx="510" cy="280" r="2"/>
+    <circle cx="370" cy="310" r="2"/>
+    <circle cx="430" cy="310" r="2"/>
+  </g>
+</svg>

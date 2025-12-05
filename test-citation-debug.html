@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Citation Debug Test - V36.11.12</title>
+    <link rel="stylesheet" href="css/citations.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .test-container {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        .test-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: #2563eb;
+        }
+        .test-input {
+            background: #f9fafb;
+            padding: 15px;
+            border-radius: 4px;
+            border: 1px solid #e5e7eb;
+            margin-bottom: 15px;
+            font-family: monospace;
+            font-size: 12px;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+        .test-output {
+            background: #fff;
+            padding: 15px;
+            border-radius: 4px;
+            border: 2px solid #10b981;
+            min-height: 50px;
+        }
+        .debug-log {
+            background: #1f2937;
+            color: #10b981;
+            padding: 15px;
+            border-radius: 4px;
+            font-family: monospace;
+            font-size: 12px;
+            margin-top: 10px;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+        .step {
+            margin: 5px 0;
+            padding: 5px;
+        }
+        .step-number {
+            color: #fbbf24;
+            font-weight: bold;
+        }
+        .error {
+            color: #ef4444;
+        }
+        .success {
+            color: #10b981;
+        }
+    </style>
+</head>
+<body>
+    <h1>🔍 Citation System Debug Test - V36.11.12</h1>
+    <p>Testing the citation placeholder conflict fix</p>
+
+    <!-- Test 1: Simple citation -->
+    <div class="test-container">
+        <div class="test-title">Test 1: Simple Citation</div>
+        <div class="test-input">Input: "Adams was indicted[1] on federal charges"</div>
+        <div class="test-output" id="test1-output"></div>
+        <div class="debug-log" id="test1-debug"></div>
+    </div>
+
+    <!-- Test 2: Multiple citations -->
+    <div class="test-container">
+        <div class="test-title">Test 2: Multiple Citations</div>
+        <div class="test-input">Input: "The bill[1] was passed[2] in 2023[3]"</div>
+        <div class="test-output" id="test2-output"></div>
+        <div class="debug-log" id="test2-debug"></div>
+    </div>
+
+    <!-- Test 3: Citations with bold text -->
+    <div class="test-container">
+        <div class="test-title">Test 3: Citations with Bold (**text**)</div>
+        <div class="test-input">Input: "The **controversial** bill[1] was passed"</div>
+        <div class="test-output" id="test3-output"></div>
+        <div class="debug-log" id="test3-debug"></div>
+    </div>
+
+    <!-- Test 4: Citations with bold (__text__) -->
+    <div class="test-container">
+        <div class="test-title">Test 4: Citations with Bold (__text__) - THE CONFLICT</div>
+        <div class="test-input">Input: "The __controversial__ bill[1] was passed"</div>
+        <div class="test-output" id="test4-output"></div>
+        <div class="debug-log" id="test4-debug"></div>
+    </div>
+
+    <!-- Test 5: Real-world example -->
+    <div class="test-container">
+        <div class="test-title">Test 5: Real-World Example</div>
+        <div class="test-input">Input: "Adams was **indicted**[1] on federal *corruption* charges[2].\n\nSources:\n1. ProPublica - Federal Indictment\n2. BBC News - Corruption Case"</div>
+        <div class="test-output" id="test5-output"></div>
+        <div class="debug-log" id="test5-debug"></div>
+    </div>
+
+    <!-- Load scripts -->
+    <script src="js/citation-renderer.js"></script>
+    <script src="js/markdown-renderer.js"></script>
+
+    <script>
+        // Debug logging function
+        function logDebug(testId, step, message, isError = false, isSuccess = false) {
+            const debugDiv = document.getElementById(`${testId}-debug`);
+            const logEntry = document.createElement('div');
+            logEntry.className = 'step';
+            if (isError) logEntry.classList.add('error');
+            if (isSuccess) logEntry.classList.add('success');
+            
+            logEntry.innerHTML = `<span class="step-number">[${step}]</span> ${message}`;
+            debugDiv.appendChild(logEntry);
+        }
+
+        // Enhanced processInlineMarkdown with debug logging
+        function processInlineMarkdownDebug(text, testId) {
+            if (!text) return '';
+            
+            logDebug(testId, 1, `Input text: "${text}"`);
+            
+            // Step 1: Save citations
+            const citationPlaceholders = [];
+            let citationIndex = 0;
+            
+            const originalText = text;
+            text = text.replace(/\[(\d+)\]/g, (match, num) => {
+                const placeholder = `◊◊CITE${citationIndex}◊◊`;
+                citationPlaceholders.push({ placeholder, citation: match });
+                citationIndex++;
+                logDebug(testId, 2, `Saved citation ${match} as placeholder: ${placeholder}`);
+                return placeholder;
+            });
+            
+            if (text !== originalText) {
+                logDebug(testId, 3, `After saving citations: "${text}"`);
+            } else {
+                logDebug(testId, 3, `No citations found in text`);
+            }
+            
+            // Step 2: Process bold markdown
+            const beforeBold = text;
+            text = text.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
+            if (text !== beforeBold) {
+                logDebug(testId, 4, `After **bold**: "${text}"`);
+            }
+            
+            const beforeUnderscoreBold = text;
+            text = text.replace(/__([^_]+)__/g, '<strong>$1</strong>');
+            if (text !== beforeUnderscoreBold) {
+                logDebug(testId, 5, `After __bold__: "${text}"`);
+            } else {
+                logDebug(testId, 5, `No __bold__ found (placeholders safe!)`, false, true);
+            }
+            
+            // Step 3: Process italic
+            const beforeItalic = text;
+            text = text.replace(/(?<!\*)\*(?!\*)([^*]+)\*(?!\*)/g, '<em>$1</em>');
+            text = text.replace(/(?<!_)_(?!_)([^_]+)_(?!_)/g, '<em>$1</em>');
+            if (text !== beforeItalic) {
+                logDebug(testId, 6, `After italic: "${text}"`);
+            }
+            
+            // Step 4: Restore citations
+            if (citationPlaceholders.length > 0) {
+                logDebug(testId, 7, `Restoring ${citationPlaceholders.length} citations...`);
+                citationPlaceholders.forEach(({ placeholder, citation }, idx) => {
+                    const beforeRestore = text;
+                    text = text.split(placeholder).join(citation);
+                    if (beforeRestore !== text) {
+                        logDebug(testId, 8, `✅ Restored ${placeholder} → ${citation}`, false, true);
+                    } else {
+                        logDebug(testId, 8, `❌ FAILED to restore ${placeholder}`, true);
+                    }
+                });
+            }
+            
+            logDebug(testId, 9, `Final output: "${text}"`, false, true);
+            
+            return text;
+        }
+
+        // Run tests
+        function runTest(testId, inputText) {
+            const outputDiv = document.getElementById(`${testId}-output`);
+            const debugDiv = document.getElementById(`${testId}-debug`);
+            
+            debugDiv.innerHTML = '';
+            
+            // Process with debug
+            const result = processInlineMarkdownDebug(inputText, testId);
+            
+            // Display result
+            outputDiv.innerHTML = `<strong>Output:</strong> ${result}`;
+        }
+
+        // Run all tests on page load
+        window.addEventListener('DOMContentLoaded', () => {
+            console.log('🔍 Running citation debug tests...');
+            
+            runTest('test1', 'Adams was indicted[1] on federal charges');
+            runTest('test2', 'The bill[1] was passed[2] in 2023[3]');
+            runTest('test3', 'The **controversial** bill[1] was passed');
+            runTest('test4', 'The __controversial__ bill[1] was passed');
+            runTest('test5', 'Adams was **indicted**[1] on federal *corruption* charges[2]');
+        });
+    </script>
+</body>
+</html>

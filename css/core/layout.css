@@ -1,0 +1,44 @@
+/* ============================================================================
+   WORKFORCE DEMOCRACY PROJECT - LAYOUT
+   Version: 37.11.0-PHASE3B
+   Date: November 14, 2024
+   
+   Layout containers, sections, and structural utilities
+   
+   Dependencies: variables.css (MUST load before this file)
+   
+   ============================================================================ */
+
+/* ============================================
+   CONTAINER
+   ============================================ */
+
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 var(--space-md);
+  overflow-x: hidden;
+  box-sizing: border-box;
+}
+
+@media (max-width: 479px) {
+  .container {
+    padding: 0 var(--space-sm);
+  }
+}
+
+/* ============================================
+   SECTION
+   ============================================ */
+
+.section {
+  padding: var(--space-xl) 0;
+  max-width: 100%;
+  overflow-x: hidden;
+  /* Background set by consolidated section at end of CSS */
+  transition: background 0.3s ease;
+}
+
+/* Section backgrounds removed - set by consolidated section at end of CSS */
+/* This ensures wallpaper shows through on all devices including mobile */

@@ -1,0 +1,170 @@
+/**
+ * VOTING INFORMATION SYSTEM - STYLES
+ * Accordion UI for voting information display
+ */
+
+/* Voting Accordion Container */
+.voting-accordion {
+    background: white;
+    border-radius: 12px;
+    margin-bottom: 1rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.voting-accordion:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+}
+
+/* Accordion Header (Button) */
+.voting-accordion-header {
+    width: 100%;
+    background: linear-gradient(135deg, #f7fafc 0%, #edf2f7 100%);
+    border: none;
+    padding: 1.25rem 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-align: left;
+    color: #1a202c;
+}
+
+.voting-accordion-header:hover {
+    background: linear-gradient(135deg, #edf2f7 0%, #e2e8f0 100%);
+}
+
+.voting-accordion-header.active {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+}
+
+.voting-accordion-header .accordion-arrow {
+    font-size: 1rem;
+    transition: transform 0.2s ease;
+    margin-left: 1rem;
+}
+
+.voting-accordion-header.active .accordion-arrow {
+    transform: rotate(180deg);
+}
+
+/* Accordion Content */
+.voting-accordion-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+    background: white;
+}
+
+.voting-accordion-content.active {
+    max-height: 5000px; /* Large enough for content */
+    transition: max-height 0.5s ease;
+}
+
+.voting-section-content {
+    padding: 1.5rem;
+    color: #1f2937;
+    line-height: 1.6;
+}
+
+/* Voting Content Typography */
+.voting-section-content h4 {
+    margin: 1rem 0 0.5rem;
+    color: #1f2937;
+    font-size: 1.0625rem;
+    font-weight: 600;
+}
+
+.voting-section-content p {
+    margin: 0.5rem 0;
+    font-size: 0.9375rem;
+    line-height: 1.6;
+}
+
+.voting-section-content ul,
+.voting-section-content ol {
+    margin: 0.5rem 0 1rem;
+    padding-left: 1.5rem;
+}
+
+.voting-section-content li {
+    margin-bottom: 0.5rem;
+    line-height: 1.6;
+}
+
+.voting-section-content a {
+    color: #667eea;
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.2s ease;
+}
+
+.voting-section-content a:hover {
+    color: #764ba2;
+    text-decoration: underline;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .voting-accordion-header {
+        padding: 1rem;
+        font-size: 0.9375rem;
+    }
+    
+    .voting-accordion-header span[style*="font-size: 1.5rem"] {
+        font-size: 1.25rem !important;
+    }
+    
+    .voting-accordion-header span[style*="font-size: 1.125rem"] {
+        font-size: 1rem !important;
+    }
+    
+    .voting-section-content {
+        padding: 1rem;
+    }
+    
+    .voting-section-content h4 {
+        font-size: 1rem;
+    }
+    
+    .voting-section-content p {
+        font-size: 0.875rem;
+    }
+}
+
+/* Mobile Landscape Adjustments */
+@media (max-width: 896px) and (max-height: 500px) {
+    .voting-accordion {
+        margin-bottom: 0.75rem;
+    }
+    
+    .voting-accordion-header {
+        padding: 0.875rem 1rem;
+    }
+    
+    .voting-section-content {
+        padding: 1rem;
+        font-size: 0.875rem;
+    }
+}
+
+/* Print Styles (For users who want to print voting info) */
+@media print {
+    .voting-accordion-header {
+        background: white !important;
+        color: black !important;
+        border-bottom: 2px solid #e2e8f0;
+    }
+    
+    .voting-accordion-content {
+        max-height: none !important;
+        display: block !important;
+    }
+    
+    .accordion-arrow {
+        display: none;
+    }
+}

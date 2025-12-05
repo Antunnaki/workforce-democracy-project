@@ -1,0 +1,456 @@
+/**
+ * REPRESENTATIVE CARDS
+ * Version: 37.11.4-PHASE3C
+ * Date: 2025-01-14
+ * 
+ * Representative/politician profile cards with photos, contact info,
+ * voting analysis, topic breakdowns, and recent votes display.
+ * 
+ * Dependencies:
+ * - variables.css (design tokens)
+ * - buttons.css (button styles)
+ * 
+ * Components:
+ * - .representative-card - Main card container
+ * - .rep-header - Photo and basic info section
+ * - .rep-photo - Representative photo (circular)
+ * - .rep-basic-info - Name, party, district
+ * - .rep-contact - Contact links (phone, email, website)
+ * - .voting-analysis - Voting pattern charts
+ * - .topic-breakdown - Topic-by-topic voting analysis
+ * - .recent-votes - Recent vote history
+ * - .vote-item - Individual vote display
+ * 
+ * Features:
+ * - Responsive layout (stacked on mobile, side-by-side on desktop)
+ * - Interactive charts and progress bars
+ * - Hover effects for engagement
+ * - Touch-friendly contact buttons (44px minimum)
+ */
+
+/* ============================================
+   REPRESENTATIVE CARDS
+   ============================================ */
+.representative-card {
+  background: var(--surface);
+  border: 2px solid var(--border);
+  border-left: 4px solid var(--primary);
+  border-radius: var(--radius-lg);
+  padding: var(--space-md);
+  margin-bottom: var(--space-lg);
+  box-shadow: var(--shadow-sm);
+  transition: all var(--transition-base);
+}
+
+@media (min-width: 768px) {
+  .representative-card {
+    padding: var(--space-lg);
+  }
+}
+
+.representative-card:hover {
+  box-shadow: var(--shadow-xl);
+  border-color: var(--secondary);
+  border-left-color: var(--secondary);
+  transform: translateX(4px);
+}
+
+.rep-header {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  margin-bottom: var(--space-xl);
+  padding-bottom: var(--space-lg);
+  border-bottom: 2px solid var(--border-light);
+}
+
+@media (min-width: 480px) {
+  .rep-header {
+    flex-direction: row;
+    align-items: flex-start;
+  }
+}
+
+.rep-photo {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid var(--primary);
+  flex-shrink: 0;
+  margin: 0 auto;
+}
+
+@media (min-width: 480px) {
+  .rep-photo {
+    margin: 0;
+  }
+}
+
+@media (min-width: 768px) {
+  .rep-photo {
+    width: 120px;
+    height: 120px;
+  }
+}
+
+.rep-basic-info {
+  flex: 1;
+  text-align: center;
+}
+
+@media (min-width: 480px) {
+  .rep-basic-info {
+    text-align: left;
+  }
+}
+
+.rep-basic-info h3 {
+  font-size: var(--font-size-lg);
+  color: var(--primary);
+  margin: 0 0 var(--space-xs) 0;
+}
+
+@media (min-width: 768px) {
+  .rep-basic-info h3 {
+    font-size: var(--font-size-xl);
+  }
+}
+
+.rep-party {
+  color: var(--text-secondary);
+  font-weight: var(--font-weight-medium);
+  margin: 0 0 var(--space-xs) 0;
+  font-size: var(--font-size-sm);
+}
+
+@media (min-width: 768px) {
+  .rep-party {
+    font-size: var(--font-size-base);
+  }
+}
+
+.rep-district {
+  color: var(--text-light);
+  margin: 0 0 var(--space-md) 0;
+  font-size: var(--font-size-sm);
+}
+
+.rep-contact {
+  display: flex;
+  gap: var(--space-sm);
+  justify-content: center;
+  margin-top: var(--space-md);
+}
+
+@media (min-width: 480px) {
+  .rep-contact {
+    justify-content: flex-start;
+  }
+}
+
+.contact-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  background: var(--background);
+  border-radius: 50%;
+  color: var(--primary);
+  text-decoration: none;
+  transition: all var(--transition-fast);
+  font-size: var(--font-size-lg);
+}
+
+.contact-link:hover {
+  background: var(--primary);
+  color: white;
+  transform: scale(1.1);
+}
+
+.voting-analysis {
+  margin-bottom: var(--space-xl);
+}
+
+.voting-analysis h4 {
+  color: var(--text);
+  margin: 0 0 var(--space-lg) 0;
+  font-size: var(--font-size-base);
+}
+
+@media (min-width: 768px) {
+  .voting-analysis h4 {
+    font-size: var(--font-size-lg);
+  }
+}
+
+.voting-chart {
+  margin-bottom: var(--space-xl);
+  padding: var(--space-md);
+  background: var(--background);
+  border-radius: var(--radius-md);
+}
+
+.topic-breakdown {
+  padding: var(--space-md);
+  background: var(--background);
+  border-radius: var(--radius-md);
+}
+
+@media (min-width: 768px) {
+  .topic-breakdown {
+    padding: var(--space-lg);
+  }
+}
+
+.topic-breakdown h5 {
+  font-size: var(--font-size-sm);
+  color: var(--text-secondary);
+  margin: 0 0 var(--space-md) 0;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+@media (min-width: 768px) {
+  .topic-breakdown h5 {
+    font-size: var(--font-size-base);
+  }
+}
+
+.topic-bar {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-xs);
+  margin-bottom: var(--space-md);
+  align-items: center;
+}
+
+@media (min-width: 480px) {
+  .topic-bar {
+    grid-template-columns: minmax(120px, auto) 1fr auto;
+    gap: var(--space-sm);
+  }
+}
+
+@media (min-width: 768px) {
+  .topic-bar {
+    grid-template-columns: minmax(150px, auto) 1fr auto;
+  }
+}
+
+.topic-label {
+  font-size: var(--font-size-sm);
+  color: var(--text);
+  font-weight: var(--font-weight-medium);
+}
+
+.progress-bar {
+  height: 24px;
+  background: var(--surface);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+  border: 1px solid var(--border-light);
+  position: relative;
+}
+
+@media (min-width: 768px) {
+  .progress-bar {
+    height: 28px;
+  }
+}
+
+.progress-fill {
+  height: 100%;
+  border-radius: var(--radius-full);
+  transition: width var(--transition-base);
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding-right: var(--space-sm);
+}
+
+.topic-percentage {
+  font-weight: var(--font-weight-bold);
+  color: var(--text);
+  min-width: 40px;
+  text-align: right;
+  font-size: var(--font-size-sm);
+}
+
+@media (min-width: 768px) {
+  .topic-percentage {
+    font-size: var(--font-size-base);
+    min-width: 50px;
+  }
+}
+
+.recent-votes h4 {
+  color: var(--text);
+  margin: var(--space-lg) 0 var(--space-md) 0;
+  padding-top: var(--space-lg);
+  border-top: 2px solid var(--border-light);
+  font-size: var(--font-size-base);
+}
+
+.recent-votes h4:first-of-type {
+  margin-top: 0;
+  padding-top: 0;
+  border-top: none;
+}
+
+@media (min-width: 768px) {
+  .recent-votes h4 {
+    font-size: var(--font-size-lg);
+  }
+}
+
+.vote-item {
+  background: var(--background);
+  border-left: 4px solid var(--primary);
+  border-radius: var(--radius-md);
+  padding: var(--space-sm);
+  margin-bottom: var(--space-sm);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+  transition: all var(--transition-fast);
+}
+
+@media (min-width: 768px) {
+  .vote-item {
+    padding: var(--space-md);
+  }
+}
+
+.vote-item:hover {
+  border-left-width: 6px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  transform: translateX(2px);
+}
+
+.vote-header-row {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-sm);
+}
+
+@media (min-width: 480px) {
+  .vote-header-row {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+}
+
+.bill-name {
+  font-weight: var(--font-weight-semibold);
+  color: var(--text);
+  font-size: var(--font-size-sm);
+  flex: 1;
+}
+
+@media (min-width: 768px) {
+  .bill-name {
+    font-size: var(--font-size-base);
+  }
+}
+
+.vote-position {
+  padding: var(--space-xs) var(--space-md);
+  border-radius: var(--radius-full);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-bold);
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+@media (min-width: 768px) {
+  .vote-position {
+    font-size: var(--font-size-sm);
+  }
+}
+
+.vote-yes {
+  background: rgba(82, 196, 26, 0.1);
+  color: var(--success);
+}
+
+.vote-no {
+  background: rgba(255, 77, 79, 0.1);
+  color: var(--error);
+}
+
+.vote-date {
+  color: var(--text-light);
+  font-size: var(--font-size-xs);
+  margin: 0 0 var(--space-sm) 0;
+}
+
+@media (min-width: 768px) {
+  .vote-date {
+    font-size: var(--font-size-sm);
+  }
+}
+
+.bill-summary {
+  color: var(--text-secondary);
+  line-height: var(--line-height-relaxed);
+  margin: 0 0 var(--space-sm) 0;
+  font-size: var(--font-size-sm);
+}
+
+@media (min-width: 768px) {
+  .bill-summary {
+    font-size: var(--font-size-sm);
+  }
+}
+
+.vote-actions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+@media (min-width: 480px) {
+  .vote-actions {
+    flex-direction: row;
+  }
+}
+
+.btn-link {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-xs);
+  background: none;
+  border: none;
+  color: var(--primary);
+  cursor: pointer;
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  text-decoration: none;
+  padding: var(--space-xs) 0;
+  transition: color var(--transition-fast);
+  min-height: 44px;
+  justify-content: center;
+}
+
+@media (min-width: 480px) {
+  .btn-link {
+    justify-content: flex-start;
+  }
+}
+
+@media (min-width: 768px) {
+  .btn-link {
+    font-size: var(--font-size-base);
+  }
+}
+
+.btn-link:hover {
+  color: var(--primary-dark);
+  text-decoration: underline;
+}
+
+.btn-link i {
+  font-size: 0.9em;
+}

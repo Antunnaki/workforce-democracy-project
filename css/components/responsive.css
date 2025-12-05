@@ -1,0 +1,275 @@
+/**
+ * RESPONSIVE DESIGN
+ * Version: 37.11.4-PHASE3C-PRIORITY
+ * Date: 2025-01-14
+ * 
+ * Mobile-first responsive breakpoints for all components.
+ * Handles layout adjustments for mobile (≤767px), tablet (1024px+), and desktop.
+ * 
+ * Dependencies:
+ * - variables.css (design tokens)
+ * - All component files
+ * 
+ * Breakpoints:
+ * - Mobile: ≤767px (stacked layouts, full-width buttons)
+ * - Tablet: ≥1024px + ≥500px height (2-3 column layouts)
+ * - Desktop: ≥1024px (multi-column grids, hover states)
+ * 
+ * NOTE: Load this file AFTER all component CSS files to ensure
+ * responsive overrides take effect properly.
+ */
+
+/* ============================================
+   RESPONSIVE DESIGN - MOBILE SPECIFIC
+   ============================================ */
+@media (max-width: 767px) {
+  /* Typography adjustments */
+  h1 { font-size: var(--font-size-2xl); }
+  h2 { font-size: var(--font-size-xl); }
+  h3 { font-size: var(--font-size-lg); }
+  
+  /* Button sizing - ensure 44px minimum for touch */
+  .btn {
+    padding: var(--space-md) var(--space-lg);
+    font-size: var(--font-size-base);
+    min-height: 44px;
+    width: 100%;
+    max-width: 100%;
+  }
+  
+  /* Make buttons in flex containers work */
+  .hero-actions .btn {
+    width: 100%;
+  }
+  
+  /* Header adjustments */
+  .header-content {
+    padding: var(--space-sm) 0;
+  }
+  
+  .establishment {
+    font-size: 0.65rem;
+  }
+  
+  /* Language button - smaller on mobile */
+  .language-btn {
+    padding: var(--space-xs) var(--space-sm);
+    font-size: 0.75rem;
+  }
+  
+  /* Section spacing */
+  .section {
+    padding: var(--space-xl) 0;
+  }
+  
+  /* Job categories - 2 columns on mobile */
+  .job-categories-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-sm);
+  }
+  
+  /* Philosophies grid */
+  .philosophies-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  /* Civic transparency mobile adjustments - REMOVED OLD STYLES */
+  /* All civic styles now in civic-redesign.css */
+  .civic-section {
+    overflow-x: hidden;
+    /* REMOVED: min-height: 100vh - was causing excessive blank space */
+    /* Dynamic spacing now controlled by content presence */
+    padding: 2rem 0;
+  }
+  
+  .decision-actions {
+    flex-direction: column;
+  }
+  
+  .decision-actions button {
+    width: 100%;
+  }
+  
+  /* Bill voting cards mobile */
+  .bill-voting-card {
+    padding: var(--space-md);
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+  
+  .bill-title {
+    font-size: var(--font-size-base);
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+  }
+  
+  .upcoming-bills-list,
+  .personal-dashboard {
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+  
+  /* Dashboard stats mobile */
+  .dashboard-stats {
+    grid-template-columns: 1fr;
+    gap: var(--space-md);
+    max-width: 100%;
+  }
+  
+  .stat-card {
+    padding: var(--space-md);
+    max-width: 100%;
+  }
+  
+  .stat-number {
+    font-size: var(--font-size-2xl);
+  }
+  
+  .stat-label {
+    font-size: var(--font-size-xs);
+  }
+  
+  /* Section headers mobile */
+  .section-header {
+    padding: 0;
+    max-width: 100%;
+  }
+  
+  .section-title {
+    font-size: var(--font-size-lg);
+    padding: 0 var(--space-xs);
+  }
+  
+  .section-subtitle {
+    font-size: var(--font-size-sm);
+    padding: 0 var(--space-xs);
+    line-height: var(--line-height-relaxed);
+  }
+  
+  /* Chat widget - DEPRECATED - Now using inline-chat-widget.css */
+  /* .chat-toggle {
+    padding: var(--space-sm) var(--space-md);
+    font-size: var(--font-size-sm);
+  }
+  
+  .chat-window {
+    width: calc(100vw - var(--space-md) * 2);
+    max-height: 500px;
+  } */
+  
+  /* Forms */
+  input, select, textarea {
+    font-size: 16px; /* Prevents zoom on iOS */
+  }
+  
+  /* Modal adjustments */
+  .modal-container {
+    max-width: 95%;
+    padding: var(--space-lg);
+  }
+  
+  /* Footer */
+  .footer-content {
+    grid-template-columns: 1fr;
+    gap: var(--space-xl);
+  }
+}
+
+/* ============================================
+   RESPONSIVE DESIGN - TABLET
+   ============================================ */
+/* Use min-width AND min-height to exclude landscape phones */
+@media (min-width: 1024px) and (min-height: 500px) {
+  .container {
+    padding: 0 var(--space-xl);
+  }
+  
+  .mobile-menu-toggle {
+    display: none;
+  }
+  
+  .desktop-nav {
+    display: block;
+  }
+  
+  .nav-list {
+    display: flex;
+  }
+  
+  .hero-title {
+    font-size: var(--font-size-4xl);
+  }
+  
+  /* OLD civic styles removed - now in civic-redesign.css */
+  
+  .footer-content {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  
+  .opt-in-actions {
+    flex-direction: row;
+    justify-content: center;
+  }
+}
+
+/* ============================================
+   RESPONSIVE DESIGN - DESKTOP
+   ============================================ */
+@media (min-width: 1024px) {
+  .section {
+    padding: var(--space-3xl) 0;
+  }
+  
+  /* OLD FLOATING CHAT WIDGET POSITIONING - DEPRECATED
+  .chat-widget {
+    bottom: var(--space-2xl);
+    right: var(--space-2xl);
+  }
+  END OLD CHAT WIDGET POSITIONING */
+  
+  /* Job categories - maintain 4 columns on desktop */
+  .job-categories-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/* Differences Grid - RESPONSIVE */
+.differences-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* 2 columns on mobile */
+  gap: var(--space-md);
+}
+
+@media (min-width: 768px) {
+  .differences-grid {
+    grid-template-columns: repeat(3, 1fr); /* 3 columns on tablet */
+    gap: var(--space-lg);
+  }
+  
+  .key-differences h3 {
+    font-size: var(--font-size-xl);
+  }
+}
+
+@media (min-width: 1024px) {
+  .differences-grid {
+    grid-template-columns: repeat(4, 1fr); /* 4 columns on desktop */
+  }
+}
+
+/* ============================================
+   REDUCED MOTION
+   ============================================ */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms;
+    animation-iteration-count: 1;
+    transition-duration: 0.01ms;
+  }
+  
+  html {
+    scroll-behavior: auto;
+  }
+}

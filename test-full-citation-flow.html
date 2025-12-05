@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Full Citation Flow Test - V36.11.12</title>
+    <link rel="stylesheet" href="css/citations.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 1200px;
+            margin: 30px auto;
+            padding: 20px;
+            background: #1f2937;
+            color: #f9fafb;
+        }
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 30px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        h1 {
+            margin: 0;
+            color: white;
+            font-size: 28px;
+        }
+        .subtitle {
+            color: #e0e7ff;
+            margin-top: 10px;
+        }
+        .test-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        .test-container {
+            background: #374151;
+            padding: 25px;
+            border-radius: 8px;
+            border: 2px solid #4b5563;
+        }
+        .test-title {
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: #fbbf24;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .test-label {
+            background: #1f2937;
+            padding: 8px 12px;
+            border-radius: 4px;
+            font-size: 11px;
+            color: #9ca3af;
+            margin-bottom: 10px;
+            font-family: monospace;
+        }
+        .test-input {
+            background: #1f2937;
+            padding: 15px;
+            border-radius: 4px;
+            border: 1px solid #4b5563;
+            margin-bottom: 15px;
+            font-family: 'Courier New', monospace;
+            font-size: 13px;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            color: #e5e7eb;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+        .test-output {
+            background: #111827;
+            padding: 20px;
+            border-radius: 4px;
+            border: 2px solid #10b981;
+            min-height: 80px;
+            color: #f9fafb;
+            line-height: 1.6;
+        }
+        .test-output.error {
+            border-color: #ef4444;
+        }
+        .status {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+        .status.pass {
+            background: #10b981;
+            color: white;
+        }
+        .status.fail {
+            background: #ef4444;
+            color: white;
+        }
+        .citation-check {
+            margin-top: 15px;
+            padding: 15px;
+            background: #1f2937;
+            border-radius: 4px;
+            font-size: 13px;
+        }
+        .check-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 8px 0;
+        }
+        .check-icon {
+            font-size: 16px;
+        }
+        .pipeline-flow {
+            background: #374151;
+            padding: 25px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            border: 2px solid #6366f1;
+        }
+        .flow-title {
+            font-size: 18px;
+            font-weight: bold;
+            color: #818cf8;
+            margin-bottom: 20px;
+        }
+        .flow-step {
+            background: #1f2937;
+            padding: 15px;
+            border-radius: 4px;
+            margin: 10px 0;
+            border-left: 4px solid #6366f1;
+        }
+        .flow-step-title {
+            color: #fbbf24;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        .flow-step-content {
+            color: #d1d5db;
+            font-size: 13px;
+            font-family: 'Courier New', monospace;
+        }
+        sup {
+            font-size: 0.6em !important;
+            color: #3b82f6 !important;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🔬 Full Citation Pipeline Test</h1>
+        <div class="subtitle">Testing markdown-renderer.js (V36.11.12) → citation-renderer.js integration</div>
+    </div>
+
+    <!-- Pipeline explanation -->
+    <div class="pipeline-flow">
+        <div class="flow-title">📊 Processing Pipeline</div>
+        <div class="flow-step">
+            <div class="flow-step-title">Step 1: Backend Response</div>
+            <div class="flow-step-content">Raw text with markdown syntax and [1], [2], [3] citations</div>
+        </div>
+        <div class="flow-step">
+            <div class="flow-step-title">Step 2: markdown-renderer.js - parseMarkdownAndCitations()</div>
+            <div class="flow-step-content">
+                • parseMarkdownToHTML() processes line-by-line<br>
+                • processInlineMarkdown() handles **bold**, __bold__, *italic*, _italic_<br>
+                • ◊◊CITE0◊◊ placeholders preserve [1] during markdown processing<br>
+                • Citations restored as [1] after markdown conversion
+            </div>
+        </div>
+        <div class="flow-step">
+            <div class="flow-step-title">Step 3: citation-renderer.js - convertCitationsToHTML()</div>
+            <div class="flow-step-content">
+                [1] → &lt;sup&gt;&lt;a href="#source-1"&gt;1&lt;/a&gt;&lt;/sup&gt;
+            </div>
+        </div>
+        <div class="flow-step">
+            <div class="flow-step-title">Step 4: CSS Styling (citations.css)</div>
+            <div class="flow-step-content">font-size: 0.6em !important; vertical-align: super !important;</div>
+        </div>
+        <div class="flow-step">
+            <div class="flow-step-title">Step 5: Browser Render</div>
+            <div class="flow-step-content">Final display: "Adams was indicted¹ on charges"</div>
+        </div>
+    </div>
+
+    <!-- Tests grid -->
+    <div class="test-grid">
+        <!-- Test 1 -->
+        <div class="test-container">
+            <div class="test-title">
+                <span>Test 1: Basic Citation</span>
+                <span class="status" id="test1-status">TESTING</span>
+            </div>
+            <div class="test-label">INPUT (Backend Response)</div>
+            <div class="test-input">Adams was indicted[1] on charges
+
+Sources:
+1. ProPublica - Federal Indictment</div>
+            <div class="test-label">OUTPUT (Rendered HTML)</div>
+            <div class="test-output" id="test1-output"></div>
+            <div class="citation-check" id="test1-check"></div>
+        </div>
+
+        <!-- Test 2 -->
+        <div class="test-container">
+            <div class="test-title">
+                <span>Test 2: Citation + **Bold**</span>
+                <span class="status" id="test2-status">TESTING</span>
+            </div>
+            <div class="test-label">INPUT (Backend Response)</div>
+            <div class="test-input">The **controversial** bill[1] was passed
+
+Sources:
+1. BBC News - Bill Passage</div>
+            <div class="test-label">OUTPUT (Rendered HTML)</div>
+            <div class="test-output" id="test2-output"></div>
+            <div class="citation-check" id="test2-check"></div>
+        </div>
+
+        <!-- Test 3 -->
+        <div class="test-container">
+            <div class="test-title">
+                <span>Test 3: Citation + __Bold__</span>
+                <span class="status" id="test3-status">TESTING</span>
+            </div>
+            <div class="test-label">INPUT (Backend Response - THE CONFLICT CASE)</div>
+            <div class="test-input">The __controversial__ bill[1] was passed
+
+Sources:
+1. BBC News - Bill Passage</div>
+            <div class="test-label">OUTPUT (Rendered HTML)</div>
+            <div class="test-output" id="test3-output"></div>
+            <div class="citation-check" id="test3-check"></div>
+        </div>
+
+        <!-- Test 4 -->
+        <div class="test-container">
+            <div class="test-title">
+                <span>Test 4: Multiple Citations</span>
+                <span class="status" id="test4-status">TESTING</span>
+            </div>
+            <div class="test-label">INPUT (Backend Response)</div>
+            <div class="test-input">Adams was **indicted**[1] on *corruption*[2] charges
+
+Sources:
+1. ProPublica - Federal Indictment
+2. BBC News - Corruption Case</div>
+            <div class="test-label">OUTPUT (Rendered HTML)</div>
+            <div class="test-output" id="test4-output"></div>
+            <div class="citation-check" id="test4-check"></div>
+        </div>
+    </div>
+
+    <!-- Load scripts in correct order -->
+    <script src="js/citation-renderer.js"></script>
+    <script src="js/markdown-renderer.js"></script>
+
+    <script>
+        console.log('🔬 Full Citation Pipeline Test - V36.11.12');
+        console.log('Testing: markdown-renderer.js → citation-renderer.js → CSS → Browser');
+        
+        function runTest(testId, inputText) {
+            const outputDiv = document.getElementById(`${testId}-output`);
+            const checkDiv = document.getElementById(`${testId}-check`);
+            const statusSpan = document.getElementById(`${testId}-status`);
+            
+            try {
+                console.log(`\n🧪 Running ${testId}...`);
+                console.log('Input:', inputText);
+                
+                // Process through full pipeline
+                const parsed = window.parseMarkdownAndCitations(inputText);
+                console.log('Parsed result:', parsed);
+                
+                // Render output
+                outputDiv.innerHTML = parsed.mainText;
+                
+                // Add sources if present
+                if (parsed.sources && parsed.sources.length > 0) {
+                    const sourcesHTML = window.generateSourcesHTML(parsed.sources, parsed.uniqueId);
+                    outputDiv.innerHTML += sourcesHTML;
+                }
+                
+                // Check for issues
+                const checks = [];
+                
+                // Check 1: No placeholder text visible
+                const hasPlaceholder = outputDiv.textContent.includes('CITE') || 
+                                      outputDiv.textContent.includes('_CITATION') ||
+                                      outputDiv.textContent.includes('◊◊');
+                checks.push({
+                    name: 'No placeholder text visible',
+                    pass: !hasPlaceholder,
+                    details: hasPlaceholder ? 'Found placeholder text in output' : 'Clean output'
+                });
+                
+                // Check 2: Has <sup> elements
+                const hasSup = outputDiv.querySelectorAll('sup').length > 0;
+                checks.push({
+                    name: 'Citations converted to <sup> elements',
+                    pass: hasSup,
+                    details: `Found ${outputDiv.querySelectorAll('sup').length} <sup> elements`
+                });
+                
+                // Check 3: No literal [1] in main text (should be in <sup>)
+                const mainText = outputDiv.querySelector('.response-paragraph')?.textContent || outputDiv.textContent;
+                const hasLiteralCitation = /\[\d+\]/.test(mainText.split('Sources')[0]);
+                checks.push({
+                    name: 'No literal [1] in main text',
+                    pass: !hasLiteralCitation,
+                    details: hasLiteralCitation ? 'Found literal [1] in text' : 'Citations properly converted'
+                });
+                
+                // Check 4: Bold markdown converted
+                const hasBold = outputDiv.querySelector('strong') !== null;
+                const inputHasBold = inputText.includes('**') || inputText.includes('__');
+                if (inputHasBold) {
+                    checks.push({
+                        name: 'Bold markdown converted to <strong>',
+                        pass: hasBold,
+                        details: hasBold ? 'Bold properly converted' : 'Bold conversion failed'
+                    });
+                }
+                
+                // Display checks
+                checkDiv.innerHTML = checks.map(check => `
+                    <div class="check-item">
+                        <span class="check-icon">${check.pass ? '✅' : '❌'}</span>
+                        <span>${check.name}: ${check.details}</span>
+                    </div>
+                `).join('');
+                
+                // Overall status
+                const allPass = checks.every(c => c.pass);
+                statusSpan.textContent = allPass ? 'PASS' : 'FAIL';
+                statusSpan.className = `status ${allPass ? 'pass' : 'fail'}`;
+                
+                if (!allPass) {
+                    outputDiv.classList.add('error');
+                }
+                
+                console.log(`${testId} result:`, allPass ? '✅ PASS' : '❌ FAIL');
+                
+            } catch (error) {
+                console.error(`${testId} error:`, error);
+                outputDiv.innerHTML = `<span style="color: #ef4444;">ERROR: ${error.message}</span>`;
+                statusSpan.textContent = 'ERROR';
+                statusSpan.className = 'status fail';
+                checkDiv.innerHTML = `<div class="check-item"><span class="check-icon">❌</span><span>Exception: ${error.message}</span></div>`;
+            }
+        }
+
+        // Run all tests on page load
+        window.addEventListener('DOMContentLoaded', () => {
+            console.log('🚀 Starting citation pipeline tests...\n');
+            
+            setTimeout(() => {
+                runTest('test1', `Adams was indicted[1] on charges
+
+Sources:
+1. ProPublica - Federal Indictment`);
+                
+                runTest('test2', `The **controversial** bill[1] was passed
+
+Sources:
+1. BBC News - Bill Passage`);
+                
+                runTest('test3', `The __controversial__ bill[1] was passed
+
+Sources:
+1. BBC News - Bill Passage`);
+                
+                runTest('test4', `Adams was **indicted**[1] on *corruption*[2] charges
+
+Sources:
+1. ProPublica - Federal Indictment
+2. BBC News - Corruption Case`);
+                
+                console.log('\n✅ All tests completed. Check results above.');
+            }, 100);
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,56 @@
+{
+  "name": "Workforce Democracy Project",
+  "short_name": "Workforce Democracy",
+  "description": "Track bills, representatives, and Supreme Court decisions. Explore democratic workplaces and ethical businesses. 100% private, non-partisan education.",
+  "start_url": "/?source=pwa",
+  "display": "standalone",
+  "background_color": "#FFF9F0",
+  "theme_color": "#FF6B35",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["education", "politics", "social", "government", "business"],
+  "lang": "en",
+  "dir": "ltr",
+  "scope": "/",
+  "screenshots": [],
+  "shortcuts": [
+    {
+      "name": "Civic Engagement",
+      "short_name": "Civic",
+      "description": "Track bills, reps, and court decisions",
+      "url": "/#civic",
+      "icons": []
+    },
+    {
+      "name": "Job Research",
+      "short_name": "Jobs",
+      "description": "Compare democratic vs traditional workplaces",
+      "url": "/#jobs",
+      "icons": []
+    },
+    {
+      "name": "Ethical Businesses",
+      "short_name": "Businesses",
+      "description": "Find worker coops and ethical companies",
+      "url": "/#ethical-business",
+      "icons": []
+    },
+    {
+      "name": "Learning Center",
+      "short_name": "Learn",
+      "description": "Educational resources and guides",
+      "url": "/learning.html",
+      "icons": []
+    }
+  ],
+  "related_applications": [],
+  "prefer_related_applications": false,
+  "display_override": ["window-controls-overlay", "standalone", "minimal-ui"]
+}

@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" role="img" aria-label="Scholarly Attribution">
+  <defs>
+    <linearGradient id="scholarGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#8B7355;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#5D4E37;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Book with quill pen and citations -->
+  <circle cx="100" cy="100" r="90" fill="#F5F5DC" opacity="0.2"/>
+  
+  <!-- Closed book -->
+  <path d="M 55 80 L 55 140 Q 55 145 60 145 L 140 145 Q 145 145 145 140 L 145 80 Q 145 75 140 75 L 60 75 Q 55 75 55 80 Z" 
+        fill="url(#scholarGrad)" stroke="#5D4E37" stroke-width="3"/>
+  
+  <!-- Book spine -->
+  <path d="M 60 75 L 60 145 Q 60 148 63 148 L 63 75 Z" fill="#3D2F24" opacity="0.6"/>
+  
+  <!-- Pages edge -->
+  <path d="M 140 78 L 142 78 L 142 142 L 140 142 Z" fill="#F5F5DC" opacity="0.8"/>
+  <path d="M 138 80 L 140 80 L 140 140 L 138 140 Z" fill="#F5F5DC" opacity="0.6"/>
+  
+  <!-- Quill pen -->
+  <path d="M 120 50 Q 130 45 135 55 L 120 90 L 115 88 L 128 58 Z" 
+        fill="#8B4513" stroke="#5D4E37" stroke-width="1.5"/>
+  <path d="M 135 55 Q 140 50 145 52 Q 150 54 148 60 L 135 55 Z" fill="#CD853F"/>
+  
+  <!-- Ink drops -->
+  <circle cx="110" cy="95" r="2" fill="#2C1F14"/>
+  <circle cx="115" cy="100" r="1.5" fill="#2C1F14"/>
+  
+  <!-- Citation marks (quotation) -->
+  <text x="75" y="105" font-family="Georgia, serif" font-size="24" fill="#FFD700" opacity="0.8">"</text>
+  <text x="115" y="130" font-family="Georgia, serif" font-size="24" fill="#FFD700" opacity="0.8">"</text>
+  
+  <!-- Reference lines -->
+  <line x1="70" y1="110" x2="110" y2="110" stroke="#F5F5DC" stroke-width="2" opacity="0.6"/>
+  <line x1="70" y1="120" x2="125" y2="120" stroke="#F5F5DC" stroke-width="2" opacity="0.6"/>
+  <line x1="70" y1="130" x2="110" y2="130" stroke="#F5F5DC" stroke-width="2" opacity="0.6"/>
+  
+  <!-- Academic star -->
+  <path d="M 85 55 L 87 60 L 92 60 L 88 63 L 90 68 L 85 65 L 80 68 L 82 63 L 78 60 L 83 60 Z" fill="#FFD700"/>
+</svg>

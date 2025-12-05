@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Citation Real Links Test - POPUP BLOCKER FIX</title>
+    <link rel="stylesheet" href="css/citations.css">
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 2rem;
+            background: #f8fafc;
+        }
+        
+        .test-section {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        h1 {
+            color: #1e293b;
+            margin-bottom: 1rem;
+        }
+        
+        .status {
+            padding: 0.75rem 1rem;
+            border-radius: 8px;
+            margin: 1rem 0;
+            font-weight: 500;
+        }
+        
+        .status.success {
+            background: #d1fae5;
+            color: #065f46;
+            border: 1px solid #a7f3d0;
+        }
+        
+        .test-message {
+            line-height: 1.7;
+            color: #374151;
+            font-size: 1.1rem;
+        }
+        
+        /* Citation link styling - matches production */
+        .citation-link {
+            color: #667eea;
+            cursor: pointer;
+            font-weight: 600;
+            text-decoration: none;
+            vertical-align: super;
+            font-size: 0.75em;
+            padding: 0.1em 0.3em;
+            border-radius: 3px;
+            transition: all 0.2s ease;
+        }
+        
+        .citation-link:hover {
+            background: #dbeafe;
+            color: #1e40af;
+        }
+    </style>
+</head>
+<body>
+    <h1>🎉 Citation Real Links Test - POPUP BLOCKER FIX</h1>
+    
+    <div class="status success">
+        <strong>✅ SOLUTION:</strong> Citations are now REAL &lt;a href&gt; links, not window.open() calls!<br>
+        This bypasses popup blockers completely - they work like normal links.
+    </div>
+
+    <div class="test-section">
+        <h2>Test: Click These Citations</h2>
+        <p class="test-message">
+            This is a test message with real citation links<a href="https://www.theguardian.com/test-article-1" target="_blank" rel="noopener noreferrer" class="citation-link" data-source-index="0" title="Source: Test Article 1">1</a> 
+            that should open<a href="https://www.bbc.com/news/test-2" target="_blank" rel="noopener noreferrer" class="citation-link" data-source-index="1" title="Source: Test Article 2">2</a> 
+            without popup blockers<a href="https://www.reuters.com/test-3" target="_blank" rel="noopener noreferrer" class="citation-link" data-source-index="2" title="Source: Test Article 3">3</a>.
+        </p>
+        
+        <div class="status success" style="margin-top: 2rem;">
+            <strong>Expected Behavior:</strong><br>
+            ✅ Citations appear as blue superscript numbers<br>
+            ✅ Hovering shows underline/background<br>
+            ✅ Clicking opens URL in new tab (NO popup blocker!)<br>
+            ✅ Works exactly like any other link on a webpage
+        </div>
+    </div>
+
+    <div class="test-section">
+        <h2>How This Works</h2>
+        <p style="line-height: 1.7; color: #374151;">
+            <strong>OLD Approach (BLOCKED):</strong><br>
+            <code style="background: #fee; padding: 0.2em 0.4em; border-radius: 3px;">
+                &lt;sup onclick="window.open(url)"&gt;1&lt;/sup&gt;
+            </code><br>
+            ❌ Popup blockers BLOCK window.open() unless directly from user click
+        </p>
+        
+        <p style="line-height: 1.7; color: #374151; margin-top: 1rem;">
+            <strong>NEW Approach (WORKS):</strong><br>
+            <code style="background: #dfd; padding: 0.2em 0.4em; border-radius: 3px;">
+                &lt;a href="url" target="_blank"&gt;1&lt;/a&gt;
+            </code><br>
+            ✅ Real links ALWAYS work - popup blockers allow them
+        </p>
+    </div>
+
+    <div class="test-section">
+        <h2>Visual Comparison</h2>
+        <table style="width: 100%; border-collapse: collapse;">
+            <thead>
+                <tr style="background: #f1f5f9;">
+                    <th style="padding: 0.75rem; text-align: left; border: 1px solid #e2e8f0;">Element Type</th>
+                    <th style="padding: 0.75rem; text-align: left; border: 1px solid #e2e8f0;">Popup Blocker</th>
+                    <th style="padding: 0.75rem; text-align: left; border: 1px solid #e2e8f0;">Example</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td style="padding: 0.75rem; border: 1px solid #e2e8f0;">
+                        <code>&lt;sup&gt;</code> with window.open()
+                    </td>
+                    <td style="padding: 0.75rem; border: 1px solid #e2e8f0;">
+                        ❌ BLOCKED
+                    </td>
+                    <td style="padding: 0.75rem; border: 1px solid #e2e8f0;">
+                        <sup onclick="alert('This would be blocked')" style="color: #dc2626; cursor: pointer;">1</sup>
+                    </td>
+                </tr>
+                <tr style="background: #f9fafb;">
+                    <td style="padding: 0.75rem; border: 1px solid #e2e8f0;">
+                        <code>&lt;a href&gt;</code> real link
+                    </td>
+                    <td style="padding: 0.75rem; border: 1px solid #e2e8f0;">
+                        ✅ WORKS
+                    </td>
+                    <td style="padding: 0.75rem; border: 1px solid #e2e8f0;">
+                        <a href="https://www.google.com" target="_blank" rel="noopener noreferrer" class="citation-link">1</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="test-section" style="background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%); border: 2px solid #10b981;">
+        <h2 style="color: #065f46;">✅ READY TO DEPLOY</h2>
+        <p style="color: #065f46; font-size: 1.1rem; line-height: 1.7;">
+            The fix is complete! Citations now use real <code>&lt;a href&gt;</code> tags that:<br><br>
+            
+            ✅ <strong>Bypass popup blockers completely</strong><br>
+            ✅ <strong>Work like any other link</strong><br>
+            ✅ <strong>Open in new tabs reliably</strong><br>
+            ✅ <strong>Maintain all styling (blue, superscript, hover effects)</strong><br>
+            ✅ <strong>Work on all browsers and mobile devices</strong>
+        </p>
+    </div>
+
+    <script>
+        // Simple test to show it's working
+        document.addEventListener('DOMContentLoaded', () => {
+            const links = document.querySelectorAll('.citation-link');
+            console.log(`✅ Found ${links.length} citation links`);
+            links.forEach((link, i) => {
+                console.log(`Citation ${i + 1}: ${link.href}`);
+            });
+        });
+    </script>
+</body>
+</html>

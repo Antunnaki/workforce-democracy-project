@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat Toggle Test</title>
+    <style>
+        body {
+            font-family: system-ui, sans-serif;
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+            background: #f3f4f6;
+        }
+        .test-panel {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .status {
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 8px;
+            font-weight: 600;
+        }
+        .success { background: #dcfce7; color: #166534; }
+        .error { background: #fee2e2; color: #991b1b; }
+        .info { background: #dbeafe; color: #1e40af; }
+        
+        /* Copy exact CSS from inline-civic-chat.css */
+        .inline-chat-section {
+            margin-top: 2rem;
+            border-radius: 12px;
+            border: 2px solid rgba(102, 126, 234, 0.15);
+            overflow: hidden;
+            background: white;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+        
+        .inline-chat-toggle {
+            width: 100%;
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.05) 0%, rgba(118, 75, 162, 0.05) 100%);
+            border: none;
+            padding: 1.25rem 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: left;
+        }
+        
+        .inline-chat-toggle:hover {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+        }
+        
+        .inline-chat-window {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease, opacity 0.3s ease;
+            opacity: 0;
+            background: white;
+        }
+        
+        .inline-chat-window.active {
+            max-height: 600px;
+            opacity: 1;
+        }
+        
+        .inline-chat-messages {
+            padding: 1.5rem;
+            background: #f8f9fd;
+            border-top: 1px solid rgba(102, 126, 234, 0.1);
+        }
+        
+        pre {
+            background: #1f2937;
+            color: #f3f4f6;
+            padding: 1rem;
+            border-radius: 6px;
+            overflow-x: auto;
+            font-size: 0.875rem;
+        }
+    </style>
+</head>
+<body>
+    <h1>🔍 Chat Toggle Isolated Test</h1>
+    
+    <div class="test-panel">
+        <h2>Test Results</h2>
+        <div id="testResults"></div>
+    </div>
+    
+    <div class="test-panel">
+        <h2>Test 1: Pure JavaScript Toggle</h2>
+        <p>Click button below - uses simple JavaScript, no external files:</p>
+        
+        <div class="inline-chat-section">
+            <button class="inline-chat-toggle" id="test1Button" onclick="test1Toggle()">
+                <span style="font-size: 1.5rem;">💬</span>
+                <span style="font-size: 1.125rem; font-weight: 600;">Test 1: Pure JS Toggle</span>
+                <span class="accordion-arrow" style="margin-left: auto;">▼</span>
+            </button>
+            
+            <div class="inline-chat-window" id="test1Window">
+                <div class="inline-chat-messages">
+                    <p style="margin: 0; color: #166534; font-weight: 600;">✅ Chat window opened successfully with pure JavaScript!</p>
+                </div>
+            </div>
+        </div>
+        <div id="test1Status"></div>
+    </div>
+    
+    <div class="test-panel">
+        <h2>Test 2: Exact Copy of Representative Chat</h2>
+        <p>Click button below - exact copy of what's on your Representatives tab:</p>
+        
+        <div class="inline-chat-section">
+            <button class="inline-chat-toggle" id="repsInlineChatToggle" onclick="toggleInlineChat('reps')">
+                <span style="font-size: 1.5rem;">💬</span>
+                <span style="font-size: 1.125rem; font-weight: 600;">Ask About Representatives</span>
+                <span style="font-size: 0.875rem; opacity: 0.8;">Get contextual insights</span>
+                <span class="accordion-arrow" style="margin-left: auto;">▼</span>
+            </button>
+            
+            <div class="inline-chat-window" id="repsInlineChatWindow">
+                <div class="inline-chat-messages">
+                    <p style="margin: 0; color: #166534; font-weight: 600;">✅ Representative chat opened successfully!</p>
+                </div>
+            </div>
+        </div>
+        <div id="test2Status"></div>
+    </div>
+    
+    <div class="test-panel">
+        <h2>Console Logs</h2>
+        <pre id="consoleLogs"></pre>
+    </div>
+    
+    <script>
+        // Capture all console output
+        let logs = [];
+        const originalLog = console.log;
+        const originalError = console.error;
+        
+        console.log = function(...args) {
+            logs.push(['LOG', new Date().toISOString().split('T')[1].split('.')[0], ...args]);
+            updateLogs();
+            originalLog.apply(console, args);
+        };
+        
+        console.error = function(...args) {
+            logs.push(['ERROR', new Date().toISOString().split('T')[1].split('.')[0], ...args]);
+            updateLogs();
+            originalError.apply(console, args);
+        };
+        
+        function updateLogs() {
+            document.getElementById('consoleLogs').textContent = 
+                logs.map(log => log.join(' ')).join('\n') || '(No logs yet)';
+        }
+        
+        // Test 1: Pure JavaScript toggle
+        let test1Open = false;
+        function test1Toggle() {
+            console.log('🔄 Test 1: Toggle called');
+            const window1 = document.getElementById('test1Window');
+            const button = document.getElementById('test1Button');
+            const arrow = button.querySelector('.accordion-arrow');
+            
+            test1Open = !test1Open;
+            
+            if (test1Open) {
+                console.log('✅ Test 1: Opening window');
+                window1.classList.add('active');
+                if (arrow) arrow.style.transform = 'rotate(180deg)';
+                document.getElementById('test1Status').innerHTML = 
+                    '<div class="status success">✅ Test 1 SUCCESS: Window opened!</div>';
+            } else {
+                console.log('✅ Test 1: Closing window');
+                window1.classList.remove('active');
+                if (arrow) arrow.style.transform = 'rotate(0deg)';
+                document.getElementById('test1Status').innerHTML = 
+                    '<div class="status info">Test 1: Window closed</div>';
+            }
+        }
+        
+        // Test 2: Copy of inline-civic-chat.js function
+        const InlineCivicChatState = {
+            reps: {
+                isOpen: false,
+                messages: [],
+                context: 'representatives'
+            }
+        };
+        
+        function toggleInlineChat(chatId) {
+            console.log(`🔄 Test 2: Toggling inline chat: ${chatId}`);
+            
+            const chatWindow = document.getElementById(`${chatId}InlineChatWindow`);
+            const chatToggle = document.getElementById(`${chatId}InlineChatToggle`);
+            
+            if (!chatWindow || !chatToggle) {
+                console.error(`❌ Test 2: Chat elements not found for: ${chatId}`);
+                console.error(`   chatWindow: ${chatWindow ? 'FOUND' : 'NOT FOUND'}`);
+                console.error(`   chatToggle: ${chatToggle ? 'FOUND' : 'NOT FOUND'}`);
+                document.getElementById('test2Status').innerHTML = 
+                    '<div class="status error">❌ Test 2 FAILED: Elements not found!</div>';
+                return;
+            }
+            
+            console.log(`✅ Test 2: Elements found`);
+            
+            const isOpen = InlineCivicChatState[chatId].isOpen;
+            
+            if (isOpen) {
+                // Close chat
+                console.log(`🔽 Test 2: Closing ${chatId} chat`);
+                chatWindow.classList.remove('active');
+                const arrow = chatToggle.querySelector('.accordion-arrow');
+                if (arrow) arrow.style.transform = 'rotate(0deg)';
+                InlineCivicChatState[chatId].isOpen = false;
+                document.getElementById('test2Status').innerHTML = 
+                    '<div class="status info">Test 2: Chat closed</div>';
+            } else {
+                // Open chat
+                console.log(`🔼 Test 2: Opening ${chatId} chat`);
+                chatWindow.classList.add('active');
+                const arrow = chatToggle.querySelector('.accordion-arrow');
+                if (arrow) arrow.style.transform = 'rotate(180deg)';
+                InlineCivicChatState[chatId].isOpen = true;
+                document.getElementById('test2Status').innerHTML = 
+                    '<div class="status success">✅ Test 2 SUCCESS: Chat opened!</div>';
+            }
+        }
+        
+        // Run diagnostics on load
+        window.addEventListener('load', () => {
+            console.log('🚀 Test page loaded');
+            
+            let results = '<h3>Diagnostic Results:</h3>';
+            
+            // Check if CSS is working
+            const testWindow = document.getElementById('test1Window');
+            const computedStyle = window.getComputedStyle(testWindow);
+            const maxHeight = computedStyle.maxHeight;
+            const opacity = computedStyle.opacity;
+            
+            if (maxHeight === '0px' && opacity === '0') {
+                results += '<div class="status success">✅ CSS loaded correctly: max-height=0px, opacity=0</div>';
+            } else {
+                results += `<div class="status error">❌ CSS issue: max-height=${maxHeight}, opacity=${opacity}</div>`;
+            }
+            
+            // Check if elements exist
+            const test1Btn = document.getElementById('test1Button');
+            const test1Win = document.getElementById('test1Window');
+            const test2Btn = document.getElementById('repsInlineChatToggle');
+            const test2Win = document.getElementById('repsInlineChatWindow');
+            
+            results += test1Btn ? '<div class="status success">✅ Test 1 button found</div>' : '<div class="status error">❌ Test 1 button NOT found</div>';
+            results += test1Win ? '<div class="status success">✅ Test 1 window found</div>' : '<div class="status error">❌ Test 1 window NOT found</div>';
+            results += test2Btn ? '<div class="status success">✅ Test 2 button found</div>' : '<div class="status error">❌ Test 2 button NOT found</div>';
+            results += test2Win ? '<div class="status success">✅ Test 2 window found</div>' : '<div class="status error">❌ Test 2 window NOT found</div>';
+            
+            // Check if functions exist
+            results += (typeof test1Toggle === 'function') ? '<div class="status success">✅ test1Toggle() defined</div>' : '<div class="status error">❌ test1Toggle() NOT defined</div>';
+            results += (typeof toggleInlineChat === 'function') ? '<div class="status success">✅ toggleInlineChat() defined</div>' : '<div class="status error">❌ toggleInlineChat() NOT defined</div>';
+            
+            document.getElementById('testResults').innerHTML = results;
+            console.log('✅ Diagnostics complete');
+        });
+    </script>
+</body>
+</html>
