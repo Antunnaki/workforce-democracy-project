@@ -25,25 +25,24 @@
 // ============================================================================
 
 const BackendAPI = {
-    //Add environment detection for backend URL
+    // Addenvironment detection for backend URL
     baseURL: window.location.hostname.includes('netlify.app') || window.location.hostname === 'localhost' 
-        ? 'http://185.193.126.13:3001'  // Version B (Development) on port 3001
-        : 'http://185.193.126.13:3000',  // Version A (Production) on port 3000
-    endpoints: {
+        ? 'https://api.workforcedemocracyproject.org'  // Use HTTPS for Netlify
+        : 'https://api.workforcedemocracyproject.org',  // Production environmentendpoints: {
         query: '/api/civic/llm-chat',  // ✅ V37.0.2: Use working civic LLM endpoint
-        health: '/api/civic/llm-health',
+        health: '/health',
         context: '/api/context',
         metrics: '/api/metrics'
     },
 
-// User identification (anonymous)
+    // User identification (anonymous)
     getUserId() {
         let userId = localStorage.getItem('wdp_user_id');
         if (!userId) {
             userId = 'user_' + Math.random().toString(36).substring(2, 15);
             localStorage.setItem('wdp_user_id', userId);
         }
-return userId;
+        return userId;
     },
 
 // Check if backend is available
@@ -61,6 +60,9 @@ return userId;
     }
 };
 
+// MakeBackendAPI available globally
+window.BackendAPI = BackendAPI;
+
 // ============================================================================
 // MAIN QUERY FUNCTION
 // ============================================================================
@@ -75,7 +77,7 @@ return userId;
  * 
  * @param {string} chatType - Type of chat: 'supreme_court', 'representatives', 'bills', 'ethical', 'learning', 'faq'
  * @param {string} query - User's question
- * @param {object} options - Additional options (context, userId, etc.)
+* @param {object} options - Additional options (context, userId, etc.)
  * @returns {Promise<object>} - Response with text, source, cost, responseTime
  */
 async function queryBackendAPI(chatType, query, options = {}) {
@@ -96,7 +98,7 @@ async function queryBackendAPI(chatType, query, options = {}) {
         // V37.0.2: Get conversation history for context
         const conversationHistory = getConversationHistory(chatType);
         
-        // V37.0.2: Formatconversation history for LLM (convert to role/content format)
+        // V37.0.2: Formatconversationhistory for LLM (convert to role/content format)
         const formattedHistory = [];
         conversationHistory.slice(-5).forEach(exchange => {
             formattedHistory.push({
@@ -105,13 +107,14 @@ async function queryBackendAPI(chatType, query, options = {}) {
             });
             formattedHistory.push({
                 role: 'assistant',
-                content: exchange.response});
+                content: exchange.response
+});
         });
         
         // V37.0.2: Format for civic LLM endpoint
         const requestBody = {
             message: query,  // ✅ Changed from 'query' to 'message'
-            context: contextMap[chatType] || 'general',  // ✅ Use civiccontext types
+            context: contextMap[chatType] || 'general',  // ✅ Use civic contexttypes
             conversationHistory: formattedHistory // ✅ Properly formatted history
         };
         
@@ -128,7 +131,7 @@ async function queryBackendAPI(chatType, query, options = {}) {
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify(requestBody)
+            body:JSON.stringify(requestBody)
         }).catch(error => {
             console.error('[Backend API] ❌ Fetch failed (likely CORS or network):', {
                 error: error.message,
@@ -138,14 +141,14 @@ async function queryBackendAPI(chatType, query, options = {}) {
             throw error;
         });
         
-if (!response.ok) {
+       if (!response.ok) {
             console.error(`[Backend API] ❌ HTTP ${response.status}:`, {
                 status: response.status,
                 statusText: response.statusText,
                 url: BackendAPI.baseURL + BackendAPI.endpoints.query,
                 headers: Object.fromEntries(response.headers)
             });
-            throw newError(`Backend API error: ${response.status} ${response.statusText}`);
+            throw new Error(`Backend API error: ${response.status} ${response.statusText}`);
         }
         
         const data = await response.json();
@@ -179,7 +182,7 @@ if (!response.ok) {
         });
         
         return {
-            success: false,
+            success:false,
             error: error.message,
             responseTime: Date.now() - startTime,
             fallback: true
@@ -195,14 +198,7 @@ if (!response.ok) {
  * Query Supreme Court chat
  */
 async function querySupremeCourtChat(query, context = {}) {
-return await queryBackendAPI('supreme_court', query, { context });
-}
-
-/**
- * Query Representatives chat
- */
-async function queryRepresentativesChat(query, context = {}) {
-    return await queryBackendAPI('representatives', query, { context });
+   return await queryBackendAPI('supreme_court', query, { context });
 }
 
 /**
@@ -213,180 +209,59 @@ async function queryBillsChat(query, context = {}) {
 }
 
 /**
- * Query Ethical Business chat
+ * Query Representatives chat
  */
-async function queryEthicalChat(query, context = {}) {
-    return await queryBackendAPI('ethical_business', query, { context });
+async function queryRepresentativesChat(query, context = {}) {
+    return await queryBackendAPI('representatives', query, { context });
 }
 
 /**
- * Query Learning chat*/
-async function queryLearningChat(query, context = {}) {
-    return await queryBackendAPI('learning', query, { context });
-}
-
-/**
- * Query FAQ chat
- */
-async function queryFAQChat(query, context = {}) {
-    return await queryBackendAPI('faq', query, { context });
-}
-
-// ============================================================================
-// CONTEXTMANAGEMENT
-// ============================================================================
-
-/**
- * Save conversation context to backend
- * Enables cross-chat context sharing
- */
-async function saveConversationContext(userId, context) {
-    try {
-        const response = await fetch(BackendAPI.baseURL + BackendAPI.endpoints.context, {
-            method: 'POST',
-            headers: {
-               'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                user_id: userId,
-                context: context
-            })
-        });
-        
-        return response.ok;
-    } catch (error) {
-        console.error('[Backend API] Failed to save context:', error);
-        return false;
-    }
-}
-
-/**
- * Retrieve conversation context from backend
- */
-async function getConversationContext(userId) {
-    try {
-        const response = await fetch(`${BackendAPI.baseURL}${BackendAPI.endpoints.context}?user_id=${userId}`);
-        
-        if (!response.ok) return null;
-        
-        const data = await response.json();
-        return data.context || null;
-    } catch (error) {
-        console.error('[Backend API] Failed to get context:', error);
-        return null;
-    }
-}
-
-// ============================================================================
-// CONVERSATION HISTORY MANAGEMENT (V36.6.0)
-// ============================================================================
-
-/**
- * Get conversation history for a specific chat type
- *@param {string} chatType - Type of chat
- * @returns {Array} - Array of {query, response} objects
+ * Getconversation history for a chat type
  */
 function getConversationHistory(chatType) {
-    const key = `wdp_${chatType}_history`;
-    const history = localStorage.getItem(key);
-    return history ? JSON.parse(history) : [];
+    const key = `chat_history_${chatType}`;
+    try {
+        const history = localStorage.getItem(key);
+        return history ? JSON.parse(history) : [];
+    } catch (error) {
+        console.warn(`[Backend API] Failed toload chat history for ${chatType}:`, error);
+        return [];
+    }
 }
 
 /**
- * Save conversation to history
- * @param {string} chatType - Type of chat
- * @param {string} query - User's question
- * @param {string} response - AI's response
+ * Save conversation history for a chat type
  */
 function saveConversationHistory(chatType, query, response) {
-    const key =`wdp_${chatType}_history`;
-    const history = getConversationHistory(chatType);
-    
-    // Add new exchange
-    history.push({
-        query: query,
-        response: response,
-        timestamp: Date.now()
-    });
-    
-    // Keep only last 20 exchanges (40 messages total)
-   if (history.length > 20) {
-        history.splice(0, history.length - 20);
+    const key = `chat_history_${chatType}`;
+    try {
+        const history = getConversationHistory(chatType);
+       history.push({ query, response, timestamp: Date.now() });
+        
+        // Keep only last 10 conversations
+        if (history.length > 10) {
+            history.splice(0, history.length - 10);
+        }
+        
+        localStorage.setItem(key, JSON.stringify(history));
+    } catch (error) {
+        console.warn(`[Backend API] Failed to save chat history for ${chatType}:`, error);
     }
-    
-    localStorage.setItem(key, JSON.stringify(history));
 }
 
-/**
- * Clear conversation history for a chat type
- * @param {string} chatType - Type of chat
- */
-function clearConversationHistory(chatType) {
-    const key = `wdp_${chatType}_history`;
-    localStorage.removeItem(key);
-}
-
-// ============================================================================
-// FALLBACK RESPONSES (When Backend Unavailable)
-// ============================================================================
-
-/**
- * Generate fallback response when backend is unavailable
- */
-function generateFallbackResponse(chatType, query) {
-    const fallbacks ={
-        supreme_court: `I can help you understand Supreme Court cases! However, I'm currently unable to connect to the backend API. Please try again in a moment, or browse the court decisions above.`,
-        
-        representatives: `I can help you learn about representatives! However, I'm currently unable to connect tothe backend API. Please try again in a moment, or use the search bar above to find representatives.`,
-        
-        bills: `I can help you research bills and legislation! However, I'm currently unable to connect to the backend API. Please try again in a moment, or browse the bills above.`,
-        
-        ethical_business: `I can help you find ethical businesses and worker cooperatives! However, I'm currently unable to connect to the backend API. Please try again in a moment, or enable personalization to see nearby businesses.`,
-        
-        learning: `I'm your learning assistant! However, I'm currently unable to connect to the backendAPI. Please try again in a moment.`,
-        
-        faq: `I can answer your questions! However, I'm currently unable to connect to the backend API. Please try again in a moment.`
-    };
-    
-    return fallbacks[chatType] || `I'm currently unable to connect to the backend API. Please try again in a moment.`;
-}
-
-// ============================================================================
-// EXPORT TO WINDOW
-// ============================================================================
-
-window.BackendAPI = BackendAPI;
+// Make functions available globally
 window.queryBackendAPI = queryBackendAPI;
 window.querySupremeCourtChat = querySupremeCourtChat;
-window.queryRepresentativesChat = queryRepresentativesChat;
 window.queryBillsChat = queryBillsChat;
-window.queryEthicalChat = queryEthicalChat;
-window.queryLearningChat = queryLearningChat;
-window.queryFAQChat = queryFAQChat;
-window.saveConversationContext = saveConversationContext;
-window.getConversationContext = getConversationContext;
-window.getConversationHistory = getConversationHistory;
-window.saveConversationHistory = saveConversationHistory;
-window.clearConversationHistory = clearConversationHistory;
-window.generateFallbackResponse = generateFallbackResponse;
+window.queryRepresentativesChat = queryRepresentativesChat;
 
-console.log('═══════════════════════════════════════════════════');
-console.log('  ✅ Backend API IntegrationV37.0.2 Loaded');
-console.log('  🧠 Conversation Memory: ENABLED');
-console.log('  🔧 Endpoint: /api/civic/llm-chat (Groq LLM)');
-console.log('═══════════════════════════════════════════════════');
-console.log(' 🔗 Backend URL:', BackendAPI.baseURL);
-console.log('  🤖 LLM Model: llama-3.3-70b-versatile');
-console.log('  👤 User ID:', BackendAPI.getUserId());
-console.log('  🧪 Testing connection...');
-
-// Test backend connection on load
-BackendAPI.checkHealth().then(isHealthy => {
-    if (isHealthy) {
-        console.log('  ✅ Backend connection: HEALTHY');
-    } else {
-        console.warn('  ⚠️ Backend connection: FAILED');
-        console.warn('  ⚠️ Chat features will use fallback responses');
+// Test the backend API connection
+document.addEventListener('DOMContentLoaded', async function() {
+    console.log('[Backend API] Testing connection...');
+    try {
+        const isHealthy = await BackendAPI.checkHealth();
+        console.log(`[Backend API] Health check: ${isHealthy? '✅ Healthy' : '❌ Unhealthy'}`);
+    } catch (error) {
+        console.error('[Backend API] Health check failed:', error);
     }
-   console.log('═══════════════════════════════════════════════════');
 });
