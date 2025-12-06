@@ -1,4 +1,4 @@
-# ✅ Deployment Checklist - Enhanced RSS v37.4.0
+#✅ Deployment Checklist - Enhanced RSS v37.4.0
 
 Use this checklist to ensure smooth deployment!
 
@@ -9,7 +9,7 @@ Use this checklist to ensure smooth deployment!
 ### Files Ready? ✅
 
 - [ ] `backend/keyword-extraction.js` (15KB) - Downloaded/ready to upload
-- [ ] `backend/rss-service-MERGED-v37.4.0.js` (32KB) - Downloaded/ready to upload
+-[ ] `backend/rss-service-MERGED-v37.4.0.js` (32KB) - Downloaded/ready to upload
 - [ ] `DEPLOY-MERGED-RSS-v37.4.0.md` - Read and understood deployment steps
 
 ### Access Verified? 🔑
@@ -18,7 +18,7 @@ Use this checklist to ensure smooth deployment!
 - [ ] Can navigate to: `/var/www/advocacyunion.com/backend`
 - [ ] Have SCP/SFTP access to upload files
 
-### Safety Net Ready? 🛡️
+### Safety Net Ready?🛡️
 
 - [ ] Understand backup process (copy current `rss-service.js`)
 - [ ] Understand rollback process (restore from backup)
@@ -35,7 +35,7 @@ Use this checklist to ensure smooth deployment!
 
 **Commands:**
 ```bash
-scp backend/keyword-extraction.js root@185.193.126.13:/var/www/advocacyunion.com/backend/
+scpbackend/keyword-extraction.js root@185.193.126.13:/var/www/advocacyunion.com/backend/
 scp backend/rss-service-MERGED-v37.4.0.js root@185.193.126.13:/var/www/advocacyunion.com/backend/
 ```
 
@@ -75,8 +75,7 @@ mv rss-service-MERGED-v37.4.0.js rss-service.js
 
 - [ ] Verified files exist:
 ```bash
-ls -lh rss-service.js keyword-extraction.js
-```
+ls -lh rss-service.js keyword-extraction.js```
 
 **Expected output:**
 ```
@@ -95,8 +94,7 @@ pm2 delete universal-chat-service
 
 - [ ] Started new service:
 ```bash
-pm2 start server.js --name universal-chat-service
-```
+pm2 start server.js --name universal-chat-service```
 
 - [ ] Checked service is running:
 ```bash
@@ -128,14 +126,14 @@ pm2 logs universal-chat-service --lines 30
 
 ### Test 1: 19th Amendment Question
 
-- [ ] Opened Universal Chat on website
+- [ ] Opened Universal Chat onwebsite
 - [ ] Asked: "What would be societal implications if the 19th amendment is repealed?"
 - [ ] Waited for response (10-15 seconds)
 
 **Expected Results:**
 
 - [ ] Received 5 sources
-- [ ] Sources are about women's rights/suffrage/voting (NOT Oasis/Thames Water)
+- [ ] Sources are about women's rights/suffrage/voting(NOT Oasis/Thames Water)
 - [ ] Sources include independent outlets (Common Dreams, Truthout, etc.)
 - [ ] Citations are clickable and open real article URLs
 
@@ -147,7 +145,7 @@ pm2 logs universal-chat-service --lines 30
 ```
 🔎 Extracted search query: "nineteenth amendment OR women suffrage OR voting rights..."
 📌 Keywords: [nineteenth amendment, women suffrage, voting rights, gender equality, feminism]
-🏷️  Topics: [womens rights, voting rights, gender equality, suffrage, feminism]
+🏷️  Topics: [womens rights, voting rights, genderequality, suffrage, feminism]
 ```
 
 - [ ] Ran: `pm2 logs universal-chat-service | grep "Score:"`
@@ -186,12 +184,12 @@ pm2 logs universal-chat-service --lines 30
 
 ### Any Red? Troubleshoot! ⚠️
 
-If any of these are true, see **Troubleshooting** section below:
+Ifany of these are true, see **Troubleshooting** section below:
 
 - [ ] PM2 service shows "errored" status
 - [ ] PM2 logs show "Cannot find module 'keyword-extraction'" error
 - [ ] Still getting irrelevant sources (Oasis, Thames Water, etc.)
-- [ ] No relevance scores in logs
+- [ ]No relevance scores in logs
 - [ ] Citations not working
 - [ ] Service crashes on startup
 
@@ -273,7 +271,7 @@ df -h
 
 - [ ] Check if port is already in use:
 ```bash
-netstat -tlnp | grep :3000
+netstat -tlnp | grep:3000
 ```
 
 - [ ] Restart PM2 completely:
@@ -305,7 +303,7 @@ cp rss-service-BACKUP-*.js rss-service.js
 cp rss-service-OLD.js rss-service.js
 ```
 
-- [ ] Remove new keyword extraction file (optional):
+- [ ] Remove new keyword extraction file(optional):
 ```bash
 mv keyword-extraction.js keyword-extraction.js.DISABLED
 ```
@@ -376,7 +374,7 @@ pm2 logs universal-chat-service | grep "Cleaned.*cache"
 
 ## 📞 Support Checklist
 
-If you need help:
+If youneed help:
 
 ### Information to Provide
 
@@ -391,8 +389,7 @@ pm2 status
 ```
 
 - [ ] File verification:
-```bash
-ls -lh /var/www/advocacyunion.com/backend/*.js
+```bashls -lh /var/www/advocacyunion.com/backend/*.js
 ```
 
 - [ ] Describe the issue:
@@ -429,7 +426,7 @@ node -c keyword-extraction.js
 When all items are checked:
 
 - [ ] **Deployment successful** ✅
-- [ ] **Testing passed** ✅
+- [] **Testing passed** ✅
 - [ ] **Monitoring started** ✅
 - [ ] **Backup verified** ✅
 

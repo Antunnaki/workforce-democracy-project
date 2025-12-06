@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Chat Test</title>
+    <script src="js/chat-clean.js"></script>
+</head>
+<body>
+    <h1>Chat Test Page</h1>
+    <p>This page tests the fixed chat functionality.</p>
+    
+    <div id="chat-container">
+        <div id="floatingChatMessages"></div>
+        <input type="text" id="chatInput" placeholder="Type a message...">
+        <button id="sendButton">Send</button>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Set the current chat container
+            CleanChat.currentChatContainer = 'floatingChatMessages';
+            
+            document.getElementById('sendButton').addEventListener('click', async function() {
+                const message = document.getElementById('chatInput').value;
+                if (message.trim()) {
+                    await sendQuery(message);
+                    document.getElementById('chatInput').value = '';
+                }
+            });
+            
+            document.getElementById('chatInput').addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    document.getElementById('sendButton').click();
+                }
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,12 +1,11 @@
 /**
- * Civic Platform API Routes (CONSOLIDATED v37.1.0)
+* Civic Platform API Routes (CONSOLIDATED v37.1.0)
  * 
  * Main Express router for civic platform endpoints.
  * Integrates: Representatives lookup, LLM chat, scraping stats
  * 
  * Endpoints:
- * - GET  /api/civic/representatives/search - Search reps by ZIP
- * - POST /api/civic/llm-chat - LLM chat with source search
+ * - GET  /api/civic/representatives/search - Search reps by ZIP* - POST /api/civic/llm-chat - LLM chat with source search
  * - GET  /api/civic/llm-health - Check LLM availability
  * - GET  /api/civic/health - Health check
  */
@@ -29,8 +28,8 @@ console.log('🏛️  Civic Platform API Routes initialized');
  * GET /api/civic/representatives/search
  * Search for representatives by ZIP code
  */
-router.get('/representatives/search', async (req, res) => {
-    try {
+router.get('/representatives/search', async (req, res) =>{
+   try {
         const { zip, q, state, district, chamber } = req.query;
         
         // Accept ZIP code searches
@@ -38,7 +37,7 @@ router.get('/representatives/search', async (req, res) => {
             console.log(`🔍 ZIP code search: ${zip}`);
             
             // Validate ZIP code
-            if (!/^\d{5}$/.test(zip)) {
+            if (!/^\d{5}$/.test(zip)){
                 return res.status(400).json({
                     success: false,
                     error: 'Invalid ZIP code format. Please provide a 5-digit ZIP code.'
@@ -47,7 +46,7 @@ router.get('/representatives/search', async (req, res) => {
             
             // Fetch real representatives
             console.log(`📡 Fetching real representatives for ZIP: ${zip}`);
-            const result = await getRepresentativesByZip(zip);
+            constresult =await getRepresentativesByZip(zip);
             
             if (!result.success) {
                 return res.status(500).json({
@@ -65,7 +64,7 @@ router.get('/representatives/search', async (req, res) => {
                 representatives: result.representatives,
                 results: result.representatives, // Keep for backward compatibility
                 location: result.location_used || {},
-                counts: result.counts,
+                counts:result.counts,
                 data_sources: result.data_sources,
                 message: 'Real data from Congress.gov & OpenStates APIs'
             });
@@ -74,7 +73,7 @@ router.get('/representatives/search', async (req, res) => {
         if (!q && !state) {
             return res.status(400).json({
                 success: false,
-                error: 'Query parameter "q", "state", or "zip" is required'
+                error: 'Query parameter "q","state", or"zip" is required'
             });
         }
         
@@ -84,7 +83,7 @@ router.get('/representatives/search', async (req, res) => {
             query: { q, state, district, chamber },
             results: [],
             message: 'Representative search endpoint ready - Congress.gov integration pending'
-        });
+});
         
     } catch (error) {
         console.error('Error searching representatives:', error);
@@ -106,9 +105,8 @@ router.get('/representatives/search', async (req, res) => {
 router.post('/llm-chat', async (req, res) => {
     try {
         const { message, context = 'general', conversationHistory = [], timezone } = req.body;
-        
-        // Validate request
-        if (!message || typeof message !== 'string') {
+// Validate request
+if (!message || typeof message !== 'string') {
             return res.status(400).json({
                 success: false,
                 error: 'Message is required and must be a string'
@@ -116,31 +114,31 @@ router.post('/llm-chat', async (req, res) => {
         }
         
         if (!process.env.GROQ_API_KEY) {
-            console.error('❌ GROQ_API_KEY not configured in environment');
+           console.error('❌ GROQ_API_KEY not configured in environment');
             return res.status(500).json({
                 success: false,
                 error: 'LLM service not configured. Please contact administrator.'
             });
         }
         
-        console.log(`🤖 LLM Chat request: "${message.substring(0, 50)}..." (context: ${context}, timezone: ${timezone || 'default'})`);
+        console.log(`🤖 LLM Chat request: "${message.substring(0,50)}..." (context: ${context}, timezone: ${timezone || 'default'})`);
         
         // Build context object with timezone for date-aware responses
         const aiContext = {
             conversationHistory: conversationHistory,
-            timezone: timezone || 'America/New_York'  // Default to US Eastern if not provided
+            timezone: timezone || 'America/New_York'  // Default to US Eastern if notprovided
         };
         
-        // Call AI service (includes automatic source search)
+        //Call AI service (includes automatic source search)
         const result = await analyzeWithAI(message, aiContext, context);
         
         if (!result.success) {
             // Return fallback response
             return res.json({
                 success: true,
-                message: generateCompassionateFallback(message, context),
+                message: generateCompassionateFallback(message,context),
                 sources: [],
-                context: context,
+               context: context,
                 fallback: true
             });
         }
@@ -151,8 +149,8 @@ router.post('/llm-chat', async (req, res) => {
         res.json({
             success: true,
             message: result.response,
-            sources: result.sources || [],
-            context: context,
+           sources: result.sources || [],
+           context: context,
             metadata: result.metadata
         });
         
@@ -170,16 +168,16 @@ router.post('/llm-chat', async (req, res) => {
  * Check if LLM service is available
  */
 router.get('/llm-health', (req, res) => {
-    const hasApiKey = !!process.env.GROQ_API_KEY;
+    const hasApiKey = !!(process.env.QWEN_API_KEY || process.env.GROQ_API_KEY);
     
     res.json({
         success: true,
         available: hasApiKey,
-        model: process.env.GROQ_MODEL || 'llama-3.3-70b-versatile',
-        provider: 'Groq',
+        model: process.env.QWEN_MODEL || process.env.GROQ_MODEL || 'qwen-plus',
+        provider: process.env.QWEN_API_KEY? 'Tongyi Lab' : (process.env.GROQ_API_KEY ? 'Groq' : 'None'),
         message: hasApiKey 
             ? 'LLM service is available' 
-            : 'GROQ_API_KEY not configured'
+            : 'API key not configured'
     });
 });
 
@@ -197,8 +195,7 @@ router.get('/llm-health', (req, res) => {
 router.post('/llm-chat/submit', civicLLMAsync.submitQuery);
 
 /**
- * GET /api/civic/llm-chat/status/:jobId
- * Check status of async job
+ * GET /api/civic/llm-chat/status/:jobId* Check status of async job
  * V37.17.0: RE-ENABLED
  */
 router.get('/llm-chat/status/:jobId', civicLLMAsync.getStatus);
@@ -206,7 +203,7 @@ router.get('/llm-chat/status/:jobId', civicLLMAsync.getStatus);
 /**
  * GET /api/civic/llm-chat/result/:jobId
  * Get result of completed job
- * V37.17.0: RE-ENABLED
+ *V37.17.0: RE-ENABLED
  */
 router.get('/llm-chat/result/:jobId', civicLLMAsync.getResult);
 
@@ -227,8 +224,8 @@ router.get('/llm-chat/stats', civicLLMAsync.getStats);
  */
 router.get('/health', (req, res) => {
     res.json({
-        success: true,
-        status: 'healthy',
+        success:true,
+status: 'healthy',
         timestamp: new Date().toISOString(),
         services: {
             representatives: 'operational',
@@ -238,7 +235,7 @@ router.get('/health', (req, res) => {
     });
 });
 
-// =============================================================================
+//=============================================================================
 // ERROR HANDLING
 // =============================================================================
 
@@ -250,7 +247,7 @@ router.use((error, req, res, next) => {
     
     res.status(500).json({
         success: false,
-        error: 'Internal server error',
+        error: 'Internalserver error',
         message: error.message
     });
 });

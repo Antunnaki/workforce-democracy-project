@@ -1,5 +1,5 @@
 /**
- * WORKFORCE DEMOCRACY PROJECT - CONFIGURATION
+* WORKFORCE DEMOCRACY PROJECT - CONFIGURATION
  * 
  * Central configuration for API endpoints and feature flags
  * Version: V36.2.0
@@ -15,11 +15,11 @@ function getBackendUrl() {
     // For Netlify testing environment
     if (window.location.hostname.includes('netlify.app') || 
         window.location.hostname === 'localhost') {
-        // Connect to Version B (Development) on port 3001
-        return 'http://185.193.126.13:3001';
+        // Connect to productionendpoint
+        return 'https://api.workforcedemocracyproject.org';
     } else {
-        // Production environment - connect to Version A on port 3000
-        return 'http://185.193.126.13:3000';
+        // Production environment
+        return 'https://api.workforcedemocracyproject.org';
     }
 }
 
@@ -27,8 +27,7 @@ const CONFIG = {
     // ═══════════════════════════════════════════════════════════════════════
     //   🔧 BACKEND CONFIGURATION
     // ═══════════════════════════════════════════════════════════════════════
-    
-    /**
+/**
      * Backend API Base URL
      * 
      * UPDATE THIS with your Njalla VPS domain when backend is deployed
@@ -40,9 +39,8 @@ const CONFIG = {
      * 
      * Leave as empty string '' to use placeholders (development mode)
      */
-    API_BASE_URL: getBackendUrl(),  // v37.18.7: Version B via /test route
-    
-    /**
+    API_BASE_URL: getBackendUrl(),
+/**
      * Groq AI Features Enabled
      * 
      * Set to true when backend is deployed and ready
@@ -51,7 +49,7 @@ const CONFIG = {
     GROQ_ENABLED: true,  // ✅ GROQ AI ENABLED!
     
     
-    // ═══════════════════════════════════════════════════════════════════════
+// ═══════════════════════════════════════════════════════════════════════
     //   📡 API ENDPOINTS (Auto-configured from API_BASE_URL)
     // ═══════════════════════════════════════════════════════════════════════
     
@@ -69,18 +67,18 @@ const CONFIG = {
     },
     
     
-    // ═══════════════════════════════════════════════════════════════════════
+    //═══════════════════════════════════════════════════════════════════════
     //   ⚙️ FEATURE FLAGS
     // ═══════════════════════════════════════════════════════════════════════
     
-    FEATURES: {
+FEATURES: {
         // Voting Assistant AI (Groq/Llama3)
         VOTING_ASSISTANT_AI: true,  // Show "Ask AI Assistant" button
         
         // Bills Chat AI (Groq/Llama3)
         BILLS_CHAT_AI: true,  // Show bills chat widget
         
-        // Hybrid Intelligence (local pattern matching + LLM fallback)
+        // HybridIntelligence (local pattern matching + LLM fallback)
         HYBRID_INTELLIGENCE: true,  // 90% local, 10% LLM for cost savings
         
         // Debug mode (shows console logs)
@@ -88,11 +86,11 @@ const CONFIG = {
     },
     
     
-    // ═══════════════════════════════════════════════════════════════════════
+   // ═══════════════════════════════════════════════════════════════════════
     //   🔒 SECURITY SETTINGS
     // ═══════════════════════════════════════════════════════════════════════
     
-    SECURITY: {
+SECURITY: {
         // API timeout (milliseconds)
         API_TIMEOUT: 30000,  // 30 seconds
         
@@ -107,11 +105,11 @@ const CONFIG = {
     
     
     // ═══════════════════════════════════════════════════════════════════════
-    //   📊 ANALYTICS SETTINGS (Privacy-Safe)
+//  📊ANALYTICS SETTINGS (Privacy-Safe)
     // ═══════════════════════════════════════════════════════════════════════
     
     ANALYTICS: {
-        // Track feature usage (localStorage only, no servers)
+        // Track feature usage (localStorage only,no servers)
         TRACK_FEATURE_USAGE: true,
         
         // Log API errors to console (for debugging)
@@ -120,14 +118,14 @@ const CONFIG = {
     
     
     // ═══════════════════════════════════════════════════════════════════════
-    //   🎨 UI SETTINGS
+//  🎨 UI SETTINGS
     // ═══════════════════════════════════════════════════════════════════════
     
     UI: {
         // Show backend status indicator
         SHOW_BACKEND_STATUS: true,
         
-        // Show "Backend not configured" messages
+       // Show "Backend not configured" messages
         SHOW_CONFIG_WARNINGS: true,
         
         // Animation duration (milliseconds)
@@ -136,13 +134,13 @@ const CONFIG = {
     
     
     // ═══════════════════════════════════════════════════════════════════════
-    //   🔍 VALIDATION & HELPERS
+//   🔍VALIDATION & HELPERS
     // ═══════════════════════════════════════════════════════════════════════
     
     /**
      * Check if backend is configured
      */
-    isBackendConfigured() {
+    isBackendConfigured(){
         return this.API_BASE_URL && this.API_BASE_URL !== '';
     },
     
@@ -155,7 +153,7 @@ const CONFIG = {
     
     /**
      * Get backend status message
-     */
+*/
     getBackendStatus() {
         if (this.isGroqReady()) {
             return {
@@ -164,7 +162,7 @@ const CONFIG = {
                 color: 'green'
             };
         } else if (this.isBackendConfigured() && !this.GROQ_ENABLED) {
-            return {
+           return {
                 status: 'configured',
                 message: '⏳ Backend configured, awaiting activation',
                 color: 'orange'
@@ -176,7 +174,7 @@ const CONFIG = {
                 color: 'gray'
             };
         }
-    },
+},
     
     /**
      * Log debug message (only if DEBUG_MODE is true)
@@ -200,11 +198,10 @@ Object.defineProperty(CONFIG, 'GROQ_ENABLED', {
     configurable: false
 });
 
-// Log configuration status on load
-console.log('═══════════════════════════════════════════════════════');
+// Log configuration status on loadconsole.log('═══════════════════════════════════════════════════════');
 console.log('  🔧 Workforce Democracy Project - Configuration');
 console.log('═══════════════════════════════════════════════════════');
-console.log(`  Backend URL: ${CONFIG.API_BASE_URL || '(not configured)'}`);
+console.log(`Backend URL: ${CONFIG.API_BASE_URL || '(not configured)'}`);
 console.log(`  Groq Enabled: ${CONFIG.GROQ_ENABLED ? '✅' : '❌'}`);
 console.log(`  Status: ${CONFIG.getBackendStatus().message}`);
 console.log('═══════════════════════════════════════════════════════\n');

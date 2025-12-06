@@ -89,7 +89,7 @@ The Workforce Democracy Project empowers citizens to understand government, make
 
 ---
 
-##📁 PROJECT STRUCTURE
+##📁 PROJECTSTRUCTURE
 
 ```
 backend/
@@ -117,11 +117,11 @@ deployment-scripts/
 | v37.19.1 | 2025-11-29 | Citation fix (enforce citing all sources) | ✅ Deployed |
 | v37.19.2 | 2025-11-29 | Smart relevance scoring (title/excerpt priority) | ✅ Deployed |
 | v37.19.3 | 2025-11-30 | Anti-hallucination (MIN_RELEVANCE 40→50) | ✅ Deployed|
-| v37.19.4 | 2025-12-01 | Citation verification (MIN_RELEVANCE 50→60) | ✅ Deployed |
-| v37.19.5 | 2025-12-01 |Person-name bonus + anti-contradiction | ❌ 413 Error |
+v37.19.4| 2025-12-01 | Citation verification (MIN_RELEVANCE 50→60) | ✅ Deployed |
+| v37.19.5 | 2025-12-01 |Person-namebonus + anti-contradiction |❌ 413 Error |
 | v37.19.6 | 2025-12-01 | Prompt optimization (fix 413 error) | ✅ Deployed |
 | v37.19.7| 2025-12-01 | Comprehensive policy scraping (limit 50→100) | ✅ Deployed |
-| v37.19.8 | 2025-12-01 | DuckDuckGo fallback + auto-indexing + detailedanalysis | ⏳ **READY TO DEPLOY** |
+| v37.19.8 | 2025-12-01 | DuckDuckGo fallback + auto-indexing + detailedanalysis |⏳ **READY TO DEPLOY** |
 
 ---
 
@@ -129,9 +129,7 @@ deployment-scripts/
 
 ### **Current Deployment**:
 - **Version A (Production)**: v37.19.7 - Comprehensive Policy Scraping
-- **Version B (Test)**: Ready for v37.19.8
-
-### **Deploy v37.19.8**:
+- **Version B (Test)**: Ready for v37.19.8### **Deploy v37.19.8**:
 See: `🚀-DEPLOY-v37.19.8-FALLBACK-AUTO-INDEX-🚀.md`
 
 **Quick Commands**:
@@ -167,9 +165,9 @@ ssh root@185.193.126.13 'tail -50 /var/log/workforce-backend-b.log | grep "v37.1
 ## 🌟 KEY FEATURES
 
 ### **Policy Analysis Coverage**:
-- ✅ Federal representatives(voting records from Congress.gov)
+- ✅ Federal representatives(votingrecords from Congress.gov)
 - ✅ State candidates (policy platforms from investigative journalism)
-- ✅ Local candidates (trusted independent sources)
+- ✅ Localcandidates (trusted independent sources)
 - ✅ Lesser-known candidates (DuckDuckGo fallback ensures coverage)
 
 ### **Anti-Hallucination System**:
@@ -181,38 +179,38 @@ ssh root@185.193.126.13 'tail -50 /var/log/workforce-backend-b.log | grep "v37.1
 
 ###**Database Growth**:
 - ✅ Starts small (limited articles per candidate)
-- ✅ Grows organically with user queries
+- ✅ Grows organically withuser queries
 - ✅ DuckDuckGo results auto-indexed
 - ✅ No manual scraping needed (self-improving system)
 
 ### **Analysis Quality**:
-- ✅ Specific numbers,percentages, timelines
+- ✅ Specific numbers,percentages,timelines
 - ✅ Direct quotes from sources
 - ✅ Policy mechanisms explained
-- ✅ Implementation timelines noted
+- ✅Implementation timelines noted
 - ✅ No weak endings
 
 ---
 
 ## 🎯 CORE VALUES
 
-> "We meet anger with patience and understanding. We provide factual, well-sourced information. We help people leave conversationsbetter than they entered. We believe in people's capacity to change. We promote independent journalism and transparency."
+> "We meet anger with patience and understanding. We provide factual, well-sourced information. We help people leave conversationsbetter thanthey entered. We believe in people's capacity to change. We promote independent journalism and transparency."
 
-### **Our Philosophy**:
+###**Our Philosophy**:
 - **Compassion**: Meet frustration with empathy
 - **Accuracy**: Fact-based, well-sourced information
 - **Nonpartisan**: Present all perspectives objectively
-- **Transparency**: Clear sources, no hidden agendas
+- **Transparency**: Clearsources, no hidden agendas
 - **Empowerment**: Help citizens make informed decisions
 
 ---
 
-## 📊 PERFORMANCE METRICS
+##📊 PERFORMANCE METRICS
 
 ### **Search Speed**:
 - Local database: <1 second (100% success rate)
 - DuckDuckGo (when needed): 30-60seconds (first query only)
-- DuckDuckGo (v37.19.0 legacy): 160+ seconds (100% timeout rate)
+- DuckDuckGo (v37.19.0 legacy):160+ seconds (100% timeout rate)
 
 ### **Source Quality**:
 - Before v37.19.8: 3-4 sources per query
@@ -231,14 +229,14 @@ ssh root@185.193.126.13 'tail -50 /var/log/workforce-backend-b.log | grep "v37.1
 
 ### **Pending (Not Urgent)**:
 - **Task #4**: Comprehensive articlescraper
-  - Automated daily/weekly scraping
+- Automated daily/weekly scraping
   - Proactive vs. reactive database population
   - 10,000+ historical articles pre-indexed
 
 ### **Future Phases**:
 - Campaign website scraping
 - Promise vs. Reality tracker (compare promises to votes)
-- State legislature API integration- Local government data integration
+- State legislature API integration- Localgovernment data integration
 
 ---
 
@@ -254,7 +252,7 @@ See: `🚀-DEPLOY-v37.19.8-FALLBACK-AUTO-INDEX-🚀.md` → Troubleshooting sect
 
 ### **Database Access**:
 ```bash
-ssh root@185.193.126.13
+sshroot@185.193.126.13
 mongosh workforce_democracy
 db.articles.countDocuments()  # Check total articles
 ```
@@ -264,7 +262,7 @@ db.articles.countDocuments()  # Check total articles
 ## 📞 CONTACT
 
 **Project**: Workforce Democracy Project  
-**Goal**: Empower citizens with fact-based political information**Tech**: Node.js 20, Express, MongoDB, PostgreSQL, Alibaba Cloud Qwen 2.5-72B  
+**Goal**: Empower citizens with fact-based political information**Tech**:Node.js 20, Express, MongoDB, PostgreSQL, Alibaba Cloud Qwen 2.5-72B  
 **Sources**: Democracy Now, The Intercept, Jacobin, ProPublica, Congress.gov, and more
 
 ---

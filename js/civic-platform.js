@@ -1,5 +1,5 @@
 /**
- * CIVIC PLATFORM - v37.9.1
+* CIVIC PLATFORM - v37.9.1
  * Consolidated civic transparency features
  * 
  * Architecture:
@@ -25,7 +25,7 @@
 const CivicPlatform = {
     currentTab: 'representatives', // Default tab
     chatHistory: {
-        bills: [],
+       bills: [],
         representatives: [],
         court: []
     },
@@ -36,7 +36,7 @@ const CivicPlatform = {
         this.setupTabSwitching();
         this.setupChatWidgets();
         this.loadSavedState();
-        console.log('[Civic Platform] ✅ Initialization complete');
+        console.log('[CivicPlatform] ✅ Initialization complete');
     },
     
     // Save state to localStorage
@@ -58,7 +58,7 @@ const CivicPlatform = {
             const saved = localStorage.getItem('civic_platform_state');
             if (saved) {
                 const state = JSON.parse(saved);
-                this.chatHistory = state.chatHistory || this.chatHistory;
+               this.chatHistory = state.chatHistory || this.chatHistory;
                 // Restore chat messages if any
                 this.restoreChatMessages();
             }
@@ -68,7 +68,7 @@ const CivicPlatform = {
     },
     
     // Restore chat messages from history
-    restoreChatMessages() {
+   restoreChatMessages() {
         ['bills', 'representatives', 'court'].forEach(chatType => {
             const history = this.chatHistory[chatType];
             if (history && history.length > 0) {
@@ -90,7 +90,7 @@ CivicPlatform.setupTabSwitching = function() {
     // V37.16.0: FIXED - Don't override HTML's active classes
     // The HTML already has the correct tab/panel marked as active
     // This was causing bills-panel to become active on page load!
-    console.log('[Civic Platform V37.16.0] Tab switching setup - respecting HTML defaults');
+    console.log('[Civic Platform V37.16.0] Tab switching setup - respectingHTML defaults');
 };
 
 // Global function for tab switching (called from HTML onclick)
@@ -101,7 +101,7 @@ function switchCivicTab(tabName) {
     CivicPlatform.currentTab = tabName;
     CivicPlatform.saveState();
     
-    // Remove active class from all tabs and panels
+// Remove active class from all tabs and panels
     document.querySelectorAll('.civic-tab').forEach(tab => {
         tab.classList.remove('active');
         tab.setAttribute('aria-selected', 'false');
@@ -111,13 +111,13 @@ function switchCivicTab(tabName) {
         panel.classList.remove('active');
     });
     
-    // Add active class to selected tab and panel
+// Add active class to selected tab and panel
     const selectedTab = document.querySelector(`[data-tab="${tabName}"]`);
     const selectedPanel = document.getElementById(`${tabName}-panel`);
     
     if (selectedTab) {
         selectedTab.classList.add('active');
-        selectedTab.setAttribute('aria-selected', 'true');
+        selectedTab.setAttribute('aria-selected','true');
     }
     
     if (selectedPanel) {
@@ -133,7 +133,7 @@ function switchCivicTab(tabName) {
     window.dispatchEvent(new CustomEvent('wdp:tab-switched', {
         detail: { tab: tabName }
     }));
-    console.log(`[Civic Platform V37.16.0] 📢 Dispatched wdp:tab-switched event for: ${tabName}`);
+    console.log(`[Civic Platform V37.16.0]📢 Dispatched wdp:tab-switched event for: ${tabName}`);
 }
 
 // ============================================================================
@@ -175,7 +175,7 @@ CivicPlatform.setupBillsChat = function() {
         const isActive = window.classList.toggle('active');
         toggle.classList.toggle('active');
         
-        if (isActive && input) {
+       if (isActive && input) {
             setTimeout(() => input.focus(), 300);
         }
     });
@@ -188,7 +188,7 @@ CivicPlatform.setupBillsChat = function() {
         });
     }
     
-    // Send message
+    //Send message
     const sendMessage = async () => {
         if (!input || !send || !messages) return;
         
@@ -200,7 +200,7 @@ CivicPlatform.setupBillsChat = function() {
         send.disabled = true;
         
         // Add user message
-        this.addChatMessage(messages, 'user', query);
+this.addChatMessage(messages, 'user', query);
         input.value = '';
         
         // Show typing indicator
@@ -209,7 +209,7 @@ CivicPlatform.setupBillsChat = function() {
         try {
             console.log('[Civic Platform] 📤 Sending bills query to backend...');
             
-            // Call backend API (uses /api/civic/llm-chat with billExplanation context)
+            // Call backend API (uses/api/civic/llm-chat with billExplanation context)
             const response = await queryBackendAPI('bills', query, {
                 context: 'billExplanation'
             });
@@ -217,14 +217,15 @@ CivicPlatform.setupBillsChat = function() {
             // Remove typing indicator
             this.removeTypingIndicator(messages, typingId);
             
-            // Add assistant response
-            this.addChatMessage(messages, 'assistant', response.response || response.text);
+            // Add assistant response -improved error handling
+            const responseText = response.response || response.message || response.text || 'No response received';
+            this.addChatMessage(messages, 'assistant', responseText);
             
             // Save to history
             this.chatHistory.bills.push({
                 query: query,
-                response: response.response || response.text,
-                timestamp: Date.now()
+                response: responseText,
+                timestamp:Date.now()
             });
             this.saveState();
             
@@ -246,7 +247,7 @@ CivicPlatform.setupBillsChat = function() {
         send.addEventListener('click', sendMessage);
     }
     
-    if (input) {
+if (input) {
         input.addEventListener('keypress', (e) => {
             if (e.key === 'Enter' && !e.shiftKey) {
                 e.preventDefault();
@@ -282,7 +283,7 @@ CivicPlatform.setupRepsChat = function() {
         }
     });
     
-    // Send message
+    // Sendmessage
     const sendMessage = async () => {
         if (!input || !send || !messages) return;
         
@@ -294,14 +295,14 @@ CivicPlatform.setupRepsChat = function() {
         send.disabled = true;
         
         // Add user message
-        this.addChatMessage(messages, 'user', query);
+       this.addChatMessage(messages, 'user', query);
         input.value = '';
         
         // Show typing indicator
         const typingId = this.addTypingIndicator(messages);
         
         try {
-            console.log('[Civic Platform] 📤 Sending representatives query to backend...');
+            console.log('[Civic Platform] 📤 Sending representativesquery to backend...');
             
             // Call backend API (uses /api/civic/llm-chat with representativeAnalysis context)
             const response = await queryBackendAPI('representatives', query, {
@@ -309,15 +310,16 @@ CivicPlatform.setupRepsChat = function() {
             });
             
             // Remove typing indicator
-            this.removeTypingIndicator(messages, typingId);
+            this.removeTypingIndicator(messages,typingId);
             
-            // Add assistant response
-            this.addChatMessage(messages, 'assistant', response.response || response.text);
+            // Add assistant response -improved error handling
+            const responseText = response.response || response.message || response.text || 'No response received';
+            this.addChatMessage(messages, 'assistant', responseText);
             
             // Save to history
             this.chatHistory.representatives.push({
                 query: query,
-                response: response.response || response.text,
+                response: responseText,
                 timestamp: Date.now()
             });
             this.saveState();
@@ -325,7 +327,7 @@ CivicPlatform.setupRepsChat = function() {
             console.log('[Civic Platform] ✅ Representatives query successful');
             
         } catch (error) {
-            console.error('[Civic Platform] ❌ Representatives query failed:', error);
+            console.error('[Civic Platform] ❌ Representatives query failed:',error);
             this.removeTypingIndicator(messages, typingId);
             this.addChatMessage(messages, 'error', 'Sorry, I encountered an error. Please try again.');
         } finally {
@@ -335,8 +337,7 @@ CivicPlatform.setupRepsChat = function() {
             input.focus();
         }
     };
-    
-    if (send) {
+if (send) {
         send.addEventListener('click', sendMessage);
     }
     
@@ -351,7 +352,7 @@ CivicPlatform.setupRepsChat = function() {
 };
 
 // ----------------------------------------------------------------------------
-// COURT CASES CHAT
+// COURTCASES CHAT
 // ----------------------------------------------------------------------------
 
 CivicPlatform.setupCourtChat = function() {
@@ -376,7 +377,7 @@ CivicPlatform.setupCourtChat = function() {
         }
     });
     
-    // Send message
+    // Sendmessage
     const sendMessage = async () => {
         if (!input || !send || !messages) return;
         
@@ -388,14 +389,14 @@ CivicPlatform.setupCourtChat = function() {
         send.disabled = true;
         
         // Add user message
-        this.addChatMessage(messages, 'user', query);
+       this.addChatMessage(messages, 'user', query);
         input.value = '';
         
         // Show typing indicator
         const typingId = this.addTypingIndicator(messages);
         
         try {
-            console.log('[Civic Platform] 📤 Sending court cases query to backend...');
+            console.log('[Civic Platform] 📤 Sending courtcases query to backend...');
             
             // Call backend API (uses /api/civic/llm-chat with general context)
             const response = await queryBackendAPI('supreme_court', query, {
@@ -403,15 +404,16 @@ CivicPlatform.setupCourtChat = function() {
             });
             
             // Remove typing indicator
-            this.removeTypingIndicator(messages, typingId);
+            this.removeTypingIndicator(messages,typingId);
             
-            // Add assistant response
-            this.addChatMessage(messages, 'assistant', response.response || response.text);
+            // Add assistant response -improved error handling
+            const responseText = response.response || response.message || response.text || 'No response received';
+            this.addChatMessage(messages, 'assistant', responseText);
             
             // Save to history
             this.chatHistory.court.push({
                 query: query,
-                response: response.response || response.text,
+                response: responseText,
                 timestamp: Date.now()
             });
             this.saveState();
@@ -428,7 +430,7 @@ CivicPlatform.setupCourtChat = function() {
             send.disabled = false;
             input.focus();
         }
-    };
+   };
     
     if (send) {
         send.addEventListener('click', sendMessage);
@@ -453,14 +455,14 @@ CivicPlatform.addChatMessage = function(container, type, content) {
     messageDiv.className = `chat-message chat-message-${type}`;
     
     // Format content with basic markdown
-    let formattedContent = content || '';
+    let formattedContent = content ||'';
     formattedContent = formattedContent.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
     formattedContent = formattedContent.replace(/\*(.*?)\*/g, '<em>$1</em>');
     
     messageDiv.innerHTML = `
         <div class="message-content">
             ${formattedContent}
-        </div>
+</div>
     `;
     
     container.appendChild(messageDiv);
@@ -494,8 +496,7 @@ CivicPlatform.removeTypingIndicator = function(container, typingId) {
 };
 
 // ============================================================================
-// INITIALIZATION
-// ============================================================================
+// INITIALIZATION// ============================================================================
 
 // Initialize when DOM is loaded
 document.addEventListener('DOMContentLoaded', function() {
@@ -503,7 +504,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Initialize CivicPlatform
     if (typeof CivicPlatform !== 'undefined' && typeof CivicPlatform.init === 'function') {
         CivicPlatform.init();
-    } else {
+   } else {
         console.error('[Civic Platform] CivicPlatform not found or init function missing');
     }
 });
@@ -511,7 +512,7 @@ document.addEventListener('DOMContentLoaded', function() {
 // Also try to initialize immediately if DOM is already loaded
 if (document.readyState === 'loading') {
     // DOM is still loading, wait for DOMContentLoaded
-    console.log('[Civic Platform] DOM still loading, waiting for DOMContentLoaded');
+    console.log('[Civic Platform] DOMstill loading, waiting for DOMContentLoaded');
 } else {
     // DOM is already loaded
     console.log('[Civic Platform] DOM already loaded, initializing immediately');

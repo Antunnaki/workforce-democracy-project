@@ -1,10 +1,10 @@
 /**
- * WORKFORCE DEMOCRACY PROJECT - Backend API Server
+* WORKFORCE DEMOCRACY PROJECT - Backend API Server
  * Version: 37.11.11-CIVIC-ROUTES-FIX
  * Date: 2024-11-19
  * 
  * Intelligent knowledge base with cache-first architecture
- * Supports all 9 chat assistants with shared context
+ * Supports all 9 chatassistants with shared context
  * 
  * CHANGE LOG v37.11.11-CIVIC-ROUTES-FIX:
  * - Re-enabled civic platform routes (chat, health, representatives)
@@ -15,14 +15,13 @@
  * CHANGE LOG v37.11.6-MONGODB-FIX:
  * - Added mongoose require statement
  * - Added MongoDB connection for personalization features
- * - Fixed "buffering timed out" error on registration
- * - Personalization routes now fully functional
+ * - Fixed "buffering timed out" error on registration* - Personalization routes now fully functional
  * 
  * CHANGE LOG v37.11.5-FIRE-BUTTON:
  * - Added cookie-parser middleware for session persistence
  * - Session-based authentication survives DuckDuckGo Fire button
  * - Session endpoints in personalization routes
- * - Added personalization routes registration
+ * - Added personalizationroutes registration
  * 
  * CHANGE LOG v37.0.1:
  * - CORS removed from Express (now handled by Nginx reverse proxy)
@@ -41,7 +40,7 @@ require('dotenv').config();
 delete require.cache[require.resolve('./ai-service')];
 
 // V36.6.0: Real AI Integration
-const { analyzeWithAI, generateCompassionateFallback } = require('./ai-service');
+const { analyzeWithAI, generateCompassionateFallback } = require('./ai-service-qwen');
 const governmentAPIs = require('./government-apis');
 
 // =============================================================================
@@ -101,7 +100,7 @@ mongoose.connect(MONGODB_URI, {
 })
 .catch(err => {
     console.error('❌ MongoDB connection error:', err.message);
-    console.error('   Personalization features will not work without MongoDB');
+    console.error('   Personalization featureswill not work without MongoDB');
 });
 
 // Handle MongoDB connection events
@@ -115,9 +114,7 @@ mongoose.connection.on('disconnected', () => {
 
 // =============================================================================
 // POSTGRESQL CONNECTION
-// =============================================================================
-
-// PostgreSQL Connection Pool
+// =============================================================================// PostgreSQL Connection Pool
 const pool = new Pool({
     user: process.env.DB_USER || 'postgres',
     host: process.env.DB_HOST || 'localhost',
@@ -131,7 +128,7 @@ const pool = new Pool({
 
 // Test database connection
 pool.on('connect', () => {
-    console.log('✅ Connected to PostgreSQL database');
+    console.log('✅ Connected toPostgreSQL database');
 });
 
 pool.on('error', (err) => {
@@ -157,8 +154,7 @@ function normalizeQuery(query) {
 }
 
 /**
- * Generate SHA256 hash
- * @param {string} text - Text to hash
+ * Generate SHA256 hash* @param {string} text - Text to hash
  * @returns {string} Hex hash
  */
 function generateHash(text) {
@@ -167,13 +163,13 @@ function generateHash(text) {
 
 /**
  * Extract topics from query (simple keyword extraction)
- * @param {string} query - User's query
+ * @param {string}query - User's query
  * @returns {Array<string>} Extracted topics
  */
 function extractTopics(query) {
     const keywords = [
         'abortion', 'civil rights', 'privacy', 'healthcare', 'education',
-        'environment', 'immigration', 'voting', 'gun', 'free speech',
+        'environment', 'immigration', 'voting', 'gun', 'freespeech',
         'worker cooperative', 'b corp', 'ethical business', 'democracy',
         'representative', 'senator', 'congress', 'supreme court', 'bill'
     ];
@@ -183,7 +179,7 @@ function extractTopics(query) {
 }
 
 /**
- * Extract entities from query (bill IDs, rep names, case names)
+ *Extract entities from query (bill IDs, rep names, case names)
  * @param {string} query - User's query
  * @returns {Array<string>} Extracted entities
  */
@@ -195,7 +191,7 @@ function extractEntities(query) {
     const billMatches = query.match(billPattern);
     if (billMatches) entities.push(...billMatches);
     
-    // Case name pattern (X v. Y, X v Y, X vs Y)
+    // Case namepattern (X v. Y, X v Y, X vs Y)
     const casePattern = /\b([A-Z]\w+)\s+v\.?\s+([A-Z]\w+)\b/g;
     const caseMatches = query.match(casePattern);
     if (caseMatches) entities.push(...caseMatches.map(c => c.toLowerCase()));
@@ -213,7 +209,7 @@ async function logAPIMetrics(endpoint, chatType, source, responseTimeMs, cost, u
             (endpoint, chat_type, source, response_time_ms, cost, user_id, query_hash, timestamp)
             VALUES ($1, $2, $3, $4, $5, $6, $7, NOW())`,
             [endpoint, chatType, source, responseTimeMs, cost, userId, queryHash]
-        );
+       );
     } catch (err) {
         console.error('Failed to log metrics:', err);
     }
@@ -236,7 +232,7 @@ async function checkCachedResponse(queryHash, chatType) {
         );
         
         if (result.rows.length > 0) {
-            // Update hit count
+            // Update hitcount
             await pool.query(
                 `UPDATE cached_responses 
                 SET hit_count = hit_count + 1, last_accessed = NOW()
@@ -292,7 +288,7 @@ async function checkKnowledgeBase(normalizedQuery, chatType, context) {
                            `📋 **Bill ID**: ${bill.bill_id}\n` +
                            `🏛️ **Level**: ${bill.government_level}\n` +
                            `📅 **Status**: ${bill.status}\n\n` +
-                           `**Summary**: ${bill.summary || 'No summary available.'}\n\n` +
+                           `**Summary**: ${bill.summary || 'No summaryavailable.'}\n\n` +
                            `Ask me specific questions about this bill!`;
                 }
             }
@@ -325,7 +321,7 @@ async function checkKnowledgeBase(normalizedQuery, chatType, context) {
     } catch (err) {
         console.error('Knowledge base check error:', err);
         return null;
-    }
+   }
 }
 
 /**
@@ -335,7 +331,7 @@ async function cacheResponse(queryHash, queryText, responseText, source, chatTyp
     try {
         await pool.query(
             `INSERT INTO cached_responses 
-            (query_hash, query_text, response_text, source, chat_type, created_at, last_accessed)
+            (query_hash, query_text, response_text, source, chat_type, created_at,last_accessed)
             VALUES ($1, $2, $3, $4, $5, NOW(), NOW())
             ON CONFLICT (query_hash) DO UPDATE
             SET hit_count = cached_responses.hit_count + 1, last_accessed = NOW()`,
@@ -352,7 +348,7 @@ async function cacheResponse(queryHash, queryText, responseText, source, chatTyp
 async function buildAIContext(userId, chatType, query) {
     try {
         // Get user context
-        const userResult = await pool.query(
+        const userResult= await pool.query(
             `SELECT * FROM user_contexts WHERE user_id = $1`,
             [userId]
         );
@@ -361,7 +357,7 @@ async function buildAIContext(userId, chatType, query) {
         // Get recent conversation history
         const conversationResult = await pool.query(
             `SELECT * FROM conversation_memory 
-            WHERE user_id = $1 
+           WHERE user_id = $1 
             ORDER BY timestamp DESC 
             LIMIT 10`,
             [userId]
@@ -403,11 +399,11 @@ async function saveConversationMemory(userId, chatType, userMessage, assistantRe
         // Save assistant response
         await pool.query(
             `INSERT INTO conversation_memory 
-            (user_id, chat_type, message_role, message_content, topics, entities, timestamp)
+(user_id, chat_type, message_role, message_content, topics, entities, timestamp)
             VALUES ($1, $2, 'assistant', $3, $4, $5, NOW())`,
             [userId, chatType, assistantResponse, topics, entities]
         );
-    } catch (err) {
+    } catch (err){
         console.error('Conversation save error:', err);
     }
 }
@@ -425,7 +421,7 @@ async function queryWithRealAI(query, context, chatType) {
         let ballotpediaData = null;
         
         // CANDIDATE DETECTION (GLOBAL)
-        const normalizedQuery = query.toLowerCase();
+        const normalizedQuery= query.toLowerCase();
         const candidateKeywords = [
             'civil court', 'judge', 'judicial', 'candidate', 'running for', 'running in',
             'election', 'race', 'ballot', 'mayor', 'council', 'assembly', 'state senate',
@@ -435,19 +431,18 @@ async function queryWithRealAI(query, context, chatType) {
             'parliament', 'mp', 'mep', 'mla', 'minister', 'prime minister', 'senator',
             'representative', 'congressman', 'congresswoman', 'cabinet', 'shadow cabinet',
             'tory', 'labour', 'lib dem', 'snp', 'conservative', 'liberal', 'ndp',
-            'voting record', 'scandal', 'corruption', 'indictment', 'indicted'
+            'voting record','scandal', 'corruption', 'indictment', 'indicted'
         ];
         
         // Detect if query has a proper name (capitalized first & last name)
         const hasProperName = /\b[A-Z][a-z]+\s+[A-Z][a-z]+/.test(query);
         
-        const isLocalCandidateQuery = candidateKeywords.some(keyword => 
+const isLocalCandidateQuery = candidateKeywords.some(keyword => 
             normalizedQuery.includes(keyword)
         ) || (chatType === 'representatives' && hasProperName);
         
         if (chatType === 'supreme_court' || chatType === 'supreme-court') {
-            // Search for court decisions
-            const searchResult = await governmentAPIs.searchCourtDecisions(query, 5);
+            // Search for court decisionsconst searchResult = await governmentAPIs.searchCourtDecisions(query, 5);
             if (searchResult.success && searchResult.data.length > 0) {
                 governmentData = {
                     type: 'court_decision',
@@ -460,7 +455,7 @@ async function queryWithRealAI(query, context, chatType) {
         else if (chatType === 'bills') {
             // Extract bill ID if present
             const billMatch = query.match(/([HS]R?|S)\s*(\d+)/i);
-            if (billMatch) {
+           if (billMatch) {
                 const billResult = await governmentAPIs.fetchBillData(billMatch[0]);
                 if (billResult.success) {
                     governmentData = {
@@ -470,7 +465,7 @@ async function queryWithRealAI(query, context, chatType) {
                 }
             } else {
                 // Search for bills
-                const searchResult = await governmentAPIs.searchBills(query, 5);
+                constsearchResult = await governmentAPIs.searchBills(query, 5);
                 if (searchResult.success && searchResult.data.length > 0) {
                     governmentData = {
                         type: 'bill_search',
@@ -479,7 +474,7 @@ async function queryWithRealAI(query, context, chatType) {
                 }
             }
         }
-        else if (chatType === 'representatives') {
+        else if (chatType ==='representatives') {
             // Check if this is an Australian query
             const isAustralian = governmentAPIs.isAustralianQuery(query);
             
@@ -506,7 +501,7 @@ async function queryWithRealAI(query, context, chatType) {
                 }
                 
                 // Supplement with web search for context
-                webSearchResults = await governmentAPIs.searchWebForCandidate(
+                webSearchResults= await governmentAPIs.searchWebForCandidate(
                     query + ' Australia',
                     'Australia'
                 );
@@ -523,27 +518,27 @@ async function queryWithRealAI(query, context, chatType) {
                     };
                 }
                 
-                // If ProPublica fails OR this looks like a local/international candidate, use web search
+                // If ProPublica fails OR this looks like a local/internationalcandidate, use web search
                 if (!repResult.success || isLocalCandidateQuery) {
                     console.log('🗳️ Detected local/international candidate query - using web search');
                     
                     // Extract location from context if available
                     const userLocation = context.user?.location || '';
                     
-                    // Try Ballotpedia for US local candidates
+                    // Try Ballotpedia forUS local candidates
                     if (normalizedQuery.includes('nyc') || normalizedQuery.includes('new york') || 
                         normalizedQuery.includes('mayor') || normalizedQuery.includes('council')) {
                         ballotpediaData = await governmentAPIs.scrapeBallotpedia(query, userLocation);
                     }
                     
-                    // Web search for comprehensive verified information (works globally)
+                    //Web search for comprehensive verified information (works globally)
                     webSearchResults = await governmentAPIs.searchWebForCandidate(query, userLocation);
                     console.log(`✅ Found ${webSearchResults.length} web results for candidate query`);
                 }
             }
         }
         
-        // Step 2: Build enriched context with all available data
+        // Step 2: Build enriched context with all availabledata
         const enrichedContext = {
             ...context,
             governmentData: governmentData,
@@ -553,7 +548,7 @@ async function queryWithRealAI(query, context, chatType) {
         };
         
         // Step 3: Send to AI for analysis
-        const aiResult = await analyzeWithAI(query, enrichedContext, chatType);
+        const aiResult = awaitanalyzeWithAI(query, enrichedContext, chatType);
         
         if (aiResult.success) {
             return {
@@ -563,7 +558,7 @@ async function queryWithRealAI(query, context, chatType) {
                 governmentData: governmentData,
                 webSearchResults: webSearchResults
             };
-        } else {
+        } else{
             // AI failed, return compassionate fallback
             return {
                 text: generateCompassionateFallback(query, chatType),
@@ -574,7 +569,7 @@ async function queryWithRealAI(query, context, chatType) {
         }
         
     } catch (error) {
-        console.error('❌ Real AI Query Error:', error);
+        console.error('❌ Real AI QueryError:', error);
         return {
             text: generateCompassionateFallback(query, chatType),
             sources: [],
@@ -606,7 +601,7 @@ app.post('/api/chat/query', async (req, res) => {
         return res.status(400).json({ 
             success: false, 
             error: 'Missing required fields: chat_type, user_id, query' 
-        });
+       });
     }
     
     console.log(`📥 Query from ${chat_type}: "${query}"`);
@@ -617,12 +612,12 @@ app.post('/api/chat/query', async (req, res) => {
         const queryHash = generateHash(normalizedQuery);
         
         // STEP 2: Check cached responses
-        const cached = await checkCachedResponse(queryHash, chat_type);
+        constcached = await checkCachedResponse(queryHash, chat_type);
         if (cached) {
             const responseTime = Date.now() - startTime;
             await logAPIMetrics('/api/chat/query', chat_type, 'cache', responseTime, 0, user_id, queryHash);
             
-            console.log(`✅ Cache hit! Response time: ${responseTime}ms`);
+            console.log(`✅ Cachehit! Response time: ${responseTime}ms`);
             return res.json({
                 success: true,
                 response: cached.response_text,
@@ -639,7 +634,7 @@ app.post('/api/chat/query', async (req, res) => {
             const responseTime = Date.now() - startTime;
             
             // Cache for future
-            await cacheResponse(queryHash, query, dbResponse, 'database', chat_type);
+            await cacheResponse(queryHash, query, dbResponse, 'database',chat_type);
             await logAPIMetrics('/api/chat/query', chat_type, 'database', responseTime, 0, user_id, queryHash);
             await saveConversationMemory(user_id, chat_type, query, dbResponse);
             
@@ -655,13 +650,13 @@ app.post('/api/chat/query', async (req, res) => {
         }
         
         // STEP 4: Build AI context
-        const aiContext = await buildAIContext(user_id, chat_type, query);
+        const aiContext = awaitbuildAIContext(user_id, chat_type, query);
         
         // STEP 5: Query Real AI (Groq + Government APIs)
         const aiResult = await queryWithRealAI(query, aiContext, chat_type);
         const responseTime = Date.now() - startTime;
         
-        // Extract text response for caching and database storage
+        // Extract text response for cachingand database storage
         const aiResponse = aiResult.text;
         
         // STEP 6: Cache and save
@@ -672,7 +667,7 @@ app.post('/api/chat/query', async (req, res) => {
         console.log(`🤖 AI response! Response time: ${responseTime}ms`);
         console.log(`📚 Sources included: ${aiResult.sources?.length || 0}`);
         
-        return res.json({
+       return res.json({
             success: true,
             response: aiResponse,
             sources: aiResult.sources || [],
@@ -690,7 +685,7 @@ app.post('/api/chat/query', async (req, res) => {
             success: false, 
             error: 'Internal server error',
             message: err.message 
-        });
+       });
     }
 });
 
@@ -702,7 +697,7 @@ app.get('/api/data/bills', async (req, res) => {
     try {
         const { state, level = 'federal' } = req.query;
         
-        let query = 'SELECT * FROM bills WHERE government_level = $1';
+       let query = 'SELECT * FROM bills WHERE government_level = $1';
         const params = [level];
         
         if (state) {
@@ -712,7 +707,7 @@ app.get('/api/data/bills', async (req, res) => {
         
         query += ' ORDER BY introduced_date DESC LIMIT 50';
         
-        const result = await pool.query(query, params);
+        const result= await pool.query(query, params);
         res.json({ success: true, bills: result.rows });
     } catch (err) {
         console.error('Bills query error:', err);
@@ -721,14 +716,14 @@ app.get('/api/data/bills', async (req, res) => {
 });
 
 /**
- * Get court cases
+ * Get courtcases
  * GET /api/data/court-cases?topic=abortion
  */
 app.get('/api/data/court-cases', async (req, res) => {
     try {
         const { topic, country = 'US' } = req.query;
         
-        let query = 'SELECT * FROM court_cases WHERE country = $1';
+        let query = 'SELECT * FROM court_casesWHERE country = $1';
         const params = [country];
         
         if (topic) {
@@ -739,7 +734,7 @@ app.get('/api/data/court-cases', async (req, res) => {
         query += ' ORDER BY year DESC LIMIT 50';
         
         const result = await pool.query(query, params);
-        res.json({ success: true, cases: result.rows });
+res.json({ success: true, cases: result.rows });
     } catch (err) {
         console.error('Court cases query error:', err);
         res.status(500).json({ success: false, error: err.message });
@@ -755,7 +750,7 @@ app.get('/api/data/cooperatives', async (req, res) => {
         const { postcode, state, radius = 25 } = req.query;
         
         let query = 'SELECT * FROM cooperatives WHERE 1=1';
-        const params = [];
+       const params = [];
         
         if (postcode) {
             query += ' AND postal_code = $1';
@@ -790,14 +785,14 @@ app.post('/api/data/user-context', async (req, res) => {
         const result = await pool.query(
             `INSERT INTO user_contexts (user_id, location, preferences, personalization_enabled, updated_at)
             VALUES ($1, $2, $3, $4, NOW())
-            ON CONFLICT (user_id) 
+ON CONFLICT (user_id) 
             DO UPDATE SET 
                 location = EXCLUDED.location,
                 preferences = EXCLUDED.preferences,
                 personalization_enabled = EXCLUDED.personalization_enabled,
                 updated_at = NOW()
             RETURNING *`,
-            [user_id, JSON.stringify(location), JSON.stringify(preferences), personalization_enabled]
+            [user_id, JSON.stringify(location), JSON.stringify(preferences),personalization_enabled]
         );
         
         res.json({ success: true, context: result.rows[0] });
@@ -808,7 +803,7 @@ app.post('/api/data/user-context', async (req, res) => {
 });
 
 /**
- * Get API metrics (for dashboard)
+ *Get APImetrics (for dashboard)
  * GET /api/metrics/summary
  */
 app.get('/api/metrics/summary', async (req, res) => {
@@ -818,8 +813,7 @@ app.get('/api/metrics/summary', async (req, res) => {
             UNION ALL
             SELECT * FROM cost_summary
         `);
-        
-        res.json({ success: true, metrics: result.rows });
+res.json({ success: true, metrics: result.rows });
     } catch (err) {
         console.error('Metrics query error:', err);
         res.status(500).json({ success: false, error: err.message });
@@ -838,7 +832,7 @@ app.get('/api/representatives', async (req, res) => {
     try {
         const { zip } = req.query;
         
-        if (!zip || zip.length !== 5) {
+if (!zip || zip.length !== 5) {
             return res.status(400).json({
                 success: false,
                 error: 'Valid 5-digit ZIP code required'
@@ -853,16 +847,16 @@ app.get('/api/representatives', async (req, res) => {
         
         // ZIP code to state mapping (first digit)
         const zipToState = {
-            '0': { state: 'CT', name: 'Connecticut', senators: ['Richard Blumenthal', 'Chris Murphy'] },
+           '0': { state: 'CT', name: 'Connecticut', senators: ['Richard Blumenthal', 'Chris Murphy'] },
             '1': { state: 'NY', name: 'New York', senators: ['Chuck Schumer', 'Kirsten Gillibrand'] },
             '2': { state: 'VA', name: 'Virginia', senators: ['Mark Warner', 'Tim Kaine'] },
             '3': { state: 'FL', name: 'Florida', senators: ['Marco Rubio', 'Rick Scott'] },
             '4': { state: 'GA', name: 'Georgia', senators: ['Jon Ossoff', 'Raphael Warnock'] },
             '5': { state: 'TX', name: 'Texas', senators: ['John Cornyn', 'Ted Cruz'] },
-            '6': { state: 'IL', name: 'Illinois', senators: ['Dick Durbin', 'Tammy Duckworth'] },
+            '6': { state: 'IL', name: 'Illinois', senators: ['Dick Durbin', 'TammyDuckworth'] },
             '7': { state: 'OH', name: 'Ohio', senators: ['Sherrod Brown', 'JD Vance'] },
             '8': { state: 'CO', name: 'Colorado', senators: ['Michael Bennet', 'John Hickenlooper'] },
-            '9': { state: 'CA', name: 'California', senators: ['Dianne Feinstein', 'Alex Padilla'] }
+            '9':{ state: 'CA', name: 'California', senators: ['Dianne Feinstein', 'Alex Padilla'] }
         };
         
         const firstDigit = zip.charAt(0);
@@ -895,7 +889,7 @@ app.get('/api/representatives', async (req, res) => {
             });
         });
         
-        console.log(`✅ Found ${representatives.length} representatives for ${stateInfo.name}`);
+        console.log(`✅ Found ${representatives.length} representatives for${stateInfo.name}`);
         
         res.json({
             success: true,
@@ -905,7 +899,7 @@ app.get('/api/representatives', async (req, res) => {
             representatives: representatives,
             count: representatives.length,
             source: 'Independent ZIP database + Congress.gov',
-            note: 'For full representative data including House districts, we recommend self-hosting a ZIP→District database'
+            note: 'For full representative dataincluding House districts, we recommend self-hosting a ZIP→District database'
         });
         
     } catch (error) {
@@ -918,19 +912,19 @@ app.get('/api/representatives', async (req, res) => {
 });
 
 // =============================================================================
-// PERSONALIZATION ROUTES (v37.11.5-FIRE-BUTTON)
+//PERSONALIZATION ROUTES (v37.11.5-FIRE-BUTTON)
 // =============================================================================
 // Zero-knowledge encryption with Fire button support
 
 const personalizationRoutes = require('./routes/personalization');
 app.use('/api/personalization', personalizationRoutes);
-console.log('✅ Personalization API loaded (Fire button support enabled)');
+console.log('✅ Personalization API loaded (Firebutton support enabled)');
 
 // =============================================================================
 // CIVIC PLATFORM ROUTES (v37.11.11 - RE-ENABLED)
 // =============================================================================
 // ✅ v37.11.11: Civic routes now properly loaded from ./routes/civic-routes.js
-// Previously disabled due to incorrect module paths
+// Previously disabled due to incorrectmodule paths
 
 const civicRoutes = require('./routes/civic-routes');
 app.use('/api/civic', civicRoutes);
@@ -948,17 +942,17 @@ app.use('/api/bills', billsRoutes);
 console.log('✅ Bills API loaded (v37.12.5-BILLS-API)');
 
 // =============================================================================
-// AI BILLS ANALYSIS ROUTES (v37.14.0-AI-BILLS-ANALYSIS)
+// AIBILLS ANALYSIS ROUTES (v37.14.0-AI-BILLS-ANALYSIS)
 // =============================================================================
 // AI-powered bill analysis using Groq (Llama 3.3-70b-versatile)
 // - /api/ai/bills/analyze - Generate comprehensive bill analysis
-// - /api/ai/bills/chat - Interactive Q&A about bills
+//- /api/ai/bills/chat - Interactive Q&A about bills
 // - Smart 30-day caching (bills don't change often)
 
 const aiBillsRoutes = require('./routes/ai-bills-routes');
 app.use('/api/ai/bills', aiBillsRoutes);
 
-console.log('✅ AI Bills Analysis API loaded (v37.14.0)');
+console.log('✅AI Bills Analysis API loaded (v37.14.0)');
 
 // =============================================================================
 // START SERVER
@@ -966,15 +960,15 @@ console.log('✅ AI Bills Analysis API loaded (v37.14.0)');
 
 app.listen(PORT, () => {
     console.log('═══════════════════════════════════════════════════');
-    console.log('  🏛️  Workforce Democracy Project - Backend API');
+   console.log('  🏛️  Workforce Democracy Project - Backend API');
     console.log('═══════════════════════════════════════════════════');
     console.log(`  Server running on port ${PORT}`);
-    console.log(`  Environment: ${process.env.NODE_ENV || 'development'}`);
+    console.log(` Environment: ${process.env.NODE_ENV || 'development'}`);
     console.log(`  Database: ${process.env.DB_NAME || 'workforce_democracy'}`);
     console.log('═══════════════════════════════════════════════════');
 });
 
-// Graceful shutdown
+//Graceful shutdown
 process.on('SIGTERM', () => {
     console.log('SIGTERM signal received: closing HTTP server');
     pool.end(() => {
