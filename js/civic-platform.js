@@ -79,6 +79,9 @@ const CivicPlatform = {
     }
 };
 
+// Ensure CivicPlatform is available globally
+window.CivicPlatform = CivicPlatform;
+
 // ============================================================================
 // TAB SWITCHING
 // ============================================================================
@@ -442,156 +445,79 @@ CivicPlatform.setupCourtChat = function() {
 };
 
 // ============================================================================
-// CHAT UI HELPERS
+// CHAT MESSAGE HELPERS
 // ============================================================================
 
 CivicPlatform.addChatMessage = function(container, type, content) {
-    if (!container) return;
-    
-    // Remove empty state if present
-    const emptyState = container.querySelector('.bills-chat-empty-state-top, .inline-chat-message-assistant');
-    if (emptyState && type === 'user') {
-        // Keep initial assistant message, only remove on first user message
-        const isInitialMessage = emptyState.textContent.includes('Welcome') || emptyState.textContent.includes('Hi!');
-        if (isInitialMessage && container.children.length === 1) {
-            // Don't remove, this is the welcome message
-        }
-    }
-    
     const messageDiv = document.createElement('div');
-    messageDiv.className = `inline-chat-message inline-chat-message-${type}`;
+    messageDiv.className = `chat-message chat-message-${type}`;
     
-    if (type === 'user') {
-        messageDiv.innerHTML = `
-            <div style="display: flex; gap: 0.75rem; align-items: flex-start;">
-                <div style="font-size: 1.5rem; flex-shrink: 0;">👤</div>
-                <div style="flex: 1;">
-                    <p style="margin: 0;">${this.escapeHtml(content)}</p>
-                </div>
-            </div>
-        `;
-    } else if (type === 'assistant') {
-        messageDiv.innerHTML = `
-            <div style="display: flex; gap: 0.75rem; align-items: flex-start;">
-                <div style="font-size: 1.5rem; flex-shrink: 0;">🤖</div>
-                <div style="flex: 1;">
-                    <p style="margin: 0; line-height: 1.6;">${this.formatResponse(content)}</p>
-                </div>
-            </div>
-        `;
-    } else if (type === 'error') {
-        messageDiv.innerHTML = `
-            <div style="display: flex; gap: 0.75rem; align-items: flex-start;">
-                <div style="font-size: 1.5rem; flex-shrink: 0;">⚠️</div>
-                <div style="flex: 1;">
-                    <p style="margin: 0; color: #dc2626;">${this.escapeHtml(content)}</p>
-                </div>
-            </div>
-        `;
-    }
+    // Format content with basic markdown
+    let formattedContent = content || '';
+    formattedContent = formattedContent.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+    formattedContent = formattedContent.replace(/\*(.*?)\*/g, '<em>$1</em>');
     
-    container.appendChild(messageDiv);
-    
-    // Scroll to bottom
-    setTimeout(() => {
-        messageDiv.scrollIntoView({ behavior: 'smooth', block: 'end' });
-    }, 100);
-};
-
-CivicPlatform.addTypingIndicator = function(container) {
-    if (!container) return null;
-    
-    const typingId = 'typing-' + Date.now();
-    const typingDiv = document.createElement('div');
-    typingDiv.id = typingId;
-    typingDiv.className = 'inline-chat-message inline-chat-message-assistant';
-    typingDiv.innerHTML = `
-        <div style="display: flex; gap: 0.75rem; align-items: flex-start;">
-            <div style="font-size: 1.5rem; flex-shrink: 0;">🤖</div>
-            <div style="flex: 1;">
-                <p style="margin: 0; color: #64748b; font-style: italic;">Thinking...</p>
-            </div>
+    messageDiv.innerHTML = `
+        <div class="message-content">
+            ${formattedContent}
         </div>
     `;
     
+    container.appendChild(messageDiv);
+    container.scrollTop = container.scrollHeight;
+};
+
+CivicPlatform.addTypingIndicator = function(container) {
+    const typingId = 'typing-' + Date.now();
+    const typingDiv = document.createElement('div');
+    typingDiv.id = typingId;
+    typingDiv.className = 'chat-message chat-message-typing';
+    typingDiv.innerHTML = `
+        <div class="message-content">
+            <div class="typing-indicator">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    `;
     container.appendChild(typingDiv);
-    
-    // Scroll to bottom
-    setTimeout(() => {
-        typingDiv.scrollIntoView({ behavior: 'smooth', block: 'end' });
-    }, 100);
-    
+    container.scrollTop = container.scrollHeight;
     return typingId;
 };
 
 CivicPlatform.removeTypingIndicator = function(container, typingId) {
-    if (!container || !typingId) return;
-    
-    const typingDiv = document.getElementById(typingId);
-    if (typingDiv) {
-        typingDiv.remove();
+    const typingElement = document.getElementById(typingId);
+    if (typingElement) {
+        typingElement.remove();
     }
 };
-
-CivicPlatform.formatResponse = function(text) {
-    if (!text) return '';
-    
-    // Escape HTML first
-    let formatted = this.escapeHtml(text);
-    
-    // Format line breaks
-    formatted = formatted.replace(/\n/g, '<br>');
-    
-    // Format bold text **text**
-    formatted = formatted.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
-    
-    // Format links [text](url)
-    formatted = formatted.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer" style="color: #667eea; text-decoration: underline;">$1</a>');
-    
-    return formatted;
-};
-
-CivicPlatform.escapeHtml = function(text) {
-    const div = document.createElement('div');
-    div.textContent = text;
-    return div.innerHTML;
-};
-
-// ============================================================================
-// INLINE CHAT TOGGLE (Global function for HTML onclick)
-// ============================================================================
-
-function toggleInlineChat(chatType) {
-    const toggle = document.getElementById(`${chatType}InlineChatToggle`);
-    const window = document.getElementById(`${chatType}InlineChatWindow`);
-    
-    if (!toggle || !window) return;
-    
-    const isActive = window.classList.toggle('active');
-    toggle.classList.toggle('active');
-    
-    if (isActive) {
-        const input = document.getElementById(`${chatType}InlineChatInput`);
-        if (input) {
-            setTimeout(() => input.focus(), 300);
-        }
-    }
-}
 
 // ============================================================================
 // INITIALIZATION
 // ============================================================================
 
-// Initialize when DOM is ready
+// Initialize when DOM is loaded
+document.addEventListener('DOMContentLoaded', function() {
+    console.log('[Civic Platform] DOMContentLoaded event fired');
+    // Initialize CivicPlatform
+    if (typeof CivicPlatform !== 'undefined' && typeof CivicPlatform.init === 'function') {
+        CivicPlatform.init();
+    } else {
+        console.error('[Civic Platform] CivicPlatform not found or init function missing');
+    }
+});
+
+// Also try to initialize immediately if DOM is already loaded
 if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', () => CivicPlatform.init());
+    // DOM is still loading, wait for DOMContentLoaded
+    console.log('[Civic Platform] DOM still loading, waiting for DOMContentLoaded');
 } else {
-    CivicPlatform.init();
+    // DOM is already loaded
+    console.log('[Civic Platform] DOM already loaded, initializing immediately');
+    if (typeof CivicPlatform !== 'undefined' && typeof CivicPlatform.init === 'function') {
+        CivicPlatform.init();
+    } else {
+        console.error('[Civic Platform] CivicPlatform not found or init function missing');
+    }
 }
-
-// Export for global access
-window.CivicPlatform = CivicPlatform;
-window.switchCivicTab = switchCivicTab;
-window.toggleInlineChat = toggleInlineChat;
-
-console.log('[Civic Platform] Module loaded v37.9.1');
