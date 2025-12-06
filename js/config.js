@@ -7,7 +7,7 @@
  * 
  * DEPLOYMENT INSTRUCTIONS:
  * 1. Update API_BASE_URL with your Njalla backend domain
- * 2. Set GROQ_ENABLED to true when backend is deployed
+ * 2. Set QWEN_ENABLED to true when backend is deployed
  * 3. That's it! No other files need manual updates.
  */
 
@@ -41,12 +41,12 @@ const CONFIG = {
      */
     API_BASE_URL: getBackendUrl(),
 /**
-     * Groq AI Features Enabled
+     * Qwen AI Features Enabled
      * 
      * Set to true when backend is deployed and ready
      * Set to false to use placeholder responses (development mode)
      */
-    GROQ_ENABLED: true,  // ✅ GROQ AI ENABLED!
+    QWEN_ENABLED: true,  // ✅ QWEN AI ENABLED!
     
     
 // ═══════════════════════════════════════════════════════════════════════
@@ -56,9 +56,9 @@ const CONFIG = {
     get ENDPOINTS() {
         const baseUrl = this.API_BASE_URL || 'https://your-backend-not-configured.com';
         return {
-            VOTING_ASSISTANT: `${baseUrl}/api/groq/voting-assistant`,
-            BILLS_CHAT: `${baseUrl}/api/groq/bills-chat`,
-            CANDIDATE_ANALYSIS: `${baseUrl}/api/groq/candidate-analysis`,
+            VOTING_ASSISTANT: `${baseUrl}/api/qwen/voting-assistant`,
+            BILLS_CHAT: `${baseUrl}/api/qwen/bills-chat`,
+            CANDIDATE_ANALYSIS: `${baseUrl}/api/qwen/candidate-analysis`,
             BILLS_BY_LOCATION: `${baseUrl}/api/bills/location`,
             ETHICAL_BUSINESSES: `${baseUrl}/api/businesses/location`,
             REPRESENTATIVES: `${baseUrl}/api/civic/representatives/search`, // ✅ FIXED v37.9.1: Added /search
@@ -72,10 +72,10 @@ const CONFIG = {
     // ═══════════════════════════════════════════════════════════════════════
     
 FEATURES: {
-        // Voting Assistant AI (Groq/Llama3)
+        // Voting Assistant AI (Qwen)
         VOTING_ASSISTANT_AI: true,  // Show "Ask AI Assistant" button
         
-        // Bills Chat AI (Groq/Llama3)
+        // Bills Chat AI (Qwen)
         BILLS_CHAT_AI: true,  // Show bills chat widget
         
         // HybridIntelligence (local pattern matching + LLM fallback)
@@ -145,23 +145,23 @@ SECURITY: {
     },
     
     /**
-     * Check if Groq features are ready
+     * Check if Qwen features are ready
      */
-    isGroqReady() {
-        return this.isBackendConfigured() && this.GROQ_ENABLED;
+    isQwenReady() {
+        return this.isBackendConfigured() && this.QWEN_ENABLED;
     },
     
     /**
      * Get backend status message
 */
     getBackendStatus() {
-        if (this.isGroqReady()) {
+        if (this.isQwenReady()) {
             return {
                 status: 'ready',
                 message: '✅ AI assistant ready',
                 color: 'green'
             };
-        } else if (this.isBackendConfigured() && !this.GROQ_ENABLED) {
+        } else if (this.isBackendConfigured() && !this.QWEN_ENABLED) {
            return {
                 status: 'configured',
                 message: '⏳ Backend configured, awaiting activation',
@@ -187,13 +187,13 @@ SECURITY: {
 };
 
 // Freeze config to prevent accidental modifications
-// (except API_BASE_URL and GROQ_ENABLED which can be updated)
+// (except API_BASE_URL and QWEN_ENABLED which can be updated)
 Object.defineProperty(CONFIG, 'API_BASE_URL', {
     writable: true,
     configurable: false
 });
 
-Object.defineProperty(CONFIG, 'GROQ_ENABLED', {
+Object.defineProperty(CONFIG, 'QWEN_ENABLED', {
     writable: true,
     configurable: false
 });
@@ -202,7 +202,7 @@ Object.defineProperty(CONFIG, 'GROQ_ENABLED', {
 console.log('  🔧 Workforce Democracy Project - Configuration');
 console.log('═══════════════════════════════════════════════════════');
 console.log(`Backend URL: ${CONFIG.API_BASE_URL || '(not configured)'}`);
-console.log(`  Groq Enabled: ${CONFIG.GROQ_ENABLED ? '✅' : '❌'}`);
+console.log(`  Qwen Enabled: ${CONFIG.QWEN_ENABLED ? '✅' : '❌'}`);
 console.log(`  Status: ${CONFIG.getBackendStatus().message}`);
 console.log('═══════════════════════════════════════════════════════\n');
 

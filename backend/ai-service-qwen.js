@@ -18,9 +18,9 @@ const axios = require('axios');
 // CONFIGURATION
 // =============================================================================
 
-const QWEN_API_KEY = process.env.QWEN_API_KEY || process.env.GROQ_API_KEY; // Backwards compatibility
-const QWEN_API_URL = process.env.QWEN_API_URL || 'https://dashscope.aliyuncs.com/api/v1/services/aigc/text-generation/generation';
-const QWEN_MODEL = process.env.QWEN_MODEL || 'qwen-plus';
+const DASHSCOPE_API_KEY = process.env.DASHSCOPE_API_KEY;
+const DASHSCOPE_API_URL = process.env.DASHSCOPE_API_URL || 'https://dashscope-intl.aliyuncs.com/compatible-mode/v1';
+const QWEN_MODEL = process.env.QWEN_MODEL || 'qwen3-max';
 
 // =============================================================================
 // CORE FUNCTIONS
