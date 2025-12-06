@@ -51,8 +51,8 @@ function generateCompassionateFallback(query, context) {
  * Call Qwen API with messages
  */
 async function callQwen(messages, options = {}) {
-    if (!QWEN_API_KEY) {
-        throw new Error('QWEN_API_KEY not configured');
+    if (!DASHSCOPE_API_KEY) {
+        throw new Error('DASHSCOPE_API_KEY not configured');
     }
 
     try {
@@ -69,7 +69,7 @@ async function callQwen(messages, options = {}) {
             }
         }, {
             headers: {
-                'Authorization': `Bearer ${QWEN_API_KEY}`,
+                'Authorization': `Bearer ${DASHSCOPE_API_KEY}`,
                 'Content-Type': 'application/json',
                 'X-DashScope-SSE': 'enable'
             }

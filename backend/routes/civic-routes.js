@@ -29,7 +29,7 @@ console.log('🏛️  Civic Platform API Routes initialized');
  * Search for representatives by ZIP code
  */
 router.get('/representatives/search', async (req, res) =>{
-   try {
+  try {
         const { zip, q, state, district, chamber } = req.query;
         
         // Accept ZIP code searches
@@ -38,7 +38,7 @@ router.get('/representatives/search', async (req, res) =>{
             
             // Validate ZIP code
             if (!/^\d{5}$/.test(zip)){
-                return res.status(400).json({
+return res.status(400).json({
                     success: false,
                     error: 'Invalid ZIP code format. Please provide a 5-digit ZIP code.'
                 });
@@ -46,7 +46,7 @@ router.get('/representatives/search', async (req, res) =>{
             
             // Fetch real representatives
             console.log(`📡 Fetching real representatives for ZIP: ${zip}`);
-            constresult =await getRepresentativesByZip(zip);
+            constresult =awaitgetRepresentativesByZip(zip);
             
             if (!result.success) {
                 return res.status(500).json({
@@ -65,7 +65,7 @@ router.get('/representatives/search', async (req, res) =>{
                 results: result.representatives, // Keep for backward compatibility
                 location: result.location_used || {},
                 counts:result.counts,
-                data_sources: result.data_sources,
+data_sources: result.data_sources,
                 message: 'Real data from Congress.gov & OpenStates APIs'
             });
         }
@@ -84,8 +84,7 @@ router.get('/representatives/search', async (req, res) =>{
             results: [],
             message: 'Representative search endpoint ready - Congress.gov integration pending'
 });
-        
-    } catch (error) {
+} catch (error) {
         console.error('Error searching representatives:', error);
         res.status(500).json({
             success: false,
@@ -113,20 +112,20 @@ if (!message || typeof message !== 'string') {
             });
         }
         
-        if (!process.env.GROQ_API_KEY) {
-           console.error('❌ GROQ_API_KEY not configured in environment');
+        if (!process.env.DASHSCOPE_API_KEY) {
+           console.error('❌ DASHSCOPE_API_KEY not configured in environment');
             return res.status(500).json({
                 success: false,
                 error: 'LLM service not configured. Please contact administrator.'
             });
         }
         
-        console.log(`🤖 LLM Chat request: "${message.substring(0,50)}..." (context: ${context}, timezone: ${timezone || 'default'})`);
+console.log(`🤖 LLM Chat request: "${message.substring(0,50)}..." (context: ${context}, timezone: ${timezone || 'default'})`);
         
         // Build context object with timezone for date-aware responses
         const aiContext = {
             conversationHistory: conversationHistory,
-            timezone: timezone || 'America/New_York'  // Default to US Eastern if notprovided
+            timezone: timezone|| 'America/New_York'  // Default to US Eastern if notprovided
         };
         
         //Call AI service (includes automatic source search)
@@ -135,7 +134,7 @@ if (!message || typeof message !== 'string') {
         if (!result.success) {
             // Return fallback response
             return res.json({
-                success: true,
+success: true,
                 message: generateCompassionateFallback(message,context),
                 sources: [],
                context: context,
@@ -146,7 +145,7 @@ if (!message || typeof message !== 'string') {
         console.log(`✅ LLM response with ${result.sources?.length || 0} sources`);
         
         // Return response with sources
-        res.json({
+       res.json({
             success: true,
             message: result.response,
            sources: result.sources || [],
@@ -157,7 +156,7 @@ if (!message || typeof message !== 'string') {
     } catch (error) {
         console.error('Error in LLM chat:', error);
         res.status(500).json({
-            success: false,
+           success: false,
             error: error.message || 'Failed to process LLM request'
         });
     }
@@ -168,13 +167,13 @@ if (!message || typeof message !== 'string') {
  * Check if LLM service is available
  */
 router.get('/llm-health', (req, res) => {
-    const hasApiKey = !!(process.env.QWEN_API_KEY || process.env.GROQ_API_KEY);
+    const hasApiKey = !!(process.env.DASHSCOPE_API_KEY || process.env.QWEN_API_KEY);
     
     res.json({
         success: true,
         available: hasApiKey,
-        model: process.env.QWEN_MODEL || process.env.GROQ_MODEL || 'qwen-plus',
-        provider: process.env.QWEN_API_KEY? 'Tongyi Lab' : (process.env.GROQ_API_KEY ? 'Groq' : 'None'),
+        model: process.env.QWEN_MODEL || 'qwen-plus',
+        provider: (process.env.DASHSCOPE_API_KEY || process.env.QWEN_API_KEY) ? 'Tongyi Lab' : 'None',
         message: hasApiKey 
             ? 'LLM service is available' 
             : 'API key not configured'
@@ -189,7 +188,7 @@ router.get('/llm-health', (req, res) => {
 
 /**
  * POST /api/civic/llm-chat/submit
- * Submit query as async job, get job ID immediately
+ * Submit query as asyncjob, get job ID immediately
  * V37.17.0: RE-ENABLED
  */
 router.post('/llm-chat/submit', civicLLMAsync.submitQuery);
@@ -229,7 +228,7 @@ status: 'healthy',
         timestamp: new Date().toISOString(),
         services: {
             representatives: 'operational',
-            llmChat: process.env.GROQ_API_KEY ? 'operational' : 'not_configured'
+            llmChat: (process.env.DASHSCOPE_API_KEY || process.env.QWEN_API_KEY) ? 'operational' : 'not_configured'
         },
         version: '37.1.0'
     });
@@ -240,7 +239,7 @@ status: 'healthy',
 // =============================================================================
 
 /**
- * Error handling middleware
+ *Error handling middleware
  */
 router.use((error, req, res, next) => {
     console.error('Unhandled error in civic API:', error);
@@ -252,4 +251,4 @@ router.use((error, req, res, next) => {
     });
 });
 
-module.exports = router;
+module.exports= router;
