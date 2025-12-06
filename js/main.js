@@ -19,101 +19,90 @@ let languageSelectorsInitialized = false;
 
 /**
  * Initialize application
+ *Sets up all core functionality
  */
-document.addEventListener('DOMContentLoaded', async () => {
-    console.log('🏛️ Workforce Democracy Project - Initializing...');
+function initializeApp() {
+    console.log('🚀 Initializing Workforce Democracy Project...');
     
-    // ===== PRIORITY 1: SHOW ONBOARDING IMMEDIATELY =====
-    // Show welcome modal FIRST before anything else (for first-time users)
-    // V35.7.6: Removed initializeUnifiedOnboarding() - using custom welcome modal instead
-    // The custom modal is initialized inline in index.html (checkWelcomeModalStatus function)
-    //This prevents conflicts between old platform modal and new custom modal
-    
-    // ===== PRIORITY 2: LOAD USER PREFERENCES =====
+    // Initialize core components
     try {
-        // Load user preferences
-        await loadUserPreferences();
-    } catch (error) {
-        console.error('⚠️ Error loading preferences:', error);
-    }
-    
-    //===== PRIORITY 3: INITIALIZE NON-BLOCKING FEATURES =====
-    // These run after onboarding is shown, won't block user experience
-    
-    // Initialize modules independently with error handling (only if functions exist)
-    if (typeof initializePhilosophies === 'function') {
+        // V35.7.6: Removed initializeUnifiedOnboarding() - using custom welcome modal instead
+        // The custom modal is initialized inline inindex.html (checkWelcomeModalStatus function)
+        
+        // Initialize philosophies section
+        if (typeof initializePhilosophies === 'function') {
+            try {
+                initializePhilosophies();
+            } catch (error) {
+                console.error('⚠️ Error initializing philosophies:', error);
+            }
+        }
+        
+       // Initialize job categories
+        if (typeof initializeJobCategories === 'function') {
+            try {
+                initializeJobCategories();
+            } catch (error) {
+                console.error('⚠️ Error initializing job categories:', error);
+            }
+        }
+        
+        // Initialize learning resources
+        if (typeof initializeLearningResources === 'function') {
+            try {
+                initializeLearningResources();
+            } catch (error) {
+                console.error('⚠️ Error initializing learning resources:', error);
+            }
+        }
+        
+        // V36.4.0: ALWAYS initialize personalization features
         try {
-            initializePhilosophies();
+            if (typeof initializePersonalizationStatus === 'function') {
+                initializePersonalizationStatus();
+            }
+            
+            if (typeof initializePersonalizationFeatures === 'function') {
+                initializePersonalizationFeatures();
+            }
         } catch (error) {
-            console.error('⚠️ Error initializing philosophies:', error);
+            console.error('⚠️ Error initializing personalization features:', error);
         }
-    }
-    
-    if (typeof initializeJobCategories === 'function') {
-        try {
-            initializeJobCategories();
-        } catch (error) {
-            console.error('⚠️ Error initializing job categories:',error);
-        }
-    }
-    
-    if (typeof initializeLearningResources === 'function') {
-        try {
-            initializeLearningResources();
-        } catch (error) {
-            console.error('⚠️ Error initializing learning resources:', error);
-        }
-    }
-    
-    try {
-        // Check personalization status
-        checkPersonalizationStatus();
-    } catch (error) {
-        console.error('⚠️ Error checking personalization:', error);
-    }
-    
-    // V36.4.0: ALWAYS initialize personalization features
-    // - Location features: only if user opted in
-    // - Tracking features: ALWAYS active (Learning,FAQ, Civic votes)
-    try {
-        if (typeof initializePersonalizationStatus === 'function') {
-            initializePersonalizationStatus();
-        }
-        // V36.4.0: CHANGED - Always call this function
-        // It handles location vs tracking internally
-        if (typeof initializePersonalizationFeatures ==='function') {
-            initializePersonalizationFeatures();
-        }
-    } catch (error) {
-        console.error('⚠️ Error initializing personalization features:', error);
-    }
-    
-    try {
-        // Set up event listeners
-        setupEventListeners();
-    } catch (error) {
-        console.error('⚠️ Errorsetting up event listeners:', error);
-    }
-    
-    try {
+        
         // Initialize language selectors
-        initializeLanguageSelectors();
+        try{
+            initializeLanguageSelectors();
+        } catch (error) {
+            console.error('⚠️ Error initializing language selectors:', error);
+        }
+        
+        // Initialize dynamic spacing for civic section
+        try {
+            initializeDynamicCivicSpacing();
+        } catch (error) {
+            console.error('⚠️ Error initializing dynamic spacing:', error);
+        }
+        
+        // Initialize civic platform
+        try {
+            if (typeof window.CivicPlatform !== 'undefined' && typeof window.CivicPlatform.init === 'function') {
+                console.log('Initializing Civic Platform...');
+                window.CivicPlatform.init();
+            } else {
+                console.warn('Civic Platformnot found or not initialized');
+            }
+        } catch (error) {
+            console.error('⚠️ Error initializing civic platform:', error);
+        }
+        
+        console.log('✅ Application initialized successfully');
     } catch (error) {
-        console.error('⚠️ Error initializing language selectors:', error);
+        console.error('❌ Critical error during initialization:', error);
     }
-    
-    // Initialize dynamic spacing for civic section
-    try {
-        initializeDynamicCivicSpacing();
-    } catch (error) {
-        console.error('⚠️ Error initializing dynamic spacing:', error);
-    }
-    
-    console.log('✅ Application initialized successfully');
-});
+}
 
 /**
- * Load user preferences from secure storage
+* Loaduser preferences from secure storage
  */
 async function loadUserPreferences() {
     try {
@@ -121,7 +110,7 @@ async function loadUserPreferences() {
         const prefsString = localStorage.getItem('user_preferences');
         if (prefsString) {
             const prefs = JSON.parse(prefsString);
-            AppState.preferences = prefs;
+            AppState.preferences =prefs;
             AppState.currentLanguage = prefs.language || 'en';
             AppState.personalizationEnabled = prefs.personalizationEnabled || false;
 // Apply language
@@ -143,7 +132,7 @@ async function saveUserPreferences() {
         localStorage.setItem('user_preferences', JSON.stringify(AppState.preferences));
     } catch (error) {
         console.error('Error saving preferences:', error);
-    }
+   }
 }
 
 /**
@@ -168,7 +157,7 @@ function checkPersonalizationStatus() {
 }
 
 /**
- * Enable personalization (DEPRECATED - Now using acceptUnifiedPersonalization() in personalization.js)
+ * Enable personalization (DEPRECATED - Now using acceptUnifiedPersonalization() inpersonalization.js)
  * Kept for backward compatibility
  */
 // V36.3.3: DELETED deprecated enablePersonalization() and skipPersonalization()
@@ -178,7 +167,7 @@ function checkPersonalizationStatus() {
  * Set up global event listeners
  */
 function setupEventListeners() {
-    // Handle keyboard navigation
+    //Handle keyboard navigation
     document.addEventListener('keydown', (e) => {
         // Escape key closes modals and menus
        if (e.key === 'Escape') {
@@ -193,28 +182,28 @@ function setupEventListeners() {
     
     // CLICK-OUTSIDE HANDLER REMOVED
     // Menu will close when:
-    // 1. User selects a language (handled in language.js)
+    // 1. User selects a language (handledin language.js)
     // 2. User presses Escape (handled below)
     // 3. User clicks button again totoggle (handled in button listener)
     
     console.log('✅ Click-outside handler disabled - menu closes via button toggle or language selection only');
     
     // Handle smooth scrolling for anchor links
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
             e.preventDefault();
             const href = this.getAttribute('href');
             let target = document.querySelector(href);
             
             // Special handling for #local - scroll to the visible content
-            if (href === '#local') {
+            if (href ==='#local') {
                 const optIn = document.getElementById('personalizationOptIn');
                 const interface = document.getElementById('localResourcesInterface');
                 
                 // If personalization is enabled, scroll to interface instead of section
                 if (interface && interface.style.display !== 'none') {
                     target = interface;
-                } else if (optIn && optIn.style.display !== 'none') {
+                } elseif (optIn && optIn.style.display !== 'none') {
                     target = optIn;
                 }
             }
@@ -225,7 +214,7 @@ function setupEventListeners() {
                     block: 'start'
                 });
                 // Remove focus from link after clicking to prevent staying highlighted
-                this.blur();
+               this.blur();
             }
         });
     });
@@ -253,13 +242,13 @@ function setupEventListeners() {
  * Mobile menu functions
  */
 function toggleMobileMenu() {
-    const mobileNav = document.getElementById('mobileNav');
+const mobileNav = document.getElementById('mobileNav');
     if (mobileNav) {
         const isOpening = !mobileNav.classList.contains('active');
         mobileNav.classList.toggle('active');
         
         // If opening menu, add click-outside listener after a short delay
-        // to prevent the toggle click from immediately closing it
+        // to prevent the toggle click from immediatelyclosing it
         if (isOpening) {
             setTimeout(() => {
                 document.addEventListener('click', handleClickOutsideMobileMenu);
@@ -281,8 +270,7 @@ function closeMobileMenu() {
 function handleClickOutsideMobileMenu(event) {
     const mobileNav = document.getElementById('mobileNav');
     const menuToggle = document.querySelector('.mobile-menu-toggle');
-    
-    // Check if click is outside both menu and toggle button
+// Check if click is outside both menu and toggle button
     if (mobileNav && 
         !mobileNav.contains(event.target) && 
         !menuToggle.contains(event.target)) {
@@ -292,7 +280,7 @@ function handleClickOutsideMobileMenu(event) {
 
 /**
  * Language selector functions
- * NOTE: Dropdown functions below are DEPRECATED - now using modal approach
+ * NOTE: Dropdown functions below are DEPRECATED - nowusing modal approach
  */
 
 /**
@@ -311,8 +299,7 @@ function toggleLanguageMenu() {
     if (menu) {
         const wasActive = menu.classList.contains('active');
         console.log('🔵 Menu was active:', wasActive);
-        
-        // If opening, position menu below button
+// If opening, position menu below button
         if (!wasActive && button) {
             const rect = button.getBoundingClientRect();
             menu.style.position = 'fixed';
@@ -324,7 +311,7 @@ function toggleLanguageMenu() {
             // Set flag to prevent immediate closing by click-outside handler
             languageMenuJustOpened = true;
             console.log('🔵 Flag set: languageMenuJustOpened = true');
-            setTimeout(() => {
+setTimeout(() => {
                 languageMenuJustOpened = false;
                 console.log('🔵 Flag cleared: languageMenuJustOpened= false');
             }, 100);
@@ -332,22 +319,21 @@ function toggleLanguageMenu() {
         
         menu.classList.toggle('active');
         const isNowActive = menu.classList.contains('active');
-        console.log('🔵 Menu toggled to:', isNowActive ? 'ACTIVE' : 'INACTIVE');
+        console.log('🔵 Menu toggledto:', isNowActive ? 'ACTIVE' : 'INACTIVE');
         
         // INTERCEPT ANY ATTEMPTS TO REMOVE'active' CLASS
         if (isNowActive) {
             const originalRemove = menu.classList.remove;
             menu.classList.remove = function(className) {
                 if (className === 'active') {
-                    console.error('🚨🚨🚨 SOMETHING IS TRYING TO REMOVE ACTIVE CLASS! 🚨🚨🚨');
+console.error('🚨🚨🚨 SOMETHING IS TRYING TO REMOVE ACTIVE CLASS! 🚨🚨🚨');
                    console.error('🚨 Call stack:', new Error().stack);
                 }
                 return originalRemove.apply(this, arguments);
             };
         }
         
-        // Check after a brief moment if it's still active
-        setTimeout(() => {
+        // Check after a brief moment if it's still activesetTimeout(() => {
             const stillActive = menu.classList.contains('active');
             console.log('🔵 After 50ms, menu is:', stillActive ? 'STILL ACTIVE' : 'NO LONGER ACTIVE');
             if (!stillActive && isNowActive) {
@@ -361,7 +347,7 @@ function toggleLanguageMenu() {
 
 /**
  * @deprecated - Replaced by openLanguageModal()
- * Old desktop dropdown toggle function - kept for reference only
+ * Old desktop dropdown toggle function - kept forreference only
  */
 function toggleLanguageMenuDesktop() {
     console.log('toggleLanguageMenuDesktop called - DEPRECATED, usemodal instead');
@@ -381,7 +367,7 @@ function toggleLanguageMenuDesktop() {
 function initializeLanguageSelectors() {
     // Prevent double initialization
     if (languageSelectorsInitialized) {
-        console.log('⚠️ Language selectors already initialized - skipping');
+console.log('⚠️ Language selectors already initialized - skipping');
         console.log('⚠️ Called from:', new Error().stack);
         return;
     }
@@ -405,7 +391,7 @@ function initializeLanguageSelectors() {
     // Mobile language button - opens modal instead of dropdown
     const mobileLangBtn = document.getElementById('languageBtnMobile');
     if (mobileLangBtn) {
-        let lastClickTime = 0;
+        let lastClickTime= 0;
         mobileLangBtn.addEventListener('click', (e) => {
             e.stopPropagation();
             e.preventDefault();
@@ -413,7 +399,7 @@ function initializeLanguageSelectors() {
             // Prevent double-click/double-tap (within 300ms)
             const now = Date.now();
             if (now - lastClickTime < 300) {
-                console.log('🔵 Ignoring duplicate click (within 300ms)');
+console.log('🔵 Ignoring duplicate click (within 300ms)');
                 return;
             }
             lastClickTime = now;
@@ -422,7 +408,7 @@ function initializeLanguageSelectors() {
             openLanguageModal();
         });
         console.log('✅ Mobile language button listener attached (modal version)');
-    } else {
+   } else {
         console.error('❌ Mobile language button not found');
     }
     
@@ -439,7 +425,7 @@ function initializeLanguageSelectors() {
         console.error('❌ Desktop language button not found');
     }
     
-    // Note: Old dropdown menu button listeners removed - now using modal
+    // Note: Old dropdown menu button listeners removed - nowusing modal
     // Language options in modal use onclick="selectLanguageFromModal(lang)" in HTML
     
     console.log('✅ Languageselectors initialized (modal version)');
@@ -464,7 +450,7 @@ function openModal(content) {
 
 function closeModal() {
     const overlay = document.getElementById('modalOverlay');
-    const container = document.getElementById('modalContainer');
+   const container = document.getElementById('modalContainer');
     
     if (overlay && container) {
         overlay.classList.remove('active');
@@ -489,7 +475,7 @@ if (overlay && modal) {
         
         // Prevent body scroll
         document.body.style.overflow = 'hidden';
-        console.log('✅ Language modal opened');
+console.log('✅ Language modal opened');
     } else {
         console.error('❌ Language modal elements not found');
     }
@@ -500,7 +486,7 @@ function closeLanguageModal() {
     const overlay = document.getElementById('languageModalOverlay');
     const modal = document.getElementById('languageModal');
     
-    if (overlay && modal) {
+    if(overlay && modal) {
         overlay.classList.remove('active');
         modal.classList.remove('active');
         
@@ -510,7 +496,7 @@ function closeLanguageModal() {
 }
 
 function selectLanguageFromModal(langCode) {
-    console.log('🌍 Language selected from modal:', langCode);
+    console.log('🌍 Language selected from modal:',langCode);
     
     // Close the modal
     closeLanguageModal();
@@ -523,7 +509,7 @@ function selectLanguageFromModal(langCode) {
     }
 }
 
-// Make functions globally accessible
+// Make functionsglobally accessible
 window.openLanguageModal = openLanguageModal;
 window.closeLanguageModal = closeLanguageModal;
 window.selectLanguageFromModal= selectLanguageFromModal;
@@ -531,7 +517,7 @@ window.selectLanguageFromModal= selectLanguageFromModal;
 // Add keyboard support (Escape to close modal)
 document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') {
-        const modal = document.getElementById('languageModal');
+        const modal= document.getElementById('languageModal');
         if (modal && modal.classList.contains('active')) {
             console.log('🌍 Escape pressed- closing language modal');
             closeLanguageModal();
@@ -544,7 +530,7 @@ document.addEventListener('keydown', (e) => {
  */
 function showLoading() {
     const indicator = document.getElementById('loadingIndicator');
-    if (indicator) {
+    if(indicator) {
         indicator.classList.add('active');
         AppState.isLoading = true;
     }
@@ -568,12 +554,12 @@ function showNotification(message, type = 'info') {
         position: fixed;
         top: 20px;
         right: 20px;
-        background: ${type === 'success' ? 'var(--success)' : type === 'error' ? 'var(--error)' : 'var(--info)'};
+        background: ${type === 'success'? 'var(--success)' : type === 'error' ? 'var(--error)' : 'var(--info)'};
        color: white;
         padding: var(--space-md) var(--space-xl);
         border-radius: var(--radius-md);
         box-shadow: var(--shadow-xl);
-        z-index: 10000;
+        z-index:10000;
         max-width: 400px;
         animation: slideIn 0.3s ease;
     `;
@@ -588,7 +574,7 @@ function showNotification(message, type = 'info') {
     document.body.appendChild(notification);
     
     // Auto-remove after 5 seconds
-    setTimeout(() => {
+    setTimeout(()=> {
         notification.style.animation = 'slideOut 0.3s ease';
         setTimeout(() => {
             document.body.removeChild(notification);
@@ -599,7 +585,7 @@ function showNotification(message, type = 'info') {
 // Add animation styles
 const style = document.createElement('style');
 style.textContent = `
-    @keyframes slideIn {
+    @keyframesslideIn {
         from {
             transform: translateX(100%);
             opacity: 0;
@@ -613,7 +599,7 @@ style.textContent = `
     @keyframes slideOut {
         from {
             transform: translateX(0);
-            opacity: 1;
+           opacity: 1;
         }
         to {
             transform: translateX(100%);
@@ -640,7 +626,7 @@ function showPrivacyPolicy() {
             <ul>
                 <li>We collect ZERO personal data</li>
                 <li>We use ZERO trackers or analytics</li>
-                <li>We share ZERO information with third parties</li>
+<li>We share ZERO information with third parties</li>
                 <li>We store ZERO data on our servers</li>
             </ul>
             
@@ -657,7 +643,7 @@ function showPrivacyPolicy() {
             <ul>
                 <li><strong>Right to Delete:</strong> Delete all your data instantly withone click</li>
                 <li><strong>Right to Export:</strong> Download all your data in JSON format</li>
-                <li><strong>Right to Opt-Out:</strong> All personalization features are optional</li>
+                <li><strong>Right to Opt-Out:</strong>All personalization features are optional</li>
             </ul>
             
             <h4>Security Measures</h4>
@@ -669,7 +655,7 @@ function showPrivacyPolicy() {
             </ul>
             
             <h4>Questions?</h4>
-            <p>If you have any questions about our privacy practices, please contact us.</p>
+            <p>If you have any questions about our privacy practices,please contact us.</p>
             
             <p style="margin-top: 30px; padding-top:20px; border-top: 1px solid var(--border); color: var(--text-secondary); font-size: 0.875rem;">
                 Last updated: January 2025
@@ -690,7 +676,7 @@ function showSecurityInfo() {
             <h3>HowWe Protect You</h3>
             
             <h4>🔒 Encryption</h4>
-            <p>We use military-grade encryption to protect your data:</p>
+            <p>We use military-grade encryption to protectyour data:</p>
             <ul>
                 <li><strong>Algorithm:</strong> AES-256-GCM (Advanced Encryption Standard)</li>
                 <li><strong>Key Derivation:</strong> PBKDF2 with SHA-256</li>
@@ -712,7 +698,7 @@ function showSecurityInfo() {
 <ul>
                 <li>Overwrite with random data 3 times</li>
                 <li>Clear from all storage locations</li>
-                <li>Remove from IndexedDB and caches</li>
+<li>Remove from IndexedDB and caches</li>
             </ul>
             
             <h4>✅ Content Security Policy</h4>
@@ -727,7 +713,7 @@ function showSecurityInfo() {
            <p>All connections use HTTPS with HSTS to prevent:</p>
             <ul>
                 <li>Man-in-the-middle attacks</li>
-                <li>Eavesdropping</li>
+               <li>Eavesdropping</li>
                 <li>Data tampering</li>
             </ul>
             
@@ -741,7 +727,7 @@ function showSecurityInfo() {
 }
 
 async function exportUserData() {
-    if (confirm('Export all your data? This will download a JSON file containing all your encrypted information.')) {
+    if (confirm('Export all your data? Thiswill download a JSON file containing all your encrypted information.')) {
         try {
             showLoading();
             await securityManager.exportUserData();
@@ -757,7 +743,7 @@ async function exportUserData() {
 async function deleteUserData() {
     if (confirm('⚠️ WARNING: This will permanently delete ALL your data from this device. This action cannot be undone. Are you sure?')) {
         if (confirm('This is your final confirmation. Delete all data?')) {
-            try {
+           try {
                 showLoading();
                 await securityManager.deleteAllUserData();
                 AppState.personalizationEnabled = false;
@@ -768,7 +754,7 @@ async function deleteUserData() {
                 // Reload page to reset state
                 setTimeout(() => {
                     window.location.reload();
-                }, 2000);
+                },2000);
             } catch (error) {
                 hideLoading();
                 showNotification('Error deleting data: ' + error.message, 'error');
@@ -779,7 +765,7 @@ async function deleteUserData() {
 
 function showContactForm() {
     // Generate unique submission ID for anonymous tracking
-    const submissionId = 'SUB-' + Date.now() + '-' + Math.random().toString(36).substr(2, 9).toUpperCase();
+    const submissionId = 'SUB-' +Date.now() + '-' + Math.random().toString(36).substr(2, 9).toUpperCase();
     
     const content = `
         <div style="max-width: 600px;">
@@ -793,7 +779,7 @@ function showContactForm() {
             <!-- Netlify Forms: Hidden fields for bot detection and form identification -->
             <form id="contactForm" name="contact" method="POST" data-netlify="true" data-netlify-honeypot="bot-field" onsubmit="handleContactSubmit(event)">
                 <!-- Honeypot field for spam protection (hidden) -->
-                <input type="hidden" name="bot-field" />
+<input type="hidden" name="bot-field" />
                 
                 <!-- Hidden form name for Netlify -->
                 <input type="hidden" name="form-name" value="contact" />
@@ -803,7 +789,7 @@ function showContactForm() {
                 
                 <div style="margin-bottom: 20px;">
                     <label for="contactName">Your Name <span style="color:var(--text-light); font-size: 0.875rem;">(Optional - you can remain anonymous)</span></label>
-                    <input type="text" id="contactName" name="name" placeholder="Leave blank to remain anonymous">
+                    <inputtype="text" id="contactName" name="name" placeholder="Leave blank to remain anonymous">
                 </div>
                 
                 <div style="margin-bottom:20px;">
@@ -814,25 +800,25 @@ function showContactForm() {
                     </p>
                 </div>
                 
-                <div style="margin-bottom: 20px;">
+               <div style="margin-bottom: 20px;">
                     <label for="contactSubject">Subject <span style="color: var(--error);">*</span></label>
                     <input type="text" id="contactSubject" name="subject" required placeholder="What is your message about?">
                 </div>
                 
                 <div style="margin-bottom: 20px;">
                     <label for="contactMessage">Message <span style="color: var(--error);">*</span></label>
-                    <textarea id="contactMessage" name="message" rows="6" required placeholder="Share your thoughts, questions, or feedback..."></textarea>
+                    <textarea id="contactMessage" name="message" rows="6" required placeholder="Share your thoughts, questions, orfeedback..."></textarea>
                 </div>
                 
                 <!-- Show submission ID for user reference -->
                 <div style="margin-bottom: 20px; padding: 12px; background: var(--surface-alt); border-radius: var(--radius-md); border-left: 4px solid var(--primary);">
-                    <p style="font-size: 0.8125rem; margin: 0; color: var(--text-secondary);">
+<p style="font-size: 0.8125rem; margin: 0; color: var(--text-secondary);">
                         📋<strong>Your Submission ID:</strong> <code style="background: var(--surface); padding: 2px 6px; border-radius: 4px; font-family: monospace;">${submissionId}</code><br>
                         <span style="font-size: 0.75rem; color:var(--text-light);">Save this ID to reference your message if you submit anonymously.</span>
                     </p>
                 </div>
                 
-                <button type="submit" class="btn btn-primary">Send Message</button>
+                <buttontype="submit" class="btn btn-primary">Send Message</button>
             </form>
             
             <div style="margin-top: 30px;padding-top: 20px; border-top: 1px solid var(--border);">
@@ -840,10 +826,10 @@ function showContactForm() {
                     <i class="fas fa-shield-alt"></i>
 <strong>Privacy Guarantee:</strong> Your message will be sent securely. We will never share your contact information.
                 </p>
-                <p style="color: var(--text-light); font-size: 0.8125rem; margin: 0;">
+                <p style="color:var(--text-light); font-size: 0.8125rem; margin: 0;">
                     ✨ <strong>Anonymous submissionsare welcome!</strong> You can leave Name and Email blank if you prefer to remain anonymous. Use your Submission ID to reference your message if needed.
                 </p>
-            </div>
+           </div>
         </div>
     `;
     openModal(content);
@@ -855,7 +841,7 @@ function handleContactSubmit(event) {
     const form= event.target;
     const formData = new FormData(form);
     const submissionId = formData.get('submission-id');
-    const isAnonymous = !formData.get('name') && !formData.get('email');
+    const isAnonymous = !formData.get('name') &&!formData.get('email');
     
     // Show loading state
     const submitButton = form.querySelector('button[type="submit"]');
@@ -863,7 +849,7 @@ function handleContactSubmit(event) {
     submitButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
     submitButton.disabled = true;
     
-    // Submit to Netlify Forms
+    //Submit to Netlify Forms
     fetch('/', {
         method: 'POST',
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
@@ -872,7 +858,7 @@ function handleContactSubmit(event) {
     .then(response => {
         if (response.ok) {
             // Success!
-            let successMessage = 'Thank you for your message! ';
+            let successMessage= 'Thank you for your message! ';
             
             if (isAnonymous) {
                 successMessage += `Your submission ID is <strong>${submissionId}</strong>. Save this to reference your message.`;
@@ -886,7 +872,7 @@ function handleContactSubmit(event) {
             closeModal();
             
             // Store submission ID in localStorage for user reference
-            const submissions = JSON.parse(localStorage.getItem('wdp_contact_submissions') || '[]');
+const submissions = JSON.parse(localStorage.getItem('wdp_contact_submissions') || '[]');
             submissions.push({
                 id: submissionId,
                date: new Date().toISOString(),
@@ -894,7 +880,7 @@ function handleContactSubmit(event) {
                 anonymous: isAnonymous
             });
             // Keep only last 10 submissions
-            if (submissions.length > 10) submissions.shift();
+            if(submissions.length > 10) submissions.shift();
             localStorage.setItem('wdp_contact_submissions', JSON.stringify(submissions));
             
         }else {
@@ -928,7 +914,7 @@ function debounce(func, wait) {
             clearTimeout(timeout);
             func(...args);
         };
-        clearTimeout(timeout);
+clearTimeout(timeout);
         timeout = setTimeout(later, wait);
     };
 }
@@ -941,7 +927,7 @@ function navigateToSection(sectionId) {
     if (section) {
         section.scrollIntoView({ behavior: 'smooth', block: 'start' });
         
-        // Close mobile menu if open
+// Close mobile menu if open
         closeMobileMenu();
         
         // Track that user has interacted (for guided tour)
@@ -953,7 +939,7 @@ function navigateToSection(sectionId) {
  * Show Civic Voting section
  */
 function showCivicVoting() {
-    // This function will be called after navigating to civic section
+    // This function will be called afternavigating to civic section
     // You can add specific logic to show voting tracker if needed
     console.log('Showing civic voting tracker...');
 }
@@ -997,7 +983,7 @@ function showGuidedTour() {
                             <div class="tour-feature-card">
                                 <div class="tour-feature-icon">🗳️</div>
                                 <div class="tour-feature-title">Civic Engagement</div>
-                                <div class="tour-feature-desc">Track representatives & vote on bills</div>
+                                <div class="tour-feature-desc">Track representatives & vote onbills</div>
                             </div>
                             <div class="tour-feature-card">
                                 <div class="tour-feature-icon">💼</div>
@@ -1016,11 +1002,11 @@ function showGuidedTour() {
                             </div>
                         </div>
                         
-                        <p style="margin-top: 1.5rem; font-weight: 600; font-size: 1.05rem;">Ready for a 45-second tour?</p>
+                        <p style="margin-top:1.5rem; font-weight: 600; font-size: 1.05rem;">Ready for a 45-second tour?</p>
                         
                         <div class="tour-actions">
                             <button class="btn btn-primary" onclick="nextTourStep()">
-                                <i class="fas fa-rocket"></i> Let's Go!
+                                <i class="fasfa-rocket"></i> Let's Go!
                             </button>
                             <button class="btn btn-secondary" onclick="skipGuidedTour()">
                                 I'll explore on my own
@@ -1032,18 +1018,18 @@ function showGuidedTour() {
                     <div class="tour-step" data-step="2">
                         <div class="tour-step-icon">🗳️</div>
                         <h3>CivicEngagement & Transparency</h3>
-                        <p style="font-size: 1.05rem; margin-bottom: 1.25rem;">Stay informed about what your elected officials are doing—and have your voice heard.</p>
+                        <p style="font-size: 1.05rem; margin-bottom: 1.25rem;">Stay informed about whatyour elected officials are doing—and have your voice heard.</p>
                         
                         <div style="background: rgba(102, 126, 234, 0.05); padding: 1.5rem; border-radius: 12px; margin-bottom: 1.25rem; border-left: 4px solid #667eea;">
                             <p style="margin: 0 0 0.75rem 0;"><strong style="color: #667eea;">✓</strong> Track voting records from federal to local government</p>
                             <p style="margin: 0 0 0.75rem 0;"><strong style="color: #667eea;">✓</strong> Voteon bills yourself and compare with your representatives</p>
-                            <p style="margin: 0 0 0.75rem 0;"><strong style="color: #667eea;">✓</strong> Get AI-powered explanations of complex legislation</p>
+                            <p style="margin: 0 0 0.75rem 0;"><strong style="color: #667eea;">✓</strong> GetAI-powered explanations of complex legislation</p>
                             <p style="margin: 0;"><strong style="color: #667eea;">✓</strong> Chat with our Civic Assistant for instant answers</p>
                         </div>
                         
                         <div class="tour-actions">
                             <button class="btn btn-primary" onclick="nextTourStep()">
-                                Next <i class="fas fa-arrow-right"></i>
+                                Next<i class="fas fa-arrow-right"></i>
                             </button>
                             <button class="btn-link" onclick="skipGuidedTour()">Skip tour</button>
                         </div>
@@ -1061,12 +1047,12 @@ function showGuidedTour() {
                                     <div class="tour-feature-icon" style="margin: 0;">🔍</div>
                                     <div>
                                         <div class="tour-feature-title" style="margin-bottom: 0.25rem;">Compare 230+ Professions</div>
-                                        <div class="tour-feature-desc">Side-by-side comparisons of traditional vs democratic workplaces</div>
+<div class="tour-feature-desc">Side-by-side comparisons of traditional vs democratic workplaces</div>
                                     </div>
                                 </div>
                             </div>
                             <div class="tour-feature-card" style="text-align: left;">
-                                <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
+                                <div style="display: flex; align-items: center; gap:1rem; margin-bottom: 1rem;">
                                     <div class="tour-feature-icon" style="margin: 0;">💬</div>
                                     <div>
                                         <div class="tour-feature-title" style="margin-bottom: 0.25rem;">AI Job Assistant</div>
@@ -1091,11 +1077,11 @@ function showGuidedTour() {
                         <p style="font-size: 1.05rem; margin-bottom: 1.25rem;">Discoverdemocratic workplaces in your area and deepen your understanding with educational resources.</p>
                         
                         <div style="display: grid; gap: 1rem; margin-bottom: 1.25rem;">
-                            <div style="background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%); padding: 1.25rem; border-radius: 12px; border: 2px solid rgba(102, 126, 234, 0.2);">
+                            <div style="background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%); padding: 1.25rem; border-radius: 12px; border: 2px solidrgba(102, 126, 234, 0.2);">
                                 <div style="font-weight: 600; margin-bottom: 0.5rem; color: #667eea;">🗺️ Ethical Business Finder</div>
                                 <p style="margin: 0; font-size: 0.95rem;">Search for worker cooperatives, B-Corps, and democratically-run businesses near you. Chat with our assistant to find the perfect match.</p>
                             </div>
-                            <div style="background: linear-gradient(135deg, rgba(72, 187, 120, 0.1) 0%, rgba(72, 187, 120, 0.05) 100%); padding: 1.25rem; border-radius: 12px; border: 2px solid rgba(72, 187, 120, 0.2);">
+                            <div style="background: linear-gradient(135deg,rgba(72, 187, 120, 0.1) 0%, rgba(72, 187, 120, 0.05) 100%); padding: 1.25rem; border-radius: 12px; border: 2px solid rgba(72, 187, 120, 0.2);">
                                 <div style="font-weight: 600; margin-bottom: 0.5rem; color: #48bb78;">📚 Learning Center</div>
                                 <p style="margin: 0; font-size: 0.95rem;">Watch expert videos, read research studies, explore real-world success stories, and get answers to common questions in our comprehensive FAQ.</p>
                             </div>
@@ -1103,7 +1089,7 @@ function showGuidedTour() {
                         
                         <div class="tour-actions">
                             <button class="btn btn-primary" onclick="nextTourStep()">
-                                Next<i class="fas fa-arrow-right"></i>
+                                Next<iclass="fas fa-arrow-right"></i>
                             </button>
                             <button class="btn-link" onclick="skipGuidedTour()">Skip tour</button>
                         </div>
@@ -1111,20 +1097,19 @@ function showGuidedTour() {
                     
                     <!-- Step 5: Personalization -->
                     <div class="tour-step" data-step="5">
-                        <div class="tour-step-icon">✨</div>
+                       <div class="tour-step-icon">✨</div>
                         <h3>Personalize Your Experience</h3>
                         <p style="font-size: 1.05rem; margin-bottom: 1.5rem;">Gettailored recommendations and find what matters most to you—with complete privacy protection.</p>
                         
                         <div class="tour-personalization-input">
                             <label for="tourPostcode" style="display: block; font-weight: 600; margin-bottom: 0.5rem; color: #2d3748;">
                                 📍 Your Postcode (Optional)
-                            </label>
+</label>
                             <p style="font-size: 0.9rem; color: #718096; margin-bottom: 1rem;">
                                 Enter your postcode to find local representatives, nearby ethical businesses, and community events.
                             </p>
                             <input 
-                                type="text" 
-                                id="tourPostcode" 
+                                type="text"id="tourPostcode" 
                                 placeholder="e.g., SW1A 1AA" 
                                 style="width: 100%; padding: 0.875rem 1.25rem; border:2px solid #cbd5e0; border-radius: 8px; font-size: 1rem; transition: all 0.3s ease;"
                                 onfocus="this.style.borderColor='#667eea'; this.style.boxShadow='0 0 0 3px rgba(102, 126, 234, 0.1)'"
@@ -1137,7 +1122,7 @@ function showGuidedTour() {
                                 <div style="font-size: 1.5rem; flex-shrink: 0;">🔐</div>
                                 <div>
                                     <div style="font-weight: 700; margin-bottom: 0.5rem; color:#2d3748;">Complete Privacy Guaranteed</div>
-                                    <ul style="margin: 0; padding-left: 1.25rem; font-size: 0.95rem; line-height: 1.6;">
+                                    <ulstyle="margin: 0; padding-left: 1.25rem; font-size: 0.95rem; line-height: 1.6;">
                                         <li><strong>All data stays on YOUR device</strong> (AES-256 encrypted)</li>
                                         <li><strong>Nothing sent to servers</strong>—ever</li>
                                         <li><strong>No accounts, no email, no tracking</strong></li>
@@ -1177,7 +1162,7 @@ function showGuidedTour() {
                 </div>
             </div>
         </div>
-    `;
+`;
     
     document.body.insertAdjacentHTML('beforeend', tourHTML);
 }
@@ -1220,7 +1205,7 @@ function enablePersonalizationAndFinish() {
     localStorage.setItem('wdp_personalization_choice', 'enabled');
 localStorage.setItem('wdp_personalization_consent_date', new Date().toISOString());
     
-    // Save postcode if provided
+    // Savepostcode if provided
     if (postcode) {
         localStorage.setItem('wdp_user_postcode', postcode);
     }
@@ -1232,7 +1217,7 @@ votingHistory: [],
         categoriesInterested: {},
         timeSpent: {},
         questionsAsked: [],
-        knowledgeLevel: 'beginner',
+knowledgeLevel: 'beginner',
         postcode: postcode,
         createdAt: new Date().toISOString()
     };
@@ -1242,7 +1227,7 @@ votingHistory: [],
    localStorage.setItem('hasSeenGuidedTour', 'true');
     closeGuidedTour();
     
-    const message = postcode 
+    constmessage = postcode 
         ? '✅ Personalization enabled! We\'ll find local resources for you.' 
         : '✅ Personalization enabled! Your journey is now customized to your interests.';
     showNotification(message,'success');
@@ -1250,7 +1235,7 @@ votingHistory: [],
 
 function finishGuidedTour() {
     // User declined personalization - use unified system
-    localStorage.setItem('wdp_personalization_enabled', 'false');
+localStorage.setItem('wdp_personalization_enabled', 'false');
     localStorage.setItem('wdp_personalization_choice', 'skipped');
     localStorage.setItem('hasSeenGuidedTour', 'true');
     closeGuidedTour();
@@ -1277,8 +1262,7 @@ function closeGuidedTour() {
 
 /**
  * Initialize dynamic spacing for civic section
- * Makes spacing conditional basedon content presence
- * Fixes blank space issue between civic and jobs sections
+ * Makes spacing conditional basedon content presence* Fixes blank space issue between civic and jobs sections
  */
 function initializeDynamicCivicSpacing() {
     const containers = [
@@ -1289,8 +1273,7 @@ function initializeDynamicCivicSpacing() {
         'personalDashboardContainer',
         'candidateResults'
     ];
-    
-    // Function to update container spacing
+// Function to update container spacing
     function updateContainerSpacing() {
         containers.forEach(containerId => {
             const container = document.getElementById(containerId);
@@ -1312,7 +1295,7 @@ function initializeDynamicCivicSpacing() {
     // Initial check
     updateContainerSpacing();
     
-   // Set up MutationObserver to watch for content changes
+   // Set upMutationObserver to watch for content changes
     const observer = new MutationObserver(() => {
         updateContainerSpacing();
     });
@@ -1350,13 +1333,13 @@ window.closeModal = closeModal;
 window.showLoading = showLoading;
 window.hideLoading = hideLoading;
 window.showNotification = showNotification;
-window.navigateToSection = navigateToSection;
+window.navigateToSection =navigateToSection;
 window.showCivicVoting = showCivicVoting;
 window.showGuidedTour = showGuidedTour;
 window.closeGuidedTour = closeGuidedTour;
 window.skipGuidedTour = skipGuidedTour;
 window.nextTourStep = nextTourStep;
-window.finishGuidedTour = finishGuidedTour;
+window.finishGuidedTour =finishGuidedTour;
 window.toggleLanguageMenuDesktop = toggleLanguageMenuDesktop;
 
 functiongetBackendUrl() {
