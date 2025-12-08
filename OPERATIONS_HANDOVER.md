@@ -136,3 +136,9 @@ See `ops-memory.json` for a snapshot assistants can parse.
 - Restart (example): `pm2 restart workforce-democracy-project`
 - Health: `curl -s http://localhost:3001/health | jq .`
 - Netlify build (auto): `git push origin main`
+
+---
+
+## 11) Credits & Cost Control
+- Default cost‑control rules live in `CREDITS-GUIDELINES.md` and MUST be followed by all assistants (Lingma, Junie, others) unless the user opts out.
+- For long chats, assistants should write a short session summary and reference it going forward to preserve context without reprocessing full history.

@@ -86,7 +86,7 @@ execute_on_server "cd ${PROJECT_PATH} && git fetch --all && git pull --ff-only o
 
 # Step 2: Restart application with PM2
 echo "=== Restarting application with PM2 ==="
-execute_on_server "pm2 restart ${PM2_NAME} || pm2 start ecosystem.config.js --only ${PM2_NAME} || pm2 restart all"
+execute_on_server "pm2 restart ${PM2_NAME} || ROOT_PATH=\$(dirname \"${PROJECT_PATH}\"); [ -f \"$ROOT_PATH/ecosystem.config.js\" ] && pm2 start \"$ROOT_PATH/ecosystem.config.js\" --only ${PM2_NAME} || pm2 restart all"
 
 # Step 3: Check application status
 echo "=== Checking application status ==="
