@@ -1,0 +1,52 @@
+{
+  "last_updated": "2025-12-08T12:19:00-05:00",
+  "environments": {
+    "version_a": {
+      "role": "production",
+      "port": 3001,
+      "pm2_name": "workforce-democracy-project",
+      "nginx_proxy": true
+    },
+    "version_b": {
+      "role": "staging",
+      "port": 3002,
+      "pm2_name": "backend-b",
+      "nginx_proxy": false
+    }
+  },
+  "backend": {
+    "canonical_path": "/var/www/workforce-democracy/backend",
+    "health_endpoint": "/health",
+    "ai_service": "ai-service-qwen.js",
+    "mongo_required": true
+  },
+  "frontend": {
+    "hosting": "Netlify",
+    "deploy_branch": "main",
+    "api_base_url": "https://api.workforcedemocracyproject.org",
+    "qwen_enabled": true
+  },
+  "features": {
+    "citations_scoring_fix": "v37.20.2",
+    "article_scraper": {
+      "version": "v37.20.0",
+      "chromium_fix": "v37.20.0.1",
+      "blocked_until_chromium_libs_installed": true
+    }
+  },
+  "env_vars": [
+    "DASHSCOPE_API_KEY",
+    "QWEN_API_KEY",
+    "QWEN_MODEL",
+    "MONGODB_URI"
+  ],
+  "verification": {
+    "endpoints": [
+      "/health",
+      "/api/civic/llm-chat/submit",
+      "/api/civic/llm-chat/status/:jobId",
+      "/api/civic/llm-chat/result/:jobId",
+      "/api/civic/representatives/search?zip=10001"
+    ]
+  }
+}

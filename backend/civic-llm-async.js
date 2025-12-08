@@ -16,7 +16,7 @@
  */
 
 const jobQueue = require('./job-queue-service');
-const aiService = require('./ai-service');
+const aiService = require('./ai-service-qwen');
 
 /**
  * Submit LLM chat query (returns immediately with job ID)

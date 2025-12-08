@@ -1,32 +1,23 @@
 #!/bin/bash
-set -euo pipefail
 
-# Workforce Democracy Project Deployment Script
-# Purpose: Safe, parameterized deploy helper for VPS
-# Default flow: git pull in backend dir → restart PM2 app → health check
+# Workforce Democracy Project - LLM Chat Fix Deployment Script
+# This script fixes the LLM chat functionality issues and deploys the changes
+
+echo "Starting LLM chat fix deployment process..."
 
 # Configuration variables
 SERVER_IP="185.193.126.13"
 SERVER_USER="root"
-# Canonical backend path on VPS (override with -p)
-PROJECT_PATH="/var/www/workforce-democracy/backend"
-# PM2 process name (override with -n)
-PM2_NAME="workforce-democracy-project"
-# Health check port (override with -H); default 3001 = Version A (prod)
-HEALTH_PORT="3001"
+PROJECT_PATH="/Users/acejrowski/Desktop/AG/WORKFORCE DEMOCRACY PROJECT/SITE FILES/Workforce Democracy Project/backend"
 
 # Function to display usage
 usage() {
     echo "Usage: $0 [options]"
     echo "Options:"
     echo "  -h, --help     Show this help message"
-    echo "  -p, --path     Backend path on VPS (default: $PROJECT_PATH)"
+    echo "  -p, --path     Path to project directory (default: $PROJECT_PATH)"
     echo "  -s, --server   Server IP address (default: $SERVER_IP)"
     echo "  -u, --user     Server username (default: $SERVER_USER)"
-    echo "  -n, --pm2      PM2 process name (default: $PM2_NAME)"
-    echo "  -H, --health   Health check port (default: $HEALTH_PORT)"
-    echo "\nExamples:"
-    echo "  $0 -p /var/www/workforce-democracy/backend -n backend-b -H 3002"
 }
 
 # Parse command line arguments
@@ -46,14 +37,6 @@ while [[ $# -gt 0 ]]; do
             ;;
         -u|--user)
             SERVER_USER="$2"
-            shift 2
-            ;;
-        -n|--pm2)
-            PM2_NAME="$2"
-            shift 2
-            ;;
-        -H|--health)
-            HEALTH_PORT="$2"
             shift 2
             ;;
         *)
@@ -82,18 +65,24 @@ get_password() {
 
 # Step 1: Pull latest code from Git
 echo "=== Pulling latest code from Git ==="
-execute_on_server "cd ${PROJECT_PATH} && git fetch --all && git pull --ff-only origin main"
+execute_on_server "cd \"${PROJECT_PATH}\" && git pull origin main"
 
-# Step 2: Restart application with PM2
+# Step 2: Update environment variables in .env file
+echo "=== Updating environment variables in .env file ==="
+execute_on_server "sed -i 's/DASHSCOPE_API_KEY=QWEN_API_KEY/g' \"${PROJECT_PATH}/.env\""
+execute_on_server "sed -i 's/DASHSCOPE_API_URL=QWEN_API_URL/g' \"${PROJECT_PATH}/.env\""
+execute_on_server "sed -i 's/QWEN_MODEL=qwen-plus/g' \"${PROJECT_PATH}/.env\""
+
+# Step 3: Restart application with PM2
 echo "=== Restarting application with PM2 ==="
-execute_on_server "pm2 restart ${PM2_NAME} || pm2 start ecosystem.config.js --only ${PM2_NAME} || pm2 restart all"
+execute_on_server "pm2 restart backend"
 
-# Step 3: Check application status
+# Step 4: Check application status
 echo "=== Checking application status ==="
 execute_on_server "pm2 status"
 
-# Step 4: Verify deployment
+# Step 5: Verify deployment
 echo "=== Verifying deployment ==="
-execute_on_server "curl -sS -X GET http://localhost:${HEALTH_PORT}/health || echo 'Health check failed'"
+execute_on_server "curl -X GET http://localhost:3001/health"
 
 # End of script
