@@ -20,7 +20,10 @@ Frontend
 - Frontend API base URL is set to: `https://api.workforcedemocracyproject.org` in `js/config.js`.
 
 Backend
-- Canonical path on VPS: `/var/www/workforce-democracy/backend/`
+- Canonical base: `/var/www/workforce-democracy/`
+  - Version A (prod) path: `/var/www/workforce-democracy/version-a/backend/`
+  - Version B (test) path: `/var/www/workforce-democracy/version-b/backend/`
+  - Some setups also keep a unified path at: `/var/www/workforce-democracy/backend/` (use the `-p` flag in `deploy.sh` to target the correct one)
 - Nginx configs (check which one is active on your server):
   - `/etc/nginx/sites-enabled/workforce-backend`
   - `/etc/nginx/sites-enabled/workforce-democracy`
@@ -67,7 +70,9 @@ PM2
    - `git push origin main` triggers Netlify (confirm Site settings). Validate on staging/live URLs.
 
 Scripts
-- `deploy.sh` (root): SSH helper with server/path/PM2 flags; defaults updated to the canonical backend path.
+- `deploy.sh` (root): SSH helper with server/path/PM2 flags; defaults updated; use `-p` to pick:
+  - Version B example: `./deploy.sh -p /var/www/workforce-democracy/version-b/backend -n backend-b -H 3002`
+  - Version A example: `./deploy.sh -p /var/www/workforce-democracy/version-a/backend -n workforce-democracy-project -H 3001`
 - `scripts/ssh-verify.sh`: Non-destructive SSH diagnostics for connectivity/auth.
 
 ---
