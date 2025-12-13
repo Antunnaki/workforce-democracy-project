@@ -26,6 +26,7 @@ Protocol TLSv1.3; ciphersuite TLS_AES_256_GCM_SHA384; CN=api-beta.workforcedemoc
 ```
 
 ### Done /Changelog
+- 2025-12-13: Added lightweight monitoring for beta API with 5-minute health checks. Script at /usr/local/bin/wdp-beta-health-check.sh, logging to /var/log/wdp-beta-health.log, scheduled via cron. Verified health endpoint is responding correctly.
 - 2025-12-13: Added https://beta-workforcedemocracyproject.netlify.app to beta CORS relaxed policy. Updated /etc/nginx/snippets/wdp-security-relaxed.conf and /srv/wdp/shared/beta.env. Nginx reloaded and backend restarted. Verification passed: CORS headers correctly returned for authorized origin and blocked for unauthorized origin.
 - 2025-12-13: Completed all preparatory work for adding https://beta-workforcedemocracyproject.netlify.app to beta CORS relaxed policy; created documentation, scripts, and implementation plan. Server-side changes pending execution.
 - 2025-12-13: Added documentation and scripts for updating beta CORS policy to include https://beta-workforcedemocracyproject.netlify.app; prepared deployment plan and verification procedures.
