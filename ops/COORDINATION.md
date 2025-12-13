@@ -26,6 +26,7 @@ Protocol TLSv1.3; ciphersuite TLS_AES_256_GCM_SHA384; CN=api-beta.workforcedemoc
 ```
 
 ### Done /Changelog
+- 2025-12-13: Completed all preparatory work for adding https://beta-workforcedemocracyproject.netlify.app to beta CORS relaxed policy; created documentation, scripts, and implementation plan. Server-side changes pending execution.
 - 2025-12-13: Added documentation and scripts for updating beta CORS policy to include https://beta-workforcedemocracyproject.netlify.app; prepared deployment plan and verification procedures.
 - 2025-12-13: Preparing to add https://beta-workforcedemocracyproject.netlify.app to beta CORS relaxed policy; preparing documentation and deployment plan.
 - 2025-12-12: Beta Nginx: `/→/health` redirect live; security profile symlink active → relaxed; CORS dev origins added (localhost:3000, 127.0.0.1:3000, preview Netlify pattern); Nginx reload OK; verification passed (302→/health, 200 at /health, v4+v6).
