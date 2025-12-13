@@ -26,6 +26,7 @@ Protocol TLSv1.3; ciphersuite TLS_AES_256_GCM_SHA384; CN=api-beta.workforcedemoc
 ```
 
 ### Done /Changelog
+- 2025-12-13: Switched to Singapore OpenAI-compatible endpoint with new international API key. Verified successful chat response from Qwen model. Test prompt: "who is my state representative in California?" completed in 4.6s. API is now fully functional.
 - 2025-12-13: Verified DashScope API integration. Confirmed API key is valid but account has exhausted free tier quota. Need to disable "use free tier only" mode in DashScope console to enable paid access. Backend code is properly configured.
 - 2025-12-13: Added lightweight monitoring for beta API with 5-minute health checks. Script at /usr/local/bin/wdp-beta-health-check.sh, logging to /var/log/wdp-beta-health.log, scheduled via cron. Verified health endpoint is responding correctly.
 - 2025-12-13: Added https://beta-workforcedemocracyproject.netlify.app to beta CORS relaxed policy. Updated /etc/nginx/snippets/wdp-security-relaxed.conf and /srv/wdp/shared/beta.env. Nginx reloaded and backend restarted. Verification passed: CORS headers correctly returned for authorized origin and blocked for unauthorized origin.
