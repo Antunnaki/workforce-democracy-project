@@ -26,15 +26,16 @@ Protocol TLSv1.3; ciphersuite TLS_AES_256_GCM_SHA384; CN=api-beta.workforcedemoc
 ```
 
 ### Done /Changelog
+- 2025-12-13: Added documentation and scripts for updating beta CORS policy to include https://beta-workforcedemocracyproject.netlify.app; prepared deployment plan and verification procedures.
 - 2025-12-13: Preparing to add https://beta-workforcedemocracyproject.netlify.app to beta CORS relaxed policy; preparing documentation and deployment plan.
-- 2025-12-12: Beta Nginx: `/→/health` redirect live; security profile symlink active → relaxed; CORS dev origins added(localhost:3000, 127.0.0.1:3000, preview Netlify pattern); Nginx reload OK; verification passed (302→/health, 200 at /health, v4+v6).
+- 2025-12-12: Beta Nginx: `/→/health` redirect live; security profile symlink active → relaxed; CORS dev origins added (localhost:3000, 127.0.0.1:3000, preview Netlify pattern); Nginx reload OK; verification passed (302→/health, 200 at /health, v4+v6).
 - 2025-12-11: Issued Let's Encrypt cert for beta; Nginx reloaded; TLS verified OK (SNI/chain). Root path currently 404 by design.
-- 2025-12-11: Successfully deployedbackend with fixed syntax errors; service running onport 3001; ready for SSL certificate issuance.
+- 2025-12-11: Successfully deployed backend with fixed syntax errors; service running on port 3001; ready for SSL certificate issuance.
 - 2025-12-11: Preparing to enable SSL certificate for beta environment; all prerequisites verified; awaiting root access to execute certificate issuance.
-- 2025-12-11: Created/updated coordinationsystem; beta service healthy on port 3001; release layout normalized; lockfile deployment fixed; `/version` endpoint added; preflight checks passed for SSL issuance.
+- 2025-12-11: Created/updated coordination system; beta service healthy on port 3001; release layout normalized; lockfile deployment fixed; `/version` endpoint added; preflight checks passed for SSL issuance.
 
 ### Appendix
-- Node/npm on server: `node -v; npm -v` should showNode 20 LTS (npm 10). Node 18 (npm 9) is acceptable but align to avoid lockfile churn.
+- Node/npm on server: `node -v; npm -v` should show Node 20 LTS (npm 10). Node 18 (npm 9) is acceptable but align to avoid lockfile churn.
 - Rsync excludes: `.git`, `node_modules`, `.idea`, `*.iml`, `.DS_Store`.
 - Version stamping example:
   ```bash
