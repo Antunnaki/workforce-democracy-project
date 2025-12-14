@@ -82,3 +82,7 @@ Ling and Junie have full local write access, terminal access (backend + frontend
 - 2025-12-14: SSL certificate renewed to include www subdomain
 - 2025-12-14: Both apex and www domains fully functional with proper redirects and headers
 - 2025-12-14: Verified CORS functionality for www origin
+- 2025-12-14: Deployed main production homepage (index.html) and all associated assets (CSS, JS, images)
+- 2025-12-14: Removed conflicting CSP meta tag from index.html to rely on Nginx headers
+- 2025-12-14: Fixed file permissions to ensure all assets are accessible
+- 2025-12-14: Verified that both apex and www domains serve the complete production site with all assets loading correctly
