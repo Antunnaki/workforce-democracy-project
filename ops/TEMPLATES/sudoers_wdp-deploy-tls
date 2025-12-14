@@ -1,0 +1,4 @@
+deploy ALL=(root) NOPASSWD: \
+  /usr/sbin/nginx, /usr/sbin/nginx -t, \
+  /bin/systemctl reload nginx, \
+  /usr/bin/certbot, /usr/bin/certbot renew, /usr/bin/certbot --nginx *
