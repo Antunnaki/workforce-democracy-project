@@ -86,3 +86,6 @@ Ling and Junie have full local write access, terminal access (backend + frontend
 - 2025-12-14: Removed conflicting CSP meta tag from index.html to rely on Nginx headers
 - 2025-12-14: Fixed file permissions to ensure all assets are accessible
 - 2025-12-14: Verified that both apex and www domains serve the complete production site with all assets loading correctly
+- 2025-12-14: Fixed CORS configuration for API to properly handle credentials for signup flow
+- 2025-12-14: Updated Nginx security snippets to avoid duplicate CORS headers
+- 2025-12-14: Verified that preflight and actual requests include proper CORS headers for authorized origins
