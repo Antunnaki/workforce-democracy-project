@@ -13,6 +13,7 @@
 #### Certbot certificates (beta + prod)
 - api-beta.workforcedemocracyproject.org: ECDSA; expires 2026-03-1122:32:11Z; paths at `/etc/letsencrypt/live/api-beta.workforcedemocracyproject.org/`
 - api.workforcedemocracyproject.org: ECDSA; expires 2026-03-11 01:00:12Z; pathsat `/etc/letsencrypt/live/api.workforcedemocracyproject.org/`
+- workforcedemocracyproject.org: ECDSA; expires 2026-03-13; paths at `/etc/letsencrypt/live/workforcedemocracyproject.org/`
 
 #### HTTP/HTTPS checks (beta)
 ```
@@ -26,6 +27,9 @@ Root redirect v6: HTTP/1.1 302 Moved Temporarily
 ```
 Protocol TLSv1.3; ciphersuite TLS_AES_256_GCM_SHA384; CN=api-beta.workforcedemocracyproject.org; Verification: OK
 ```
+
+### Team access note (prod/beta)
+Ling and Junie have full local write access, terminal access (backend + frontend), and can modify local frontend files and backend code. They may push changes directly to git (docs/cleanup-20251210 branch currently in use) and run deployment/check scripts as needed.
 
 ### Done /Changelog
 - 2025-12-13: Switched to Singapore OpenAI-compatible endpoint with new international API key. Verified successful chat response from Qwen model. Test prompt: "who is my state representative in California?" completed in 4.6s. API is now fully functional.
@@ -67,3 +71,6 @@ Protocol TLSv1.3; ciphersuite TLS_AES_256_GCM_SHA384; CN=api-beta.workforcedemoc
 - 2025-12-13: Configured HSTS headers for enhanced security
 - 2025-12-13: Ensured proper SSL certificate coverage for both apex and www domains
 - 2025-12-13: Implemented HTTP to HTTPS redirects for all traffic
+- 2025-12-14: Successfully deployed main website with proper SSL certificate and security headers
+- 2025-12-14: Website is now accessible at https://workforcedemocracyproject.org with all security headers properly configured
+- 2025-12-14: Created updated Nginx configuration with CSP headers (ops/TEMPLATES/nginx_main_website_with_csp.conf)
