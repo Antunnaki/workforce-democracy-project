@@ -13,7 +13,7 @@
 #### Certbot certificates (beta + prod)
 - api-beta.workforcedemocracyproject.org: ECDSA; expires 2026-03-1122:32:11Z; paths at `/etc/letsencrypt/live/api-beta.workforcedemocracyproject.org/`
 - api.workforcedemocracyproject.org: ECDSA; expires 2026-03-11 01:00:12Z; pathsat `/etc/letsencrypt/live/api.workforcedemocracyproject.org/`
-- workforcedemocracyproject.org: ECDSA; expires 2026-03-13; paths at `/etc/letsencrypt/live/workforcedemocracyproject.org/`
+- workforcedemocracyproject.org: ECDSA; expires 2026-03-14; paths at `/etc/letsencrypt/live/workforcedemocracyproject.org/`
 
 #### HTTP/HTTPS checks (beta)
 ```
@@ -78,3 +78,7 @@ Ling and Junie have full local write access, terminal access (backend + frontend
 - 2025-12-14: Updated frontend config to guard against process.env undefined error
 - 2025-12-14: Updated Nginx configuration to include www subdomain (pending DNS setup)
 - 2025-12-14: Verified proper MIME types and CSP headers for frontend files
+- 2025-12-14: DNS records for www subdomain added and propagated
+- 2025-12-14: SSL certificate renewed to include www subdomain
+- 2025-12-14: Both apex and www domains fully functional with proper redirects and headers
+- 2025-12-14: Verified CORS functionality for www origin
