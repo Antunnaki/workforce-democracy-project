@@ -8,9 +8,10 @@ import prodConfig from './production.js';
 function getConfig() {
   // In a real implementation, this would be determined by environment variables
   // For now, we'll default to production but allow override for development
+  const isDev = typeof process !== 'undefined' && process.env && process.env.NODE_ENV === 'development';
   const isBeta = window.location.hostname.includes('beta') || 
                  window.location.hostname === 'localhost' ||
-                 process.env.NODE_ENV === 'development';
+                 isDev;
                  
   return isBeta ? betaConfig : prodConfig;
 }

@@ -74,3 +74,7 @@ Ling and Junie have full local write access, terminal access (backend + frontend
 - 2025-12-14: Successfully deployed main website with proper SSL certificate and security headers
 - 2025-12-14: Website is now accessible at https://workforcedemocracyproject.org with all security headers properly configured
 - 2025-12-14: Created updated Nginx configuration with CSP headers (ops/TEMPLATES/nginx_main_website_with_csp.conf)
+- 2025-12-14: Synced complete frontend directory to server including config files
+- 2025-12-14: Updated frontend config to guard against process.env undefined error
+- 2025-12-14: Updated Nginx configuration to include www subdomain (pending DNS setup)
+- 2025-12-14: Verified proper MIME types and CSP headers for frontend files
