@@ -1,3 +1,5 @@
+/* WDP chat-clean.js LIVE v37.9.15-FINAL builtAt=2025-12-16T10:00Z */
+
 /**
 * Clean Chat System v37.9.15-FINAL
  * 
@@ -1094,3 +1096,13 @@ ChatWidget.initFloating = function initFloating() {
 };
 
 console.log('[CleanChat v37.9.12-ASYNC] 🚀 Module loaded - Async polling with NO TIMEOUT!');
+
+// Smoke test for debugging
+(function smoke(){
+  try {
+    console.log('[Chat] smoke test: building selectors');
+    const btn = document.getElementById('openChatBtn');
+    const modal = document.getElementById('chat-modal');
+    console.log('[Chat] nodes', { btn: !!btn, modal: !!modal });
+  } catch(e){ console.error('[Chat] smoke failed', e); }
+})();

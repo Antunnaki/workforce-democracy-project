@@ -1,3 +1,5 @@
+/* WDP main.js LIVE v20250125-PERFORMANCE-OPTIMIZED-V3 builtAt=2025-12-16T10:00Z */
+
 /**
 * WORKFORCE DEMOCRACY PROJECT - MAIN APPLICATION
  * Core functionality and initialization
