@@ -15,18 +15,7 @@
     <meta name="googlebot" content="index, follow">
     <meta name="referrer" content="strict-origin-when-cross-origin">
     
-    <!-- V36.12.2: Content Security Policy - Allow Tailwind CSS CDN for news feed -->
-    <meta http-equiv="Content-Security-Policy" content="
-        default-src 'self' https:;
-        script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.jsdelivr.net https://cdn.tailwindcss.com https://fonts.googleapis.com;
-        style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.jsdelivr.net;
-        font-src 'self' https://fonts.gstatic.com;
-        img-src 'self' data: https: https://www.congress.gov https://www.senate.ca.gov https://www.assembly.ca.gov https://www.joincalifornia.com https://bioguide.congress.gov https://api.workforcedemocracyproject.org;
-        connect-src 'self' https://api.workforcedemocracyproject.org https://api.groq.com https://*.netlify.app https://*.gensparkspace.com https://projects.propublica.org;
-        frame-src 'self';
-    ">
-    
-    <!-- V37.1.0: REMOVED - Duplicate cache headers (keeping optimized version in line ~68) -->
+    <!-- V37.1.0: REMOVED - Duplicate CSP and cache headers (keeping optimized version in Nginx) -->
     
     <!-- Open Graph (Enhanced for Social Sharing) -->
     <meta property="og:title" content="How to Vote in 7 Countries | Track Representatives | Democratic Workplaces">
@@ -3140,7 +3129,12 @@
             }
             
             if (queryLower.includes('worker cooperative') || queryLower.includes('what is a co-op')) {
-                return `A worker cooperative is a business owned and democratically controlled by its employees! Features:\\n\\n🗳️ Democratic Ownership\\n💰 Profit Sharing\\n🎯 Collective Management\\n🔒 Job Security`;
+                return `A worker cooperative is a business owned and democratically controlled by its employees! Features:
+
+🗳️ Democratic Ownership
+💰 Profit Sharing
+🎯 Collective Management
+🔒 Job Security`;
             }
             
             if (queryLower.includes('how much') || queryLower.includes('salary')) {
@@ -3422,7 +3416,7 @@
     <!-- V36.5.3: OLD personalization REMOVED - using new zero-knowledge system -->
     <!-- Chart.js CDN (V36.5.1: Removed outdated integrity hash) -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js" 
-            crossorigin="anonymous" defer"></script>
+            crossorigin="anonymous" defer></script>
     <!-- Critical scripts (no defer - needed for immediate functionality) -->
     <script src="js/security.js?v=20250122-HORIZONTAL-TABS"></script>
     <script src="js/language.js?v=20250122-HORIZONTAL-TABS"></script>
@@ -3478,11 +3472,11 @@
     <!-- V37.4.1: CLEAN CHAT SYSTEM - NO TYPEWRITER, INSTANT CITATIONS -->
     <!-- User reported: typewriter effect broke citations, created 20+ failed fix attempts -->
     <!-- Solution: Complete rebuild with instant text display + simple superscripts ¹ ² ³ -->
-    <script src="js/chat-clean.js?v=37.9.11" defer></script>
+    <script src="js/chat-clean.js?v=37.9.15" defer></script>
     <script src="js/nonprofit-widgets.js?v=36.11.6-ESCAPE-FIX&t=1730592000" defer></script>
     <!-- V37.8.7: Community Services with Phase 1 Enhancements (distance, categories, languages, accessibility) -->
     <script src="js/community-services.js?v=37.8.7-PHASE1-ACTIVATED&t=1731276000" defer></script>
-    <script src="js/main.js?v=20250125-PERFORMANCE-OPTIMIZED-V2" defer></script>
+    <script src="js/main.js?v=20250125-PERFORMANCE-OPTIMIZED-V3" defer></script>
     
     <!-- V24: No force-svg script needed - SVGs are inline! -->
 
@@ -3651,98 +3645,75 @@
                     <div class="progress-dot" data-step="3"></div>
                 </div>
                 
-                <!-- Step 1: Create Account -->
-                <div class="wizard-step active" data-step="1">
-                    <h3>Step 1: Create Your Account</h3>
+                <!-- Step 0: Privacy mode selection -->
+                <div class="wizard-step active" data-step="0">
+                    <h3>Privacy first</h3>
+                    <p>Choose how you want to store your data. You can change this later.</p>
+                    <div class="card-grid">
+                        <label class="card option">
+                            <input type="radio" name="mode" value="local" checked>
+                            <div class="card-body">
+                                <h4>Local‑only (recommended)</h4>
+                                <p>All data stays on this device. No account. You can enable sync later.</p>
+                            </div>
+                        </label>
+                        <label class="card option">
+                            <input type="radio" name="mode" value="sync">
+                            <div class="card-body">
+                                <h4>Enable Sync (advanced)</h4>
+                                <p>Encrypt with a passphrase and sync across devices. Optional email for recovery.</p>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Step 1A: Local‑only credentials (no network calls) -->
+                <div class="wizard-step" data-step="1-local">
+                    <h3>Create a local unlock passphrase</h3>
+                    <input id="local-pass" type="password" class="form-control" autocomplete="new-password" placeholder="Enter a passphrase (min 6 chars)">
+                    <p class="hint">Used only on this device to unlock your data. Not sent anywhere.</p>
+                </div>
+
+                <!-- Step 1B: Sync credentials (optional email) -->
+                <div class="wizard-step" data-step="1-sync">
+                    <h3>Create a passphrase</h3>
                     <div class="form-group">
-                        <label for="wizardUsername">Username</label>
-                        <input type="text" id="wizard-username" class="form-control" 
-                               placeholder="Choose a username (min 3 characters)" required>
+                        <label for="sync-username">Username</label>
+                        <input id="sync-username" type="text" class="form-control" autocomplete="username" placeholder="Choose a username">
+                        <div class="help-text">3–50 chars, start with a letter. Only letters, numbers, _ and -.</div>
+                        <div class="field-error" aria-live="polite"></div>
                     </div>
                     <div class="form-group">
-                        <label for="wizardPassword">Password</label>
-                        <input type="password" id="wizard-password" class="form-control" 
-                               placeholder="Create a secure password" required>
-                        <div class="password-strength">
+                        <label for="sync-pass">Passphrase</label>
+                        <input id="sync-pass" type="password" class="form-control" autocomplete="new-password" placeholder="Create a passphrase (min 8 chars)">
+                        <div id="pass-strength" class="password-strength">
                             <div class="password-strength-bar"></div>
                             <span class="password-strength-text"></span>
                         </div>
+                        <div class="help-text">Use 8+ chars with upper/lowercase, a number, and a symbol.</div>
+                        <div class="field-error" aria-live="polite"></div>
                     </div>
-                    <div class="form-group">
-                        <label for="wizardPasswordConfirm">Confirm Password</label>
-                        <input type="password" id="wizard-password-confirm" class="form-control" 
-                               placeholder="Re-enter your password" required>
-                    </div>
+                    <label class="toggle"><input id="opt-email-toggle" type="checkbox"> Add email for recovery (optional)</label>
+                    <input id="sync-email" type="email" class="form-control" placeholder="Email (optional)" style="display:none">
+                    <label class="consent"><input id="consent-encryption" type="checkbox"> I understand my data is encrypted on my device before sync.</label>
                 </div>
-                
-                <!-- Step 2: Address -->
+
+                <!-- Step 2: Recovery Kit -->
                 <div class="wizard-step" data-step="2">
-                    <h3>Step 2: Your Address</h3>
-                    <p class="step-description">We need your address to connect you with your representatives</p>
-                    <div class="form-group">
-                        <label for="wizardStreet">Street Address</label>
-                        <input type="text" id="wizard-street" class="form-control" 
-                               placeholder="123 Main St" required>
+                    <h3>Save your Recovery Kit</h3>
+                    <p>Write down your 12‑word phrase. You can also download an encrypted recovery file.</p>
+                    <div id="recovery-phrase" class="recovery-key-display">••• ••• ••• ••• ••• ••• ••• ••• ••• ••• ••• •••</div>
+                    <div class="wizard-buttons-inline">
+                        <button type="button" id="download-recovery" class="btn-secondary">💾 Download Recovery File</button>
                     </div>
-                    <div class="form-group">
-                        <label for="wizardCity">City</label>
-                        <input type="text" id="wizard-city" class="form-control" 
-                               placeholder="Washington" required>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="wizardState">State</label>
-                            <input type="text" id="wizard-state" class="form-control" 
-                                   placeholder="DC" maxlength="2" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="wizardZip">ZIP Code</label>
-                            <input type="text" id="wizard-zip" class="form-control" 
-                                   placeholder="20001" maxlength="5" required>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Step 3: Language & Recovery Key -->
-                <div class="wizard-step" data-step="3">
-                    <h3>Step 3: Final Settings</h3>
-                    <div class="form-group">
-                        <label for="wizardLanguage">Preferred Language</label>
-                        <select id="wizard-language" class="form-control">
-                            <option value="en">English</option>
-                            <option value="es">Español</option>
-                        </select>
-                    </div>
-                    
-                    <div id="recoveryKeySection" style="display: none;">
-                        <h4>⚠️ Important: Save Your Recovery Key</h4>
-                        <p>This key allows you to reset your password. Store it somewhere safe!</p>
-                        <div class="recovery-key-display">
-                            <code id="recoveryKeyText"></code>
-                            <button type="button" onclick="copyRecoveryKey()" class="btn-secondary">
-                                📋 Copy Key
-                            </button>
-                            <button type="button" onclick="downloadRecoveryKey()" class="btn-secondary">
-                                💾 Download Key
-                            </button>
-                        </div>
-                    </div>
+                    <label class="consent"><input id="ack-recovery" type="checkbox"> I have saved my recovery phrase.</label>
                 </div>
                 
                 <!-- Wizard Buttons -->
                 <div class="wizard-buttons">
-                    <button type="button" id="wizardPrevBtn" class="btn-secondary" 
-                            onclick="wizardPrevStep()" style="display: none;">
-                        ← Back
-                    </button>
-                    <button type="button" id="wizardNextBtn" class="btn-primary" 
-                            onclick="wizardNextStep()">
-                        Next →
-                    </button>
-                    <button type="button" id="wizardCompleteBtn" class="btn-primary" 
-                            onclick="completeSetup()" style="display: none;">
-                        ✅ Complete Setup
-                    </button>
+                    <button type="button" id="wizardPrevBtn" class="btn-secondary" onclick="wizardPrevStep()" style="display: none;">← Back</button>
+                    <button type="button" id="wizardNextBtn" class="btn-primary" onclick="wizardNextStep()">Next →</button>
+                    <button type="button" id="wizardCompleteBtn" class="btn-primary" onclick="completeSetup()" style="display: none;">✅ Complete Setup</button>
                 </div>
             </div>
         </div>
@@ -3817,6 +3788,25 @@
     <!-- IMPORTANT: This script ONLY for testing on GenSpark (sxcrlfyt.gensparkspace.com) -->
     <!-- Remove this script tag when deploying to production -->
     <!--<script src="js/test-backend-override.js"></script> -->
+
+    <!-- Recovery Key Modal -->
+    <div id="recovery-modal" class="rk-modal" hidden>
+      <div class="rk-card" role="dialog" aria-modal="true" aria-labelledby="rk-title">
+        <h3 id="rk-title">Your Recovery Key</h3>
+        <p class="rk-sub">Store this securely. We cannot recover it if lost.</p>
+
+        <div class="rk-key" id="rk-key" tabindex="0" aria-label="Recovery key"></div>
+
+        <div class="rk-actions">
+          <button id="rk-copy" class="button">Copy</button>
+          <button id="rk-download" class="button">Download .txt</button>
+          <button id="rk-close" class="button primary">Done</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Floating Chat Widget Container -->
+    <div id="wdp-chat-floating"></div>
 
 </body>
 </html>
