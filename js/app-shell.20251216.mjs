@@ -13,4 +13,4 @@ export async function boot() {
   console.log('[Shell] booted');
 }
 
-boot();
+boot();/* Trigger redeploy */
