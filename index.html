@@ -4,11 +4,17 @@
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <title>WDP Beta Shell</title>
+  <!-- WDP SHELL LIVE BETA 2025-12-16T13:25Z -->
   <!-- CSP: only self + API -->
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; connect-src 'self' https://api.workforcedemocracyproject.org; img-src 'self' data:; base-uri 'none'; frame-ancestors 'none'">
-  <style>body{font:16px/1.5 system-ui,sans-serif;margin:0;padding:24px} #app-root{min-height:60vh}</style>
+  <style>body{font:16px/1.5 system-ui,sans-serif;margin:0;padding:24px} #app-root{min-height:60vh}body::before{content:'WDP SHELL LIVE';position:fixed;top:0;left:0;background:#111;color:#0f0;font:12px/1 monospace;padding:2px 6px;z-index:99999;opacity:.85}</style>
   <script>window.WDP_API_BASE='https://api.workforcedemocracyproject.org';</script>
-  <script type="module" src="/js/app-shell.mjs"></script>
+  <script type="module" src="/js/app-shell.20251216.mjs"></script>
+  <script type="module">
+    import '/js/app-shell.20251216.mjs';
+    import { mount as mountChat } from '/js/modules/chat.20251216.mjs';
+    window.addEventListener('DOMContentLoaded', ()=> mountChat());
+  </script>
 </head>
 <body>
   <header><h1>WDP Beta</h1><p>Rebuild in progress — modules will appear here.</p></header>
