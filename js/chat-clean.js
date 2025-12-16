@@ -165,8 +165,6 @@ messageDiv.innerHTML =msg.html;
 // =============================================================================
 // CONTEXT DETECTION
 // =============================================================================
-// CONTEXT DETECTION
-// =============================================================================
 /**
  * Detect what page/content user is currently viewing
  * This helps the AI provide more relevant responses
@@ -179,30 +177,30 @@ function detectContext() {
         viewingContent: null 
     };
     
-  // Detect page
+    // Detect page
     if (path.includes('civic-platform')) {
-       context.page = 'civic-platform';
+        context.page = 'civic-platform';
     } else if (path.includes('philosophies')) {
         context.page = 'philosophies';
     } else if (path.includes('learning')) {
         context.page = 'learning';
-  } else if (path.includes('privacy')) {
+    } else if (path.includes('privacy')) {
         context.page = 'privacy';
-} else if (path === '/' || path.includes('index')) {
+    } else if (path === '/' || path.includes('index')) {
         context.page = 'home';
     }
     
     // Detect section (which part of page is visible)
     const sections = document.querySelectorAll('section[id]');
-  sections.forEach(section => {
+    sections.forEach(section => {
         const rect = section.getBoundingClientRect();
-        if (rect.top>= 0 && rect.top <= window.innerHeight * 0.5) {
+        if (rect.top >= 0 && rect.top <= window.innerHeight * 0.5) {
             context.section = section.id;
         }
     });
     
     // Detect specific content being viewed
-    if (context.section === 'my-representatives'){
+    if (context.section === 'my-representatives') {
         const repCard = document.querySelector('.rep-card');  // ✅ FIX:Changedfrom .representative-cardto .rep-card
         if (repCard) {
             const name = repCard.querySelector('.rep-name')?.textContent;
@@ -215,7 +213,7 @@ function detectContext() {
         if (billTitle) {
             context.viewingContent = { type: 'bill', title: billTitle };
         }
-   }
+    }
     
     return context;
 }
@@ -238,8 +236,8 @@ function convertCitations(text, sources) {
    // Implementation here
 }
 
-//=============================================================================
-//MARKDOWN RENDERING (Simple, NO typewriter)
+// =============================================================================
+// MARKDOWN RENDERING (Simple, NO typewriter)
 // =============================================================================
 
 /**
@@ -265,22 +263,22 @@ function buildSourcesSection(sources) {
     //Implementation here
 }
 
-//=============================================================================
-// BILLVOTING INTEGRATION
+// =============================================================================
+// BILL VOTING INTEGRATION
 // =============================================================================
 
 /**
  * Add bill voting information when relevant
  * User requirement: "Link to official government record of the vote"
  * User requirement: "Bill summary"
-* User requirement: "How the representative voted"
+ * User requirement: "How the representative voted"
  * User requirement: "Impact analysis of the vote"
  */
-functionaddBillVotingInfo(text, context){
+function addBillVotingInfo(text, context) {
    // Check if we're viewing a bill
-    if (!context.viewingContent || context.viewingContent.type !== 'bill') {
+        if (!context.viewingContent || context.viewingContent.type !== 'bill') {
         return text;
-}
+    }
     
     const billInfo = context.viewingContent;
     
@@ -303,7 +301,7 @@ functionaddBillVotingInfo(text, context){
 }
 
 // =============================================================================
-// SMART PARAGRAPHFORMATTING
+// SMART PARAGRAPH FORMATTING
 // =============================================================================
 
 /**
@@ -331,36 +329,36 @@ function formatSmartParagraphs(text){
     // Use negative lookahead to avoid splitting on digitfollowed by period
     const sentences =text.split(/(?<!\d)\. /).map(s => s.trim()).filter(s => s.length > 0);
     
-    // Determineparagraph grouping based on content length
-    consttotalSentences = sentences.length;
+    // Determine paragraph grouping based on content length
+    const totalSentences = sentences.length;
     let paragraphSize;
     
     if (totalSentences <= 3) {
-        //Short answer: 1 paragraph
+        // Short answer: 1 paragraph
         paragraphSize = totalSentences;
     } else if (totalSentences <= 6) {
-        //Medium answer: 2-3 paragraphs
-paragraphSize = Math.ceil(totalSentences / 2);
+        // Medium answer: 2-3 paragraphs
+        paragraphSize = Math.ceil(totalSentences / 2);
     } else if (totalSentences <= 12) {
-// Long answer: 3-5 paragraphs
+        // Long answer: 3-5 paragraphs
         paragraphSize = Math.ceil(totalSentences / 4);
     } else {
-       // Very long answer: 5-10 paragraphs
+        // Very long answer: 5-10 paragraphs
         paragraphSize = Math.ceil(totalSentences / 6);
     }
     
-   // Group sentences into paragraphs
-   constparagraphs = [];
+    // Group sentences into paragraphs
+    const paragraphs = [];
     for (let i = 0; i < sentences.length; i += paragraphSize) {
         const group = sentences.slice(i, i + paragraphSize);
-       paragraphs.push(group.join('. ') + '.');
+        paragraphs.push(group.join('. ') + '.');
     }
     
     return paragraphs.join('\n\n');
 }
 
 // =============================================================================
-// BACKEND APIINTEGRATION
+// BACKEND API INTEGRATION
 // =============================================================================
 
 /**
@@ -407,7 +405,7 @@ if (!directResponse.ok) {
        }
         
        const data = await directResponse.json();
-        constelapsedTime = ((Date.now() - startTime) / 1000).toFixed(1);
+        const elapsedTime = ((Date.now() - startTime) / 1000).toFixed(1);
         console.log('[CleanChat v37.9.12-ASYNC] ✅ Received result after', elapsedTime, 'seconds:', data);
         
 // Extract responseand sources
@@ -699,9 +697,10 @@ CleanChat.toggleSources = function(headerElement) {
 
 // =============================================================================
 // INLINE CHAT TOGGLE (For existing HTML widgets)
-// =============================================================================/**
- *Toggle inline chat sections (called by onclick in HTML)
- *This function was in the deleted files - recreating it here
+// =============================================================================
+/**
+ * Toggle inline chat sections (called by onclick in HTML)
+ * This function was in the deleted files - recreating it here
  */
 window.toggleInlineChat = function(chatId) {
     console.log(`[CleanChat] toggleInlineChat('${chatId}') called`);

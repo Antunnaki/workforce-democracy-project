@@ -103,7 +103,7 @@ const RepresentativeFinder = {
             
             if (locationData && locationData.zipCode) {
                 this.state.locationEntered = true;
-                console.log('[RepFinder] ✅ Loaded saved location (ZIP:', locationData.zipCode.substring(0, 3) + '**)', ');
+                console.log('[RepFinder] ✅ Loaded saved location (ZIP:', locationData.zipCode.substring(0, 3) + '**)');
                 
                 // Load cached representatives
                 await this.loadCachedRepresentatives();

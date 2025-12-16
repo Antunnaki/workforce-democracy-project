@@ -332,7 +332,8 @@ console.error('🚨🚨🚨 SOMETHING IS TRYING TO REMOVE ACTIVE CLASS! 🚨🚨
             };
         }
         
-        // Check after a brief moment if it's still activesetTimeout(() => {
+        // Check after a brief moment if it's still active
+        setTimeout(() => {
             const stillActive = menu.classList.contains('active');
             console.log('🔵 After 50ms, menu is:', stillActive ? 'STILL ACTIVE' :'NO LONGERACTIVE');
             if (!stillActive && isNowActive) {
@@ -432,7 +433,7 @@ if (desktopLangBtn) {
 /**
  * Modal functions
  */
-functionopenModal(content) {
+function openModal(content) {
 const overlay = document.getElementById('modalOverlay');
     const container = document.getElementById('modalContainer');
     
@@ -1358,3 +1359,4 @@ document.addEventListener('DOMContentLoaded', () => {
   } catch(e) { 
     console.error('[ChatWidget] initFloating error:', e); 
   }
+});
