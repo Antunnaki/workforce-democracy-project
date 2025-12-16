@@ -37,6 +37,10 @@ Ling and Junie have full local write access, terminal access (backend + frontend
 - 2025-12-16: Added version banners to JS files for cache-busting verification
 - 2025-12-16: Added smoke test code to verify file loading
 - 2025-12-16: Updated script versions in index.html with timestamps to break through CDN/proxy caches
+- 2025-12-16: Created timestamped copies of JS files (chat-clean, main, civic-representative-finder) with unique names to break through aggressive caching
+- 2025-12-16: Updated index.html to reference the new timestamped JS files instead of using query parameters
+- 2025-12-16: Added null guards to nonprofit-explorer.js to prevent errors when DOM elements are not present
+- 2025-12-16: Created timestamped index.html.20251216T1000 to break through HTML caching
 - 2025-12-15: Added client-side username validation to align with backend requirements
 - 2025-12-15: Added UI hints and error messaging to signup form for improved user experience
 - 2025-12-15: Added CSS styling for form error messages and help text

@@ -1,5 +1,5 @@
 /**
- * Nonprofit Explorer - ProPublica API Integration
+* Nonprofit Explorer - ProPublica API Integration
  * Workforce Democracy Project
  * 
  * Provides comprehensive nonprofit search, discovery, and verification
@@ -10,22 +10,22 @@
 // Configuration & Constants
 // ============================================================================
 
-const PROPUBLICA_API = {
-    BASE_URL: 'https://projects.propublica.org/nonprofits/api/v2',
+const NONPROFIT_API = {
+    BASE_URL: 'https://api.workforcedemocracyproject.org/api/nonprofits',
     ENDPOINTS: {
-        SEARCH: '/search.json',
-        ORGANIZATION: '/organizations'
+        SEARCH: '/search',
+        ORGANIZATION: '/'
     },
     RATE_LIMIT: 100, // requests per minute
-    CACHE_DURATION: 1000 * 60 * 15 // 15 minutes
+    CACHE_DURATION: 1000* 60 * 15 // 15 minutes
 };
 
 const CATEGORY_KEYWORDS = {
     healthcare: ['health', 'medical', 'hospital', 'clinic', 'healthcare', 'wellness'],
     housing: ['housing', 'homeless', 'shelter', 'affordable housing', 'transitional'],
-    food: ['food', 'hunger', 'meal', 'nutrition', 'pantry', 'feeding'],
+food: ['food', 'hunger', 'meal', 'nutrition', 'pantry', 'feeding'],
     education: ['education', 'school', 'scholarship', 'literacy', 'learning', 'university'],
-    environment: ['environment', 'conservation', 'wildlife', 'nature', 'climate', 'sustainability'],
+    environment: ['environment', 'conservation', 'wildlife','nature', 'climate', 'sustainability'],
     'human-services': ['human services', 'community', 'family', 'children', 'youth', 'senior'],
     'mental-health': ['mental health', 'counseling', 'therapy', 'behavioral', 'psychiatric'],
     legal: ['legal', 'law', 'justice', 'civil rights', 'advocacy'],
@@ -58,22 +58,22 @@ const nonprofitExplorerState = {
  * @returns {Promise<Object>} Search results
  */
 async function searchNonprofits(query) {
-    const cacheKey = `search_${query}`;
+   const cacheKey = `search_${query}`;
     
     // Check cache first
     if (nonprofitExplorerState.cache.has(cacheKey)) {
         const cached = nonprofitExplorerState.cache.get(cacheKey);
-        if (Date.now() - cached.timestamp < PROPUBLICA_API.CACHE_DURATION) {
+        if (Date.now() - cached.timestamp < NONPROFIT_API.CACHE_DURATION) {
             console.log('📦 Using cached results for:', query);
             return cached.data;
         }
     }
     
     try {
-        const url = `${PROPUBLICA_API.BASE_URL}${PROPUBLICA_API.ENDPOINTS.SEARCH}?q=${encodeURIComponent(query)}`;
-        console.log('🔍 Fetching:', url);
+        const url = `${NONPROFIT_API.BASE_URL}${NONPROFIT_API.ENDPOINTS.SEARCH}?q=${encodeURIComponent(query)}`;
+        console.log('🔍Fetching:', url);
         
-        const response = await fetch(url);
+        const response =await fetch(url);
         
         if (!response.ok) {
             throw new Error(`API returned ${response.status}: ${response.statusText}`);
@@ -83,21 +83,21 @@ async function searchNonprofits(query) {
         
         // Cache the results
         nonprofitExplorerState.cache.set(cacheKey, {
-            data: data,
+            data: data.data, // Extract data fromresponse
             timestamp: Date.now()
         });
         
-        console.log(`✅ Found ${data.organizations?.length || 0} organizations`);
-        return data;
+        console.log(`✅ Found ${data.data?.length || 0} organizations`);
+        return data.data;
         
     } catch (error) {
         console.error('❌ Search error:', error);
         throw new Error(`Failed to search nonprofits: ${error.message}`);
-    }
+}
 }
 
 /**
- * Get detailed information about a specific nonprofit
+ * Get detailedinformation about a specific nonprofit
  * @param {string} ein - Employer Identification Number
  * @returns {Promise<Object>} Organization details
  */
@@ -107,19 +107,19 @@ async function getOrganizationDetails(ein) {
     // Check cache first
     if (nonprofitExplorerState.cache.has(cacheKey)) {
         const cached = nonprofitExplorerState.cache.get(cacheKey);
-        if (Date.now() - cached.timestamp < PROPUBLICA_API.CACHE_DURATION) {
-            console.log('📦 Using cached org details for:', ein);
+        if (Date.now() - cached.timestamp < NONPROFIT_API.CACHE_DURATION) {
+            console.log('📦 Using cached orgdetails for:', ein);
             return cached.data;
         }
     }
     
     try {
-        const url = `${PROPUBLICA_API.BASE_URL}${PROPUBLICA_API.ENDPOINTS.ORGANIZATION}/${ein}.json`;
+        const url = `${NONPROFIT_API.BASE_URL}${NONPROFIT_API.ENDPOINTS.ORGANIZATION}${ein}`;
         console.log('🔍 Fetching organization:', url);
         
         const response = await fetch(url);
         
-        if (!response.ok) {
+       if (!response.ok) {
             throw new Error(`API returned ${response.status}: ${response.statusText}`);
         }
         
@@ -127,12 +127,12 @@ async function getOrganizationDetails(ein) {
         
         // Cache the results
         nonprofitExplorerState.cache.set(cacheKey, {
-            data: data,
+            data: data.data, // Extract data from response
             timestamp: Date.now()
         });
         
         console.log('✅ Organization details loaded');
-        return data;
+        return data.data;
         
     } catch (error) {
         console.error('❌ Organization fetch error:', error);
@@ -145,23 +145,22 @@ async function getOrganizationDetails(ein) {
 // ============================================================================
 
 /**
- * Render search results as cards
- */
+ * Render search results ascards
+*/
 function renderResults(organizations) {
     const resultsGrid = document.getElementById('resultsGrid');
     const resultsHeader = document.getElementById('resultsHeader');
     const resultsCount = document.getElementById('resultsCount');
-    const emptyState = document.getElementById('emptyState');
+    const emptyState =document.getElementById('emptyState');
     const featuredCategories = document.getElementById('featuredCategories');
-    
-    if (!organizations || organizations.length === 0) {
+if (!organizations || organizations.length === 0) {
         resultsGrid.innerHTML = '';
         resultsHeader.style.display = 'none';
         emptyState.style.display = 'block';
         emptyState.innerHTML = `
             <i class="fas fa-search"></i>
             <h3>No Results Found</h3>
-            <p>Try a different search term or browse by category</p>
+<p>Try a different search term or browse by category</p>
         `;
         featuredCategories.style.display = 'block';
         return;
@@ -176,9 +175,9 @@ function renderResults(organizations) {
     resultsCount.textContent = `Found ${organizations.length} organization${organizations.length !== 1 ? 's' : ''}`;
     
     // Render cards
-    resultsGrid.innerHTML = organizations.map(org => createOrganizationCard(org)).join('');
+    resultsGrid.innerHTML = organizations.map(org=> createOrganizationCard(org)).join('');
     
-    // Add click handlers to cards
+    // Add clickhandlers tocards
     document.querySelectorAll('.org-card').forEach(card => {
         card.addEventListener('click', () => {
             const ein = card.dataset.ein;
@@ -188,16 +187,15 @@ function renderResults(organizations) {
 }
 
 /**
- * Create HTML for organization card
- */
+ * Create HTML for organization card*/
 function createOrganizationCard(org) {
-    const revenue = formatCurrency(org.revenue_amount);
+    const revenue =formatCurrency(org.revenue_amount);
     const assets = formatCurrency(org.asset_amount);
     const city = org.city || 'Unknown';
     const state = org.state || '';
     const location = state ? `${city}, ${state}` : city;
     
-    // Determine classification icon
+   // Determine classification icon
     const classIcon = getClassificationIcon(org.ntee_code);
     
     return `
@@ -205,7 +203,7 @@ function createOrganizationCard(org) {
             <div class="org-card-header">
                 <div class="org-icon">${classIcon}</div>
                 <div class="org-title-section">
-                    <h3 class="org-name">${escapeHtml(org.name)}</h3>
+                   <h3 class="org-name">${escapeHtml(org.name)}</h3>
                     <p class="org-location">
                         <i class="fas fa-map-marker-alt"></i> ${escapeHtml(location)}
                     </p>
@@ -213,7 +211,7 @@ function createOrganizationCard(org) {
             </div>
             
             <div class="org-card-body">
-                ${org.ntee_code ? `
+               ${org.ntee_code ? `
                     <div class="org-classification">
                         <span class="classification-badge">${escapeHtml(org.ntee_code)}</span>
                     </div>
@@ -228,7 +226,7 @@ function createOrganizationCard(org) {
                     ` : ''}
                     ${assets ? `
                         <div class="stat">
-                            <span class="stat-label">Total Assets</span>
+                            <span class="stat-label">TotalAssets</span>
                             <span class="stat-value">${assets}</span>
                         </div>
                     ` : ''}
@@ -237,11 +235,10 @@ function createOrganizationCard(org) {
             
             <div class="org-card-footer">
                 <button class="btn-view-details">
-                    <i class="fas fa-info-circle"></i> View Details
-                </button>
+                    <i class="fas fa-info-circle"></i> View Details</button>
             </div>
         </div>
-    `;
+   `;
 }
 
 /**
@@ -253,7 +250,7 @@ async function showOrganizationDetails(ein) {
     
     // Show modal with loading state
     modal.style.display = 'block';
-    document.body.style.overflow = 'hidden';
+    document.body.style.overflow ='hidden';
     
     modalBody.innerHTML = `
         <div class="loading-state">
@@ -266,7 +263,7 @@ async function showOrganizationDetails(ein) {
         const data = await getOrganizationDetails(ein);
         const org = data.organization;
         
-        modalBody.innerHTML = createOrganizationDetailView(org);
+modalBody.innerHTML = createOrganizationDetailView(org);
         
         // Add event listeners for tabs
         document.querySelectorAll('.detail-tab').forEach(tab => {
@@ -274,7 +271,7 @@ async function showOrganizationDetails(ein) {
                 const targetId = tab.dataset.tab;
                 
                 // Update tabs
-                document.querySelectorAll('.detail-tab').forEach(t => t.classList.remove('active'));
+               document.querySelectorAll('.detail-tab').forEach(t => t.classList.remove('active'));
                 tab.classList.add('active');
                 
                 // Update content
@@ -289,7 +286,7 @@ async function showOrganizationDetails(ein) {
                 <i class="fas fa-exclamation-triangle"></i>
                 <h3>Unable to Load Details</h3>
                 <p>${escapeHtml(error.message)}</p>
-                <button class="btn-primary" onclick="document.getElementById('orgModal').style.display='none'; document.body.style.overflow='auto';">
+                <button class="btn-primary" onclick="document.getElementById('orgModal').style.display='none';document.body.style.overflow='auto';">
                     Close
                 </button>
             </div>
@@ -309,8 +306,8 @@ function createOrganizationDetailView(org) {
     const location = state ? `${city}, ${state}` : city;
     const classIcon = getClassificationIcon(org.ntee_code);
     
-    // Get most recent filing
-    const latestFiling = org.filings_with_data?.[0];
+    //Get most recent filing
+    const latestFiling= org.filings_with_data?.[0];
     
     return `
         <div class="org-detail-view">
@@ -323,23 +320,22 @@ function createOrganizationDetailView(org) {
                     </p>
                     ${org.ntee_code ? `
                         <span class="classification-badge large">${escapeHtml(org.ntee_code)}</span>
-                    ` : ''}
+` : ''}
                 </div>
             </div>
-            
-            <div class="org-detail-tabs">
+<div class="org-detail-tabs">
                 <button class="detail-tab active" data-tab="overview">
                     <i class="fas fa-info-circle"></i> Overview
                 </button>
                 <button class="detail-tab" data-tab="financials">
-                    <i class="fas fa-dollar-sign"></i> Financials
+<i class="fas fa-dollar-sign"></i> Financials
                 </button>
                 <button class="detail-tab" data-tab="contact">
                     <i class="fas fa-address-card"></i> Contact
                 </button>
                 ${latestFiling ? `
-                    <button class="detail-tab" data-tab="filings">
-                        <i class="fas fa-file-alt"></i> IRS Filings
+                    <button class="detail-tab"data-tab="filings">
+                        <iclass="fas fa-file-alt"></i> IRS Filings
                     </button>
                 ` : ''}
             </div>
@@ -348,21 +344,21 @@ function createOrganizationDetailView(org) {
                 <!-- Overview Tab -->
                 <div class="tab-content active" id="overview">
                     <h3>Organization Information</h3>
-                    <div class="info-grid">
+                   <divclass="info-grid">
                         <div class="info-item">
                             <span class="info-label">EIN (Tax ID)</span>
                             <span class="info-value">${escapeHtml(org.ein)}</span>
                         </div>
-                        ${org.ruling_date ? `
+                        ${org.ruling_date? `
                             <div class="info-item">
-                                <span class="info-label">Founded</span>
+<span class="info-label">Founded</span>
                                 <span class="info-value">${formatDate(org.ruling_date)}</span>
                             </div>
                         ` : ''}
                         ${org.organization_type ? `
                             <div class="info-item">
                                 <span class="info-label">Organization Type</span>
-                                <span class="info-value">${escapeHtml(org.organization_type)}</span>
+<span class="info-value">${escapeHtml(org.organization_type)}</span>
                             </div>
                         ` : ''}
                         ${org.tax_prd ? `
@@ -376,7 +372,7 @@ function createOrganizationDetailView(org) {
                     ${latestFiling?.mission ? `
                         <div class="mission-statement">
                             <h4><i class="fas fa-bullseye"></i> Mission Statement</h4>
-                            <p>${escapeHtml(latestFiling.mission)}</p>
+<p>${escapeHtml(latestFiling.mission)}</p>
                         </div>
                     ` : ''}
                 </div>
@@ -385,7 +381,7 @@ function createOrganizationDetailView(org) {
                 <div class="tab-content" id="financials">
                     <h3>Financial Overview</h3>
                     <div class="financial-stats">
-                        ${revenue ? `
+                        ${revenue ?`
                             <div class="financial-stat">
                                 <i class="fas fa-chart-line"></i>
                                 <div>
@@ -393,8 +389,8 @@ function createOrganizationDetailView(org) {
                                     <span class="stat-value-large">${revenue}</span>
                                 </div>
                             </div>
-                        ` : ''}
-                        ${assets ? `
+                        ` :''}
+${assets ? `
                             <div class="financial-stat">
                                 <i class="fas fa-building"></i>
                                 <div>
@@ -402,7 +398,7 @@ function createOrganizationDetailView(org) {
                                     <span class="stat-value-large">${assets}</span>
                                 </div>
                             </div>
-                        ` : ''}
+                        `:''}
                         ${income ? `
                             <div class="financial-stat">
                                 <i class="fas fa-money-bill-wave"></i>
@@ -424,20 +420,20 @@ function createOrganizationDetailView(org) {
                                         <span class="info-value">${formatCurrency(latestFiling.totrevenue)}</span>
                                     </div>
                                 ` : ''}
-                                ${latestFiling.totassetsend ? `
+                                ${latestFiling.totassetsend?`
                                     <div class="info-item">
                                         <span class="info-label">Assets (End of Year)</span>
                                         <span class="info-value">${formatCurrency(latestFiling.totassetsend)}</span>
                                     </div>
                                 ` : ''}
-                                ${latestFiling.totliabend ? `
+                                ${latestFiling.totliabend?`
                                     <div class="info-item">
                                         <span class="info-label">Liabilities</span>
                                         <span class="info-value">${formatCurrency(latestFiling.totliabend)}</span>
                                     </div>
                                 ` : ''}
-                                ${latestFiling.totexpns ? `
-                                    <div class="info-item">
+                                ${latestFiling.totexpns ?`
+                                   <div class="info-item">
                                         <span class="info-label">Total Expenses</span>
                                         <span class="info-value">${formatCurrency(latestFiling.totexpns)}</span>
                                     </div>
@@ -446,8 +442,7 @@ function createOrganizationDetailView(org) {
                         </div>
                     ` : ''}
                 </div>
-                
-                <!-- Contact Tab -->
+<!--Contact Tab -->
                 <div class="tab-content" id="contact">
                     <h3>Contact Information</h3>
                     <div class="contact-info">
@@ -455,21 +450,21 @@ function createOrganizationDetailView(org) {
                             <div class="contact-item">
                                 <i class="fas fa-map-marker-alt"></i>
                                 <div>
-                                    <strong>Address</strong>
+                                   <strong>Address</strong>
                                     <p>${escapeHtml(org.address)}</p>
                                     <p>${escapeHtml(city)}, ${escapeHtml(state)} ${escapeHtml(org.zipcode || '')}</p>
                                 </div>
                             </div>
                         ` : ''}
                         
-                        ${latestFiling?.website ? `
-                            <div class="contact-item">
+                        ${latestFiling?.website? `
+                           <div class="contact-item">
                                 <i class="fas fa-globe"></i>
                                 <div>
                                     <strong>Website</strong>
                                     <a href="${escapeHtml(latestFiling.website)}" target="_blank" rel="noopener noreferrer">
                                         ${escapeHtml(latestFiling.website)}
-                                        <i class="fas fa-external-link-alt"></i>
+                                       <i class="fas fa-external-link-alt"></i>
                                     </a>
                                 </div>
                             </div>
@@ -479,14 +474,14 @@ function createOrganizationDetailView(org) {
                             <i class="fas fa-search"></i>
                             <div>
                                 <strong>Verify on ProPublica</strong>
-                                <a href="https://projects.propublica.org/nonprofits/organizations/${org.ein}" target="_blank" rel="noopener noreferrer">
+<a href="https://projects.propublica.org/nonprofits/organizations/${org.ein}" target="_blank" rel="noopener noreferrer">
                                     View full IRS records
                                     <i class="fas fa-external-link-alt"></i>
                                 </a>
                             </div>
                         </div>
-                    </div>
-                </div>
+</div>
+</div>
                 
                 <!-- Filings Tab -->
                 ${latestFiling ? `
@@ -498,17 +493,17 @@ function createOrganizationDetailView(org) {
                                     <div class="filing-year">
                                         <i class="fas fa-calendar-alt"></i>
                                         <strong>${filing.tax_prd_yr || 'N/A'}</strong>
-                                    </div>
-                                    <div class="filing-info">
+</div>
+                                  <div class="filing-info">
                                         ${filing.totrevenue ? `<span>Revenue: ${formatCurrency(filing.totrevenue)}</span>` : ''}
-                                        ${filing.totassetsend ? `<span>Assets: ${formatCurrency(filing.totassetsend)}</span>` : ''}
+                                        ${filing.totassetsend ? `<span>Assets: ${formatCurrency(filing.totassetsend)}</span>`: ''}
                                     </div>
                                     ${filing.pdf_url ? `
                                         <a href="${escapeHtml(filing.pdf_url)}" target="_blank" rel="noopener noreferrer" class="btn-filing">
                                             <i class="fas fa-file-pdf"></i> View PDF
                                         </a>
                                     ` : ''}
-                                </div>
+</div>
                             `).join('') || '<p>No filings available</p>'}
                         </div>
                     </div>
@@ -522,38 +517,38 @@ function createOrganizationDetailView(org) {
  * Get icon based on NTEE classification code
  */
 function getClassificationIcon(nteeCode) {
-    if (!nteeCode) return '<i class="fas fa-building"></i>';
+   if (!nteeCode)return'<i class="fas fa-building"></i>';
     
     const prefix = nteeCode.charAt(0).toUpperCase();
     const iconMap = {
         'A': '<i class="fas fa-palette"></i>', // Arts
-        'B': '<i class="fas fa-graduation-cap"></i>', // Education
+        'B': '<i class="fas fa-graduation-cap"></i>',// Education
         'C': '<i class="fas fa-leaf"></i>', // Environment
         'D': '<i class="fas fa-paw"></i>', // Animals
         'E': '<i class="fas fa-heartbeat"></i>', // Healthcare
-        'F': '<i class="fas fa-brain"></i>', // Mental Health
+       'F': '<i class="fas fa-brain"></i>', // Mental Health
         'G': '<i class="fas fa-hand-holding-medical"></i>', // Diseases
         'H': '<i class="fas fa-clinic-medical"></i>', // Medical Research
         'I': '<i class="fas fa-shield-alt"></i>', // Crime & Safety
         'J': '<i class="fas fa-briefcase"></i>', // Employment
         'K': '<i class="fas fa-utensils"></i>', // Food & Agriculture
-        'L': '<i class="fas fa-home"></i>', // Housing
+        'L': '<i class="fas fa-home"></i>',//Housing
         'M': '<i class="fas fa-balance-scale"></i>', // Legal
         'N': '<i class="fas fa-running"></i>', // Recreation
         'O': '<i class="fas fa-child"></i>', // Youth Development
-        'P': '<i class="fas fa-hands-helping"></i>', // Human Services
+        'P': '<i class="fasfa-hands-helping"></i>', // Human Services
         'Q': '<i class="fas fa-globe"></i>', // International
         'R': '<i class="fas fa-fist-raised"></i>', // Civil Rights
-        'S': '<i class="fas fa-users"></i>', // Community
+        'S': '<i class="fas fa-users"></i>',// Community
         'T': '<i class="fas fa-hands"></i>', // Philanthropy
         'U': '<i class="fas fa-university"></i>', // Science
-        'V': '<i class="fas fa-network-wired"></i>', // Social Science
-        'W': '<i class="fas fa-handshake"></i>', // Public Affairs
+        'V': '<i class="fas fa-network-wired"></i>', //Social Science
+        'W':'<i class="fas fa-handshake"></i>', // Public Affairs
         'X': '<i class="fas fa-church"></i>', // Religion
         'Y': '<i class="fas fa-building"></i>' // Mutual Benefit
     };
     
-    return iconMap[prefix] || '<i class="fas fa-building"></i>';
+    return iconMap[prefix] || '<iclass="fas fa-building"></i>';
 }
 
 // ============================================================================
@@ -567,12 +562,12 @@ function formatCurrency(amount) {
     if (!amount || amount === 0) return null;
     
     const num = parseInt(amount);
-    if (isNaN(num)) return null;
+    if (isNaN(num))return null;
     
-    if (num >= 1000000000) {
+    if(num >=1000000000) {
         return `$${(num / 1000000000).toFixed(1)}B`;
     } else if (num >= 1000000) {
-        return `$${(num / 1000000).toFixed(1)}M`;
+       return `$${(num /1000000).toFixed(1)}M`;
     } else if (num >= 1000) {
         return `$${(num / 1000).toFixed(0)}K`;
     } else {
@@ -581,8 +576,7 @@ function formatCurrency(amount) {
 }
 
 /**
- * Format date string
- */
+* Format date string*/
 function formatDate(dateString) {
     if (!dateString) return 'N/A';
     
@@ -591,8 +585,8 @@ function formatDate(dateString) {
     
     return date.toLocaleDateString('en-US', { 
         year: 'numeric', 
-        month: 'long', 
-        day: 'numeric' 
+        month:'long', 
+       day: 'numeric' 
     });
 }
 
@@ -619,7 +613,7 @@ function escapeHtml(text) {
 function showLoading() {
     nonprofitExplorerState.isLoading = true;
     document.getElementById('loadingState').style.display = 'flex';
-    document.getElementById('resultsGrid').style.display = 'none';
+   document.getElementById('resultsGrid').style.display = 'none';
     document.getElementById('resultsHeader').style.display = 'none';
     document.getElementById('emptyState').style.display = 'none';
     document.getElementById('errorState').style.display = 'none';
@@ -629,7 +623,7 @@ function showLoading() {
  * Hide loading state
  */
 function hideLoading() {
-    nonprofitExplorerState.isLoading = false;
+   nonprofitExplorerState.isLoading =false;
     document.getElementById('loadingState').style.display = 'none';
     document.getElementById('resultsGrid').style.display = 'grid';
 }
@@ -639,7 +633,7 @@ function hideLoading() {
  */
 function showError(message) {
     document.getElementById('errorState').style.display = 'flex';
-    document.getElementById('errorMessage').textContent = message;
+document.getElementById('errorMessage').textContent= message;
     document.getElementById('loadingState').style.display = 'none';
     document.getElementById('resultsGrid').style.display = 'none';
     document.getElementById('resultsHeader').style.display = 'none';
@@ -648,11 +642,8 @@ function showError(message) {
 
 // ============================================================================
 // Event Handlers
-// ============================================================================
-
-/**
- * Handle search input
- */
+// ============================================================================/**
+ * Handle search input*/
 async function handleSearch(query) {
     if (!query || query.trim().length < 2) {
         nonprofitExplorerState.currentResults = [];
@@ -662,10 +653,10 @@ async function handleSearch(query) {
     
     nonprofitExplorerState.currentQuery = query;
     
-    showLoading();
+   showLoading();
     
     try {
-        const data = await searchNonprofits(query);
+const data = await searchNonprofits(query);
         state.currentResults = data.organizations || [];
         
         hideLoading();
@@ -678,7 +669,7 @@ async function handleSearch(query) {
 }
 
 /**
- * Debounce function for search input
+ * Debounce function forsearch input
  */
 function debounce(func, wait) {
     let timeout;
@@ -696,7 +687,7 @@ function debounce(func, wait) {
 // Initialization
 // ============================================================================
 
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded',() => {
     console.log('🚀 Nonprofit Explorer initialized');
     
     // Search input
@@ -704,16 +695,16 @@ document.addEventListener('DOMContentLoaded', () => {
     const clearBtn = document.getElementById('clearSearch');
     const debouncedSearch = debounce(handleSearch, 500);
     
-    // Only attach event listeners if elements exist (safety check for pages without nonprofit search)
+// Only attach event listeners if elementsexist (safety check forpages without nonprofit search)
     if (searchInput) {
         searchInput.addEventListener('input', (e) => {
         const query = e.target.value.trim();
         
         // Show/hide clear button
-        if (query.length > 0) {
+        if (query.length > 0){
             clearBtn.style.display = 'flex';
         } else {
-            clearBtn.style.display = 'none';
+           clearBtn.style.display = 'none';
         }
         
         debouncedSearch(query);
@@ -725,7 +716,7 @@ document.addEventListener('DOMContentLoaded', () => {
         searchInput.value = '';
                 clearBtn.style.display = 'none';
                 nonprofitExplorerState.currentResults = [];
-                renderResults([]);
+renderResults([]);
                 const featuredCats = document.getElementById('featuredCategories');
                 if (featuredCats) featuredCats.style.display = 'block';
             });
@@ -733,8 +724,8 @@ document.addEventListener('DOMContentLoaded', () => {
         
         // Example searches
         document.querySelectorAll('.example-btn').forEach(btn => {
-            btn.addEventListener('click', () => {
-                const query = btn.dataset.query;
+            btn.addEventListener('click',() => {
+                const query= btn.dataset.query;
                 searchInput.value = query;
                 if (clearBtn) clearBtn.style.display = 'flex';
                 handleSearch(query);
@@ -744,7 +735,7 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // Category buttons (search section)
     document.querySelectorAll('.filter-btn').forEach(btn => {
-        btn.addEventListener('click', () => {
+        btn.addEventListener('click', () =>{
             // Update active state
             document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
@@ -753,8 +744,8 @@ document.addEventListener('DOMContentLoaded', () => {
             state.currentCategory = category;
             
             if (category === 'all') {
-                // Show all current results
-                if (state.currentResults.length > 0) {
+                // Showall current results
+                if(state.currentResults.length > 0) {
                     renderResults(state.currentResults);
                 }
             } else {
@@ -772,9 +763,9 @@ document.addEventListener('DOMContentLoaded', () => {
     // Category exploration cards
     document.querySelectorAll('.btn-category').forEach(btn => {
         btn.addEventListener('click', (e) => {
-            e.stopPropagation();
+e.stopPropagation();
             const query = btn.dataset.query;
-            searchInput.value = query;
+            searchInput.value= query;
             clearBtn.style.display = 'flex';
             handleSearch(query);
             window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -783,14 +774,14 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // Emergency resources modal
     const emergencyBtn = document.getElementById('showEmergencyResources');
-    const emergencyModal = document.getElementById('emergencyModal');
+    const emergencyModal= document.getElementById('emergencyModal');
     const emergencyModalClose = document.getElementById('emergencyModalClose');
     const emergencyModalOverlay = document.getElementById('emergencyModalOverlay');
     
     // Only add event listeners if elements exist
     if (emergencyBtn && emergencyModal) {
-        emergencyBtn.addEventListener('click', () => {
-            emergencyModal.style.display = 'block';
+       emergencyBtn.addEventListener('click', () => {
+           emergencyModal.style.display = 'block';
             document.body.style.overflow = 'hidden';
         });
     }
@@ -811,16 +802,16 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // Emergency resource search buttons (with location awareness)
     document.querySelectorAll('.btn-resource').forEach(btn => {
-        btn.addEventListener('click', async () => {
+        btn.addEventListener('click', async ()=> {
             const query = btn.dataset.query;
             searchInput.value = query;
             clearBtn.style.display = 'flex';
             closeEmergencyModal();
             
             // Try to use user's location if available
-            if ('geolocation' in navigator) {
+            if ('geolocation'in navigator) {
                 try {
-                    const position = await new Promise((resolve, reject) => {
+                    const position =await new Promise((resolve,reject) => {
                         navigator.geolocation.getCurrentPosition(resolve, reject);
                     });
                     
@@ -831,7 +822,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         lng: position.coords.longitude,
                         useLocation: true
                     });
-                } catch (error) {
+} catch (error) {
                     console.log('Location not available, searching without location');
                     handleSearch(query);
                 }
@@ -843,13 +834,13 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
     
-    // Organization detail modal
-    const orgModal = document.getElementById('orgModal');
+   // Organizationdetail modal
+   const orgModal = document.getElementById('orgModal');
     const modalClose = document.getElementById('modalClose');
     const modalOverlay = document.getElementById('modalOverlay');
     
     const closeOrgModal = () => {
-        if (orgModal) {
+        if (orgModal){
             orgModal.style.display = 'none';
             document.body.style.overflow = 'auto';
         }
@@ -859,61 +850,69 @@ document.addEventListener('DOMContentLoaded', () => {
     if (modalClose) {
         modalClose.addEventListener('click', closeOrgModal);
     } else {
-        console.warn('⚠️ Element #modalClose not found - modal close button may not work');
+        console.warn('⚠️ Element #modalClosenot found - modal close button may not work');
     }
-    
-    if (modalOverlay) {
+if (modalOverlay) {
         modalOverlay.addEventListener('click', closeOrgModal);
     } else {
         console.warn('⚠️ Element #modalOverlay not found - modal overlay click may not work');
     }
     
-    // Keyboard accessibility for modals
-    document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape') {
-            if (orgModal.style.display === 'block') {
+    // Keyboard accessibility for modalsdocument.addEventListener('keydown', (e) => {
+        if(e.key === 'Escape'){
+            if (orgModal &&orgModal.style.display === 'block') {
                 closeOrgModal();
             }
-            if (emergencyModal.style.display === 'block') {
+            if (emergencyModal && emergencyModal.style.display === 'block') {
                 closeEmergencyModal();
             }
         }
     });
     
-    // Export results button
-    document.getElementById('exportResults').addEventListener('click', () => {
-        if (state.currentResults.length === 0) return;
-        
-        const csvContent = exportToCSV(state.currentResults);
-        downloadCSV(csvContent, `nonprofits_${Date.now()}.csv`);
-    });
+    // Export results button - only addif element exists
+    const exportBtn = document.getElementById('exportResults');
+    if (exportBtn) {
+        exportBtn.addEventListener('click', () => {
+            if (state.currentResults.length === 0) return;
+            
+            const csvContent = exportToCSV(state.currentResults);
+            downloadCSV(csvContent, `nonprofits_${Date.now()}.csv`);
+        });
+    } else{
+        console.warn('⚠️ Element #exportResults not found - export button may not work');
+    }
     
-    // Retry button
-    document.getElementById('retryBtn').addEventListener('click', () => {
-        if (state.currentQuery) {
-            handleSearch(state.currentQuery);
-        }
-    });
+    // Retry button - only add if element exists
+    const retryBtn = document.getElementById('retryBtn');
+    if (retryBtn){
+        retryBtn.addEventListener('click',() => {
+            if (state.currentQuery) {
+                handleSearch(state.currentQuery);
+            }
+        });
+    } else {
+        console.warn('⚠️ Element #retryBtn not found - retry button may not work');
+    }
 });
 
 /**
  * Export results to CSV
  */
-function exportToCSV(organizations) {
-    const headers = ['Name', 'EIN', 'City', 'State', 'Revenue', 'Assets', 'Classification'];
+functionexportToCSV(organizations) {
+   const headers = ['Name', 'EIN', 'City', 'State', 'Revenue', 'Assets', 'Classification'];
     const rows = organizations.map(org => [
         org.name,
         org.ein,
         org.city || '',
-        org.state || '',
-        org.revenue_amount || '',
+org.state || '',
+        org.revenue_amount|| '',
         org.asset_amount || '',
-        org.ntee_code || ''
+org.ntee_code || ''
     ]);
     
     const csvRows = [headers, ...rows].map(row => 
         row.map(cell => `"${String(cell).replace(/"/g, '""')}"`).join(',')
-    );
+);
     
     return csvRows.join('\n');
 }
@@ -927,8 +926,8 @@ function downloadCSV(content, filename) {
     const url = URL.createObjectURL(blob);
     
     link.setAttribute('href', url);
-    link.setAttribute('download', filename);
-    link.style.display = 'none';
+   link.setAttribute('download', filename);
+   link.style.display = 'none';
     
     document.body.appendChild(link);
     link.click();
