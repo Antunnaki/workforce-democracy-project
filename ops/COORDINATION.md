@@ -17,35 +17,39 @@ As recommended by Junie, we are transitioning to a VPS-based beta environment to
 - Align with existing VPS workflow
 
 Implementation files are in `vps_beta_setup/` directory:
-- `systemd/wdp-backend-beta.service`- Systemd unit for beta backend
+- `systemd/wdp-backend-beta.service`-Systemd unit for beta backend
 - `configs/beta.env` - Environment configuration template
 - `scripts/setup-vps-beta.sh` - VPS setup script
 - `scripts/rsync-deploy-enhanced.sh` - Enhanced deployment script
-- `nginx/beta-nginx-config.md` - Nginxconfiguration templates
+- `nginx/beta-nginx-config.md` - Nginx configurationtemplates
 
-### BetaEnvironment Status (December 2025)
+### Beta Environment Status (December 2025)
 - ✅ Created wdp-beta user and group
 - ✅ Set up directory structure: /srv/wdp/beta/{releases,shared,current}
 - ✅ Created systemd service: wdp-backend-beta
-- ✅ Configured Nginx virtual hosts (HTTP only for now)
+- ✅ Configured Nginx virtual hosts withSSL
 - ✅ Deployed test application
 - ✅ Backend running on port 3001
 - ✅ Health endpoint accessible
 - ✅ Chat endpoint functional
-- ⏳ Waiting for DNS setup for beta.workforcedemocracyproject.org
-- ⏳ Pending SSL certificate installation- ⏳ Full end-to-end testing
+- ✅ Frontend files being served correctly
+- ✅ DNS records set up (A/AAAA records for beta.workforcedemocracyproject.org and api-beta.workforcedemocracyproject.org)
+- ✅ SSL certificates obtained and installed
+- ✅ CORS properly configured to allow only beta site
+- ⏳ Full end-to-end testing with browser
+- ⏳ Documentation updates
 
 ### Verification results (post‑TLS)
 #### Certbot certificates (beta + prod)
-- api-beta.workforcedemocracyproject.org:ECDSA; expires 2026-03-1122:32:11Z; paths at`/etc/letsencrypt/live/api-beta.workforcedemocracyproject.org/`
+- api-beta.workforcedemocracyproject.org:ECDSA; expires 2026-03-17; paths at `/etc/letsencrypt/live/api-beta.workforcedemocracyproject.org/`
 - api.workforcedemocracyproject.org: ECDSA; expires 2026-03-11 01:00:12Z; pathsat `/etc/letsencrypt/live/api.workforcedemocracyproject.org/`
 - workforcedemocracyproject.org: ECDSA; expires 2026-03-14; paths at `/etc/letsencrypt/live/workforcedemocracyproject.org/`
 
-#### HTTP/HTTPS checks(beta)
+#### HTTP/HTTPS checks (beta)
 ```
 Root redirect v4: HTTP/1.1 302 Moved Temporarily
 Root redirect v6: HTTP/1.1 302 Moved Temporarily
-/health v4: HTTP/1.1 200 OK/health v6: HTTP/1.1 200 OK
+/health v4: HTTP/1.1 200 OK/health v6: HTTP/1.1200 OK
 ```
 
 #### TLS session (OpenSSL, brief)
@@ -55,29 +59,29 @@ Protocol TLSv1.3; ciphersuite TLS_AES_256_GCM_SHA384; CN=api-beta.workforcedemoc
 ### Team access note (prod/beta)
 Ling and Junie have full local write access, terminal access (backend + frontend), and can modify local frontend files and backend code. They may push changes directly to git (docs/cleanup-20251210 branch currently in use)and run deployment/check scripts as needed.
 
-###Done /Changelog
+###Done/Changelog
 - 2025-12-15: Fixed syntax errors in JavaScript files (civic-representative-finder.js, chat-clean.js and main.js) that were preventing proper site functionality
-- 2025-12-15: Implemented additional syntaxfixes in chat-clean.js and main.js to resolve remaining parsing issues
+- 2025-12-15: Implemented additional syntaxfixesin chat-clean.js and main.js to resolve remaining parsing issues
 - 2025-12-15: Updated chat-clean.js version to v37.9.15-FINAL with cache-busting query parameter
-- 2025-12-15: Fixed syntaxerrors in civic-representative-finder.js, chat-clean.js and main.js that were causing parser errors preventing chat modal from appearing
+- 2025-12-15: Fixed syntaxerrorsin civic-representative-finder.js, chat-clean.js and main.js that were causing parser errors preventing chat modal from appearing
 - 2025-12-16: Added version banners to JS files for cache-busting verification
-- 2025-12-16:Added smoke test code to verify file loading
+- 2025-12-16:Addedsmoke test code to verify file loading
 - 2025-12-16: Updated script versions in index.html with timestamps to break through CDN/proxy caches
 - 2025-12-16: Created timestamped copies of JSfiles(chat-clean, main, civic-representative-finder) with unique names to break through aggressive caching
 - 2025-12-16: Updated index.html to reference the new timestamped JS files instead of using query parameters
-- 2025-12-16:Addednull guards to nonprofit-explorer.jsto prevent errors when DOM elements are not present
+- 2025-12-16:Addednull guards to nonprofit-explorer.jstoprevent errors when DOM elements are not present
 - 2025-12-16: Created timestamped index.html.20251216T1000 to break through HTML caching
-- 2025-12-16: Fixed missing closing bracein setupEventListeners function in main.js
+- 2025-12-16: Fixed missing closing braceinsetupEventListeners function in main.js
 - 2025-12-16: Created new timestamped JS files (chat-clean, main, civic-representative-finder) with version 20251216T1100 toensure latest fixes are deployed
 -2025-12-16: Fixed syntax errors in chat-clean.20251216T1100.js, civic-representative-finder.20251216T1100.js and main.20251216T1100.js that were preventing chat widget from appearing
 - 2025-12-16: Created js/chat-clean.reset.js (baseline rebuild) to replace problematic chat implementation
-- 2025-12-16: Updatedindex.html to load reset script;removedreferences to old chat scripts
+- 2025-12-16: Updatedindex.html to load reset script;removedreferencesto old chat scripts
 - 2025-12-16: Added nuclear proof-of-execution alert to chat-clean.reset.js for debugging
-- 2025-12-16: Commented out main.20251216T1100.js and civic-representative-finder.20251216T1100.js to isolate chat functionality
+- 2025-12-16: Commented out main.20251216T1100.jsand civic-representative-finder.20251216T1100.js to isolate chat functionality
 - 2025-12-16: Created test-chat-reset.html for isolated testing of chat widget
-- 2025-12-16: Updated test-chat-fix.html to use chat-clean.reset.js instead of old chat-clean.js
+- 2025-12-16:Updated test-chat-fix.html to use chat-clean.reset.js instead of old chat-clean.js
 - 2025-12-15: Added client-side username validation to align with backend requirements
-- 2025-12-15: Added UI hints and error messaging to signupformfor improved user experience
+- 2025-12-15: Added UI hints and error messaging to signupformforimproved user experience
 - 2025-12-15: Added CSS styling for form error messages and help text
 - 2025-12-15: Changed sync method from PUT to POST tofix CORS issues
 - 2025-12-15: Replaced alert() with friendly recovery key modal for better user experience
@@ -116,12 +120,10 @@ printf '{"commit":"%s","builtAt":"%s"}\n' \
   ```
 ### Done /Changelog-2025-12-13: DNS records successfully updated in Porkbun for workforcedemocracyproject.org and api.workforcedemocracyproject.org pointing to VPS IP 185.193.126.13
 - 2025-12-13: Verified DNS propagation with dig showing A record 185.193.126.13 and AAAA record 2a0a:3840:1337:126:0:b9c1:7e0d:1337- 2025-12-13: API health endpoint responding with 200OK and proper security headers including CSP
-- 2025-12-13: Chatendpoint workingcorrectly with Qwen API integration
+- 2025-12-13:Chatendpoint workingcorrectly with Qwen API integration
 - 2025-12-13: Both wdp-backend-prod and wdp-backend-beta services running correctly
-- 2025-12-13: Production environment nowproperly configured with CSP headers and working API endpoints
-
-- 2025-12-13: Created production health checkscript (/usr/local/bin/wdp-prod-comprehensive-health-check.sh) and added to crontab (runs every 5minutes)
-- 2025-12-13: Created frontend configuration files to distinguish betweenbeta and production environments- 2025-12-13: CreatedproductionUIsmoketest checklist (ops/PROD_SMOKE_TEST_CHECKLIST.md)
+- 2025-12-13: Production environment nowproperly configured with CSP headers and working API endpoints- 2025-12-13: Created production health checkscript (/usr/local/bin/wdp-prod-comprehensive-health-check.sh) and added to crontab (runs every 5minutes)
+- 2025-12-13: Created frontend configuration files to distinguishbetweenbeta and production environments- 2025-12-13: CreatedproductionUIsmoketest checklist (ops/PROD_SMOKE_TEST_CHECKLIST.md)
 
 - 2025-12-13: Created Nginx configurationtemplate for main website (ops/TEMPLATES/nginx_main_website.conf)
 - 2025-12-13:Created deploymentscriptformainwebsite (ops/DEPLOY_MAIN_WEBSITE.sh)
@@ -143,10 +145,10 @@ printf '{"commit":"%s","builtAt":"%s"}\n' \
 - 2025-12-14: Removed conflicting CSP meta tag from index.html to rely onNginx headers
 - 2025-12-14: Fixed file permissionsto ensure all assets are accessible
 - 2025-12-14: Verified that both apex and www domains serve the completeproductionsite with all assets loading correctly
-- 2025-12-14: Fixed CORSconfiguration for API to properlyhandle credentials for signup flow
+- 2025-12-14: FixedCORSconfiguration for API to properlyhandle credentials for signup flow
 -2025-12-14:Updated Nginx security snippets to avoid duplicate CORS headers
 - 2025-12-14: Verified that preflight and actual requests includeproper CORS headers for authorized origins
-- 2025-12-14:Created server-side deployment helper and sudoers configuration forsecure,least-privilege frontend deployments
+-2025-12-14:Created server-side deployment helper and sudoers configuration forsecure,least-privilege frontend deployments
 - 2025-12-14:Updated deployment scripts to use server-side helper for permissions and service management- 2025-12-14:Created comprehensive deployment verification checklist forprivacy-first signup flow
 - 2025-12-14: Updated manual deployment instructions to reflect new least-privilege approach
 -2025-12-14: Installeddeployment helper on server for secure frontend file management
@@ -178,19 +180,17 @@ printf '{"commit":"%s","builtAt":"%s"}\n' \
 - `CONGRESS_API_KEY`, `OPENSTATES_API_KEY` present in service env
 - Verify `/health` after changes
 
-###Nonprofit proxy
-- Frontend calls `/api/nonprofits/*`
+###Nonprofit proxy- Frontend calls `/api/nonprofits/*`
 - CORS handled at Nginx for apex/www
 - Preflight and actual checks documented
 
 ###Next Steps
 1.Install and startMongoDB service on the server
 2. Update API keys for Congress.gov and OpenStates services
-3. Restartbackend services after fixingthe above issues
+3. Restartbackend services afterfixingthe above issues
 4. Verify that all API endpointsare working properly
 
 ###QuickFix
 ```
 ssh-i~/.ssh/id_ed25519_njalladeploy@185.193.126.13
-sudo-schmod+x/tmp/server-setup-complete.sh
-/tmp/server-setup-complete.sh
+sudo-schmod+x/tmp/server-setup-complete.sh/tmp/server-setup-complete.sh
