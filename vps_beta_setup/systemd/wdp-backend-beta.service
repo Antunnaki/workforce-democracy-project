@@ -1,0 +1,19 @@
+[Unit]
+Description=WDP Backend (Beta)
+After=network.target
+
+[Service]
+User=wdp-beta
+Group=wdp-beta
+WorkingDirectory=/srv/wdp/beta/current/backend
+EnvironmentFile=/srv/wdp/beta/shared/beta.env
+ExecStart=/usr/bin/node server.js
+Restart=always
+RestartSec=5
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+
+[Install]
+WantedBy=multi-user.target
