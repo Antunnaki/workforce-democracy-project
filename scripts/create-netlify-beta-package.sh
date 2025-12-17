@@ -5,18 +5,18 @@
 echo "Creating Netlify beta deployment package..."
 
 # Remove old package if exists
-rm -f ../netlify_beta_deploy.zip
+rm -f netlify_beta_deploy.zip
 
 # Create new package with required files at root level
-zip -j ../netlify_beta_deploy.zip \
-    ../index.html \
-    ../chat.html \
-    ../js/app-shell.20251216.mjs \
-    ../js/modules/chat.20251216.mjs
+zip -j netlify_beta_deploy.zip \
+    index.html \
+    chat.html \
+    js/app-shell.20251216.mjs \
+    js/modules/chat.20251216.mjs
 
 echo "Netlify beta deployment package created: netlify_beta_deploy.zip"
 echo "Package contents:"
-unzip -l ../netlify_beta_deploy.zip
+unzip -l netlify_beta_deploy.zip
 
 echo ""
 echo "To deploy:"
