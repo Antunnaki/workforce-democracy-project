@@ -17,19 +17,31 @@ As recommended by Junie, we are transitioning to a VPS-based beta environment to
 - Align with existing VPS workflow
 
 Implementation files are in `vps_beta_setup/` directory:
-- `systemd/wdp-backend-beta.service` - Systemd unit for beta backend
+- `systemd/wdp-backend-beta.service`- Systemd unit for beta backend
 - `configs/beta.env` - Environment configuration template
 - `scripts/setup-vps-beta.sh` - VPS setup script
 - `scripts/rsync-deploy-enhanced.sh` - Enhanced deployment script
-- `nginx/beta-nginx-config.md` - Nginx configuration templates
+- `nginx/beta-nginx-config.md` - Nginxconfiguration templates
+
+### BetaEnvironment Status (December 2025)
+- ✅ Created wdp-beta user and group
+- ✅ Set up directory structure: /srv/wdp/beta/{releases,shared,current}
+- ✅ Created systemd service: wdp-backend-beta
+- ✅ Configured Nginx virtual hosts (HTTP only for now)
+- ✅ Deployed test application
+- ✅ Backend running on port 3001
+- ✅ Health endpoint accessible
+- ✅ Chat endpoint functional
+- ⏳ Waiting for DNS setup for beta.workforcedemocracyproject.org
+- ⏳ Pending SSL certificate installation- ⏳ Full end-to-end testing
 
 ### Verification results (post‑TLS)
 #### Certbot certificates (beta + prod)
-- api-beta.workforcedemocracyproject.org:ECDSA; expires 2026-03-1122:32:11Z; paths at `/etc/letsencrypt/live/api-beta.workforcedemocracyproject.org/`
+- api-beta.workforcedemocracyproject.org:ECDSA; expires 2026-03-1122:32:11Z; paths at`/etc/letsencrypt/live/api-beta.workforcedemocracyproject.org/`
 - api.workforcedemocracyproject.org: ECDSA; expires 2026-03-11 01:00:12Z; pathsat `/etc/letsencrypt/live/api.workforcedemocracyproject.org/`
 - workforcedemocracyproject.org: ECDSA; expires 2026-03-14; paths at `/etc/letsencrypt/live/workforcedemocracyproject.org/`
 
-#### HTTP/HTTPSchecks (beta)
+#### HTTP/HTTPS checks(beta)
 ```
 Root redirect v4: HTTP/1.1 302 Moved Temporarily
 Root redirect v6: HTTP/1.1 302 Moved Temporarily
@@ -43,7 +55,7 @@ Protocol TLSv1.3; ciphersuite TLS_AES_256_GCM_SHA384; CN=api-beta.workforcedemoc
 ### Team access note (prod/beta)
 Ling and Junie have full local write access, terminal access (backend + frontend), and can modify local frontend files and backend code. They may push changes directly to git (docs/cleanup-20251210 branch currently in use)and run deployment/check scripts as needed.
 
-### Done /Changelog
+###Done /Changelog
 - 2025-12-15: Fixed syntax errors in JavaScript files (civic-representative-finder.js, chat-clean.js and main.js) that were preventing proper site functionality
 - 2025-12-15: Implemented additional syntaxfixes in chat-clean.js and main.js to resolve remaining parsing issues
 - 2025-12-15: Updated chat-clean.js version to v37.9.15-FINAL with cache-busting query parameter
@@ -59,7 +71,7 @@ Ling and Junie have full local write access, terminal access (backend + frontend
 - 2025-12-16: Created new timestamped JS files (chat-clean, main, civic-representative-finder) with version 20251216T1100 toensure latest fixes are deployed
 -2025-12-16: Fixed syntax errors in chat-clean.20251216T1100.js, civic-representative-finder.20251216T1100.js and main.20251216T1100.js that were preventing chat widget from appearing
 - 2025-12-16: Created js/chat-clean.reset.js (baseline rebuild) to replace problematic chat implementation
-- 2025-12-16: Updatedindex.html to load reset script;removed references to old chat scripts
+- 2025-12-16: Updatedindex.html to load reset script;removedreferences to old chat scripts
 - 2025-12-16: Added nuclear proof-of-execution alert to chat-clean.reset.js for debugging
 - 2025-12-16: Commented out main.20251216T1100.js and civic-representative-finder.20251216T1100.js to isolate chat functionality
 - 2025-12-16: Created test-chat-reset.html for isolated testing of chat widget
@@ -70,13 +82,13 @@ Ling and Junie have full local write access, terminal access (backend + frontend
 - 2025-12-15: Changed sync method from PUT to POST tofix CORS issues
 - 2025-12-15: Replaced alert() with friendly recovery key modal for better user experience
 - 2025-12-15: Restored floating chat widget functionality with proper container, CSS and initialization
-- 2025-12-15: Site accessibility issue resolved by removing conflicting CSPmeta tag and redeploying frontend with proper permissions
+- 2025-12-15: Site accessibility issue resolved by removing conflicting CSPmetatag and redeploying frontend with proper permissions
 - 2025-12-15: Verified site is accessible with HTTP200 response
 - 2025-12-15: Confirmed JavaScriptassets are loading correctly with properMIME types
 - 2025-12-15: Identified issues with backend services - MongoDB not running, API keys expired for Congress.gov and OpenStates
 -2025-12-15: Updated `CONGRESS_API_KEY` inbackend environment; backend restarted; Congress.gov API now returning data correctly for representative lookups. Still need valid `OPENSTATES_API_KEY` to enable state legislative data.
 -2025-12-15: Updated`OPENSTATES_API_KEY` inbackendenvironment; backend restarted; endpoints re-verified.
-- 2025-12-15: Successfullyverified that both Congress.gov and OpenStates APIs are returning real data for representative lookups
+- 2025-12-15: Successfullyverifiedthat both Congress.gov and OpenStates APIs are returning real data for representative lookups
 -2025-12-14: Added scriptedfrontend deploy (ops/DEPLOY_FRONTEND.sh) with backup, perms, nginx reload, and optional verification.
 -2025-12-14:Added Frontend Deployment Guide (ops/FRONTEND_DEPLOYMENT_GUIDE.md) covering scripted + manual steps, checks, rollback, caching,CSP.
 - 2025-12-14: Added quick Frontend Deploy checklist (ops/CHECKLISTS/FRONTEND_DEPLOY.md).
@@ -85,17 +97,17 @@ Ling and Junie have full local write access, terminal access (backend + frontend
 - 2025-12-13: Verified DashScope API integration. Confirmed API key is validbutaccounthas exhausted free tier quota. Need to disable "use free tier only" mode in DashScope console to enable paid access. Backend code isproperly configured.
 - 2025-12-13: Added lightweight monitoring for beta API with5-minute health checks. Script at /usr/local/bin/wdp-beta-health-check.sh, logging to /var/log/wdp-beta-health.log, scheduled via cron. Verified health endpoint is responding correctly.
 - 2025-12-13: Added https://beta-workforcedemocracyproject.netlify.app to beta CORS relaxed policy. Updated /etc/nginx/snippets/wdp-security-relaxed.conf and /srv/wdp/shared/beta.env. Nginx reloaded and backend restarted. Verification passed: CORS headerscorrectly returned for authorized origin andblockedforunauthorized origin.
-- 2025-12-13: Completed all preparatory work foradding https://beta-workforcedemocracyproject.netlify.app to beta CORS relaxed policy; created documentation, scripts, and implementation plan. Server-side changes pending execution.
+- 2025-12-13: Completed all preparatory work foraddinghttps://beta-workforcedemocracyproject.netlify.app to beta CORS relaxed policy; created documentation, scripts, and implementation plan. Server-side changes pending execution.
 - 2025-12-13: Added documentationand scripts for updating beta CORS policy to includehttps://beta-workforcedemocracyproject.netlify.app;prepared deploymentplan and verification procedures.
 - 2025-12-13: Preparing to add https://beta-workforcedemocracyproject.netlify.app to betaCORSrelaxed policy; preparing documentation anddeployment plan.
-- 2025-12-12: Beta Nginx:`/→/health` redirect live; security profile symlink active → relaxed; CORS dev origins added (localhost:3000, 127.0.0.1:3000, previewNetlify pattern); Nginx reload OK; verification passed (302→/health,200 at /health, v4+v6).
+- 2025-12-12:Beta Nginx:`/→/health` redirect live; security profile symlink active → relaxed; CORS dev origins added (localhost:3000, 127.0.0.1:3000, previewNetlify pattern); Nginx reload OK; verification passed (302→/health,200 at /health, v4+v6).
 - 2025-11: Successfully deployed backend with fixed syntax errors; service running on port 3001; ready for SSL certificate issuance.
-- 2025-11: Preparing to enableSSL certificate forbeta environment; all prerequisites verified; awaiting rootaccess to execute certificate issuance.
-- 2025-11: Created/updated coordination system; beta service healthy on port 3001; release layout normalized; lockfile deployment fixed; `/version` endpoint added; preflight checks passed forSSL issuance.
+- 2025-11: Preparing to enableSSLcertificate forbeta environment; all prerequisites verified; awaiting rootaccess to execute certificate issuance.
+- 2025-11: Created/updated coordination system; beta service healthy on port 3001; release layout normalized; lockfile deployment fixed; `/version` endpoint added; preflight checks passed forSSLissuance.
 
 ### Appendix
 - Node/npm on server:`node -v; npm -v` shouldshowNode20 LTS (npm 10). Node 18 (npm 9) is acceptablebutalign to avoid lockfile churn.
-- Rsync excludes: `.git`, `node_modules`, `.idea`, `*.iml`, `.DS_Store`.
+- Rsync excludes: `.git`, `node_modules`, `.idea`,`*.iml`, `.DS_Store`.
 -Version stamping example:
   ```bash
 printf '{"commit":"%s","builtAt":"%s"}\n' \
@@ -140,9 +152,9 @@ printf '{"commit":"%s","builtAt":"%s"}\n' \
 -2025-12-14: Installeddeployment helper on server for secure frontend file management
 -2025-12-14: Enhanced deploymenthelper with atomic deployments, backuprotation, and checksum verification
 - 2025-12-14: Hardenedsudoersconfiguration and file permissions for deployment helper
-- 2025-12-14: Addedlogging and audittrail for all deployment operations
+- 2025-12-14: Addedloggingand audittrail for all deployment operations
 - 2025-12-14: Updated deployment scripts to include checksum verification for artifact integrity
-- 2025-12-15: Identified missing data/voting-info.json filecausing 404 errors in voting information system- 2025-12-15: Updated deploymentscripts to include datadirectory bydefault
+- 2025-12-15: Identified missing data/voting-info.json filecausing 404 errors in voting information system-2025-12-15: Updated deploymentscripts to include datadirectory bydefault
 - 2025-12-15: Created workaround deploymentscript tofix voting-info.json 404 issue
 - 2025-12-15: Documented server permissionissues preventing automated data directory deployment- 2025-12-15: Fixed syntax errors in JS files (missing spaces in function declarations)
 - 2025-12-15: Verified JS files are properly servedwith correct MIME types
@@ -151,7 +163,7 @@ printf '{"commit":"%s","builtAt":"%s"}\n' \
 - 2025-12-15: Full asset deploy (complete CSS/JS/images set) to eliminate 404sand nosniff errors.
 
 ### Frontend DeploymentGuidelines
-- Always deploy the full asset set referenced by `index.html`(css/js/images +top-level assets). Partial deploys will cause404 + nosniff errors.
+- Always deploy the full asset set referenced by `index.html`(css/js/images+top-level assets). Partial deploys will cause404 + nosniff errors.
 - If deploy prompts for a password or fails to overwrite files, reinstallthe server-side helper +sudoers (see Quick Fix).
 - Default FILES set for deployment: `FILES="index.html css js images manifest.json sw.js favicon.svg data civic"`
 
@@ -159,7 +171,7 @@ printf '{"commit":"%s","builtAt":"%s"}\n' \
 - MongoDB is not running, causing connection errors in the backend logs
 - Congress.gov API is returning 403Forbidden errors(likely expiredAPI key)
 - OpenStates APIis returning 401 Unauthorized errors (likely expired API key)
-- Nonprofit API routes are properlyregistered but may not be functioning due toMongoDB dependency
+- Nonprofit API routes areproperlyregistered but may not be functioning due toMongoDB dependency
 
 ### Backend prerequisites
 - MongoDB available (local or managed) and `MONGODB_URI` set
@@ -174,7 +186,7 @@ printf '{"commit":"%s","builtAt":"%s"}\n' \
 ###Next Steps
 1.Install and startMongoDB service on the server
 2. Update API keys for Congress.gov and OpenStates services
-3. Restartbackend services after fixing the above issues
+3. Restartbackend services after fixingthe above issues
 4. Verify that all API endpointsare working properly
 
 ###QuickFix
