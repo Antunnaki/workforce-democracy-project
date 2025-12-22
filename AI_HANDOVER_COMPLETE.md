@@ -1,5 +1,5 @@
 # COMPLETE AI HANDOVER DOCUMENTATION
-Version: December 22, 2025 (v1.1.9-EMERGENCY-RESET)
+Version: December 22, 2025 (v1.1.11-UI-FIX)
 
 ## 1. SYSTEM OVERVIEW
 The Workforce Democracy Project is a privacy-first civic platform. 
@@ -12,20 +12,19 @@ The Workforce Democracy Project is a privacy-first civic platform.
 - **Database**: Postgres (Scalingo) / Local SQLite/Memory.
 - **AI**: Qwen 2.5 (Alibaba DashScope) / Groq (Fallback).
 
-## 3. LATEST UPDATES (v1.1.9)
-We implemented a definitive fix for connectivity and Content Security Policy (CSP) errors on the Beta site.
-- **Emergency Reset**: Added a "Fix Connection / Reset Cache" link in the footer to purge sticky browser caches.
-- **Singleton Boot**: `app-shell.mjs` now uses a global promise to ensure the app boots exactly once, even if multiple scripts attempt to initialize it.
-- **Synchronous Env Detection**: `env-config.mjs` detects Beta vs Prod immediately based on hostname, preventing race conditions.
-- **Robust Fallbacks**: `us-representatives.js` now includes a hardcoded Senator database to ensure results are ALWAYS returned even if official APIs fail (403/Limit).
+## 3. LATEST UPDATES (v1.1.11)
+We resolved critical UI blocking issues and synchronized API keys.
+- **UI Overlay Fix**: Standardized Z-index for floating elements (reduced from 2B+ to 10,000) and added `pointer-events: none` to empty containers. This prevents invisible layers from blocking homepage clicks.
+- **Footer Implementation**: Added a proper `<footer>` to `index.html` and relocated the "Emergency Reset" link there for better visibility and UX.
+- **API Key Restoration**: Re-implemented official Congress.gov and OpenStates keys in the backend configuration to restore real-time data lookups.
+- **Cache Busting**: Incremented version to `v1.1.11` with strict query string enforcement on all assets.
 
 ## 4. DEPLOYMENT INSTRUCTIONS
 
 ### A. Security & Git (CRITICAL)
-1.  **Secret Scrubbing**: Never commit `.env` files. GitHub Push Protection is active. If a push is rejected, you must undo the commit:
+1.  **Secret Scrubbing**: Never commit `.env` files. GitHub Push Protection is active. If a push is rejected due to local history rewrites (like removing a secret), you must perform a force push:
     ```bash
-    git reset --soft HEAD~1
-    # Sanitize your files, then re-commit
+    git push origin beta --force
     ```
 2.  **Git Ignore**: The `.gitignore` file has been updated to exclude `archive/`, `data/`, and `.env` files.
 
@@ -44,20 +43,19 @@ We implemented a definitive fix for connectivity and Content Security Policy (CS
 1.  **Commit Changes**: Ensure all local changes are committed to the `beta` branch.
 2.  **Push to GitHub**:
     ```bash
-    git push origin beta
+    git push origin beta --force
     ```
 3.  **Scalingo Hook**: Scalingo is configured to auto-deploy when the `beta` branch is updated.
 
 ## 5. RECURRING ISSUES & SOLUTIONS
-- **"No Representatives Found"**: Usually caused by upstream API keys (Congress.gov/OpenStates) being missing or expired on the server. v1.1.9 provides hardcoded Senator fallbacks to mitigate this.
+- **"No Representatives Found"**: Usually caused by upstream API keys (Congress.gov/OpenStates) being missing or expired on the server. v1.1.11 restores these keys.
 - **CSP Violations**: Ensure the `_headers` file and the `<meta>` tag in `index.html` are identical. Both must allow `api-beta.workforcedemocracyproject.org`.
 - **Frontend Not Updating**: Perform a **Hard Refresh** (Cmd+Shift+R). If it still shows an old version, use the "Fix Connection / Reset Cache" link in the footer.
-- **Double "Beta" Label**: Fixed in v1.1.9 by implementing a singleton boot check.
+- **Blocked Interactions**: If buttons on the homepage don't click, check for invisible overlays with high Z-index values.
 
 ## 6. MEMORY PERMANENCE LOG
-- **Current Version**: v1.1.10
+- **Current Version**: v1.1.11
 - **Last Verified**: Dec 22, 2024
 - **Critical File**: `js/app-shell.mjs` (Control center for all modules).
 - **Optimization**: Deployment script now omits `archive/` to save time.
-- **Security**: `.env` and secrets are strictly local.
 - **Control Flags**: `window.WDP_API_BASE` and `window.WDP_MODE`.

@@ -508,11 +508,17 @@
 /* ============================================
    FLOATING CHAT WIDGET
    ============================================ */
-#wdp-chat-floating { 
-  position: fixed; 
-  right: 18px; 
-  bottom: 18px; 
-  z-index: 2147483000; 
+#wdp-chat-floating {
+    position: fixed;
+    right: 18px;
+    bottom: 18px;
+    z-index: 10000;
+    pointer-events: auto;
+}
+
+#wdp-chat-floating:empty {
+    display: none;
+    pointer-events: none;
 }
 
 .wdp-chat-fab { 

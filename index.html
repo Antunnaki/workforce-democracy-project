@@ -6,11 +6,11 @@
   <title id="page-title">Workforce Democracy Project</title>
   <!-- CSP Override to allow inline styles and scripts during Beta development -->
   <meta http-equiv="Content-Security-Policy" content="default-src 'self' https:; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.jsdelivr.net https://cdn.tailwindcss.com https://fonts.googleapis.com https://api.workforcedemocracyproject.org https://api-beta.workforcedemocracyproject.org; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.jsdelivr.net; font-src 'self' https://fonts.gstatic.com https://cdn.jsdelivr.net; img-src 'self' data: https: https://www.congress.gov https://www.senate.ca.gov https://www.assembly.ca.gov https://www.joincalifornia.com https://bioguide.congress.gov https://api.workforcedemocracyproject.org https://api-beta.workforcedemocracyproject.org; connect-src 'self' https://workforcedemocracyproject.org https://www.workforcedemocracyproject.org https://api.workforcedemocracyproject.org https://api-beta.workforcedemocracyproject.org https://api.groq.com https://*.netlify.app https://*.gensparkspace.com https://projects.propublica.org https://dashscope.aliyuncs.com; frame-src 'self'">
-  <!-- WDP VERSION: 1.1.10-20251222-OPTIMIZED -->
+  <!-- WDP VERSION: 1.1.11-20251222-UI-FIX -->
   <meta name="description" content="Privacy-first civic platform providing representative info, bill tracking/analysis, and an empathy-forward AI assistant that always cites original sources.">
-  <link rel="stylesheet" href="/css/core/variables.css?v=1.1.10">
-  <link rel="stylesheet" href="/css/core/base.css?v=1.1.10">
-  <link rel="stylesheet" href="/css/components/tabs.css?v=1.1.10">
+  <link rel="stylesheet" href="/css/core/variables.css?v=1.1.11">
+  <link rel="stylesheet" href="/css/core/base.css?v=1.1.11">
+  <link rel="stylesheet" href="/css/components/tabs.css?v=1.1.11">
   <style>
     #beta-status-bar {
       position: fixed; top: 0; left: 0; right: 0; height: 4px; background: #3b82f6; z-index: 99999;
@@ -56,8 +56,7 @@
   <header>
     <h1 id="main-title">Workforce Democracy Project</h1>
     <div style="display:flex; justify-content:space-between; align-items:center;">
-      <p style="font-size: 10px; opacity: 0.5; margin:0;">v1.1.10-20251222-OPTIMIZED</p>
-      <span id="emergency-reset" onclick="emergencyReset()">Fix Connection / Reset Cache</span>
+      <p style="font-size: 10px; opacity: 0.5; margin:0;">v1.1.11-20251222-UI-FIX</p>
     </div>
   </header>
   
@@ -102,7 +101,14 @@
 
   <div id="home-chat"></div>
 
-  <script type="module" src="/js/app-shell.mjs?v=1.1.10"></script>
-  <script type="module" src="/js/modules/home-mount.mjs?v=1.1.10"></script>
+  <footer style="margin-top: 40px; padding: 20px; border-top: 1px solid rgba(255,255,255,0.1); text-align: center;">
+    <div style="display:flex; flex-direction:column; align-items:center; gap:10px;">
+      <p style="font-size: 12px; opacity: 0.6; margin:0;">&copy; 2025 Workforce Democracy Project</p>
+      <span id="emergency-reset" onclick="emergencyReset()" style="font-size: 11px; opacity: 0.5; color: #fff; cursor: pointer; text-decoration: underline;">Fix Connection / Reset Cache</span>
+    </div>
+  </footer>
+
+  <script type="module" src="/js/app-shell.mjs?v=1.1.11"></script>
+  <script type="module" src="/js/modules/home-mount.mjs?v=1.1.11"></script>
 </body>
 </html>
