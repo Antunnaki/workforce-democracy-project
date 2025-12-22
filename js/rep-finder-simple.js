@@ -181,7 +181,8 @@ function initRepFinder() {
         
         try {
             // Call API - FIXED v37.9.1: Use GET with query params
-            const apiUrl = window.CONFIG?.ENDPOINTS?.REPRESENTATIVES || 'https://api.workforcedemocracyproject.org/api/civic/representatives/search';
+            const base = window.WDP_API_BASE || 'https://api.workforcedemocracyproject.org';
+            const apiUrl = window.CONFIG?.ENDPOINTS?.REPRESENTATIVES || `${base}/api/civic/representatives/search`;
             const fullUrl = `${apiUrl}?zip=${zip}`;
             
             console.log('📡 [REP-FINDER-SIMPLE] Calling:', fullUrl);

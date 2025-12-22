@@ -1,0 +1,10 @@
+# Workforce Democracy Project - Frontend Deployment Sudoers Configuration
+# This file should be placed in /etc/sudoers.d/wdp-frontend-deploy
+# Use 'visudo -f /etc/sudoers.d/wdp-frontend-deploy' to install safely
+
+# Restrict to the exact helper path, NOPASSWD, no env keep, and safe secure_path
+Defaults!/usr/local/bin/wdp-frontend-deploy.sh env_reset
+deploy ALL=(root) NOPASSWD: /usr/local/bin/wdp-frontend-deploy.sh
+
+# This configuration grants minimal required privileges for frontend deployment
+# operations while maintaining security through restricted command scope.

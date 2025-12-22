@@ -1,0 +1,2 @@
+Defaults!/usr/local/bin/wdp-frontend-deploy-helper.sh env_reset
+deploy ALL=(root) NOPASSWD: /usr/local/bin/wdp-frontend-deploy-helper.sh

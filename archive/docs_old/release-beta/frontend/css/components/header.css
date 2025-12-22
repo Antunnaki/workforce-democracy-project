@@ -1,0 +1,294 @@
+/* ============================================================================
+   WORKFORCE DEMOCRACY PROJECT - HEADER
+   Version: 37.11.0-PHASE3B
+   Date: November 14, 2024
+   
+   Header, navigation, and top-bar styles
+   
+   Dependencies: variables.css (MUST load before this file)
+   
+   ============================================================================ */
+
+/* ============================================
+   SITE HEADER
+   ============================================ */
+
+.site-header {
+  /* Background handled by unified-color-scheme.css - DO NOT override */
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  z-index: var(--z-sticky);
+  transition: all var(--transition-base);
+  overflow: visible;
+}
+
+.site-header.scrolled {
+  /* Scrolled state handled by unified-color-scheme.css - DO NOT override */
+}
+
+.header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--space-md) 0;
+  gap: var(--space-md);
+  overflow: visible;
+}
+
+/* ============================================
+   BRAND / LOGO
+   ============================================ */
+
+.brand {
+  display: flex;
+  flex-direction: column;
+}
+
+.site-title {
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-extrabold);
+  /* Color handled by unified-color-scheme.css - DO NOT set here to avoid conflicts */
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+}
+
+@media (min-width: 480px) {
+  .site-title {
+    font-size: var(--font-size-lg);
+    gap: var(--space-sm);
+  }
+}
+
+@media (min-width: 768px) {
+  .site-title {
+    font-size: var(--font-size-xl);
+  }
+}
+
+.site-logo {
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius-sm);
+  object-fit: cover;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+@media (min-width: 480px) {
+  .site-logo {
+    width: 40px;
+    height: 40px;
+  }
+}
+
+@media (min-width: 768px) {
+  .site-logo {
+    width: 48px;
+    height: 48px;
+  }
+}
+
+.establishment {
+  font-size: var(--font-size-xs);
+  color: var(--primary-dark);  /* Purple to match header theme */
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: 0.1em;
+  margin: 0;
+  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8);  /* Subtle glow for readability */
+}
+
+/* ============================================
+   DESKTOP NAVIGATION
+   ============================================ */
+
+.desktop-nav {
+  display: none;
+}
+
+.nav-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  justify-content: flex-end;
+  max-width: 100%;
+}
+
+.nav-list a {
+  color: rgba(255, 255, 255, 0.9);
+  font-weight: var(--font-weight-medium);
+  font-size: 0.875rem;
+  padding: 0.4rem 0.8rem;
+  border-radius: var(--radius-md);
+  transition: all var(--transition-fast);
+  white-space: nowrap;
+}
+
+.nav-list a:hover {
+  background: rgba(243, 156, 18, 0.2);
+  color: #FFFFFF;
+  text-decoration: none;
+  transform: translateY(-2px);
+}
+
+.nav-list a:focus {
+  outline: none;
+}
+
+.nav-list a:focus-visible {
+  background: rgba(243, 156, 18, 0.3);
+  color: #FFFFFF;
+  text-decoration: none;
+  outline: 2px solid var(--secondary);
+  outline-offset: 2px;
+}
+
+/* ============================================
+   MOBILE CONTROLS
+   ============================================ */
+
+.mobile-controls {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+  overflow: visible;
+  position: relative;
+  z-index: 1000;
+}
+
+/* Hide on desktop (but keep on landscape phones) */
+@media (min-width: 1024px) and (min-height: 500px) {
+  .mobile-controls {
+    display: none;
+  }
+}
+
+/* ============================================
+   MOBILE MENU TOGGLE (Hamburger)
+   ============================================ */
+
+.mobile-menu-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--primary);
+  border: 2px solid var(--primary-dark);
+  cursor: pointer;
+  padding: 12px;
+  border-radius: var(--radius-md);
+  transition: all var(--transition-fast);
+  min-width: 48px;
+  min-height: 48px;
+  width: 48px;
+  height: 48px;
+  box-shadow: 0 2px 8px rgba(102, 126, 234, 0.4);
+  position: relative;
+}
+
+/* Hamburger icon using span element */
+.mobile-menu-toggle span {
+  display: block;
+  width: 24px;
+  height: 3px;
+  background: #ffffff;
+  border-radius: 2px;
+  position: relative;
+  transition: background 0.3s ease;
+}
+
+.mobile-menu-toggle span::before,
+.mobile-menu-toggle span::after {
+  content: '';
+  display: block;
+  width: 24px;
+  height: 3px;
+  background: #ffffff;
+  border-radius: 2px;
+  position: absolute;
+  left: 0;
+  transition: all 0.3s ease;
+}
+
+.mobile-menu-toggle span::before {
+  top: -8px;
+}
+
+.mobile-menu-toggle span::after {
+  bottom: -8px;
+}
+
+.mobile-menu-toggle:hover,
+.mobile-menu-toggle:focus {
+  background: var(--primary-dark);
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.6);
+}
+
+.mobile-menu-toggle:active {
+  transform: scale(0.95);
+}
+
+/* Animation when menu is open - transforms to X */
+.mobile-nav.active + * .mobile-menu-toggle span {
+  background: transparent;
+}
+
+.mobile-nav.active + * .mobile-menu-toggle span::before {
+  top: 0;
+  transform: rotate(45deg);
+}
+
+.mobile-nav.active + * .mobile-menu-toggle span::after {
+  bottom: 0;
+  transform: rotate(-45deg);
+}
+
+/* ============================================
+   MOBILE NAVIGATION
+   ============================================ */
+
+.mobile-nav {
+  display: none;
+  background: var(--surface);
+  border-top: 1px solid var(--border-light);
+  padding: var(--space-md) 0;
+}
+
+.mobile-nav.active {
+  display: block;
+}
+
+.mobile-nav-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.mobile-nav-list li {
+  border-bottom: 1px solid var(--border-light);
+}
+
+.mobile-nav-list li:last-child {
+  border-bottom: none;
+}
+
+.mobile-nav-list a {
+  display: block;
+  padding: var(--space-md);
+  color: var(--text);
+  font-weight: var(--font-weight-medium);
+  transition: background var(--transition-fast);
+}
+
+.mobile-nav-list a:hover,
+.mobile-nav-list a:focus {
+  background: var(--surface-alt);
+  color: var(--primary);
+  text-decoration: none;
+}

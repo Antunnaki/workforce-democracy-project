@@ -1,0 +1,470 @@
+/**
+ * WDP Form Validation Styles v36.9.11
+ * Beautiful, accessible validation feedback with smooth animations
+ * Matches site's existing design language
+ */
+
+/* ========================================
+   VALIDATION WRAPPER
+   ======================================== */
+
+.validation-wrapper {
+    position: relative;
+    width: 100%;
+}
+
+/* Ensure wrapper doesn't break flex layouts */
+.civic-controls-compact .validation-wrapper,
+.search-input-container .validation-wrapper,
+.faq-search-wrapper .validation-wrapper,
+.search-box .validation-wrapper {
+    flex: 1;
+    min-width: 0; /* Allow flex shrinking */
+}
+
+/* ========================================
+   VALIDATION MESSAGE
+   ======================================== */
+
+.validation-message {
+    font-size: 0.875rem;
+    line-height: 1.4;
+    margin-top: 0.5rem;
+    padding: 0.5rem 0.75rem;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    opacity: 0;
+    transform: translateY(-4px);
+    max-height: 0;
+    overflow: hidden;
+}
+
+/* Show message when active */
+.validation-message-error,
+.validation-message-success {
+    opacity: 1;
+    transform: translateY(0);
+    max-height: 100px;
+}
+
+/* Error message styling */
+.validation-message-error {
+    background: #fee2e2; /* Light red background */
+    color: #991b1b; /* Dark red text */
+    border-left: 4px solid #dc2626; /* Red accent */
+    font-weight: 500;
+}
+
+/* Success message styling */
+.validation-message-success {
+    background: #d1fae5; /* Light green background */
+    color: #065f46; /* Dark green text */
+    border-left: 4px solid #10b981; /* Green accent */
+    font-weight: 500;
+}
+
+/* ========================================
+   INPUT FIELD STATES
+   ======================================== */
+
+/* Error state - red border */
+input.validation-error,
+textarea.validation-error,
+select.validation-error {
+    border-color: #dc2626 !important;
+    border-width: 2px;
+    box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.1);
+    animation: shake 0.5s ease;
+}
+
+/* Success state - green border (subtle) */
+input.validation-success,
+textarea.validation-success,
+select.validation-success {
+    border-color: #10b981 !important;
+    border-width: 2px;
+}
+
+/* Focus states - enhance visual feedback */
+input.validation-error:focus,
+textarea.validation-error:focus,
+select.validation-error:focus {
+    outline: none;
+    border-color: #dc2626 !important;
+    box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.2);
+}
+
+input.validation-success:focus,
+textarea.validation-success:focus,
+select.validation-success:focus {
+    outline: none;
+    border-color: #10b981 !important;
+    box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.2);
+}
+
+/* ========================================
+   ANIMATIONS
+   ======================================== */
+
+/* Shake animation for errors */
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    10%, 30%, 50%, 70%, 90% { transform: translateX(-4px); }
+    20%, 40%, 60%, 80% { transform: translateX(4px); }
+}
+
+/* Fade in animation for messages */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-4px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.validation-message-error,
+.validation-message-success {
+    animation: fadeIn 0.3s ease;
+}
+
+/* ========================================
+   ICON INDICATORS (Optional Enhancement)
+   ======================================== */
+
+/* Add checkmark or X icon to validated fields */
+.validation-wrapper::after {
+    content: '';
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 20px;
+    height: 20px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+}
+
+/* Error icon (X) */
+.validation-wrapper:has(.validation-error)::after {
+    content: '✖';
+    color: #dc2626;
+    font-size: 1rem;
+    font-weight: bold;
+    opacity: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Success icon (✓) */
+.validation-wrapper:has(.validation-success)::after {
+    content: '✓';
+    color: #10b981;
+    font-size: 1.25rem;
+    font-weight: bold;
+    opacity: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Adjust positioning for textareas (top-right corner) */
+.validation-wrapper:has(textarea)::after {
+    top: 16px;
+    transform: none;
+}
+
+/* Hide icons for search inputs (they have their own icons) */
+.search-input-container .validation-wrapper::after,
+.faq-search-wrapper .validation-wrapper::after,
+.search-box .validation-wrapper::after {
+    display: none;
+}
+
+/* ========================================
+   ACCESSIBILITY ENHANCEMENTS
+   ======================================== */
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+    .validation-message-error {
+        border: 2px solid #991b1b;
+        background: #fff;
+    }
+    
+    .validation-message-success {
+        border: 2px solid #065f46;
+        background: #fff;
+    }
+    
+    input.validation-error,
+    textarea.validation-error,
+    select.validation-error {
+        border-width: 3px !important;
+    }
+    
+    input.validation-success,
+    textarea.validation-success,
+    select.validation-success {
+        border-width: 3px !important;
+    }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+    .validation-message,
+    .validation-wrapper::after,
+    input.validation-error,
+    textarea.validation-error,
+    select.validation-error,
+    input.validation-success,
+    textarea.validation-success,
+    select.validation-success {
+        animation: none;
+        transition: none;
+    }
+    
+    input.validation-error,
+    textarea.validation-error,
+    select.validation-error {
+        animation: none;
+    }
+}
+
+/* ========================================
+   MOBILE RESPONSIVE ADJUSTMENTS
+   ======================================== */
+
+@media (max-width: 768px) {
+    .validation-message {
+        font-size: 0.8125rem;
+        padding: 0.4rem 0.6rem;
+        margin-top: 0.4rem;
+    }
+    
+    .validation-wrapper::after {
+        right: 10px;
+        width: 18px;
+        height: 18px;
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .validation-message {
+        font-size: 0.75rem;
+        padding: 0.35rem 0.5rem;
+    }
+}
+
+/* ========================================
+   PRINT STYLES
+   ======================================== */
+
+@media print {
+    /* Hide validation messages when printing */
+    .validation-message,
+    .validation-wrapper::after {
+        display: none !important;
+    }
+    
+    /* Remove validation borders when printing */
+    input.validation-error,
+    textarea.validation-error,
+    select.validation-error,
+    input.validation-success,
+    textarea.validation-success,
+    select.validation-success {
+        border: 1px solid #ccc !important;
+        box-shadow: none !important;
+    }
+}
+
+/* ========================================
+   DARK MODE SUPPORT (Future Enhancement)
+   ======================================== */
+
+@media (prefers-color-scheme: dark) {
+    /* Error message in dark mode */
+    .validation-message-error {
+        background: rgba(220, 38, 38, 0.2);
+        color: #fca5a5;
+        border-left-color: #dc2626;
+    }
+    
+    /* Success message in dark mode */
+    .validation-message-success {
+        background: rgba(16, 185, 129, 0.2);
+        color: #6ee7b7;
+        border-left-color: #10b981;
+    }
+}
+
+/* ========================================
+   SPECIFIC COMPONENT ADJUSTMENTS
+   ======================================== */
+
+/* Inline chat validation adjustments */
+.inline-chat-input-area .validation-wrapper {
+    width: 100%;
+}
+
+.inline-chat-input-area .validation-message {
+    margin-top: 0.5rem;
+}
+
+/* Bills chat validation adjustments */
+.bills-chat-input-container-top .validation-wrapper {
+    flex: 1;
+}
+
+.bills-chat-input-container-top .validation-message {
+    position: absolute;
+    bottom: -2.5rem;
+    left: 0;
+    right: 60px; /* Account for send button */
+    z-index: 10;
+}
+
+/* Personalization validation adjustments */
+.wdp-personalization-simple .validation-wrapper {
+    flex: 1;
+    min-width: 200px;
+}
+
+/* 404 page search validation */
+.error-404-search .validation-wrapper {
+    width: 100%;
+}
+
+/* FAQ search validation */
+.faq-search-container .validation-wrapper {
+    width: 100%;
+}
+
+/* Nonprofit search validation */
+.search-container .validation-wrapper {
+    width: 100%;
+}
+
+/* ========================================
+   LOADING STATE (for async validation)
+   ======================================== */
+
+.validation-wrapper.validation-loading input,
+.validation-wrapper.validation-loading textarea,
+.validation-wrapper.validation-loading select {
+    background-image: linear-gradient(
+        90deg,
+        transparent 0%,
+        rgba(59, 130, 246, 0.1) 50%,
+        transparent 100%
+    );
+    background-size: 200% 100%;
+    animation: loading 1.5s ease infinite;
+}
+
+@keyframes loading {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+}
+
+/* ========================================
+   TOOLTIP-STYLE VALIDATION (Alternative)
+   ======================================== */
+
+/* Optional: Show validation messages as tooltips on hover/focus */
+.validation-wrapper[data-validation-style="tooltip"] .validation-message {
+    position: absolute;
+    bottom: calc(100% + 8px);
+    left: 0;
+    right: auto;
+    margin: 0;
+    white-space: nowrap;
+    z-index: 100;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.validation-wrapper[data-validation-style="tooltip"] .validation-message::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 20px;
+    width: 0;
+    height: 0;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-top: 8px solid #fee2e2;
+}
+
+.validation-wrapper[data-validation-style="tooltip"] .validation-message-success::after {
+    border-top-color: #d1fae5;
+}
+
+/* ========================================
+   SCREEN READER ONLY CONTENT
+   ======================================== */
+
+.validation-aria-live {
+    position: absolute !important;
+    left: -10000px !important;
+    width: 1px !important;
+    height: 1px !important;
+    overflow: hidden !important;
+}
+
+/* ========================================
+   FORM SUBMISSION STATES
+   ======================================== */
+
+/* Disable form during validation/submission */
+form.form-validating input,
+form.form-validating textarea,
+form.form-validating select,
+form.form-validating button {
+    opacity: 0.6;
+    pointer-events: none;
+    cursor: not-allowed;
+}
+
+/* Success state for entire form */
+form.form-valid {
+    border: 2px solid #10b981;
+    border-radius: 12px;
+    padding: 1rem;
+    background: rgba(16, 185, 129, 0.05);
+}
+
+/* ========================================
+   CHARACTER COUNTER (for textareas)
+   ======================================== */
+
+.validation-wrapper .character-counter {
+    font-size: 0.75rem;
+    color: #6b7280;
+    text-align: right;
+    margin-top: 0.25rem;
+    font-family: 'Monaco', 'Courier New', monospace;
+}
+
+.validation-wrapper .character-counter.near-limit {
+    color: #f59e0b; /* Orange warning */
+    font-weight: 600;
+}
+
+.validation-wrapper .character-counter.at-limit {
+    color: #dc2626; /* Red error */
+    font-weight: 700;
+}
+
+/* ========================================
+   END OF FORM VALIDATION STYLES
+   ======================================== */
+
+console.log('✅ [WDP Form Validation CSS v36.9.11] Loaded successfully!');

@@ -1,0 +1,79 @@
+/* ============================================================================
+   WORKFORCE DEMOCRACY PROJECT - BASE STYLES
+   Version: 37.11.0-PHASE3B
+   Date: November 14, 2024
+   
+   Foundation styles: Reset, normalize, and global element styles
+   
+   Dependencies: variables.css (MUST load before this file)
+   
+   ============================================================================ */
+
+/* ============================================
+   RESET & NORMALIZE
+   ============================================ */
+
+/* Universal box-sizing */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* Prevent horizontal overflow on mobile */
+html, body {
+  overflow-x: hidden;
+  max-width: 100%;
+}
+
+/* Responsive media elements */
+img, video, iframe {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Responsive tables */
+table {
+  max-width: 100%;
+  overflow-x: auto;
+  display: block;
+}
+
+/* ============================================
+   HTML & BODY BASE STYLES
+   ============================================ */
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+body {
+  font-family: var(--font-family);
+  font-size: var(--font-size-base);
+  line-height: var(--line-height-normal);
+  color: var(--text);
+  /* Wallpaper will be set by consolidated section at end of CSS */
+  overflow-x: hidden;
+  -webkit-text-size-adjust: 100%;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+/* ============================================
+   MAIN CONTENT AREA
+   ============================================ */
+
+/* Add padding for fixed header */
+main {
+  padding-top: 80px;
+}
+
+@media (min-width: 768px) {
+  main {
+    padding-top: 90px;
+  }
+}

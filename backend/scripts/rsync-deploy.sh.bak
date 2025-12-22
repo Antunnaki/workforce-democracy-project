@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+set -euo pipefail
+TARGET="${1:-}"  # prod|beta
+VPS="${2:-}"     # your VPS IP
+if [[ "$TARGET" != "prod" && "$TARGET" != "beta" ]]; then
+  echo "Usage: $0 prod|beta VPS_IP"; exit 1; fi
+if [[ -z "$VPS" ]]; then echo "Missing VPS_IP"; exit 1; fi
+if [[ "$TARGET" == "prod" ]]; then
+  PORT=3000; CUR=/srv/wdp/current-prod; SERVICE=wdp-backend-prod
+else
+  PORT=3001; CUR=/srv/wdp/current-beta; SERVICE=wdp-backend-beta
+fi
+REL=$(date +%Y%m%d%H%M%S)
+RSYNC_OPTS=( -avz --delete --exclude node_modules --exclude .git )
+rsync "${RSYNC_OPTS[@]}" ./ deploy@"$VPS":/srv/wdp/releases/"$REL"/
+ssh deploy@"$VPS" "ln -sfn /srv/wdp/releases/$REL $CUR && cd $CUR && npm ci --omit=dev && sudo systemctl restart $SERVICE && sleep 1 && sudo systemctl status $SERVICE --no-pager"
+echo " Deployed $TARGET to $VPS on :$PORT"

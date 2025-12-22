@@ -17,9 +17,10 @@
 
 const PersonalizationSystem = {
   // API Configuration
-  API_BASE: window.location.hostname === 'localhost' 
-    ? 'http://localhost:3001/api/personalization'
-    : 'https://api.workforcedemocracyproject.org/api/personalization',
+  get API_BASE() {
+    const base = window.WDP_API_BASE || 'https://api.workforcedemocracyproject.org';
+    return base + '/api/personalization';
+  },
   
   // Session password (kept in memory for re-encryption during sync)
   // NOTE: This is cleared on logout and tab close
@@ -118,16 +119,38 @@ const PersonalizationSystem = {
   // ============================================
 
   /**
-   * Register new user account
-   * @param {Object} credentials - { username, password }
+   * Validate username on client side
+   * @param {string} u - Username to validate
+   * @returns {Object} - { ok: boolean, msg?: string }
+   */
+  function validateUsernameClient(u) {
+    if (!u || typeof u !== 'string') return { ok: false, msg: 'Username is required' };
+    const trimmed = u.trim();
+    if (trimmed.length < 3) return { ok: false, msg: 'Username must be at least 3 characters' };
+    if (trimmed.length > 50) return { ok: false, msg: 'Username must be 50 characters or less' };
+    if (!/^[a-zA-Z]/.test(trimmed)) return { ok: false, msg: 'Username must start with a letter' };
+    if (!/^[a-zA-Z0-9_-]+$/.test(trimmed)) {
+      return { ok: false, msg: 'Only letters, numbers, underscores, and hyphens are allowed' };
+    }
+    if (/^(admin|test|root|sys|support)(\d+)?$/i.test(trimmed)) {
+      return { ok: false, msg: 'Please choose a different username' };
+    }
+    return { ok: true };
+  }
+
+  /**
+   * Register new user account (zero‑knowledge encryption)
+   * @param {string} username
+   * @param {string} password
+   * @param {Object} [options]
+   * @param {string|null} [options.email] Optional email for recovery delivery
    * @returns {Promise<Object>} - { success: boolean, recoveryKey?, error? }
    */
-  async register(username, password) {
+  async register(username, password, options = {}) {
     try {
       // Validate inputs
-      if (!username || username.length < 3) {
-        throw new Error('Username must be at least 3 characters');
-      }
+      const u = validateUsernameClient(username);
+      if (!u.ok) throw new Error(u.msg);
       
       const passwordValidation = CryptoUtils.validatePassword(password);
       if (!passwordValidation.valid) {
@@ -157,7 +180,9 @@ const PersonalizationSystem = {
           encrypted_data: encrypted,
           iv,
           encryption_salt: salt,
-          recovery_hash: await CryptoUtils.hashPassword(recoveryKey)
+          recovery_hash: await CryptoUtils.hashPassword(recoveryKey),
+          // Include optional email only if provided and non-empty
+          ...(options.email ? { email: options.email } : {})
         })
       });
       
@@ -209,6 +234,37 @@ const PersonalizationSystem = {
         error: error.message
       };
     }
+  },
+
+  /**
+   * Initialize local‑only account (no network requests)
+   * Stores minimal profile and encryption metadata locally.
+   * @param {string} localPass
+   */
+  async localOnlyInit(localPass) {
+    const alias = 'user-' + Math.random().toString(36).slice(2, 8);
+    const salt = CryptoUtils.generateSalt();
+    const recoveryKey = CryptoUtils.generateRecoveryKey();
+    const passwordHash = await CryptoUtils.hashPassword(localPass);
+    const initialData = this.createEmptyUserData();
+    // Keep parity with existing applyPersonalization expectations
+    // (user data is stored as JSON locally; encryption is applied for sync payloads)
+    await CryptoUtils.encrypt(initialData, localPass, salt); // derive key once; result not stored
+
+    this.sessionPassword = localPass;
+    localStorage.setItem(this.STORAGE_KEYS.USERNAME, alias);
+    localStorage.setItem(this.STORAGE_KEYS.PASSWORD_HASH, passwordHash);
+    localStorage.setItem(this.STORAGE_KEYS.SALT, salt);
+    localStorage.setItem(this.STORAGE_KEYS.USER_DATA, JSON.stringify(initialData));
+    localStorage.setItem(this.STORAGE_KEYS.RECOVERY_KEY, recoveryKey);
+    localStorage.setItem(this.STORAGE_KEYS.LAST_SYNC, new Date().toISOString());
+
+    // Apply personalization immediately
+    this.applyPersonalization();
+    this.showAccountIndicator(alias);
+    window.dispatchEvent(new CustomEvent('personalization:ready', {
+      detail: { username: alias, loggedIn: true }
+    }));
   },
 
   // ============================================
@@ -682,7 +738,7 @@ const PersonalizationSystem = {
       const { encrypted, iv } = await CryptoUtils.encrypt(userData, this.sessionPassword, salt);
       
       const response = await fetch(`${this.API_BASE}/sync`, {
-        method: 'PUT',
+        method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         credentials: 'include',
         body: JSON.stringify({

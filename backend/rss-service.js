@@ -19,6 +19,7 @@
  */
 
 const Parser = require('rss-parser');
+require('./utils/polyfills');
 const axios = require('axios');
 const keywordExtraction = require('./keyword-extraction');
 

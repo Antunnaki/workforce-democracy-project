@@ -1,0 +1,442 @@
+/**
+ * Nonprofit Widget Styles
+ * Compact integration widgets for ethical business, jobs, and civic sections
+ * Workforce Democracy Project
+ */
+
+/* ============================================================================
+   Nonprofit Verification Widget (Ethical Business Section)
+   ============================================================================ */
+
+.nonprofit-verification-widget {
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    border-radius: 16px;
+    padding: 2rem;
+    margin: 3rem 0;
+    border: 2px solid #dee2e6;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.nonprofit-widget-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.nonprofit-widget-header i {
+    font-size: 3rem;
+    color: #667eea;
+    margin-bottom: 1rem;
+}
+
+.nonprofit-widget-header h3 {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: #2d3748;
+    margin-bottom: 0.5rem;
+}
+
+.nonprofit-widget-header p {
+    font-size: 1rem;
+    color: #718096;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.nonprofit-widget-search {
+    max-width: 700px;
+    margin: 0 auto 2rem;
+}
+
+.nonprofit-search-box-compact {
+    display: flex;
+    align-items: center;
+    background: white;
+    border-radius: 50px;
+    padding: 0.5rem 0.75rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    border: 2px solid transparent;
+    transition: all 0.3s ease;
+}
+
+.nonprofit-search-box-compact:focus-within {
+    border-color: #667eea;
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.2);
+}
+
+.nonprofit-search-box-compact i {
+    color: #718096;
+    font-size: 1.1rem;
+    margin: 0 0.75rem;
+    flex-shrink: 0;
+}
+
+.nonprofit-search-input-compact {
+    flex: 1;
+    border: none;
+    outline: none;
+    font-size: 1rem;
+    padding: 0.75rem 0.5rem;
+    background: transparent;
+}
+
+.btn-search-nonprofit {
+    background: #667eea;
+    color: white;
+    border: none;
+    padding: 0.75rem 2rem;
+    border-radius: 50px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    flex-shrink: 0;
+}
+
+.btn-search-nonprofit:hover {
+    background: #5568d3;
+    transform: scale(1.05);
+}
+
+.nonprofit-widget-results {
+    max-width: 800px;
+    margin: 0 auto 2rem;
+    display: grid;
+    gap: 1rem;
+}
+
+.nonprofit-result-card-compact {
+    background: white;
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+    cursor: pointer;
+    border: 2px solid transparent;
+}
+
+.nonprofit-result-card-compact:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+    border-color: #667eea;
+}
+
+.nonprofit-result-header-compact {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.nonprofit-result-icon-compact {
+    font-size: 2rem;
+    color: #667eea;
+    flex-shrink: 0;
+}
+
+.nonprofit-result-info-compact {
+    flex: 1;
+}
+
+.nonprofit-result-name-compact {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #2d3748;
+    margin-bottom: 0.25rem;
+}
+
+.nonprofit-result-location-compact {
+    font-size: 0.9rem;
+    color: #718096;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.nonprofit-result-stats-compact {
+    display: flex;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+}
+
+.nonprofit-stat-compact {
+    display: flex;
+    flex-direction: column;
+}
+
+.nonprofit-stat-label-compact {
+    font-size: 0.8rem;
+    color: #718096;
+    margin-bottom: 0.25rem;
+}
+
+.nonprofit-stat-value-compact {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #2d3748;
+}
+
+.nonprofit-widget-loading {
+    text-align: center;
+    padding: 2rem;
+}
+
+.nonprofit-widget-spinner {
+    width: 40px;
+    height: 40px;
+    border: 3px solid #e2e8f0;
+    border-top-color: #667eea;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+    margin: 0 auto 1rem;
+}
+
+.nonprofit-widget-empty {
+    text-align: center;
+    padding: 2rem;
+    color: #718096;
+}
+
+.nonprofit-widget-empty i {
+    font-size: 3rem;
+    color: #cbd5e0;
+    margin-bottom: 1rem;
+}
+
+.nonprofit-widget-cta {
+    text-align: center;
+    margin-top: 2rem;
+}
+
+.btn-explore-nonprofits {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 1rem 2rem;
+    border-radius: 50px;
+    font-weight: 600;
+    font-size: 1.05rem;
+    text-decoration: none;
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+    transition: all 0.3s ease;
+}
+
+.btn-explore-nonprofits:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+}
+
+.btn-explore-nonprofits i {
+    font-size: 1.2rem;
+}
+
+/* ============================================================================
+   Jobs Section - Nonprofit Employers Widget
+   ============================================================================ */
+
+.nonprofit-employers-widget {
+    background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
+    border-radius: 16px;
+    padding: 2rem;
+    margin: 3rem 0;
+    border: 2px solid #81c784;
+}
+
+.nonprofit-employers-widget .widget-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.nonprofit-employers-widget .widget-header i {
+    font-size: 3rem;
+    color: #4caf50;
+    margin-bottom: 1rem;
+}
+
+.nonprofit-employers-widget .widget-header h3 {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: #1b5e20;
+    margin-bottom: 0.5rem;
+}
+
+.nonprofit-employers-widget .widget-header p {
+    font-size: 1rem;
+    color: #2e7d32;
+}
+
+.nonprofit-employers-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+}
+
+.nonprofit-employer-card {
+    background: white;
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.nonprofit-employer-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+}
+
+.nonprofit-employer-name {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #2d3748;
+    margin-bottom: 0.75rem;
+}
+
+.nonprofit-employer-mission {
+    font-size: 0.95rem;
+    color: #718096;
+    line-height: 1.5;
+    margin-bottom: 1rem;
+}
+
+.nonprofit-employer-stats {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.nonprofit-employer-stat {
+    font-size: 0.85rem;
+    color: #2d3748;
+    background: #f7fafc;
+    padding: 0.5rem 0.75rem;
+    border-radius: 6px;
+}
+
+/* ============================================================================
+   Civic Engagement - Advocacy Organizations Widget
+   ============================================================================ */
+
+.advocacy-orgs-widget {
+    background: linear-gradient(135deg, #fff3e0 0%, #ffe0b2 100%);
+    border-radius: 16px;
+    padding: 2rem;
+    margin: 3rem 0;
+    border: 2px solid #ffb74d;
+}
+
+.advocacy-orgs-widget .widget-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.advocacy-orgs-widget .widget-header i {
+    font-size: 3rem;
+    color: #f57c00;
+    margin-bottom: 1rem;
+}
+
+.advocacy-orgs-widget .widget-header h3 {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: #e65100;
+    margin-bottom: 0.5rem;
+}
+
+.advocacy-orgs-widget .widget-header p {
+    font-size: 1rem;
+    color: #ef6c00;
+}
+
+.advocacy-orgs-categories {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+}
+
+.advocacy-category-btn {
+    background: white;
+    border: 2px solid #ffb74d;
+    color: #f57c00;
+    padding: 0.75rem 1.5rem;
+    border-radius: 50px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.advocacy-category-btn:hover,
+.advocacy-category-btn.active {
+    background: #f57c00;
+    color: white;
+    border-color: #f57c00;
+}
+
+/* ============================================================================
+   Responsive Design
+   ============================================================================ */
+
+@media (max-width: 768px) {
+    .nonprofit-verification-widget,
+    .nonprofit-employers-widget,
+    .advocacy-orgs-widget {
+        padding: 1.5rem;
+        margin: 2rem 0;
+    }
+    
+    .nonprofit-widget-header h3,
+    .widget-header h3 {
+        font-size: 1.5rem;
+    }
+    
+    .nonprofit-widget-header i,
+    .widget-header i {
+        font-size: 2.5rem;
+    }
+    
+    .nonprofit-search-box-compact {
+        flex-direction: column;
+        border-radius: 12px;
+        padding: 1rem;
+    }
+    
+    .nonprofit-search-input-compact {
+        width: 100%;
+        margin-bottom: 1rem;
+    }
+    
+    .btn-search-nonprofit {
+        width: 100%;
+        border-radius: 8px;
+    }
+    
+    .nonprofit-result-header-compact {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .nonprofit-result-stats-compact {
+        justify-content: center;
+    }
+    
+    .nonprofit-employers-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .advocacy-orgs-categories {
+        flex-direction: column;
+    }
+    
+    .advocacy-category-btn {
+        width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    .btn-explore-nonprofits {
+        width: 100%;
+        justify-content: center;
+    }
+}

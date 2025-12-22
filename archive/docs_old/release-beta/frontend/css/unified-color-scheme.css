@@ -1,0 +1,603 @@
+/* ============================================
+   UNIFIED COLOR SCHEME - Based on Hero Section
+   Applied across entire website for consistency
+   ============================================ */
+
+:root {
+  /* PRIMARY PALETTE - Purple-Blue Gradient (from Hero) */
+  --primary: #667eea;              /* Primary purple-blue */
+  --primary-dark: #764ba2;         /* Deeper purple */
+  --primary-light: #8b9dff;        /* Lighter blue-purple */
+  --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  
+  /* BACKGROUND PALETTE - Light Blue-Grey (from Hero) */
+  --bg-lightest: #f5f7fa;          /* Lightest background */
+  --bg-light: #e8ecf3;             /* Light background */
+  --bg-medium: #c3cfe2;            /* Medium background (hero gradient end) */
+  --bg-gradient: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  
+  /* SECTION DIFFERENTIATION - Subtle variations */
+  --section-hero: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  --section-civic: linear-gradient(135deg, #f0f3f8 0%, #d4dce9 100%);      /* Slightly darker */
+  --section-jobs: linear-gradient(135deg, #e8ecf3 0%, #bdc9de 100%);       /* Medium tone */
+  --section-business: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);   /* Back to hero tone */
+  
+  /* TEXT COLORS */
+  --text-primary: #2d3748;         /* Primary text (dark grey) */
+  --text-secondary: #4a5568;       /* Secondary text (medium grey) */
+  --text-tertiary: #718096;        /* Tertiary text (lighter grey) */
+  --text-inverse: #ffffff;         /* White text on colored backgrounds */
+  
+  /* ACCENT COLORS */
+  --accent-pink: #f5576c;          /* Warm pink accent */
+  --accent-green: #48bb78;         /* Success green */
+  --accent-orange: #ed8936;        /* Warning orange */
+  --accent-blue: #4299e1;          /* Info blue */
+  
+  /* SURFACE COLORS (Cards, Panels) */
+  --surface: #ffffff;              /* White cards/panels */
+  --surface-hover: #f7fafc;        /* Hover state */
+  --surface-border: #e2e8f0;       /* Card borders */
+  
+  /* SHADOWS - Purple-blue tinted */
+  --shadow-sm: 0 1px 3px rgba(102, 126, 234, 0.12);
+  --shadow-md: 0 4px 6px rgba(102, 126, 234, 0.15);
+  --shadow-lg: 0 10px 15px rgba(102, 126, 234, 0.2);
+  --shadow-xl: 0 20px 25px rgba(102, 126, 234, 0.25);
+  
+  /* BUTTON COLORS */
+  --btn-primary-bg: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  --btn-primary-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+  --btn-primary-hover-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+  
+  --btn-secondary-bg: #ffffff;
+  --btn-secondary-border: #667eea;
+  --btn-secondary-text: #667eea;
+  --btn-secondary-hover-bg: #667eea;
+  --btn-secondary-hover-text: #ffffff;
+  
+  /* FLOATING ORBS (for section decorations) */
+  --orb-primary: rgba(102, 126, 234, 0.1);
+  --orb-secondary: rgba(245, 87, 108, 0.08);
+  
+  /* BORDERS */
+  --border-light: #e2e8f0;
+  --border-medium: #cbd5e0;
+  --border-dark: #a0aec0;
+  
+  /* SEMANTIC COLORS (matching hero palette) */
+  --success: #48bb78;
+  --warning: #ed8936;
+  --error: #f56565;
+  --info: #4299e1;
+}
+
+/* ============================================
+   GLOBAL BACKGROUND & TEXT
+   ============================================ */
+
+body {
+  background: var(--bg-lightest);
+  color: var(--text-primary);
+}
+
+/* ============================================
+   HEADER (Navigation Bar) - Frosted Glass Effect
+   ============================================ */
+
+header,
+.header,
+.site-header,
+nav.header {
+  /* Frosted glass effect - transparent with blur */
+  background: rgba(255, 255, 255, 0.75);  /* More transparent for dynamic colors */
+  backdrop-filter: blur(20px) saturate(180%);  /* Enhanced blur + color saturation */
+  -webkit-backdrop-filter: blur(20px) saturate(180%);  /* Safari support */
+  border-bottom: 1px solid rgba(102, 126, 234, 0.2);  /* Subtle purple border */
+  box-shadow: 0 2px 10px rgba(102, 126, 234, 0.1);  /* Purple-tinted shadow */
+}
+
+header a,
+.header a,
+.site-header a,
+nav.header a {
+  color: var(--primary);  /* Purple navigation links */
+  transition: all 0.3s ease;
+}
+
+header a:hover,
+.header a:hover,
+.site-header a:hover,
+nav.header a:hover {
+  color: var(--primary-dark);  /* Deeper purple on hover */
+  text-shadow: 0 0 8px rgba(102, 126, 234, 0.3);  /* Subtle glow effect */
+}
+
+/* Active navigation link */
+header a.active,
+.header a.active,
+.site-header a.active,
+nav.header a.active {
+  color: var(--primary-dark);  /* Deeper purple for active */
+  font-weight: 600;
+  text-shadow: 0 0 8px rgba(102, 126, 234, 0.3);  /* Subtle glow */
+}
+
+/* Logo text - ONLY apply gradient on homepage hero, NOT on header */
+.hero-section .logo,
+.hero-section .site-title,
+.logo.gradient-text,
+.site-title.gradient-text {
+  background: var(--primary-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-weight: 800;
+}
+
+/* Site header logo/title - Purple color with frosted glass */
+.site-header .site-title,
+.site-header .logo {
+  /* Beautiful purple text on frosted glass background */
+  background: none;
+  -webkit-text-fill-color: initial;
+  color: var(--primary);  /* Purple - matches site theme! */
+  font-weight: 800;
+  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8);  /* Subtle white glow for readability */
+}
+
+/* Clickable logo/title link - Make it look seamless */
+.site-header .site-title a {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  text-decoration: none;
+  color: inherit;  /* Inherit purple from parent */
+  transition: all 0.3s ease;
+}
+
+.site-header .site-title a:hover {
+  opacity: 0.8;  /* Subtle hover effect */
+  transform: translateY(-1px);  /* Slight lift on hover */
+}
+
+.site-header .site-title a .title-text {
+  color: inherit;  /* Ensure text inherits purple color */
+}
+
+/* ============================================
+   FOOTER
+   ============================================ */
+
+footer,
+.footer {
+  background: var(--section-civic);
+  color: var(--text-primary);
+  border-top: 1px solid var(--border-light);
+}
+
+footer h3,
+footer h4,
+.footer h3,
+.footer h4 {
+  color: var(--primary);
+  font-weight: 700;
+}
+
+footer a,
+.footer a {
+  color: var(--text-secondary);
+  transition: color 0.3s ease;
+}
+
+footer a:hover,
+.footer a:hover {
+  color: var(--primary);
+}
+
+/* Footer social icons */
+footer .social-icon,
+.footer .social-icon {
+  background: var(--primary-gradient);
+  color: var(--text-inverse);
+  border-radius: 50%;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+footer .social-icon:hover,
+.footer .social-icon:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+/* ============================================
+   SECTION BACKGROUNDS (Subtle Differentiation)
+   ============================================ */
+
+/* Hero Section */
+.hero-section,
+.hero-section-new {
+  background: var(--section-hero);
+}
+
+/* Civic Transparency Section */
+.civic-section,
+section[data-section="civic"] {
+  background: var(--section-civic);
+}
+
+/* Jobs Section */
+.jobs-section,
+.jobs-section-new,
+section[data-section="jobs"] {
+  background: var(--section-jobs);
+}
+
+/* Ethical Business Section */
+.ethical-business-section,
+.business-section,
+section[data-section="business"] {
+  background: var(--section-business);
+}
+
+/* ============================================
+   BUTTONS (Consistent Style)
+   ============================================ */
+
+.btn-primary,
+button.primary,
+.primary-button,
+.cta-button {
+  background: var(--btn-primary-bg);
+  color: var(--text-inverse);
+  border: none;
+  box-shadow: var(--btn-primary-shadow);
+  transition: all 0.3s ease;
+}
+
+.btn-primary:hover,
+button.primary:hover,
+.primary-button:hover,
+.cta-button:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--btn-primary-hover-shadow);
+}
+
+.btn-secondary,
+button.secondary,
+.secondary-button {
+  background: var(--btn-secondary-bg);
+  color: var(--btn-secondary-text);
+  border: 2px solid var(--btn-secondary-border);
+  box-shadow: var(--shadow-sm);
+  transition: all 0.3s ease;
+}
+
+.btn-secondary:hover,
+button.secondary:hover,
+.secondary-button:hover {
+  background: var(--btn-secondary-hover-bg);
+  color: var(--btn-secondary-hover-text);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+/* ============================================
+   CARDS & PANELS (Consistent Style)
+   ============================================ */
+
+.card,
+.panel,
+.job-card,
+.business-card,
+.candidate-card,
+.court-card {
+  background: var(--surface);
+  border: 1px solid var(--surface-border);
+  border-radius: 12px;
+  box-shadow: var(--shadow-sm);
+  transition: all 0.3s ease;
+}
+
+.card:hover,
+.panel:hover,
+.job-card:hover,
+.business-card:hover,
+.candidate-card:hover,
+.court-card:hover {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+  border-color: var(--primary);
+}
+
+/* Card headers */
+.card-header,
+.panel-header {
+  color: var(--text-primary);
+  border-bottom: 1px solid var(--border-light);
+}
+
+/* ============================================
+   HEADINGS (Consistent Gradient)
+   ============================================ */
+
+h1, h2, h3, h4 {
+  color: var(--text-primary);
+}
+
+/* Section headings with gradient */
+.section-title,
+.panel-intro h3,
+h2.gradient-text,
+h3.gradient-text {
+  background: var(--primary-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-weight: 700;
+}
+
+/* ============================================
+   ENHANCED HEADER CONTRAST ON LIGHT BACKGROUNDS
+   ============================================ */
+
+/* All major section headers get gradient text */
+.civic-section h2,
+.civic-section h3,
+.jobs-section-new h2,
+.jobs-section-new h3,
+.ethical-business-section h2,
+.ethical-business-section h3,
+.hero-section h2,
+.hero-section h3 {
+  background: var(--primary-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-weight: 800;
+}
+
+/* Card headers on light sections */
+.civic-section .card-header,
+.civic-section .panel-header,
+.jobs-section-new .card-header,
+.jobs-section-new .panel-header,
+.ethical-business-section .card-header,
+.ethical-business-section .panel-header {
+  background: var(--primary-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-weight: 700;
+}
+
+/* Tab headers with enhanced visibility */
+.civic-tabs .civic-tab-button,
+.jobs-tabs .tab-button,
+.business-tabs .tab-button {
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.civic-tabs .civic-tab-button.active,
+.jobs-tabs .tab-button.active,
+.business-tabs .tab-button.active {
+  background: var(--primary-gradient);
+  color: var(--text-inverse);
+  font-weight: 700;
+}
+
+/* Panel intro titles */
+.panel-intro h3,
+.panel-intro h4 {
+  background: var(--primary-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-weight: 700;
+}
+
+/* Job titles, business names, candidate names */
+.job-title,
+.business-name,
+.candidate-name,
+.court-name {
+  background: var(--primary-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-weight: 700;
+}
+
+/* ============================================
+   LINKS (Consistent Hover Effect)
+   ============================================ */
+
+a {
+  color: var(--primary);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+a:hover {
+  color: var(--primary-dark);
+}
+
+/* ============================================
+   TABS (Civic Section)
+   ============================================ */
+
+.civic-tab {
+  background: var(--surface);
+  color: var(--text-secondary);
+  border: 1px solid var(--border-light);
+  transition: all 0.3s ease;
+}
+
+.civic-tab:hover {
+  color: var(--primary);
+  border-color: var(--primary);
+}
+
+.civic-tab.active,
+.civic-tab[aria-selected="true"] {
+  background: var(--primary-gradient);
+  color: var(--text-inverse);
+  border-color: var(--primary);
+  box-shadow: var(--shadow-md);
+}
+
+/* ============================================
+   BADGES (Status Indicators)
+   ============================================ */
+
+/* V37.1.2 FIX: Scoped .badge selector to prevent conflicts with .source-type-badge */
+/* Only apply base badge styles to specific badge types, NOT to all elements containing "badge" */
+.badge-primary,
+.badge-incumbent,
+.badge-challenger,
+.badge-primary-challenger,
+.badge-new,
+.badge-info {
+  border-radius: 9999px;
+  padding: 0.25rem 0.75rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.badge-primary,
+.badge-incumbent {
+  background: var(--primary-gradient);
+  color: var(--text-inverse);
+}
+
+.badge-challenger,
+.badge-primary-challenger {
+  background: linear-gradient(135deg, #ed8936 0%, #f56565 100%);
+  color: var(--text-inverse);
+}
+
+.badge-new {
+  background: linear-gradient(135deg, #48bb78 0%, #38a169 100%);
+  color: var(--text-inverse);
+}
+
+.badge-info {
+  background: linear-gradient(135deg, #4299e1 0%, #3182ce 100%);
+  color: var(--text-inverse);
+}
+
+/* ============================================
+   FORMS & INPUTS
+   ============================================ */
+
+input[type="text"],
+input[type="email"],
+input[type="search"],
+textarea,
+select {
+  background: var(--surface);
+  border: 2px solid var(--border-light);
+  color: var(--text-primary);
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  border-color: var(--primary);
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+/* ============================================
+   LOADING STATES
+   ============================================ */
+
+.loading-spinner {
+  border: 3px solid var(--border-light);
+  border-top-color: var(--primary);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ============================================
+   TOOLTIPS & POPOVERS
+   ============================================ */
+
+.tooltip,
+.popover {
+  background: var(--surface);
+  border: 1px solid var(--border-light);
+  box-shadow: var(--shadow-lg);
+  color: var(--text-primary);
+}
+
+/* ============================================
+   FLOATING DECORATIVE ELEMENTS
+   ============================================ */
+
+.floating-orb-1 {
+  background: radial-gradient(circle, var(--orb-primary) 0%, transparent 70%);
+}
+
+.floating-orb-2 {
+  background: radial-gradient(circle, var(--orb-secondary) 0%, transparent 70%);
+}
+
+/* ============================================
+   RESPONSIVE TEXT COLORS
+   ============================================ */
+
+@media (max-width: 768px) {
+  body {
+    background: var(--bg-lightest);
+  }
+  
+  /* Ensure text remains readable on mobile */
+  .card,
+  .panel {
+    background: var(--surface);
+  }
+}
+
+/* ============================================
+   ACCESSIBILITY - High Contrast Mode
+   ============================================ */
+
+@media (prefers-contrast: high) {
+  :root {
+    --text-primary: #000000;
+    --border-light: #000000;
+  }
+  
+  .btn-primary,
+  .btn-secondary {
+    border-width: 3px;
+  }
+}
+
+/* ============================================
+   PRINT STYLES
+   ============================================ */
+
+@media print {
+  header,
+  footer,
+  .floating-orb-1,
+  .floating-orb-2 {
+    display: none;
+  }
+  
+  body {
+    background: white;
+    color: black;
+  }
+}

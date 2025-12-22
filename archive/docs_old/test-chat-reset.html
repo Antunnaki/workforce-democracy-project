@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>WDP Chat Reset Diagnostic</title>
+  <!-- Unique marker: TEST-CHAT-RESET 2025-12-16T12:18Z BETA -->
+  <script>window.WDP_API_BASE='https://api.workforcedemocracyproject.org';</script>
+  <script>
+    // Nuclear proof: this alert must show once per load
+    alert('TEST page loaded @ ' + new Date().toISOString());
+  </script>
+  <script defer src="/js/chat-clean.reset.js"></script>
+  <style>
+    body { font:16px/1.4 system-ui, sans-serif; padding: 32px; }
+  </style>
+</head>
+<body>
+  <h1>Chat Reset Diagnostic</h1>
+  <p>If the 💬 button is not bottom-right, the reset script did not run (or CSS overlays it).</p>
+</body>
+</html>

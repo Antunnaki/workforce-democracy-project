@@ -1,0 +1,44 @@
+/**
+ * PRINT STYLES
+ * Version: 37.11.4-PHASE3C-PRIORITY
+ * Date: 2025-01-14
+ * 
+ * Print-optimized styles for creating printer-friendly versions of pages.
+ * Hides interactive elements and optimizes for black & white printing.
+ * 
+ * Dependencies:
+ * - None (standalone print styles)
+ * 
+ * Features:
+ * - Hides navigation, buttons, and interactive elements
+ * - Forces white background and black text
+ * - Underlines links for clarity
+ * - Optimizes for paper-based reading
+ * 
+ * NOTE: This file should load AFTER all other CSS to ensure print
+ * overrides take effect properly.
+ */
+
+/* ============================================
+   PRINT STYLES
+   ============================================ */
+@media print {
+  .site-header,
+  .chat-widget,
+  .language-selector,
+  .mobile-menu-toggle,
+  .hero-actions,
+  .filter-btn,
+  .search-btn {
+    display: none;
+  }
+  
+  body {
+    background: white;
+    color: black;
+  }
+  
+  a {
+    text-decoration: underline;
+  }
+}

@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>WDP Chat Reset Diagnostic</title>
+  <!-- TEST-CHAT-RESET INLINE 2025-12-16T12:40Z BETA -->
+  <script>
+    window.WDP_API_BASE='https://api.workforcedemocracyproject.org';
+    alert('TEST page inline mode @ '+new Date().toISOString());
+  </script>
+  <style>
+    body { font:16px/1.4 system-ui, sans-serif; padding: 32px; }
+  </style>
+</head>
+<body>
+  <h1>Chat Reset Diagnostic (Inline)</h1>
+  <p>If you don't see a 💬 button bottom-right, JavaScript execution is being halted before this block, or CSS overlays it.</p>
+  <script>
+    /* WDP chat-clean.reset.js INLINE TIMESTAMP-VERIFIED */
+    (function(){
+      'use strict';
+      const API_BASE = (window.WDP_API_BASE) || 'https://api.workforcedemocracyproject.org';
+      function $(id){ return document.getElementById(id); }
+      function ensureChatDOM(){
+        if (!$('openChatBtn')) {
+          const btn = document.createElement('button');
+          btn.id = 'openChatBtn';
+          btn.type = 'button';
+          btn.setAttribute('aria-label','Open chat');
+          Object.assign(btn.style,{position:'fixed',right:'16px',bottom:'16px',zIndex:'9999',width:'56px',height:'56px',borderRadius:'50%',border:'none',background:'#1d4ed8',color:'#fff',fontSize:'20px',boxShadow:'0 6px 16px rgba(0,0,0,.25)'});
+          btn.textContent='💬'; document.body.appendChild(btn);
+        }
+        if (!$('chat-modal')) {
+          const modal = document.createElement('div'); modal.id='chat-modal'; modal.setAttribute('role','dialog'); modal.setAttribute('aria-modal','true');
+          Object.assign(modal.style,{position:'fixed',right:'16px',bottom:'80px',width:'min(420px,94vw)',maxHeight:'70vh',display:'none',flexDirection:'column',background:'#0f172a',color:'#fff',borderRadius:'12px',boxShadow:'0 12px 28px rgba(0,0,0,.35)',overflow:'hidden',zIndex:'10000'});
+          modal.innerHTML = `
+            <div id="chat-header" style="display:flex;align-items:center;justify-content:space-between;padding:10px 12px;background:#111827;border-bottom:1px solid rgba(255,255,255,.08)">
+              <div style="font-weight:600">Civic Assistant</div>
+              <button id="closeChatBtn" type="button" aria-label="Close chat" style="background:transparent;border:none;color:#fff;font-size:18px;line-height:1">×</button>
+            </div>
+            <div id="chat-messages" style="padding:12px;gap:10px;display:flex;flex-direction:column;overflow:auto;min-height:160px;max-height:44vh;background:#0b1220"></div>
+            <form id="chat-form" style="display:flex;gap:8px;padding:12px;border-top:1px solid rgba(255,255,255,.08);background:#0b1220">
+              <input id="chat-input" type="text" autocomplete="off" placeholder="Ask about your representatives, bills, or voting…" aria-label="Message" style="flex:1;padding:10px 12px;border-radius:8px;border:1px solid #334155;background:#111827;color:#fff" />
+              <button id="sendChatBtn" type="submit" style="padding:10px 14px;border-radius:8px;border:none;background:#1d4ed8;color:#fff;font-weight:600">Send</button>
+            </form>`;
+          document.body.appendChild(modal);
+        }
+      }
+      function openModal(){ const m=$('chat-modal'); if (m) m.style.display='flex'; }
+      function closeModal(){ const m=$('chat-modal'); if (m) m.style.display='none'; }
+      function addMessage(text, role){ const list=$('chat-messages'); if(!list) return; const bubble=document.createElement('div');
+        Object.assign(bubble.style,{padding:'10px 12px',borderRadius:'10px',maxWidth:'90%',whiteSpace:'pre-wrap',wordBreak:'break-word'});
+        bubble.textContent=String(text);
+        if(role==='user'){ Object.assign(bubble.style,{alignSelf:'flex-end',background:'#1f2a44'}); } else { Object.assign(bubble.style,{alignSelf:'flex-start',background:'#122233'}); }
+        list.appendChild(bubble); list.scrollTop=list.scrollHeight; }
+      async function sendMessage(prompt){ addMessage(prompt,'user'); try{ const res=await fetch(`${API_BASE}/api/chat`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({message:prompt})}); if(!res.ok) throw new Error('HTTP '+res.status); const data=await res.json(); addMessage(data?.reply||data?.message||'[No reply]','assistant'); }catch(e){ console.error('[Chat] send failed',e); addMessage('Sorry — assistant unavailable. Please try again shortly.','assistant'); } }
+      function wire(){ const btn=$('openChatBtn'), modal=$('chat-modal'), closeBtn=$('closeChatBtn'), form=$('chat-form'), input=$('chat-input'); if(!btn||!modal||!form||!input){ console.warn('[Chat] Missing nodes',{btn:!!btn,modal:!!modal,form:!!form,input:!!input}); return; }
+        btn.addEventListener('click',()=>{ openModal(); setTimeout(()=> input?.focus(),0); }); closeBtn?.addEventListener('click',closeModal);
+        form.addEventListener('submit',e=>{ e.preventDefault(); const val=input.value.trim(); if(!val) return; input.value=''; sendMessage(val); });
+        document.addEventListener('keydown',e=>{ if(e.key==='Escape') closeModal(); });
+        console.log('[Chat] reset inline wired ✅'); }
+      window.addEventListener('DOMContentLoaded',()=>{ try{ ensureChatDOM(); wire(); } catch(e){ console.error('[Chat] reset inline init failed',e); } });
+    })();
+  </script>
+</body>
+</html>

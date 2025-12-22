@@ -47,7 +47,7 @@
 
 const CleanChat = {
     version: '37.9.15-FINAL',
-    apiBase: 'https://api.workforcedemocracyproject.org', // Fixed: removed '/test' path
+    apiBase: window.WDP_API_BASE || (window.CONFIG && window.CONFIG.API_BASE_URL) || 'https://api.workforcedemocracyproject.org',
     fetchTimeout: 300000, // 5 minutes for policy research queries (backend needs 60-90s)
     currentChatContainer: null, // FIX v37.9.14: Track which chat container isactive
     
@@ -235,7 +235,25 @@ function detectContext() {
  * to prevent HTML escaping issues
  */
 function convertCitations(text, sources) {
-   // Implementation here
+    if (!text) return '';
+    const superscriptMap = {
+        '1': '¹', '2': '²', '3': '³', '4': '⁴', '5': '⁵',
+        '6': '⁶', '7': '⁷', '8': '⁸', '9': '⁹', '0': '⁰'
+    };
+
+    const convertToSuperscript = (num) => {
+        return num.toString().split('').map(d => superscriptMap[d] || d).join('');
+    };
+
+    // Replace [1], [2], etc. with superscript numbers
+    return text.replace(/\[(\d+)\]/g, (match, number) => {
+        const index = parseInt(number);
+        // User requirement: "If no source, don't include citation"
+        if (sources && sources[index - 1]) {
+            return `<sup class="citation-link" data-source-index="${index - 1}" style="cursor:pointer; color:#3b82f6; font-weight:bold; padding:0 2px;" title="Click to see source">${convertToSuperscript(number)}</sup>`;
+        }
+        return ''; // Remove citation if source missing
+    });
 }
 
 // =============================================================================
@@ -243,26 +261,73 @@ function convertCitations(text, sources) {
 // =============================================================================
 
 /**
- * Convertmarkdown to HTML - INSTANT rendering
+ * Convert markdown to HTML - INSTANT rendering
  * NO character-by-character processing
  * 
- *CRITICAL FIX: Do NOTwrap in <p> tags - we'll add those AFTER citations
+ * CRITICAL FIX: Do NOT wrap in <p> tags - we'll add those AFTER citations
  * to prevent HTML escaping issues
  */
 function renderMarkdown(text) {
-    //Implementation here
+    if (!text) return '';
+    let html = text;
+    
+    // Bold
+    html = html.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+    html = html.replace(/__(.*?)__/g, '<strong>$1</strong>');
+    
+    // Italic
+    html = html.replace(/\*(.*?)\*/g, '<em>$1</em>');
+    html = html.replace(/_(.*?)_/g, '<em>$1</em>');
+    
+    // Links
+    html = html.replace(/\[(.*?)\]\((.*?)\)/g, '<a href="$2" target="_blank" style="color:#3b82f6; text-decoration:none;">$1</a>');
+    
+    // Newlines to breaks
+    html = html.replace(/\n\n/g, '<br><br>');
+    html = html.replace(/\n/g, '<br>');
+    
+    return html;
 }
 
-//=============================================================================
+// =============================================================================
 // SOURCES SECTION BUILDER
 // =============================================================================
 
 /**
  * Build collapsible Sources section
- * Userrequirement: "Collapsible'Sources' section below response text"
+ * User requirement: "Collapsible 'Sources' section below response text"
  */
 function buildSourcesSection(sources) {
-    //Implementation here
+    if (!sources || sources.length === 0) return '';
+
+    const sourcesList = sources.map((s, i) => {
+        const title = s.title || s.name || 'Source';
+        const url = s.url || '#';
+        const pub = s.publication || s.source || '';
+        return `<div id="source-${i}" style="margin-bottom:8px; padding:10px; background:rgba(0,0,0,0.03); border-radius:8px; font-size:12px; border:1px solid rgba(0,0,0,0.05);">
+            <div style="display:flex; justify-content:space-between; align-items:flex-start;">
+                <span style="opacity:0.6; font-weight:bold; margin-right:8px;">[${i + 1}]</span>
+                <div style="flex:1;">
+                    <a href="${url}" target="_blank" style="color:#2563eb; text-decoration:none; font-weight:600; display:block; margin-bottom:2px;">${title}</a>
+                    ${pub ? `<span style="opacity:0.5; font-size:10px;">${pub}</span>` : ''}
+                </div>
+            </div>
+        </div>`;
+    }).join('');
+
+    return `
+        <div class="wdp-sources-section" style="margin-top:20px; border-top:1px solid rgba(0,0,0,0.1); padding-top:15px;">
+            <div class="sources-header" onclick="CleanChat.toggleSources(this)" style="cursor:pointer; display:flex; align-items:center; justify-content:space-between; margin-bottom:10px;">
+                <span style="font-size:12px; font-weight:bold; color:#475569; text-transform:uppercase; letter-spacing:0.05em;">
+                    Verified Sources (${sources.length})
+                </span>
+                <span class="sources-arrow" style="transition:transform 0.3s ease;">▼</span>
+            </div>
+            <div class="sources-list" style="display:none;">
+                ${sourcesList}
+            </div>
+        </div>
+    `;
 }
 
 // =============================================================================

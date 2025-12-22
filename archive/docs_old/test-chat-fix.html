@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chat Module Test</title>
+</head>
+<body>
+  <header>
+    <h1>Chat Module Test Page</h1>
+  </header>
+  
+  <main id="app-root">
+    <section id="home-chat"></section>
+  </main>
+  
+  <script type="module" src="/js/env-config.mjs"></script>
+  <script type="module" src="/js/app-shell.mjs"></script>
+  <script type="module">
+    import { mount as mountChat } from '/js/modules/chat.mjs';
+    
+    window.addEventListener('DOMContentLoaded', () => {
+      mountChat(document.getElementById('home-chat'));
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,101 @@
+/* ============================================
+   MODAL FIX - V36.0.4
+   Fixes transparent text in contact form modals
+   Date: January 27, 2025
+   ============================================ */
+
+/* Modal container needs explicit background and text colors */
+.modal-container {
+    background: var(--surface) !important;  /* White background */
+    color: var(--text) !important;  /* Dark text */
+    box-shadow: var(--shadow-xl) !important;
+}
+
+/* Ensure all text elements in modal are visible */
+.modal-container h1,
+.modal-container h2,
+.modal-container h3,
+.modal-container h4,
+.modal-container h5,
+.modal-container h6,
+.modal-container p,
+.modal-container label,
+.modal-container div,
+.modal-container span {
+    color: var(--text) !important;  /* Dark text for readability */
+}
+
+/* Form inputs in modal */
+.modal-container input[type="text"],
+.modal-container input[type="email"],
+.modal-container input[type="search"],
+.modal-container textarea,
+.modal-container select {
+    background: var(--surface) !important;
+    border: 2px solid var(--border) !important;
+    color: var(--text) !important;  /* Dark text */
+    border-radius: var(--radius-md);
+}
+
+/* Input placeholders */
+.modal-container input::placeholder,
+.modal-container textarea::placeholder {
+    color: var(--text-light) !important;  /* Lighter grey for placeholders */
+    opacity: 0.6;
+}
+
+/* Focus states */
+.modal-container input:focus,
+.modal-container textarea:focus,
+.modal-container select:focus {
+    border-color: var(--primary) !important;
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.15);
+}
+
+/* Links in modal */
+.modal-container a {
+    color: var(--primary) !important;
+}
+
+.modal-container a:hover {
+    color: var(--primary-dark) !important;
+}
+
+/* Buttons in modal */
+.modal-container .btn-primary,
+.modal-container button.primary,
+.modal-container .primary-button {
+    background: var(--btn-primary-bg) !important;
+    color: var(--text-inverse) !important;
+    border: none;
+}
+
+.modal-container .btn-secondary,
+.modal-container button.secondary,
+.modal-container .secondary-button {
+    background: var(--btn-secondary-bg) !important;
+    color: var(--btn-secondary-text) !important;
+    border: 2px solid var(--btn-secondary-border);
+}
+
+/* Close button visibility */
+.modal-container .close-btn,
+.modal-container .modal-close {
+    background: rgba(0, 0, 0, 0.1);
+    color: var(--text);
+    border: none;
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.modal-container .close-btn:hover,
+.modal-container .modal-close:hover {
+    background: rgba(0, 0, 0, 0.2);
+}

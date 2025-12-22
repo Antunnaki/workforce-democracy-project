@@ -1,0 +1,142 @@
+/**
+ * Helpful Suggestions Styling
+ * 
+ * Beautiful, friendly styling for suggestion messages
+ * Matches site's warm, welcoming aesthetic
+ */
+
+.helpful-suggestion {
+  background: linear-gradient(135deg, #fff9e6 0%, #fff 100%);
+  border-left: 4px solid #f4a261;
+  border-radius: 8px;
+  padding: 1rem;
+  margin: 0.75rem 0;
+  box-shadow: 0 2px 8px rgba(244, 162, 97, 0.15);
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.suggestion-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+  color: #2d3748;
+}
+
+.suggestion-icon {
+  font-size: 1.5rem;
+  flex-shrink: 0;
+}
+
+.suggestion-header strong {
+  font-size: 15px;
+  font-weight: 600;
+  color: #2d3748;
+}
+
+.suggestion-body {
+  color: #4a5568;
+}
+
+.suggestion-body p {
+  margin: 0.5rem 0;
+}
+
+.suggestion-body strong {
+  color: #2d3748;
+  font-weight: 600;
+}
+
+/* Collapsible "Show me how" section */
+.suggestion-body details {
+  margin: 0.75rem 0;
+  padding: 0.5rem;
+  background: rgba(255, 255, 255, 0.7);
+  border-radius: 6px;
+  border: 1px solid rgba(244, 162, 97, 0.2);
+}
+
+.suggestion-body summary {
+  cursor: pointer;
+  font-weight: 600;
+  color: #667eea;
+  user-select: none;
+  padding: 0.25rem;
+  transition: color 0.2s;
+}
+
+.suggestion-body summary:hover {
+  color: #764ba2;
+}
+
+.suggestion-body summary::-webkit-details-marker {
+  color: #667eea;
+}
+
+/* Steps list */
+.suggestion-steps {
+  margin: 0.75rem 0 0.5rem 1.5rem;
+  padding: 0;
+  color: #4a5568;
+}
+
+.suggestion-steps li {
+  margin: 0.5rem 0;
+  line-height: 1.6;
+}
+
+/* Footer */
+.suggestion-footer {
+  margin-top: 0.75rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid rgba(244, 162, 97, 0.2);
+  font-size: 13px;
+  color: #718096;
+  font-style: italic;
+}
+
+/* Mobile optimization */
+@media (max-width: 768px) {
+  .helpful-suggestion {
+    padding: 0.875rem;
+    font-size: 13px;
+  }
+  
+  .suggestion-icon {
+    font-size: 1.25rem;
+  }
+  
+  .suggestion-header strong {
+    font-size: 14px;
+  }
+  
+  .suggestion-steps {
+    margin-left: 1.25rem;
+  }
+}
+
+/* Animation - subtle slide-in */
+@keyframes slideInSuggestion {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.helpful-suggestion {
+  animation: slideInSuggestion 0.3s ease-out;
+}
+
+/* Print-friendly */
+@media print {
+  .helpful-suggestion {
+    background: white;
+    border: 2px solid #f4a261;
+    box-shadow: none;
+  }
+}

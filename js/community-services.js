@@ -12,7 +12,9 @@
 
 // V36.11.16: Using backend proxy to avoid CORS issues
 const NONPROFIT_API = {
-    BASE_URL: window.location.hostname === 'localhost' ? 'http://localhost:3001' : 'https://api.workforcedemocracyproject.org',
+    get BASE_URL() {
+        return window.WDP_API_BASE || 'https://api.workforcedemocracyproject.org';
+    },
     SEARCH: '/api/nonprofits/search'
 };
 

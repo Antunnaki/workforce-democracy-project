@@ -1,0 +1,61 @@
+/**
+ * PHILOSOPHIES
+ * Version: 37.11.4-PHASE3C
+ * Date: 2025-01-14
+ * 
+ * Philosophy cards grid for displaying core principles and values.
+ * Numbered cards with hover effects and accent borders.
+ * 
+ * Dependencies:
+ * - variables.css (design tokens)
+ * 
+ * Components:
+ * - .philosophies-grid - Responsive grid layout
+ * - .philosophy-card - Individual philosophy card with number badge
+ * - .philosophy-number - Circular number indicator
+ */
+
+/* ============================================
+   PHILOSOPHIES
+   ============================================ */
+.philosophies-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-lg);
+}
+
+@media (min-width: 500px) {
+  .philosophies-grid {
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  }
+}
+
+.philosophy-card {
+  background: var(--surface);
+  border: 2px solid var(--border);
+  border-left: 5px solid var(--primary);
+  border-radius: var(--radius-md);
+  padding: var(--space-lg);
+  box-shadow: var(--shadow-md);
+  transition: all var(--transition-base);
+}
+
+.philosophy-card:hover {
+  box-shadow: var(--shadow-lg);
+  transform: translateX(6px);
+  border-left-color: var(--secondary);
+  border-color: var(--accent-light);
+}
+
+.philosophy-number {
+  display: inline-block;
+  background: var(--primary);
+  color: white;
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius-full);
+  text-align: center;
+  line-height: 32px;
+  font-weight: var(--font-weight-bold);
+  margin-bottom: var(--space-md);
+}

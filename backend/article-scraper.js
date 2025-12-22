@@ -11,6 +11,7 @@
  * - Graceful degradation (returns excerpt if scraping fails)
  */
 
+require('./utils/polyfills');
 const axios = require('axios');
 const cheerio = require('cheerio');
 

@@ -11,7 +11,9 @@
 // ============================================================================
 
 const NONPROFIT_API = {
-    BASE_URL: 'https://api.workforcedemocracyproject.org/api/nonprofits',
+    get BASE_URL() {
+        return (window.WDP_API_BASE || 'https://api.workforcedemocracyproject.org') + '/api/nonprofits';
+    },
     ENDPOINTS: {
         SEARCH: '/search',
         ORGANIZATION: '/'

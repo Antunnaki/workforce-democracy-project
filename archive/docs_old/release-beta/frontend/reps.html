@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Representatives Test Page</title>
+</head>
+<body>
+  <header>
+    <h1>Representatives Module Test</h1>
+  </header>
+  
+  <main id="app-root"></main>
+  
+  <script type="module">
+    import { boot } from '/js/app-shell.mjs';
+    import { mount as mountReps } from '/js/modules/representatives.mjs';
+    
+    boot().then(() => {
+      mountReps();
+    });
+  </script>
+</body>
+</html>

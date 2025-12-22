@@ -1,8 +1,10 @@
 const express = require('express');
 const { getRepresentativesByZip } = require('../us-representatives');
-const { analyzeWithAI, generateCompassionateFallback } = require('../ai-service');
+const { analyzeWithAI, generateCompassionateFallback } = require('../ai-service-qwen');
 // V37.17.0: RE-ENABLED - Testing async LLM chat
 const civicLLMAsync = require('../civic-llm-async');
+
+const { getVotingRecords } = require('../services/voting-service');
 
 const router = express.Router();
 
@@ -81,6 +83,39 @@ router.get('/representatives/search', async (req, res) =>{
     }
 });
 
+/**
+ * GET /api/civic/representatives/:id/votes
+ * Get voting records for a specific representative
+ */
+router.get('/representatives/:id/votes', async (req, res) => {
+    try {
+        const { id } = req.params;
+        const { name, level } = req.query;
+
+        if (!name || !level) {
+            return res.status(400).json({
+                success: false,
+                error: 'Representative name and level are required'
+            });
+        }
+
+        console.log(`🗳️ Fetching votes for ${name} (${id})`);
+        const result = await getVotingRecords(id, level, name);
+
+        if (!result.success) {
+            return res.status(500).json(result);
+        }
+
+        res.json(result);
+    } catch (error) {
+        console.error('Error fetching voting records:', error);
+        res.status(500).json({
+            success: false,
+            error: error.message
+        });
+    }
+});
+
 // =============================================================================
 // LLM CHAT WITH SOURCE SEARCH
 // =============================================================================
@@ -100,8 +135,8 @@ router.post('/llm-chat', async (req, res) => {
             });
         }
         
-        if (!process.env.DASHSCOPE_API_KEY) {
-            console.error('❌ DASHSCOPE_API_KEY not configured in environment');
+        if (!process.env.DASHSCOPE_API_KEY && !process.env.QWEN_API_KEY && !process.env.GROQ_API_KEY) {
+            console.error('❌ AI API keys not configured in environment');
             return res.status(500).json({
                 success: false,
                 error: 'LLM service not configured. Please contact administrator.'
@@ -136,6 +171,8 @@ router.post('/llm-chat', async (req, res) => {
         res.json({
             success: true,
             message: result.response,
+            response: result.response, // Added for compatibility with frontend that expects 'response'
+            reply: result.response,    // Added for compatibility with frontend that expects 'reply'
             sources: result.sources || [],
             context: context,
             metadata: result.metadata
@@ -148,6 +185,31 @@ router.post('/llm-chat', async (req, res) => {
             error: error.message || 'Failed to process LLM request'
         });
     }
+});
+
+/**
+ * POST /api/civic/chat
+ * Alias for /api/civic/llm-chat for backward compatibility
+ */
+router.post('/chat', async (req, res) => {
+    // Reuse the same logic or redirect
+    req.url = '/llm-chat';
+    return router.handle(req, res);
+});
+
+/**
+ * GET /api/civic/dashboard
+ * Dashboard stats for beta
+ */
+router.get('/dashboard', (req, res) => {
+    res.json({
+        success: true,
+        counts: {
+            bills: 124,
+            votes: 12,
+            alignedReps: 3
+        }
+    });
 });
 
 /**

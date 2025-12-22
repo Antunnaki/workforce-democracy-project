@@ -10,6 +10,7 @@
  * All APIs are FREE and provide official, authoritative data
  */
 
+require('./utils/polyfills');
 const axios = require('axios');
 const cheerio = require('cheerio');
 

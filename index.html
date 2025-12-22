@@ -1,23 +1,108 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <title>WDP Beta Shell</title>
-  <!-- WDP SHELL LIVE BETA 2025-12-16T13:25Z -->
-  <!-- CSP: only self + API -->
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; connect-src 'self' https://api.workforcedemocracyproject.org; img-src 'self' data:; base-uri 'none'; frame-ancestors 'none'">
-  <style>body{font:16px/1.5 system-ui,sans-serif;margin:0;padding:24px} #app-root{min-height:60vh}body::before{content:'WDP SHELL LIVE';position:fixed;top:0;left:0;background:#111;color:#0f0;font:12px/1 monospace;padding:2px 6px;z-index:99999;opacity:.85}</style>
-  <script>window.WDP_API_BASE='https://api.workforcedemocracyproject.org';</script>
-  <script type="module" src="/js/app-shell.20251216.mjs"></script>
-  <script type="module">
-    import '/js/app-shell.20251216.mjs';
-    import { mount as mountChat } from '/js/modules/chat.20251216.mjs';
-    window.addEventListener('DOMContentLoaded', ()=> mountChat());
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title id="page-title">Workforce Democracy Project</title>
+  <!-- CSP Override to allow inline styles and scripts during Beta development -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self' https:; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.jsdelivr.net https://cdn.tailwindcss.com https://fonts.googleapis.com https://api.workforcedemocracyproject.org https://api-beta.workforcedemocracyproject.org; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.jsdelivr.net; font-src 'self' https://fonts.gstatic.com https://cdn.jsdelivr.net; img-src 'self' data: https: https://www.congress.gov https://www.senate.ca.gov https://www.assembly.ca.gov https://www.joincalifornia.com https://bioguide.congress.gov https://api.workforcedemocracyproject.org https://api-beta.workforcedemocracyproject.org; connect-src 'self' https://workforcedemocracyproject.org https://www.workforcedemocracyproject.org https://api.workforcedemocracyproject.org https://api-beta.workforcedemocracyproject.org https://api.groq.com https://*.netlify.app https://*.gensparkspace.com https://projects.propublica.org https://dashscope.aliyuncs.com; frame-src 'self'">
+  <!-- WDP VERSION: 1.1.10-20251222-OPTIMIZED -->
+  <meta name="description" content="Privacy-first civic platform providing representative info, bill tracking/analysis, and an empathy-forward AI assistant that always cites original sources.">
+  <link rel="stylesheet" href="/css/core/variables.css?v=1.1.10">
+  <link rel="stylesheet" href="/css/core/base.css?v=1.1.10">
+  <link rel="stylesheet" href="/css/components/tabs.css?v=1.1.10">
+  <style>
+    #beta-status-bar {
+      position: fixed; top: 0; left: 0; right: 0; height: 4px; background: #3b82f6; z-index: 99999;
+      display: none;
+    }
+    #emergency-reset {
+      font-size: 9px; opacity: 0.3; color: #fff; cursor: pointer; text-decoration: underline; margin-top: 10px; display: inline-block;
+    }
+    #emergency-reset:hover { opacity: 1; color: #f87171; }
+  </style>
+  <script>
+    window.WDP_VERSION = '1.1.10';
+    // Clear old state to prevent Beta-Beta title issue
+    document.title = 'Workforce Democracy Project';
+    
+    async function emergencyReset() {
+      if (confirm('Emergency Reset: This will clear all local cache, settings, and session data to fix connectivity issues. Continue?')) {
+        // Clear everything
+        localStorage.clear();
+        sessionStorage.clear();
+        
+        // Unregister all service workers
+        if ('serviceWorker' in navigator) {
+          const regs = await navigator.serviceWorker.getRegistrations();
+          for (let reg of regs) { await reg.unregister(); }
+        }
+        
+        // Purge caches
+        if ('caches' in window) {
+          const names = await caches.keys();
+          for (let name of names) { await caches.delete(name); }
+        }
+        
+        alert('Reset complete. Page will now reload with fresh code.');
+        window.location.href = window.location.origin + window.location.pathname + '?reset=' + Date.now();
+      }
+    }
   </script>
+  <script type="module" src="/js/csp-logger.mjs?v=1.1.10"></script>
 </head>
 <body>
-  <header><h1>WDP Beta</h1><p>Rebuild in progress — modules will appear here.</p></header>
-  <main id="app-root"></main>
+  <div id="beta-status-bar"></div>
+  <header>
+    <h1 id="main-title">Workforce Democracy Project</h1>
+    <div style="display:flex; justify-content:space-between; align-items:center;">
+      <p style="font-size: 10px; opacity: 0.5; margin:0;">v1.1.10-20251222-OPTIMIZED</p>
+      <span id="emergency-reset" onclick="emergencyReset()">Fix Connection / Reset Cache</span>
+    </div>
+  </header>
+  
+  <main id="app-root" class="container">
+    <div class="civic-tabs" role="tablist">
+      <button class="civic-tab active" data-tab="reps">
+        <span class="tab-icon">👥</span>
+        <span class="tab-label">My Reps</span>
+      </button>
+      <button class="civic-tab" data-tab="bills">
+        <span class="tab-icon">📜</span>
+        <span class="tab-label">My Bills</span>
+      </button>
+      <button class="civic-tab" data-tab="court">
+        <span class="tab-icon">⚖️</span>
+        <span class="tab-label">Supreme Court</span>
+      </button>
+      <button class="civic-tab" data-tab="dashboard">
+        <span class="tab-icon">📊</span>
+        <span class="tab-label">Dashboard</span>
+      </button>
+    </div>
+
+    <div class="civic-tab-panels" style="position: relative; min-height: 400px;">
+      <section id="reps-panel" class="civic-panel active">
+        <div id="home-reps"></div>
+      </section>
+
+      <section id="bills-panel" class="civic-panel">
+        <div id="home-bills"></div>
+      </section>
+
+      <section id="court-panel" class="civic-panel">
+        <div id="home-court"></div>
+      </section>
+      
+      <section id="dashboard-panel" class="civic-panel">
+        <div id="home-dashboard"></div>
+      </section>
+    </div>
+  </main>
+
+  <div id="home-chat"></div>
+
+  <script type="module" src="/js/app-shell.mjs?v=1.1.10"></script>
+  <script type="module" src="/js/modules/home-mount.mjs?v=1.1.10"></script>
 </body>
 </html>

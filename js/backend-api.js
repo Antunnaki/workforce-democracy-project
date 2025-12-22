@@ -26,9 +26,9 @@
 
 const BackendAPI = {
     // Add environment detection for backend URL
-    baseURL: window.location.hostname.includes('netlify.app') || window.location.hostname === 'localhost' 
-        ? 'https://api.workforcedemocracyproject.org'  // Use HTTPS for Netlify
-        : 'https://api.workforcedemocracyproject.org',  // Production environment
+    get baseURL() {
+        return window.WDP_API_BASE || (window.CONFIG && window.CONFIG.API_BASE_URL) || 'https://api.workforcedemocracyproject.org';
+    },
     endpoints: {
         query: '/api/civic/llm-chat',// ✅ V37.0.2: Use working civic LLM endpoint
         health: '/health',

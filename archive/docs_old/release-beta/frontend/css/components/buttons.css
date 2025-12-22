@@ -1,0 +1,275 @@
+/* ============================================================================
+   WORKFORCE DEMOCRACY PROJECT - BUTTONS
+   Version: 37.11.0-PHASE3B
+   Date: November 14, 2024
+   
+   All button styles and variations
+   
+   Dependencies: variables.css (MUST load before this file)
+   
+   ============================================================================ */
+
+/* ============================================
+   BASE BUTTON STYLES
+   ============================================ */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-sm);
+  padding: var(--space-sm) var(--space-lg);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  border: none;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  text-decoration: none;
+  min-height: 40px; /* Touch-friendly */
+  font-family: inherit;
+}
+
+@media (min-width: 768px) {
+  .btn {
+    padding: var(--space-md) var(--space-xl);
+    font-size: var(--font-size-base);
+    min-height: 44px;
+  }
+}
+
+.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* ============================================
+   BUTTON VARIANTS
+   ============================================ */
+
+/* Primary Button */
+.btn-primary {
+  background: var(--primary);
+  color: white;
+}
+
+.btn-primary:hover,
+.btn-primary:focus {
+  background: var(--primary-dark);
+  box-shadow: var(--shadow-md);
+  text-decoration: none;
+}
+
+/* Secondary Button */
+.btn-secondary {
+  background: var(--secondary);
+  color: white;
+}
+
+.btn-secondary:hover,
+.btn-secondary:focus {
+  background: var(--secondary-dark);
+  box-shadow: var(--shadow-md);
+  text-decoration: none;
+}
+
+/* Link Button (text-style button) */
+.btn-link {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-xs);
+  background: none;
+  border: none;
+  color: var(--primary);
+  cursor: pointer;
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  text-decoration: none;
+  padding: var(--space-xs) 0;
+  transition: color var(--transition-fast);
+  min-height: 44px;
+  justify-content: center;
+}
+
+@media (min-width: 480px) {
+  .btn-link {
+    justify-content: flex-start;
+  }
+}
+
+@media (min-width: 768px) {
+  .btn-link {
+    font-size: var(--font-size-base);
+  }
+}
+
+.btn-link:hover {
+  color: var(--primary-dark);
+  text-decoration: underline;
+}
+
+.btn-link i {
+  font-size: 0.9em;
+}
+
+/* ============================================
+   FEATURE BUTTON (for hero/feature cards)
+   ============================================ */
+
+.feature-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-xs);
+  background: var(--secondary);
+  color: white;
+  border: none;
+  padding: var(--space-md) var(--space-lg);
+  border-radius: var(--radius-full);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  width: 100%;
+  box-shadow: 0 4px 12px rgba(243, 156, 18, 0.3);
+}
+
+.feature-btn:hover {
+  background: var(--secondary-dark);
+  transform: translateX(4px);
+  box-shadow: 0 6px 20px rgba(243, 156, 18, 0.4);
+}
+
+.feature-btn i {
+  transition: transform var(--transition-fast);
+}
+
+.feature-btn:hover i {
+  transform: translateX(4px);
+}
+
+/* ============================================
+   BILL DETAIL BUTTON
+   ============================================ */
+
+.bill-detail-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-xs);
+  background: var(--background);
+  border: 2px solid var(--border);
+  color: var(--text);
+  padding: var(--space-sm) var(--space-md);
+  border-radius: var(--radius-md);
+  text-decoration: none;
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  transition: all var(--transition-fast);
+  cursor: pointer;
+  min-height: 44px;
+}
+
+@media (min-width: 768px) {
+  .bill-detail-btn {
+    font-size: var(--font-size-base);
+  }
+}
+
+.bill-detail-btn:hover {
+  background: var(--primary);
+  color: white;
+  border-color: var(--primary);
+}
+
+/* ============================================
+   VOTING BUTTONS
+   ============================================ */
+
+/* Vote buttons container */
+.vote-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  margin-top: var(--space-md);
+}
+
+@media (min-width: 480px) {
+  .vote-buttons {
+    flex-direction: row;
+  }
+}
+
+/* Base vote button */
+.vote-btn {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-sm);
+  padding: var(--space-md) var(--space-lg);
+  border: 2px solid var(--border);
+  border-radius: var(--radius-md);
+  background: var(--surface);
+  color: var(--text);
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-semibold);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  min-height: 52px;
+}
+
+.vote-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+/* Vote Yes button */
+.vote-btn-yes {
+  border-color: var(--success);
+  color: var(--success);
+}
+
+.vote-btn-yes:hover,
+.vote-btn-yes.vote-btn-selected {
+  background: var(--success);
+  color: white;
+}
+
+/* Vote No button */
+.vote-btn-no {
+  border-color: var(--error);
+  color: var(--error);
+}
+
+.vote-btn-no:hover,
+.vote-btn-no.vote-btn-selected {
+  background: var(--error);
+  color: white;
+}
+
+/* Vote Abstain button */
+.vote-btn-abstain {
+  border-color: var(--text-light);
+  color: var(--text-light);
+}
+
+.vote-btn-abstain:hover,
+.vote-btn-abstain.vote-btn-selected {
+  background: var(--text-light);
+  color: white;
+}
+
+/* Selected state */
+.vote-btn-selected {
+  box-shadow: var(--shadow-lg);
+  transform: scale(1.02);
+}
+
+/* Vote timestamp */
+.voted-timestamp {
+  text-align: center;
+  color: var(--text-secondary);
+  font-size: var(--font-size-sm);
+  margin-top: var(--space-md);
+}

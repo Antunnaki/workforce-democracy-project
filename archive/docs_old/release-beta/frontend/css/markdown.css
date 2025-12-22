@@ -1,0 +1,298 @@
+/**
+ * MARKDOWN STYLES - Phase 4 Frontend Enhancement
+ * Styling for markdown-rendered content (bold, italic, lists)
+ * 
+ * Matches existing design system:
+ * - Warm, inviting colors
+ * - Clean typography
+ * - Mobile responsive
+ * - Accessibility-focused
+ * 
+ * Created: October 30, 2025 (Phase 4)
+ */
+
+/* ============================================================================
+   INLINE MARKDOWN ELEMENTS
+   ============================================================================ */
+
+/**
+ * Bold text (**text** or __text__)
+ * Slightly heavier weight for emphasis
+ */
+strong {
+    font-weight: 700;
+    color: inherit;
+}
+
+/**
+ * Italic text (*text* or _text_)
+ * Subtle emphasis without overpowering
+ */
+em {
+    font-style: italic;
+    color: inherit;
+}
+
+/**
+ * Combined bold + italic (***text***)
+ * Rare but supported
+ */
+strong em,
+em strong {
+    font-weight: 700;
+    font-style: italic;
+}
+
+/* ============================================================================
+   UNORDERED LISTS (BULLET POINTS)
+   ============================================================================ */
+
+/**
+ * Unordered list container
+ * Created from markdown: - item, * item, + item
+ */
+.response-paragraph ul,
+ul.markdown-list {
+    margin: 0.75rem 0;
+    padding-left: 1.5rem;
+    list-style-type: disc;
+}
+
+/**
+ * Nested unordered lists
+ */
+.response-paragraph ul ul,
+ul.markdown-list ul {
+    margin: 0.25rem 0;
+    padding-left: 1.5rem;
+    list-style-type: circle;
+}
+
+/**
+ * List items
+ */
+.response-paragraph ul li,
+ul.markdown-list li {
+    margin: 0.5rem 0;
+    line-height: 1.6;
+    color: inherit;
+}
+
+/* ============================================================================
+   ORDERED LISTS (NUMBERED)
+   ============================================================================ */
+
+/**
+ * Ordered list container
+ * Created from markdown: 1. item, 2. item, 3. item
+ */
+.response-paragraph ol,
+ol.markdown-list {
+    margin: 0.75rem 0;
+    padding-left: 1.5rem;
+    list-style-type: decimal;
+}
+
+/**
+ * Nested ordered lists
+ */
+.response-paragraph ol ol,
+ol.markdown-list ol {
+    margin: 0.25rem 0;
+    padding-left: 1.5rem;
+    list-style-type: lower-alpha;
+}
+
+/**
+ * List items
+ */
+.response-paragraph ol li,
+ol.markdown-list li {
+    margin: 0.5rem 0;
+    line-height: 1.6;
+    color: inherit;
+}
+
+/* ============================================================================
+   LIST MARKERS (BULLETS & NUMBERS)
+   ============================================================================ */
+
+/**
+ * Customize bullet color
+ * Matches text color for cohesive look
+ */
+.response-paragraph ul li::marker,
+ul.markdown-list li::marker {
+    color: inherit;
+    font-size: 0.9em;
+}
+
+/**
+ * Customize number color
+ * Matches text color for cohesive look
+ */
+.response-paragraph ol li::marker,
+ol.markdown-list li::marker {
+    color: inherit;
+    font-weight: 600;
+}
+
+/* ============================================================================
+   INTEGRATION WITH CITATIONS
+   ============================================================================ */
+
+/**
+ * Ensure citations work inside markdown elements
+ * Bold text with citation: **text**[1]
+ */
+strong .citation-link,
+em .citation-link {
+    /* Citations inherit styles from citations.css */
+    /* No additional styling needed - Phase 3 handles it */
+}
+
+/**
+ * Citations in list items
+ */
+.response-paragraph li .citation-link,
+ul.markdown-list li .citation-link,
+ol.markdown-list li .citation-link {
+    /* Citations work normally in lists */
+    /* Phase 3 styles apply automatically */
+}
+
+/* ============================================================================
+   CHAT WIDGET INTEGRATION
+   ============================================================================ */
+
+/**
+ * Markdown in chat messages
+ * Inherits chat widget text color
+ */
+.chat-message strong,
+.chat-response strong {
+    font-weight: 700;
+}
+
+.chat-message em,
+.chat-response em {
+    font-style: italic;
+}
+
+.chat-message ul,
+.chat-response ul {
+    margin: 0.5rem 0;
+    padding-left: 1.25rem;
+}
+
+.chat-message ol,
+.chat-response ol {
+    margin: 0.5rem 0;
+    padding-left: 1.25rem;
+}
+
+.chat-message li,
+.chat-response li {
+    margin: 0.35rem 0;
+    line-height: 1.5;
+}
+
+/* ============================================================================
+   MOBILE RESPONSIVE
+   ============================================================================ */
+
+/**
+ * Slightly tighter spacing on mobile
+ */
+@media (max-width: 768px) {
+    .response-paragraph ul,
+    .response-paragraph ol,
+    ul.markdown-list,
+    ol.markdown-list {
+        padding-left: 1.25rem;
+        margin: 0.5rem 0;
+    }
+    
+    .response-paragraph li,
+    ul.markdown-list li,
+    ol.markdown-list li {
+        margin: 0.35rem 0;
+        font-size: 0.95em;
+    }
+    
+    .chat-message ul,
+    .chat-message ol,
+    .chat-response ul,
+    .chat-response ol {
+        padding-left: 1rem;
+    }
+}
+
+/* ============================================================================
+   ACCESSIBILITY
+   ============================================================================ */
+
+/**
+ * High contrast mode support
+ * Ensure bold/italic remain visible
+ */
+@media (prefers-contrast: high) {
+    strong {
+        font-weight: 900;
+    }
+    
+    em {
+        text-decoration: underline;
+        text-decoration-style: dotted;
+    }
+}
+
+/**
+ * Reduced motion support
+ * No animations on markdown elements
+ */
+@media (prefers-reduced-motion: reduce) {
+    /* Markdown elements are static anyway */
+    /* No animations to disable */
+}
+
+/* ============================================================================
+   PRINT STYLES
+   ============================================================================ */
+
+/**
+ * Ensure markdown prints correctly
+ */
+@media print {
+    strong {
+        font-weight: 700;
+        color: #000;
+    }
+    
+    em {
+        font-style: italic;
+        color: #000;
+    }
+    
+    .response-paragraph ul,
+    .response-paragraph ol {
+        page-break-inside: avoid;
+    }
+    
+    .response-paragraph li {
+        page-break-inside: avoid;
+    }
+}
+
+/* ============================================================================
+   DARK MODE COMPATIBILITY
+   ============================================================================ */
+
+/**
+ * Markdown works with dark mode
+ * Inherits text color from parent elements
+ */
+@media (prefers-color-scheme: dark) {
+    /* No specific dark mode styles needed */
+    /* Markdown inherits colors from parent */
+}

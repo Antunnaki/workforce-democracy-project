@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WDP Connectivity Diagnostic</title>
+    <style>
+        body { font-family: sans-serif; padding: 20px; line-height: 1.5; background: #0f172a; color: #f8fafc; }
+        .card { background: #1e293b; padding: 20px; border-radius: 8px; margin-bottom: 20px; border: 1px solid #334155; }
+        h2 { margin-top: 0; color: #38bdf8; }
+        pre { background: #000; padding: 10px; border-radius: 4px; overflow-x: auto; color: #4ade80; }
+        .success { color: #4ade80; font-weight: bold; }
+        .error { color: #f87171; font-weight: bold; }
+        button { background: #2563eb; color: white; border: none; padding: 10px 20px; border-radius: 4px; cursor: pointer; font-size: 16px; }
+        button:hover { background: #1d4ed8; }
+        .status-pill { display: inline-block; padding: 2px 8px; border-radius: 999px; font-size: 12px; margin-left: 10px; }
+        .status-waiting { background: #475569; }
+        .status-success { background: #166534; }
+        .status-error { background: #991b1b; }
+    </style>
+</head>
+<body>
+    <h1>WDP Connectivity Diagnostic</h1>
+    <p>Use this tool to verify if your browser can connect to the backend APIs from the Beta site.</p>
+
+    <div class="card">
+        <h2>1. Environment Info</h2>
+        <p><strong>Current Origin:</strong> <span id="current-origin"></span></p>
+        <p><strong>Detected Mode:</strong> <span id="detected-mode"></span></p>
+        <p><strong>Target API Base:</strong> <span id="api-base"></span></p>
+    </div>
+
+    <div class="card">
+        <h2>2. API Health Check</h2>
+        <button onclick="runHealthCheck()">Run Health Check</button>
+        <span id="health-status" class="status-pill status-waiting">Waiting</span>
+        <pre id="health-result">Results will appear here...</pre>
+    </div>
+
+    <div class="card">
+        <h2>3. CORS Preflight Test (OPTIONS)</h2>
+        <button onclick="runCorsTest()">Run CORS Test</button>
+        <span id="cors-status" class="status-pill status-waiting">Waiting</span>
+        <pre id="cors-result">Results will appear here...</pre>
+    </div>
+
+    <div class="card">
+        <h2>4. LLM Chat Endpoint Test</h2>
+        <button onclick="runChatTest()">Run Chat Test</button>
+        <span id="chat-status" class="status-pill status-waiting">Waiting</span>
+        <pre id="chat-result">Results will appear here...</pre>
+    </div>
+
+    <script type="module">
+        import { CONFIG } from './js/app-shell.mjs';
+        
+        document.getElementById('current-origin').textContent = window.location.origin;
+        document.getElementById('detected-mode').textContent = CONFIG.MODE;
+        document.getElementById('api-base').textContent = CONFIG.API_BASE;
+
+        window.runHealthCheck = async () => {
+            const el = document.getElementById('health-result');
+            const status = document.getElementById('health-status');
+            el.textContent = 'Testing...';
+            try {
+                const start = Date.now();
+                const res = await fetch(`${CONFIG.API_BASE}/api/civic/health`);
+                const data = await res.json();
+                el.textContent = JSON.stringify(data, null, 2);
+                status.textContent = 'Success';
+                status.className = 'status-pill status-success';
+            } catch (err) {
+                el.textContent = 'Error: ' + err.message;
+                status.textContent = 'Failed';
+                status.className = 'status-pill status-error';
+            }
+        };
+
+        window.runCorsTest = async () => {
+            const el = document.getElementById('cors-result');
+            const status = document.getElementById('cors-status');
+            el.textContent = 'Testing OPTIONS preflight...';
+            try {
+                const res = await fetch(`${CONFIG.API_BASE}/api/civic/llm-chat`, {
+                    method: 'OPTIONS',
+                    headers: {
+                        'Access-Control-Request-Method': 'POST',
+                        'Access-Control-Request-Headers': 'Content-Type'
+                    }
+                });
+                el.textContent = `Status: ${res.status} ${res.statusText}\n`;
+                el.textContent += `Access-Control-Allow-Origin: ${res.headers.get('Access-Control-Allow-Origin')}\n`;
+                el.textContent += `Access-Control-Allow-Methods: ${res.headers.get('Access-Control-Allow-Methods')}\n`;
+                
+                if (res.status === 204 || res.status === 200) {
+                    status.textContent = 'Success';
+                    status.className = 'status-pill status-success';
+                } else {
+                    status.textContent = 'Failed';
+                    status.className = 'status-pill status-error';
+                }
+            } catch (err) {
+                el.textContent = 'Error: ' + err.message;
+                status.textContent = 'Failed';
+                status.className = 'status-pill status-error';
+            }
+        };
+
+        window.runChatTest = async () => {
+            const el = document.getElementById('chat-result');
+            const status = document.getElementById('chat-status');
+            el.textContent = 'Sending test message...';
+            try {
+                const res = await fetch(`${CONFIG.API_BASE}/api/civic/llm-chat`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ message: 'Hello diagnostic test', context: 'general' })
+                });
+                const data = await res.json();
+                el.textContent = JSON.stringify(data, null, 2);
+                status.textContent = 'Success';
+                status.className = 'status-pill status-success';
+            } catch (err) {
+                el.textContent = 'Error: ' + err.message;
+                status.textContent = 'Failed';
+                status.className = 'status-pill status-error';
+            }
+        };
+    </script>
+</body>
+</html>

@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+set -euo pipefail
+REL="$1"
+[ -d "$REL" ] || { echo "missing: $REL" >&2; exit 1; }
+sudo ln -sfn "$REL" /srv/wdp/beta/current
+curl -s https://beta.workforcedemocracyproject.org/index.html | head -n 5

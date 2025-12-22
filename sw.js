@@ -8,24 +8,13 @@
  * Service worker updated to force complete cache clear
  */
 
-const CACHE_VERSION = 'wdp-v42z-sw-fix-' + Date.now();
+const CACHE_VERSION = 'wdp-v1.1.9-emergency-reset-' + Date.now();
 const CACHE_ASSETS = [
     '/',
     '/index.html',
-    '/css/fonts.css',
-    '/css/main.css',
-    '/css/civic-redesign.css',
-    '/js/main.js',
-    '/js/security.js',
-    '/js/charts.js',
-    '/js/civic.js',
-    '/js/jobs.js',
-    '/js/learning.js',
-    '/js/language.js',
-    '/js/local.js',
-    '/js/philosophies.js',
-    '/js/faq.js',
-    '/js/civic-voting.js'
+    '/js/app-shell.mjs',
+    '/js/modules/home-mount.mjs',
+    '/env-config.mjs'
 ];
 
 // Install event - cache assets
@@ -40,17 +29,15 @@ self.addEventListener('install', (event) => {
     );
 });
 
-// Activate event - clean old caches
+// Activate event - clean old caches IMMEDIATELY
 self.addEventListener('activate', (event) => {
     event.waitUntil(
         caches.keys()
             .then((cacheNames) => {
                 return Promise.all(
                     cacheNames.map((cache) => {
-                        if (cache !== CACHE_VERSION) {
-                            console.log('Service Worker: Clearing old cache');
-                            return caches.delete(cache);
-                        }
+                        console.log('Service Worker: Purging cache', cache);
+                        return caches.delete(cache);
                     })
                 );
             })

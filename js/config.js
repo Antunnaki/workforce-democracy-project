@@ -12,15 +12,24 @@
  */
 
 function getBackendUrl() {
-    // For Netlify testing environment
-    if (window.location.hostname.includes('netlify.app') || 
-        window.location.hostname === 'localhost') {
-        // Connect to productionendpoint
-        return 'https://api.workforcedemocracyproject.org';
-    } else {
-        // Production environment
-        return 'https://api.workforcedemocracyproject.org';
+    // Priority 1: Use window.WDP_API_BASE set by env-config.mjs
+    if (window.WDP_API_BASE) {
+        return window.WDP_API_BASE;
     }
+
+    // Priority 2: Use window.CONFIG.API_BASE_URL if already set
+    if (window.CONFIG && window.CONFIG.API_BASE_URL) {
+        return window.CONFIG.API_BASE_URL;
+    }
+
+    // Priority 3: Fallback based on hostname
+    const hostname = window.location.hostname;
+    if (hostname.includes('beta.workforcedemocracyproject.org')) {
+        return 'https://api-beta.workforcedemocracyproject.org';
+    }
+    
+    // Default to production
+    return 'https://api.workforcedemocracyproject.org';
 }
 
 const CONFIG = {
@@ -39,7 +48,9 @@ const CONFIG = {
      * 
      * Leave as empty string '' to use placeholders (development mode)
      */
-    API_BASE_URL: getBackendUrl(),
+    get API_BASE_URL() {
+        return getBackendUrl();
+    },
 /**
      * Qwen AI Features Enabled
      * 

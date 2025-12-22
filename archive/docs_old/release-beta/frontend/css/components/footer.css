@@ -1,0 +1,85 @@
+/**
+ * SITE FOOTER
+ * Version: 37.11.4-PHASE3C-PRIORITY
+ * Date: 2025-01-14
+ * 
+ * Site-wide footer with links, information sections, and copyright.
+ * Colors are managed by unified-color-scheme.css for consistency.
+ * 
+ * Dependencies:
+ * - variables.css (design tokens)
+ * - unified-color-scheme.css (colors - DO NOT override)
+ * 
+ * Components:
+ * - .site-footer - Main footer container
+ * - .footer-content - Grid layout for footer sections
+ * - .footer-links - Link lists
+ * - .footer-bottom - Copyright/legal text
+ * 
+ * NOTE: Background and text colors are managed by unified-color-scheme.css
+ * to ensure they adapt to the global color scheme. Do NOT add color overrides here.
+ */
+
+/* ============================================
+   SITE FOOTER
+   ============================================ */
+.site-footer {
+  /* Background and colors handled by unified-color-scheme.css - DO NOT override */
+  padding: var(--space-3xl) 0 var(--space-xl);
+  margin-top: var(--space-3xl);
+}
+
+.footer-content {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-2xl);
+  margin-bottom: var(--space-2xl);
+}
+
+.footer-title {
+  /* Color handled by unified-color-scheme.css (footer h3/h4) */
+  font-size: var(--font-size-lg);
+  margin-bottom: var(--space-md);
+  font-weight: var(--font-weight-semibold);
+}
+
+.footer-section p {
+  /* Color inherited from unified-color-scheme.css */
+  line-height: var(--line-height-relaxed);
+}
+
+.footer-links {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-links li {
+  margin-bottom: var(--space-sm);
+}
+
+.footer-links a {
+  /* Colors handled by unified-color-scheme.css (footer a) */
+  transition: color var(--transition-fast);
+  text-decoration: none;
+}
+
+.footer-links a:hover {
+  /* Hover color handled by unified-color-scheme.css */
+  text-decoration: underline;
+}
+
+.footer-bottom {
+  border-top: 1px solid var(--border-light);
+  padding-top: var(--space-lg);
+  text-align: center;
+  /* Color inherited from unified-color-scheme.css */
+  font-size: var(--font-size-sm);
+}
+
+.footer-note {
+  margin-top: var(--space-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-sm);
+}

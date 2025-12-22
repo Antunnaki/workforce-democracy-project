@@ -1,0 +1,4 @@
+# /etc/sudoers.d/wdp-beta-deploy
+# Allow wdp-beta group members to update the beta symlink without password
+Cmnd_Alias WDP_BETA_LINK = /bin/ln -sfn * /srv/wdp/beta/current
+%wdp-beta ALL=(root) NOPASSWD: WDP_BETA_LINK

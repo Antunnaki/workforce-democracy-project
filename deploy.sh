@@ -1,99 +1,132 @@
 #!/bin/bash
-set -euo pipefail
+# WORKFORCE DEMOCRACY PROJECT - UNIFIED DEPLOYMENT SCRIPT
+# Version: 2.0.0
+# Usage: ./deploy.sh [beta|production]
 
-# Workforce Democracy Project Deployment Script
-# Purpose: Safe, parameterized deploy helper for VPS
-# Default flow: git pull in backend dir → restart PM2 app → health check
+TARGET=${1:-beta}
+VPS_IP="185.193.126.13"
+REMOTE_USER="root"
 
-# Configuration variables
-SERVER_IP="185.193.126.13"
-SERVER_USER="root"
-# Canonical backend path on VPS (override with -p)
-PROJECT_PATH="/var/www/workforce-democracy/backend"
-# PM2 process name (override with -n)
-PM2_NAME="workforce-democracy-project"
-# Health check port (override with -H); default 3001 = Version A (prod)
-HEALTH_PORT="3001"
+echo "🚀 Starting Deployment to $TARGET..."
 
-# Function to display usage
-usage() {
-    echo "Usage: $0 [options]"
-    echo "Options:"
-    echo "  -h, --help     Show this help message"
-    echo "  -p, --path     Backend path on VPS (default: $PROJECT_PATH)"
-    echo "  -s, --server   Server IP address (default: $SERVER_IP)"
-    echo "  -u, --user     Server username (default: $SERVER_USER)"
-    echo "  -n, --pm2      PM2 process name (default: $PM2_NAME)"
-    echo "  -H, --health   Health check port (default: $HEALTH_PORT)"
-    echo "\nExamples:"
-    echo "  $0 -p /var/www/workforce-democracy/backend -n backend-b -H 3002"
-}
+if [ "$TARGET" == "beta" ]; then
+    REMOTE_DIR="/srv/wdp/beta/current"
+    FRONTEND_DIR="$REMOTE_DIR/frontend"
+    PORT=3001
+    USER="wdp-beta"
+    API_URL="https://api-beta.workforcedemocracyproject.org"
+    SITE_URL="https://beta.workforcedemocracyproject.org"
+else
+    REMOTE_DIR="/srv/wdp/current-prod"
+    FRONTEND_DIR="/var/www/workforcedemocracyproject.org"
+    PORT=3000
+    USER="deploy"
+    API_URL="https://api.workforcedemocracyproject.org"
+    SITE_URL="https://workforcedemocracyproject.org"
+fi
 
-# Parse command line arguments
-while [[ $# -gt 0 ]]; do
-    case $1 in
-        -h|--help)
-            usage
-            exit 0
-            ;;
-        -p|--path)
-            PROJECT_PATH="$2"
-            shift 2
-            ;;
-        -s|--server)
-            SERVER_IP="$2"
-            shift 2
-            ;;
-        -u|--user)
-            SERVER_USER="$2"
-            shift 2
-            ;;
-        -n|--pm2)
-            PM2_NAME="$2"
-            shift 2
-            ;;
-        -H|--health)
-            HEALTH_PORT="$2"
-            shift 2
-            ;;
-        *)
-            echo "Unknown option: $1"
-            usage
-            exit 1
-            ;;
-    esac
-done
+echo "📦 Syncing files..."
+echo "  -> Backend to $REMOTE_DIR/backend/..."
 
-# Function to execute commands on server
-execute_on_server() {
-    local command="$1"
-    echo "Executing: $command"
-    ssh ${SERVER_USER}@${SERVER_IP} "$command"
-}
+# 1. Upload Backend
+# Exclude node_modules, .env, large data/archive folders, .git, and backups to speed up upload
+rsync -avz \
+    --exclude 'node_modules' \
+    --exclude '.env' \
+    --exclude 'archive' \
+    --exclude 'data' \
+    --exclude '.git' \
+    --exclude '*.bak' \
+    --exclude '*~' \
+    backend/ $REMOTE_USER@$VPS_IP:$REMOTE_DIR/backend/
 
-# Function to get password from user
-get_password() {
-    read -sp "Enter password for ${SERVER_USER}@${SERVER_IP}: " password
-    echo
-    echo $password
-}
+# 2. Upload Frontend
+echo "  -> Frontend to $FRONTEND_DIR..."
 
-# Main deployment process
+# If production, use config.prod.json as config.json
+if [ "$TARGET" == "production" ]; then
+    cp config.prod.json config.json.tmp
+    # Also ensure env-config.mjs uses production settings if necessary, 
+    # but env-config.prod.mjs seems to be the one to use.
+    # However, index.html likely imports env-config.mjs.
+    cp env-config.prod.mjs env-config.mjs.tmp
+fi
 
-# Step 1: Pull latest code from Git
-echo "=== Pulling latest code from Git ==="
-execute_on_server "cd ${PROJECT_PATH} && git fetch --all && git pull --ff-only origin main"
+# Use rsync for frontend too, excluding the archive and other non-essential folders
+rsync -avz \
+    --delete \
+    --exclude 'archive' \
+    --exclude 'backend' \
+    --exclude 'node_modules' \
+    --exclude 'scripts' \
+    --exclude 'ops' \
+    --exclude 'docs' \
+    --exclude 'data' \
+    --exclude '.git' \
+    --exclude '.idea' \
+    --exclude '*.bak' \
+    --exclude 'config.prod.json' \
+    --exclude 'env-config.prod.mjs' \
+    ./ $REMOTE_USER@$VPS_IP:$FRONTEND_DIR/
 
-# Step 2: Restart application with PM2
-echo "=== Restarting application with PM2 ==="
-execute_on_server "pm2 restart ${PM2_NAME} || ROOT_PATH=\$(dirname \"${PROJECT_PATH}\"); [ -f \"$ROOT_PATH/ecosystem.config.js\" ] && pm2 start \"$ROOT_PATH/ecosystem.config.js\" --only ${PM2_NAME} || pm2 restart all"
+# If we used temp files, sync them as their correct names and then cleanup
+if [ "$TARGET" == "production" ]; then
+    scp config.json.tmp $REMOTE_USER@$VPS_IP:$FRONTEND_DIR/config.json
+    scp env-config.mjs.tmp $REMOTE_USER@$VPS_IP:$FRONTEND_DIR/env-config.mjs
+    rm config.json.tmp env-config.mjs.tmp
+fi
 
-# Step 3: Check application status
-echo "=== Checking application status ==="
-execute_on_server "pm2 status"
+# 3. Upload Security Configurations
+echo "  -> Security Configurations..."
+# We no longer upload the master fix script as a separate file, 
+# but we ensure the local config files for Nginx are present if needed.
+# (Logic now integrated into remote execution)
 
-# Step 4: Verify deployment
-echo "=== Verifying deployment ==="
-execute_on_server "curl -sS -X GET http://localhost:${HEALTH_PORT}/health || echo 'Health check failed'"
+# 4. Remote Execution
+echo "⚙️  Executing remote updates and restarting server..."
+ssh $REMOTE_USER@$VPS_IP << EOF
+    # Run Nginx/CORS Fix (If script exists on VPS)
+    if [ -f "/root/MASTER-VPS-FIX.sh" ]; then
+        bash /root/MASTER-VPS-FIX.sh
+    fi
 
-# End of script
+    # Ensure dependencies are installed in backend
+    cd "$REMOTE_DIR/backend"
+    npm install zipcodes xml2js node-fetch@2 --quiet
+
+    # Kill existing process on port $PORT
+    echo "Stopping existing process on port $PORT..."
+    fuser -k $PORT/tcp 2>/dev/null || true
+    pkill -u $USER node || true
+    pkill -u deploy node || true
+
+    # Set permissions on the real path
+    REAL_DIR_VAL=\$(readlink -f "$REMOTE_DIR")
+    echo "🔧 Setting permissions and ownership on \$REAL_DIR_VAL..."
+    chown -R $USER:$USER "\$REAL_DIR_VAL"
+    find "\$REAL_DIR_VAL" -type d -exec chmod 755 {} +
+    find "\$REAL_DIR_VAL" -type f -exec chmod 644 {} +
+
+    # Set permissions for frontend if different from REAL_DIR_VAL
+    REAL_FRONTEND_VAL=\$(readlink -f "$FRONTEND_DIR")
+    if [ "\$REAL_FRONTEND_VAL" != "\$REAL_DIR_VAL" ]; then
+        echo "🔧 Setting permissions and ownership on \$REAL_FRONTEND_VAL..."
+        chown -R www-data:www-data "\$REAL_FRONTEND_VAL"
+        find "\$REAL_FRONTEND_VAL" -type d -exec chmod 755 {} +
+        find "\$REAL_FRONTEND_VAL" -type f -exec chmod 644 {} +
+    fi
+    
+    # Ensure Nginx can read frontend files
+    usermod -a -G $USER www-data || true
+
+    # Start the server as the correct user
+    echo "Starting Node server on port $PORT..."
+    cd "\$REAL_DIR_VAL"
+    sudo -u $USER /usr/bin/node backend/server.js > backend/server.log 2>&1 &
+    
+    echo "✅ Remote execution complete."
+EOF
+
+echo "✨ Deployment Finished!"
+echo "🔗 Site: $SITE_URL"
+echo "🔗 API Health: $API_URL/api/civic/health"

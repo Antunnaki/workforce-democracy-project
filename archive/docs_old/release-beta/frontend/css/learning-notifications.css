@@ -1,0 +1,129 @@
+/**
+ * LEARNING PATH ENGINE - NOTIFICATION STYLES
+ * Version: 37.17.0-LEARNING-ENGINE
+ */
+
+/* Learning Completion Notification */
+.learning-completion-notification {
+    position: fixed;
+    top: 80px;
+    right: 20px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 1rem 1.5rem;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+    z-index: 10000;
+    opacity: 0;
+    transform: translateX(400px);
+    transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    max-width: 350px;
+}
+
+.learning-completion-notification.show {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.completion-content {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.completion-icon {
+    font-size: 2rem;
+    flex-shrink: 0;
+}
+
+.completion-text strong {
+    display: block;
+    font-size: 1.1rem;
+    margin-bottom: 0.25rem;
+}
+
+.completion-text p {
+    margin: 0;
+    font-size: 0.9rem;
+    opacity: 0.95;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    .learning-completion-notification {
+        top: 60px;
+        right: 10px;
+        left: 10px;
+        max-width: none;
+    }
+}
+
+/* Learning Recommendations Widget */
+.learning-recommendations {
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin: 1.5rem 0;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.learning-recommendations h4 {
+    color: #667eea;
+    margin-top: 0;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.recommendation-card {
+    background: white;
+    border-radius: 8px;
+    padding: 1rem;
+    margin-bottom: 0.75rem;
+    border-left: 4px solid #667eea;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.recommendation-card:hover {
+    transform: translateX(4px);
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.2);
+}
+
+.recommendation-card h5 {
+    color: #333;
+    margin-top: 0;
+    margin-bottom: 0.5rem;
+    font-size: 1rem;
+}
+
+.recommendation-card p {
+    color: #666;
+    margin: 0;
+    font-size: 0.9rem;
+}
+
+.recommendation-card .priority-badge {
+    display: inline-block;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+}
+
+.priority-badge.high {
+    background: #ffd700;
+    color: #333;
+}
+
+.priority-badge.medium {
+    background: #87ceeb;
+    color: #333;
+}
+
+.priority-badge.low {
+    background: #e0e0e0;
+    color: #666;
+}

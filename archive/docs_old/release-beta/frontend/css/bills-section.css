@@ -1,0 +1,1149 @@
+/**
+ * BILLS SECTION STYLES (V32.9.5)
+ * Vote on Bills - Complete Redesign
+ * 
+ * Components:
+ * - Getting Started prompt
+ * - Progress indicator
+ * - Category filter tabs
+ * - Government level filter
+ * - Bill cards (with inline AI chat)
+ * - Representative contact info
+ * - Native share buttons
+ */
+
+/* ========== PROGRESS INDICATOR ========== */
+
+.bills-progress-indicator {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: var(--radius-lg);
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+    color: white !important;
+    /* V36.7.2: Enhanced contrast for better readability */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.progress-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.stat-item {
+    text-align: center;
+}
+
+.bills-progress-indicator .stat-number {
+    display: block;
+    font-size: 2.5rem;
+    font-weight: 700;
+    line-height: 1;
+    margin-bottom: 0.5rem;
+    /* V36.7.2: Enhanced contrast - pure white with text shadow */
+    /* V36.7.2.1: Increased specificity to override main.css */
+    color: #ffffff !important;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2) !important;
+}
+
+.bills-progress-indicator .stat-label {
+    display: block;
+    font-size: 0.875rem;
+    /* V36.7.2: Increased from 0.9 to 1.0 for better readability */
+    /* V36.7.2.1: Increased specificity to override main.css */
+    opacity: 1.0;
+    color: #ffffff !important;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.15) !important;
+    font-weight: 500;
+}
+
+.progress-bar {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: var(--radius-full);
+    height: 12px;
+    overflow: hidden;
+    margin-top: 1rem;
+}
+
+.progress-fill {
+    background: white;
+    height: 100%;
+    border-radius: var(--radius-full);
+    transition: width 0.5s ease;
+}
+
+/* ========== GETTING STARTED PROMPT ========== */
+
+.bills-getting-started {
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+    border: 2px solid rgba(102, 126, 234, 0.3);
+    border-radius: var(--radius-lg);
+    padding: 2.5rem;
+    text-align: center;
+    max-width: 700px;
+    margin: 0 auto 2rem;
+}
+
+.getting-started-icon {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 1.5rem;
+}
+
+.getting-started-icon svg {
+    width: 100%;
+    height: 100%;
+}
+
+.bills-getting-started h3 {
+    font-size: 1.75rem;
+    margin-bottom: 1rem;
+    color: var(--text-primary);
+}
+
+.bills-getting-started > p {
+    font-size: 1.125rem;
+    color: var(--text-secondary);
+    margin-bottom: 2rem;
+    line-height: 1.6;
+}
+
+.getting-started-features {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.feature-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 1rem;
+    background: white;
+    border-radius: var(--radius-md);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.feature-icon {
+    font-size: 2rem;
+}
+
+.feature-item span:last-child {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--text-primary);
+}
+
+.getting-started-button {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+    padding: 1rem 2rem;
+    border-radius: var(--radius-full);
+    font-size: 1.125rem;
+    font-weight: 600;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    transition: transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+}
+
+.getting-started-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+}
+
+.getting-started-button:active {
+    transform: translateY(0);
+}
+
+.getting-started-note {
+    margin-top: 1.5rem;
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+/* ========== CATEGORY FILTER TABS ========== */
+
+.bills-category-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+    padding: 1rem;
+    background: var(--surface-elevated);
+    border-radius: var(--radius-lg);
+}
+
+.category-tab {
+    flex: 0 0 auto;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.25rem;
+    background: white;
+    border: 2px solid var(--border-light);
+    border-radius: var(--radius-full);
+    font-size: 0.9375rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.category-tab:hover {
+    border-color: var(--accent-purple);
+    background: rgba(102, 126, 234, 0.05);
+    transform: translateY(-2px);
+}
+
+.category-tab.active {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-color: transparent;
+    color: white;
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+}
+
+.tab-icon {
+    font-size: 1.25rem;
+}
+
+.tab-label {
+    white-space: nowrap;
+}
+
+/* ========== GOVERNMENT LEVEL FILTER ========== */
+
+.bills-level-filter {
+    display: flex;
+    gap: 0.75rem;
+    margin-bottom: 2rem;
+    justify-content: center;
+}
+
+.level-filter-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    background: white;
+    border: 2px solid var(--border-light);
+    border-radius: var(--radius-full);
+    font-size: 0.9375rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.level-filter-btn:hover {
+    border-color: var(--accent-purple);
+    background: rgba(102, 126, 234, 0.05);
+}
+
+.level-filter-btn.active {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-color: transparent;
+    color: white;
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+}
+
+.level-icon {
+    font-size: 1.25rem;
+}
+
+/* ========== BILLS LIST CONTAINER ========== */
+
+.bills-list-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 400px), 1fr));
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+.bills-loading,
+.bills-error,
+.bills-empty {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 3rem 1.5rem;
+    background: var(--surface-elevated);
+    border-radius: var(--radius-lg);
+}
+
+.loading-spinner {
+    width: 40px;
+    height: 40px;
+    margin: 0 auto 1rem;
+    border: 4px solid var(--border-light);
+    border-top-color: var(--accent-purple);
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* ========== BILL CARD ========== */
+
+.bill-card {
+    background: white;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    transition: transform 0.2s, box-shadow 0.2s;
+    border: 1px solid var(--border-light);
+}
+
+.bill-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+}
+
+/* Category Color Bar */
+.bill-category-bar {
+    height: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 0 1rem;
+}
+
+.category-name {
+    font-size: 0.625rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    color: white;
+    opacity: 0;
+    transition: opacity 0.2s;
+}
+
+.bill-card:hover .category-name {
+    opacity: 1;
+}
+
+/* Bill Header */
+.bill-header {
+    padding: 1.5rem 1.5rem 1rem;
+}
+
+.bill-meta {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 0.75rem;
+    flex-wrap: wrap;
+}
+
+.bill-number {
+    font-size: 0.875rem;
+    font-weight: 700;
+    color: var(--accent-purple);
+    padding: 0.25rem 0.75rem;
+    background: rgba(102, 126, 234, 0.1);
+    border-radius: var(--radius-sm);
+}
+
+.bill-level {
+    font-size: 0.8125rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+}
+
+.status-badge {
+    font-size: 0.8125rem;
+    font-weight: 600;
+    padding: 0.25rem 0.75rem;
+    border-radius: var(--radius-sm);
+}
+
+.status-pending {
+    background: rgba(237, 137, 54, 0.1);
+    color: #c05621;
+}
+
+.status-passed {
+    background: rgba(72, 187, 120, 0.1);
+    color: #2f855a;
+}
+
+.status-failed {
+    background: rgba(245, 101, 101, 0.1);
+    color: #c53030;
+}
+
+.bill-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    line-height: 1.4;
+    color: var(--text-primary);
+    margin: 0;
+}
+
+/* Bill Summary */
+.bill-summary {
+    padding: 0 1.5rem 1rem;
+}
+
+.bill-summary p {
+    font-size: 0.9375rem;
+    line-height: 1.6;
+    color: var(--text-secondary);
+    margin: 0;
+}
+
+/* Impact Rating */
+.bill-impact {
+    padding: 0 1.5rem 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.impact-label {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.impact-stars {
+    font-size: 1rem;
+    color: #f59e0b;
+}
+
+.impact-score {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+}
+
+/* Bill Info */
+.bill-info {
+    padding: 0 1.5rem 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.bill-info-item {
+    display: flex;
+    gap: 0.5rem;
+    font-size: 0.875rem;
+}
+
+.info-label {
+    font-weight: 600;
+    color: var(--text-secondary);
+}
+
+.info-value {
+    color: var(--text-primary);
+}
+
+/* ========== INLINE AI CHAT ========== */
+
+.bill-ai-toggle {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    padding: 1rem 1.5rem;
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+    border: none;
+    border-top: 1px solid var(--border-light);
+    border-bottom: 1px solid var(--border-light);
+    cursor: pointer;
+    font-size: 0.9375rem;
+    font-weight: 600;
+    color: var(--accent-purple);
+    transition: all 0.2s;
+}
+
+.bill-ai-toggle:hover {
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.15) 0%, rgba(118, 75, 162, 0.15) 100%);
+}
+
+.ai-icon {
+    font-size: 1.25rem;
+}
+
+.ai-arrow {
+    margin-left: auto;
+    font-size: 0.875rem;
+}
+
+.bill-inline-chat {
+    display: none;
+    background: var(--surface-elevated);
+    border-bottom: 1px solid var(--border-light);
+}
+
+.bill-inline-chat.active {
+    display: block;
+}
+
+.inline-chat-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 1.5rem;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+}
+
+.inline-chat-header h4 {
+    margin: 0;
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.inline-chat-close {
+    background: rgba(255, 255, 255, 0.2);
+    border: none;
+    width: 32px;
+    height: 32px;
+    border-radius: var(--radius-full);
+    color: white;
+    font-size: 1.25rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s;
+}
+
+.inline-chat-close:hover {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+.inline-chat-messages {
+    max-height: 300px;
+    overflow-y: auto;
+    padding: 1rem 1.5rem;
+}
+
+.inline-chat-empty {
+    color: var(--text-secondary);
+    font-size: 0.9375rem;
+}
+
+.inline-chat-empty p {
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+}
+
+.inline-chat-empty ul {
+    margin: 0;
+    padding-left: 1.5rem;
+}
+
+.inline-chat-empty li {
+    margin-bottom: 0.5rem;
+}
+
+.inline-chat-input-container {
+    display: flex;
+    gap: 0.75rem;
+    padding: 1rem 1.5rem;
+    background: white;
+    border-top: 1px solid var(--border-light);
+}
+
+.inline-chat-input {
+    flex: 1;
+    padding: 0.75rem 1rem;
+    border: 2px solid var(--border-light);
+    border-radius: var(--radius-md);
+    font-size: 0.9375rem;
+    font-family: inherit;
+    resize: none;
+    transition: border-color 0.2s;
+}
+
+.inline-chat-input:focus {
+    outline: none;
+    border-color: var(--accent-purple);
+}
+
+.inline-chat-send {
+    flex-shrink: 0;
+    width: 44px;
+    height: 44px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border: none;
+    border-radius: var(--radius-full);
+    color: white;
+    font-size: 1.125rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.inline-chat-send:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+}
+
+.inline-chat-send:active {
+    transform: scale(0.95);
+}
+
+/* ========== VOTE SECTION ========== */
+
+.bill-vote-section {
+    padding: 1.5rem;
+    background: var(--surface-elevated);
+}
+
+.vote-prompt {
+    text-align: center;
+    font-size: 0.9375rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 1rem;
+}
+
+.vote-buttons {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.75rem;
+}
+
+.vote-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 1rem 0.75rem;
+    background: white;
+    border: 2px solid var(--border-light);
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    font-size: 0.875rem;
+    font-weight: 600;
+    transition: all 0.2s;
+}
+
+.vote-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.vote-icon {
+    font-size: 1.75rem;
+}
+
+.vote-yes:hover {
+    border-color: #48bb78;
+    background: rgba(72, 187, 120, 0.05);
+}
+
+.vote-yes.voted {
+    background: #48bb78;
+    border-color: #48bb78;
+    color: white;
+}
+
+.vote-no:hover {
+    border-color: #f56565;
+    background: rgba(245, 101, 101, 0.05);
+}
+
+.vote-no.voted {
+    background: #f56565;
+    border-color: #f56565;
+    color: white;
+}
+
+.vote-abstain:hover {
+    border-color: #a0aec0;
+    background: rgba(160, 174, 192, 0.05);
+}
+
+.vote-abstain.voted {
+    background: #a0aec0;
+    border-color: #a0aec0;
+    color: white;
+}
+
+/* ========== REPRESENTATIVE CONTACT ========== */
+
+.bill-representative {
+    padding: 1.5rem;
+    background: white;
+    border-top: 1px solid var(--border-light);
+}
+
+.bill-representative h4 {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 0 0 1rem 0;
+}
+
+.rep-info {
+    margin-bottom: 1rem;
+}
+
+.rep-info:last-child {
+    margin-bottom: 0;
+}
+
+.rep-name {
+    font-size: 0.9375rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 0.25rem;
+}
+
+.rep-position {
+    font-size: 0.8125rem;
+    color: var(--text-secondary);
+    margin-bottom: 0.75rem;
+}
+
+.rep-contact {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.rep-contact-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 0.75rem;
+    background: var(--surface-elevated);
+    border-radius: var(--radius-md);
+    text-decoration: none;
+    font-size: 0.875rem;
+    color: var(--text-primary);
+    transition: background 0.2s;
+}
+
+.rep-contact-item:hover {
+    background: rgba(102, 126, 234, 0.1);
+}
+
+.contact-icon {
+    font-size: 1rem;
+}
+
+.contact-label {
+    font-weight: 600;
+    color: var(--text-secondary);
+}
+
+.contact-value {
+    color: var(--accent-purple);
+    font-weight: 600;
+}
+
+/* ========== ACTION BUTTONS ========== */
+
+.bill-actions {
+    padding: 1.5rem;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.75rem;
+    background: var(--surface-elevated);
+    border-top: 1px solid var(--border-light);
+}
+
+.bill-action-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.875rem 1rem;
+    background: white;
+    border: 2px solid var(--border-light);
+    border-radius: var(--radius-md);
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.bill-action-btn:hover {
+    border-color: var(--accent-purple);
+    background: rgba(102, 126, 234, 0.05);
+    transform: translateY(-2px);
+}
+
+.btn-icon {
+    font-size: 1.125rem;
+}
+
+.bill-doc-btn:hover {
+    border-color: #4299e1;
+    background: rgba(66, 153, 225, 0.05);
+}
+
+.bill-share-btn:hover {
+    border-color: #48bb78;
+    background: rgba(72, 187, 120, 0.05);
+}
+
+/* ========== BACKEND STATUS NOTE (Dev Only) ========== */
+
+.backend-note {
+    background: rgba(237, 137, 54, 0.1);
+    border-left: 4px solid #ed8936;
+    padding: 0.75rem 1rem;
+    margin-top: 1rem;
+    font-size: 0.875rem;
+    border-radius: var(--radius-sm);
+}
+
+/* ========== AI ANALYSIS STYLES (V37.14.0) ========== */
+
+/* AI Summary Badge */
+.ai-summary-badge {
+    display: inline-block;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 0.25rem 0.75rem;
+    border-radius: var(--radius-sm);
+    font-size: 0.75rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.ai-summary-text {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: var(--text-color);
+    margin: 0.5rem 0;
+}
+
+/* AI Impact Rating */
+.bill-impact {
+    background: #f8f9fa;
+    border-left: 4px solid #667eea;
+    padding: 1rem;
+    margin: 1rem 0;
+    border-radius: var(--radius-sm);
+}
+
+.bill-impact.loading {
+    background: #fff3cd;
+    border-left-color: #ffc107;
+}
+
+.bill-impact.unavailable {
+    background: #e9ecef;
+    border-left-color: #6c757d;
+}
+
+.impact-header {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.impact-label {
+    font-weight: 600;
+    color: var(--text-dark);
+}
+
+.impact-stars {
+    font-size: 1.2rem;
+    letter-spacing: 2px;
+}
+
+.impact-score {
+    font-weight: 700;
+    color: #667eea;
+}
+
+.impact-reason {
+    font-size: 0.9rem;
+    color: var(--text-color);
+    margin: 0.5rem 0 0 0;
+    font-style: italic;
+}
+
+.impact-affects {
+    font-size: 0.9rem;
+    color: var(--text-color);
+    margin: 0.5rem 0 0 0;
+    padding: 0.5rem;
+    background: white;
+    border-radius: var(--radius-sm);
+}
+
+.loading-dots {
+    font-size: 1.5rem;
+    animation: pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+}
+
+.impact-message {
+    color: var(--text-muted);
+    font-style: italic;
+}
+
+/* Read Full Bill Link */
+.bill-actions {
+    margin: 1rem 0;
+    padding: 1rem;
+    background: #f8f9fa;
+    border-radius: var(--radius-sm);
+    text-align: center;
+}
+
+.bill-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white !important;
+    text-decoration: none;
+    border-radius: var(--radius-md);
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 4px rgba(102, 126, 234, 0.2);
+}
+
+.bill-link:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(102, 126, 234, 0.3);
+    color: white !important;
+}
+
+.bill-link:active {
+    transform: translateY(0);
+}
+
+/* Enhanced AI Analysis Sections (V37.15.0) */
+.bill-analysis-section {
+    background: #f8f9fa;
+    border-left: 4px solid #667eea;
+    padding: 1rem;
+    margin: 1rem 0;
+    border-radius: var(--radius-sm);
+}
+
+.analysis-heading {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-dark);
+    margin: 0 0 0.75rem 0;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.provisions-list,
+.arguments-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.provisions-list li,
+.arguments-list li {
+    padding: 0.5rem 0;
+    padding-left: 1.5rem;
+    position: relative;
+    line-height: 1.6;
+    color: var(--text-color);
+}
+
+.provisions-list li::before {
+    content: "▸";
+    position: absolute;
+    left: 0;
+    color: #667eea;
+    font-weight: bold;
+}
+
+.arguments-for li::before {
+    content: "✓";
+    position: absolute;
+    left: 0;
+    color: #48bb78;
+    font-weight: bold;
+}
+
+.arguments-against li::before {
+    content: "✗";
+    position: absolute;
+    left: 0;
+    color: #f56565;
+    font-weight: bold;
+}
+
+.economic-impact,
+.similar-legislation,
+.next-steps {
+    margin: 0;
+    padding: 0.5rem;
+    background: white;
+    border-radius: var(--radius-sm);
+    color: var(--text-color);
+    line-height: 1.6;
+}
+
+.economic-impact {
+    font-weight: 600;
+    color: #2d3748;
+}
+
+/* ========== RESPONSIVE ========== */
+
+@media (max-width: 768px) {
+    .bills-progress-indicator {
+        padding: 1.25rem;
+    }
+    
+    .progress-stats {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1rem;
+    }
+    
+    .bills-progress-indicator .stat-number {
+        font-size: 2rem;
+        /* V36.7.2.1: Maintain contrast fixes on mobile */
+        color: #ffffff !important;
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2) !important;
+    }
+    
+    .bills-progress-indicator .stat-label {
+        font-size: 0.75rem;
+        /* V36.7.2.1: Maintain contrast fixes on mobile */
+        color: #ffffff !important;
+        text-shadow: 0 1px 2px rgba(0, 0, 0, 0.15) !important;
+    }
+    
+    .bills-getting-started {
+        padding: 1.5rem;
+    }
+    
+    .getting-started-icon {
+        width: 60px;
+        height: 60px;
+    }
+    
+    .bills-getting-started h3 {
+        font-size: 1.5rem;
+    }
+    
+    .bills-getting-started > p {
+        font-size: 1rem;
+    }
+    
+    .getting-started-features {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .bills-category-tabs {
+        gap: 0.5rem;
+        padding: 0.75rem;
+    }
+    
+    .category-tab {
+        padding: 0.625rem 1rem;
+        font-size: 0.875rem;
+    }
+    
+    .tab-icon {
+        font-size: 1.125rem;
+    }
+    
+    .bills-level-filter {
+        gap: 0.5rem;
+        flex-wrap: wrap;
+    }
+    
+    .level-filter-btn {
+        padding: 0.625rem 1.25rem;
+        font-size: 0.875rem;
+    }
+    
+    .bills-list-container {
+        grid-template-columns: 1fr;
+        gap: 1.25rem;
+    }
+    
+    .bill-header {
+        padding: 1.25rem 1.25rem 0.875rem;
+    }
+    
+    .bill-title {
+        font-size: 1.125rem;
+    }
+    
+    .bill-summary,
+    .bill-impact,
+    .bill-info {
+        padding-left: 1.25rem;
+        padding-right: 1.25rem;
+    }
+    
+    .vote-buttons {
+        gap: 0.5rem;
+    }
+    
+    .vote-btn {
+        padding: 0.875rem 0.5rem;
+        font-size: 0.8125rem;
+    }
+    
+    .vote-icon {
+        font-size: 1.5rem;
+    }
+    
+    .bill-actions {
+        grid-template-columns: 1fr;
+        padding: 1.25rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .progress-stats {
+        grid-template-columns: 1fr;
+        gap: 0.75rem;
+    }
+    
+    .getting-started-features {
+        grid-template-columns: 1fr;
+    }
+    
+    .bills-category-tabs {
+        justify-content: center;
+    }
+    
+    .category-tab .tab-label {
+        display: none;
+    }
+    
+    .category-tab.active .tab-label {
+        display: inline;
+    }
+}

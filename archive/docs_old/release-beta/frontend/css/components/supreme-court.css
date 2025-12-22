@@ -1,0 +1,332 @@
+/**
+ * SUPREME COURT DECISIONS
+ * Version: 37.11.4-PHASE3C
+ * Date: 2025-01-14
+ * 
+ * Supreme Court decision cards with case information, voting breakdown,
+ * majority/dissent opinions, citizen impact analysis, and related cases.
+ * 
+ * Dependencies:
+ * - variables.css (design tokens)
+ * - buttons.css (button styles)
+ * 
+ * Components:
+ * - .court-decision-card - Main decision card container
+ * - .decision-header - Case title, vote count, metadata
+ * - .decision-section - Expandable/collapsible sections
+ * - .citizen-impact-section - Real-world effects & affected groups
+ * - .majority-section - Majority opinion details
+ * - .dissent-section - Dissenting opinion details
+ * - .deliberation-section - Key debates and reasoning
+ * - .decision-actions - Action buttons (read full text, share, etc.)
+ * - .related-cases - Links to similar cases
+ * 
+ * Features:
+ * - Expandable sections for detailed content
+ * - Color-coded sections (green=majority, red=dissent, blue=deliberation)
+ * - Impact timeline for understanding effects
+ * - Group badges for affected populations
+ */
+
+/* ============================================
+   SUPREME COURT DECISIONS
+   ============================================ */
+.court-decisions-section {
+  margin-top: var(--space-2xl);
+}
+
+.court-decisions-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+}
+
+.court-decision-card {
+  background: var(--surface);
+  border: 2px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-xl);
+  box-shadow: var(--shadow-md);
+  transition: all var(--transition-base);
+}
+
+.court-decision-card:hover {
+  box-shadow: var(--shadow-xl);
+  border-color: var(--primary);
+}
+
+.decision-header {
+  margin-bottom: var(--space-xl);
+  padding-bottom: var(--space-lg);
+  border-bottom: 2px solid var(--border-light);
+}
+
+.decision-title-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: var(--space-md);
+  margin-bottom: var(--space-md);
+  flex-wrap: wrap;
+}
+
+.decision-title {
+  font-size: var(--font-size-xl);
+  color: var(--primary);
+  margin: 0;
+  flex: 1;
+  min-width: 250px;
+}
+
+@media (min-width: 768px) {
+  .decision-title {
+    font-size: var(--font-size-2xl);
+  }
+}
+
+.decision-title i {
+  margin-right: var(--space-sm);
+}
+
+.decision-vote {
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  color: white;
+  padding: var(--space-sm) var(--space-lg);
+  border-radius: var(--radius-full);
+  font-weight: var(--font-weight-bold);
+  font-size: var(--font-size-lg);
+  white-space: nowrap;
+}
+
+.decision-vote.narrow-vote {
+  background: linear-gradient(135deg, #ff6b6b, #ff9068);
+}
+
+.decision-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+  align-items: center;
+  color: var(--text-secondary);
+  font-size: var(--font-size-sm);
+  margin-bottom: var(--space-sm);
+}
+
+.decision-separator {
+  color: var(--border);
+}
+
+.decision-topic {
+  display: inline-block;
+  background: var(--background);
+  padding: var(--space-xs) var(--space-md);
+  border-radius: var(--radius-full);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--primary);
+  margin-top: var(--space-sm);
+}
+
+.decision-section {
+  margin-bottom: var(--space-lg);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+
+.section-header {
+  background: var(--surface-alt);
+  padding: var(--space-md) var(--space-lg);
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: background var(--transition-fast);
+  user-select: none;
+}
+
+.section-header:hover {
+  background: var(--border-light);
+}
+
+.section-header h4 {
+  margin: 0;
+  font-size: var(--font-size-base);
+  color: var(--text);
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+@media (min-width: 768px) {
+  .section-header h4 {
+    font-size: var(--font-size-lg);
+  }
+}
+
+.toggle-icon {
+  transition: transform var(--transition-base);
+  color: var(--text-secondary);
+}
+
+.section-content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height var(--transition-base), padding var(--transition-base);
+  padding: 0 var(--space-lg);
+}
+
+.section-content.active {
+  max-height: 3000px;
+  padding: var(--space-lg);
+}
+
+.citizen-impact-section {
+  border-color: var(--primary);
+  border-width: 2px;
+}
+
+.citizen-impact-section .section-header {
+  background: linear-gradient(135deg, rgba(243, 156, 18, 0.1), rgba(93, 173, 226, 0.1));
+}
+
+.impact-summary {
+  background: var(--background);
+  padding: var(--space-md);
+  border-radius: var(--radius-md);
+  border-left: 4px solid var(--primary);
+  margin-bottom: var(--space-lg);
+  font-size: var(--font-size-base);
+  line-height: var(--line-height-relaxed);
+}
+
+.affected-groups {
+  margin-bottom: var(--space-lg);
+}
+
+.group-badge {
+  display: inline-block;
+  background: var(--primary);
+  color: white;
+  padding: var(--space-xs) var(--space-md);
+  border-radius: var(--radius-full);
+  font-size: var(--font-size-sm);
+  margin: var(--space-xs);
+  font-weight: var(--font-weight-medium);
+}
+
+.real-world-effects ul,
+.key-points ul,
+.main-questions ul {
+  list-style-position: outside;
+  padding-left: var(--space-xl);
+  margin: var(--space-md) 0;
+}
+
+.real-world-effects li,
+.key-points li,
+.main-questions li {
+  margin-bottom: var(--space-sm);
+  line-height: var(--line-height-relaxed);
+}
+
+.impact-timeline {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-md);
+  margin-top: var(--space-lg);
+}
+
+@media (min-width: 768px) {
+  .impact-timeline {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.timeline-item {
+  background: var(--surface-alt);
+  padding: var(--space-md);
+  border-radius: var(--radius-md);
+  border-left: 4px solid var(--secondary);
+}
+
+.timeline-item strong {
+  display: block;
+  margin-bottom: var(--space-sm);
+  color: var(--primary);
+}
+
+.opinion-author,
+.opinion-summary,
+.legal-reasoning,
+.dissent-concerns,
+.key-debates {
+  margin-bottom: var(--space-md);
+}
+
+.opinion-author {
+  font-weight: var(--font-weight-semibold);
+  color: var(--text-secondary);
+}
+
+.opinion-summary,
+.dissent-concerns,
+.key-debates {
+  line-height: var(--line-height-relaxed);
+}
+
+.majority-section {
+  border-color: var(--success);
+}
+
+.majority-section .section-header {
+  background: rgba(82, 196, 26, 0.1);
+}
+
+.dissent-section {
+  border-color: var(--error);
+}
+
+.dissent-section .section-header {
+  background: rgba(255, 77, 79, 0.1);
+}
+
+.deliberation-section {
+  border-color: var(--info);
+}
+
+.deliberation-section .section-header {
+  background: rgba(24, 144, 255, 0.1);
+}
+
+.decision-actions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  margin-top: var(--space-xl);
+  padding-top: var(--space-xl);
+  border-top: 1px solid var(--border-light);
+}
+
+@media (min-width: 768px) {
+  .decision-actions {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+}
+
+.related-cases {
+  margin-top: var(--space-lg);
+  padding-top: var(--space-lg);
+  border-top: 1px solid var(--border-light);
+  font-size: var(--font-size-sm);
+}
+
+.related-case {
+  display: inline-block;
+  background: var(--background);
+  padding: var(--space-xs) var(--space-md);
+  border-radius: var(--radius-md);
+  margin: var(--space-xs);
+  color: var(--text-secondary);
+}

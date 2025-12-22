@@ -1,0 +1,746 @@
+/**
+ * CIVIC PLATFORM STYLES - v37.9.1
+ * Consolidated civic transparency features for homepage
+ * 
+ * Based on advanced civic-platform.html template (user preferred)
+ * Integrated into index.html civic section
+ * 
+ * Features:
+ * - Bills voting and tracking
+ * - Representative finder
+ * - Supreme Court case explorer
+ * - Personal civic dashboard
+ * - Voting information
+ * 
+ * Created: November 10, 2025
+ * Architecture: Clean, modular, no !important hacks
+ */
+
+/* ============================================================================
+   CIVIC SECTION CONTAINER
+   ============================================================================ */
+
+.civic-section {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+    padding: 4rem 0;
+    position: relative;
+    overflow: hidden;
+}
+
+.civic-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="40" fill="rgba(255,255,255,0.05)"/></svg>');
+    background-size: 200px 200px;
+    opacity: 0.3;
+    pointer-events: none;
+}
+
+.civic-section .container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    position: relative;
+    z-index: 1;
+}
+
+/* ============================================================================
+   CIVIC HEADER & HERO
+   ============================================================================ */
+
+.civic-hero {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.civic-hero-image {
+    max-width: 600px;
+    width: 100%;
+    height: auto;
+    filter: drop-shadow(0 10px 30px rgba(0,0,0,0.2));
+    animation: float 6s ease-in-out infinite;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+.civic-header-text {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.civic-title {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: white !important;
+    margin-bottom: 1rem;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.2) !important;
+}
+
+.civic-subtitle {
+    font-size: 1.1rem;
+    color: rgba(255,255,255,0.95) !important;
+    max-width: 800px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+/* ============================================================================
+   TAB NAVIGATION
+   ============================================================================ */
+
+.civic-tabs {
+    /* V37.9.1: OVERRIDE civic-redesign.css grid with flexbox! */
+    display: flex !important;
+    flex-direction: row !important;
+    justify-content: center !important;
+    gap: 1rem !important;
+    flex-wrap: wrap !important;
+    margin-bottom: 2rem !important;
+    /* Reset grid properties from civic-redesign.css */
+    grid-template-columns: none !important;
+    padding: 1rem !important;
+}
+
+/* V37.9.1: Ensure horizontal on desktop, vertical on mobile */
+@media (max-width: 768px) {
+    .civic-tabs {
+        flex-direction: column !important;
+        align-items: stretch !important;
+    }
+}
+
+.civic-tab {
+    /* V37.9.1: HIGH CONTRAST - White buttons with dark text */
+    /* OVERRIDE civic-redesign.css completely! */
+    background: white !important;
+    backdrop-filter: blur(10px) !important;
+    border: 2px solid #667eea !important;
+    color: #1e293b !important;
+    padding: 1rem 1.5rem !important;
+    border-radius: 12px !important;
+    cursor: pointer !important;
+    transition: all 0.3s ease !important;
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+    gap: 0.75rem !important;
+    font-weight: 600 !important;
+    font-size: 1rem !important;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1) !important;
+    /* Reset grid properties */
+    width: auto !important;
+    min-height: auto !important;
+    text-align: left !important;
+    grid-column: auto !important;
+    transform: none !important;
+}
+
+.civic-tab:hover {
+    /* V37.9.1: Enhanced hover state with high contrast */
+    /* OVERRIDE civic-redesign.css! */
+    background: #f8fafc !important;
+    border-color: #764ba2 !important;
+    transform: translateY(-2px) !important;
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3) !important;
+}
+
+.civic-tab.active {
+    /* V37.9.1: Active state with gradient background */
+    /* OVERRIDE civic-redesign.css! */
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+    color: white !important;
+    border-color: #764ba2 !important;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.25) !important;
+    transform: none !important;
+}
+
+.civic-tab .tab-icon {
+    font-size: 1.5rem;
+}
+
+.civic-tab .tab-label {
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+/* ============================================================================
+   TAB PANELS
+   ============================================================================ */
+
+.civic-tab-panels {
+    background: white;
+    border-radius: 20px;
+    padding: 2.5rem;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+    min-height: 600px;
+}
+
+.civic-panel {
+    display: none;
+}
+
+.civic-panel.active {
+    display: block;
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.panel-intro {
+    margin-bottom: 2rem;
+}
+
+.panel-intro h3 {
+    font-size: 1.75rem;
+    color: #1e293b;
+    margin-bottom: 0.75rem;
+}
+
+.panel-intro p {
+    color: #64748b;
+    font-size: 1rem;
+    line-height: 1.6;
+}
+
+/* ============================================================================
+   BILLS SECTION STYLES
+   ============================================================================ */
+
+.bills-chat-top {
+    margin-bottom: 2rem;
+}
+
+.bills-chat-toggle-top {
+    width: 100%;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: white;
+    border: none;
+    padding: 1.25rem 1.5rem;
+    border-radius: 12px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+}
+
+.bills-chat-toggle-top:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(102, 126, 234, 0.4);
+}
+
+.bills-chat-toggle-top .icon {
+    font-size: 1.5rem;
+}
+
+.bills-chat-toggle-top .arrow {
+    margin-left: auto;
+    transition: transform 0.3s ease;
+}
+
+.bills-chat-toggle-top.active .arrow {
+    transform: rotate(180deg);
+}
+
+.bills-chat-window-top {
+    display: none;
+    background: #f8fafc;
+    border-radius: 12px;
+    margin-top: 1rem;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+.bills-chat-window-top.active {
+    display: block;
+    animation: slideDown 0.3s ease;
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        max-height: 0;
+    }
+    to {
+        opacity: 1;
+        max-height: 600px;
+    }
+}
+
+.bills-chat-header-top {
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: white;
+    padding: 1rem 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.bills-chat-header-top h4 {
+    margin: 0;
+    font-size: 1.1rem;
+}
+
+.bills-chat-close-top {
+    background: rgba(255,255,255,0.2);
+    border: none;
+    color: white;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+}
+
+.bills-chat-close-top:hover {
+    background: rgba(255,255,255,0.3);
+}
+
+.bills-chat-messages-top {
+    padding: 1.5rem;
+    max-height: 400px;
+    overflow-y: auto;
+    background: white;
+}
+
+.bills-chat-empty-state-top {
+    text-align: center;
+    padding: 2rem;
+    color: #64748b;
+}
+
+.chat-icon-svg {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 1rem;
+}
+
+.bills-chat-input-container-top {
+    display: flex;
+    gap: 0.75rem;
+    padding: 1rem 1.5rem;
+    background: #f8fafc;
+    border-top: 1px solid #e2e8f0;
+}
+
+.bills-chat-input-top {
+    flex: 1;
+    padding: 0.75rem 1rem;
+    border: 2px solid #e2e8f0;
+    border-radius: 8px;
+    font-family: inherit;
+    font-size: 0.95rem;
+    resize: none;
+    transition: border-color 0.2s ease;
+}
+
+.bills-chat-input-top:focus {
+    outline: none;
+    border-color: #667eea;
+}
+
+.bills-chat-send-top {
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1.2rem;
+    transition: all 0.2s ease;
+}
+
+.bills-chat-send-top:hover {
+    transform: scale(1.05);
+}
+
+.bills-chat-send-top:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* ============================================================================
+   REPRESENTATIVE FINDER STYLES
+   ============================================================================ */
+
+.representatives-container {
+    margin-top: 1.5rem;
+}
+
+.rep-card {
+    background: #f8fafc;
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-bottom: 1rem;
+    border: 2px solid #e2e8f0;
+    transition: all 0.3s ease;
+}
+
+.rep-card:hover {
+    border-color: #667eea;
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.1);
+    transform: translateY(-2px);
+}
+
+.rep-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.rep-photo {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #667eea;
+}
+
+.rep-info h4 {
+    margin: 0 0 0.25rem 0;
+    font-size: 1.25rem;
+    color: #1e293b;
+}
+
+.rep-info p {
+    margin: 0;
+    color: #64748b;
+    font-size: 0.9rem;
+}
+
+.rep-party {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    border-radius: 12px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin-top: 0.5rem;
+}
+
+.rep-party.democrat {
+    background: #dbeafe;
+    color: #1e40af;
+}
+
+.rep-party.republican {
+    background: #fee2e2;
+    color: #991b1b;
+}
+
+.rep-party.independent {
+    background: #f3e8ff;
+    color: #6b21a8;
+}
+
+/* ============================================================================
+   INLINE CHAT STYLES
+   ============================================================================ */
+
+.inline-chat-section {
+    margin: 2rem 0;
+}
+
+.inline-chat-toggle {
+    width: 100%;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: white;
+    border: none;
+    padding: 1.25rem 1.5rem;
+    border-radius: 12px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+    text-align: left;
+}
+
+.inline-chat-toggle:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(102, 126, 234, 0.4);
+}
+
+.accordion-arrow {
+    margin-left: auto;
+    transition: transform 0.3s ease;
+}
+
+.inline-chat-toggle.active .accordion-arrow {
+    transform: rotate(180deg);
+}
+
+.inline-chat-window {
+    display: none;
+    background: white;
+    border-radius: 12px;
+    margin-top: 1rem;
+    overflow: hidden;
+    border: 2px solid #e2e8f0;
+}
+
+.inline-chat-window.active {
+    display: block;
+    animation: fadeIn 0.3s ease;
+}
+
+.inline-chat-messages {
+    padding: 1.5rem;
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+.inline-chat-message {
+    margin-bottom: 1rem;
+    padding: 1rem;
+    border-radius: 8px;
+}
+
+.inline-chat-message-user {
+    background: #f1f5f9;
+    margin-left: 2rem;
+}
+
+.inline-chat-message-assistant {
+    background: #ede9fe;
+    margin-right: 2rem;
+}
+
+.inline-chat-input-area {
+    display: flex;
+    gap: 0.75rem;
+    padding: 1rem 1.5rem;
+    background: #f8fafc;
+    border-top: 1px solid #e2e8f0;
+}
+
+.inline-chat-input {
+    flex: 1;
+    padding: 0.75rem 1rem;
+    border: 2px solid #e2e8f0;
+    border-radius: 8px;
+    font-family: inherit;
+    font-size: 0.95rem;
+    resize: none;
+    transition: border-color 0.2s ease;
+}
+
+.inline-chat-input:focus {
+    outline: none;
+    border-color: #667eea;
+}
+
+.inline-chat-send {
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1.2rem;
+    transition: all 0.2s ease;
+}
+
+.inline-chat-send:hover {
+    transform: scale(1.05);
+}
+
+.inline-chat-send:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* ============================================================================
+   RESPONSIVE DESIGN
+   ============================================================================ */
+
+@media (max-width: 768px) {
+    .civic-title {
+        font-size: 1.75rem;
+        color: white !important;
+        text-shadow: 0 2px 10px rgba(0,0,0,0.2) !important;
+    }
+    
+    .civic-subtitle {
+        font-size: 0.95rem;
+        color: rgba(255,255,255,0.95) !important;
+    }
+    
+    .civic-tabs {
+        gap: 0.5rem;
+    }
+    
+    .civic-tab {
+        padding: 0.75rem 1rem;
+        font-size: 0.9rem;
+    }
+    
+    .civic-tab .tab-icon {
+        font-size: 1.25rem;
+    }
+    
+    .civic-tab-panels {
+        padding: 1.5rem;
+    }
+    
+    .panel-intro h3 {
+        font-size: 1.5rem;
+    }
+    
+    .rep-header {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .rep-photo {
+        width: 100px;
+        height: 100px;
+    }
+}
+
+@media (max-width: 480px) {
+    .civic-section {
+        padding: 2rem 0;
+    }
+    
+    .civic-section .container {
+        padding: 0 1rem;
+    }
+    
+    .civic-title {
+        font-size: 1.5rem;
+        color: white !important;
+        text-shadow: 0 2px 10px rgba(0,0,0,0.2) !important;
+    }
+    
+    .civic-tab {
+        flex-direction: column;
+        padding: 0.75rem;
+        gap: 0.25rem;
+    }
+    
+    .civic-tab .tab-label {
+        font-size: 0.85rem;
+    }
+    
+    .civic-tab-panels {
+        padding: 1rem;
+    }
+}
+
+/* ============================================================================
+   UTILITY CLASSES
+   ============================================================================ */
+
+.text-center {
+    text-align: center;
+}
+
+.mb-2 {
+    margin-bottom: 2rem;
+}
+
+/* ============================================================================
+   V37.9.1 FINAL NUCLEAR OVERRIDE - WINS AGAINST ALL OTHER CSS FILES!
+   ============================================================================ */
+
+/* FORCE FLEXBOX LAYOUT (override civic-redesign.css grid) */
+.civic-section .civic-tabs {
+    display: flex !important;
+    flex-direction: row !important;
+    justify-content: center !important;
+    flex-wrap: wrap !important;
+    grid-template-columns: none !important;
+    gap: 1rem !important;
+    padding: 1rem !important;
+    margin-bottom: 2rem !important;
+}
+
+/* FORCE HIGH CONTRAST BUTTONS */
+.civic-section .civic-tab {
+    background: white !important;
+    color: #1e293b !important;
+    border: 2px solid #667eea !important;
+    padding: 1rem 1.5rem !important;
+    border-radius: 12px !important;
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    gap: 0.75rem !important;
+    font-weight: 600 !important;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1) !important;
+    width: auto !important;
+    min-height: auto !important;
+    text-align: left !important;
+    transform: none !important;
+}
+
+/* FORCE HIGH CONTRAST HOVER */
+.civic-section .civic-tab:hover {
+    background: #f8fafc !important;
+    border-color: #764ba2 !important;
+    transform: translateY(-2px) !important;
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3) !important;
+}
+
+/* FORCE HIGH CONTRAST ACTIVE STATE */
+.civic-section .civic-tab.active {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+    color: white !important;
+    border-color: #764ba2 !important;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.25) !important;
+    transform: none !important;
+}
+
+/* Mobile: vertical stack */
+@media (max-width: 768px) {
+    .civic-section .civic-tabs {
+        flex-direction: column !important;
+        align-items: stretch !important;
+    }
+    
+    .civic-section .civic-tab {
+        width: 100% !important;
+        justify-content: flex-start !important;
+    }
+}
+
+.mt-2 {
+    margin-top: 2rem;
+}
+
+.hidden {
+    display: none;
+}
+
+.fade-in {
+    animation: fadeIn 0.3s ease;
+}

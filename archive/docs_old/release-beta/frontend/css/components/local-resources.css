@@ -1,0 +1,70 @@
+/**
+ * LOCAL RESOURCES
+ * Version: 37.11.4-PHASE3C
+ * Date: 2025-01-14
+ * 
+ * Personalization opt-in cards with privacy assurances.
+ * Used for local resource personalization features.
+ * 
+ * Dependencies:
+ * - variables.css (design tokens)
+ * - buttons.css (button styles)
+ * 
+ * Components:
+ * - .personalization-opt-in - Container for opt-in interface
+ * - .opt-in-card - Main card with icon and actions
+ * - .privacy-assurance - Privacy features list
+ */
+
+/* ============================================
+   LOCAL RESOURCES
+   ============================================ */
+.personalization-opt-in {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.opt-in-card {
+  background: var(--surface);
+  border-radius: var(--radius-lg);
+  padding: var(--space-2xl);
+  box-shadow: var(--shadow-lg);
+  text-align: center;
+}
+
+.opt-in-icon {
+  font-size: 4rem;
+  margin-bottom: var(--space-lg);
+}
+
+.privacy-assurance {
+  background: var(--background);
+  border-radius: var(--radius-md);
+  padding: var(--space-lg);
+  margin: var(--space-xl) 0;
+  text-align: left;
+}
+
+.privacy-assurance ul {
+  list-style: none;
+  padding: 0;
+}
+
+.privacy-assurance li {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-sm);
+  color: var(--text-secondary);
+}
+
+.privacy-assurance li i {
+  color: var(--success);
+}
+
+.opt-in-actions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  margin-top: var(--space-xl);
+}

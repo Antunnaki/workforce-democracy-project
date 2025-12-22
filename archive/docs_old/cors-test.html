@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advanced CORS Diagnostic - Workforce Democracy Project</title>
+    <style>
+        body { font-family: sans-serif; max-width: 900px; margin: 40px auto; padding: 20px; line-height: 1.6; background-color: #f8fafc; color: #1e293b; }
+        .card { background: white; border: 1px solid #e2e8f0; padding: 24px; border-radius: 12px; margin-bottom: 24px; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1); }
+        h1, h2, h3 { color: #0f172a; margin-top: 0; }
+        pre { background: #0f172a; color: #f8fafc; padding: 20px; overflow-x: auto; border-radius: 8px; font-size: 14px; }
+        .success { color: #10b981; font-weight: bold; }
+        .error { color: #ef4444; font-weight: bold; }
+        .warning { color: #f59e0b; font-weight: bold; }
+        button { padding: 12px 24px; background: #2563eb; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: 600; transition: background 0.2s; }
+        button:hover { background: #1d4ed8; }
+        input { padding: 12px; width: 100%; max-width: 500px; margin-bottom: 16px; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 16px; }
+        .label { font-weight: 600; margin-bottom: 8px; display: block; }
+        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        @media (max-width: 768px) { .grid { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+    <h1>🏛️ Advanced CORS Diagnostic Tool</h1>
+    <p>This tool verifies if your browser can communicate with the backend API from this origin: <strong id="current-origin"></strong></p>
+    
+    <div class="card">
+        <h3>1. Select Environment to Test</h3>
+        <div class="grid">
+            <div>
+                <button onclick="setApi('https://api.workforcedemocracyproject.org')">Set to PRODUCTION</button>
+            </div>
+            <div>
+                <button onclick="setApi('https://api-beta.workforcedemocracyproject.org')">Set to BETA</button>
+            </div>
+        </div>
+        <br>
+        <span class="label">Target API Base URL:</span>
+        <input type="text" id="api-url" value="https://api-beta.workforcedemocracyproject.org">
+        <br>
+        <button onclick="runDiagnostic()">Run Full Diagnostic</button>
+    </div>
+
+    <div id="results" class="card" style="display:none;">
+        <h3>2. Diagnostic Results</h3>
+        <div id="status"></div>
+        <h4>Response Data:</h4>
+        <pre id="output"></pre>
+        <h4>Response Headers (CORS related):</h4>
+        <pre id="headers-output"></pre>
+    </div>
+
+    <div class="card">
+        <h3>Troubleshooting Guide</h3>
+        <ul>
+            <li><strong>CORS ERROR:</strong> If you see this, the origin <code class="origin-tag"></code> is NOT allowed by the backend.</li>
+            <li><strong>Status 204:</strong> Means the preflight request succeeded but might have missing headers.</li>
+            <li><strong>Status 404:</strong> Means the endpoint doesn't exist on the server.</li>
+        </ul>
+    </div>
+
+    <script>
+        const originTags = document.querySelectorAll('.origin-tag');
+        const currentOrigin = window.location.origin;
+        document.getElementById('current-origin').textContent = currentOrigin;
+        originTags.forEach(tag => tag.textContent = currentOrigin);
+
+        function setApi(url) {
+            document.getElementById('api-url').value = url;
+        }
+
+        async function runDiagnostic() {
+            const apiUrl = document.getElementById('api-url').value.trim();
+            const results = document.getElementById('results');
+            const status = document.getElementById('status');
+            const output = document.getElementById('output');
+            const headersOutput = document.getElementById('headers-output');
+            
+            results.style.display = 'block';
+            status.innerHTML = '⏱️ Running diagnostic...';
+            output.textContent = '';
+            headersOutput.textContent = '';
+
+            try {
+                const startTime = Date.now();
+                // Test 1: GET Health endpoint
+                const healthResponse = await fetch(`${apiUrl}/api/civic/llm-health`, {
+                    method: 'GET',
+                    headers: { 'X-Requested-With': 'XMLHttpRequest' }
+                });
+                
+                // Test 2: POST Chat endpoint (preflight check)
+                const chatResponse = await fetch(`${apiUrl}/api/civic/llm-chat`, {
+                    method: 'POST',
+                    headers: { 
+                        'Content-Type': 'application/json',
+                        'X-Requested-With': 'XMLHttpRequest'
+                    },
+                    body: JSON.stringify({ message: 'CORS Test', context: 'general' })
+                });
+
+                const duration = Date.now() - startTime;
+                const healthData = await healthResponse.json();
+                const chatData = await chatResponse.json();
+
+                // Extract headers
+                let headersText = '';
+                const corsHeaders = [
+                    'access-control-allow-origin',
+                    'access-control-allow-credentials',
+                    'access-control-allow-methods',
+                    'access-control-allow-headers',
+                    'content-type'
+                ];
+                corsHeaders.forEach(h => {
+                    const val = chatResponse.headers.get(h);
+                    if (val) headersText += `${h}: ${val}\n`;
+                });
+
+                headersOutput.textContent = headersText || 'No CORS headers found in response (check browser console for blocked preflight)';
+
+                if (healthResponse.ok && chatResponse.ok) {
+                    status.innerHTML = `<span class="success">✅ SUCCESS!</span> Both GET and POST are reachable. CORS is correctly configured. (Time: ${duration}ms)`;
+                    output.textContent = "HEALTH:\n" + JSON.stringify(healthData, null, 2) + "\n\nCHAT:\n" + JSON.stringify(chatData, null, 2);
+                } else {
+                    status.innerHTML = `<span class="warning">⚠️ SERVER RESPONDED WITH STATUS ${healthResponse.status} / ${chatResponse.status}</span>`;
+                    output.textContent = "HEALTH:\n" + JSON.stringify(healthData, null, 2) + "\n\nCHAT:\n" + JSON.stringify(chatData, null, 2);
+                }
+            } catch (err) {
+                status.innerHTML = `<span class="error">❌ CORS ERROR!</span> Request blocked by browser.`;
+                output.textContent = `The browser blocked the request. Possible causes:
+1. Origin "${currentOrigin}" is missing from ALLOWED_ORIGINS in .env
+2. Nginx on VPS is missing CORS configuration for this origin
+3. The server at "${apiUrl}" is offline or unreachable.
+
+Error message: ${err.message}`;
+                headersOutput.textContent = 'No headers available (request was blocked).';
+            }
+        }
+    </script>
+</body>
+</html>

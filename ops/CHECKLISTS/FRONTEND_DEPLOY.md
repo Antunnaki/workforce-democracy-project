@@ -1,6 +1,8 @@
 # Frontend Deploy — Quick Checklist (prod/beta)
 
-- [ ] Prep: Confirm you’re on the correct branch (beta → Beta, main → Prod)
+See also: [Full Verification Checklist](file:///Users/acejrowski/Desktop/AG/WORKFORCE%20DEMOCRACY%20PROJECT/SITE%20FILES/Workforce%20Democracy%20Project/ops/CHECKLISTS/FRONTEND_DEPLOY_VERIFICATION.md) for comprehensive deployment validation.
+
+- [ ] Prep: Confirm you're on the correct branch (beta → Beta, main → Prod)
 - [ ] Build/validate locally (optional for static): open `index.html` and test wizard
 - [ ] Confirm CSP/CDN allowances unchanged (see `_headers` and `ops/TEMPLATES/nginx_main_website.conf`)
 

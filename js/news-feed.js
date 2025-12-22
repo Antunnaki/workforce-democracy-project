@@ -109,7 +109,8 @@ class NewsFeed {
     async fetchRSS(source) {
         try {
             // Use VPS API endpoint as CORS proxy
-            const proxyUrl = `https://api.workforcedemocracyproject.org/api/rss/proxy?url=${encodeURIComponent(source.rss)}`;
+            const base = window.WDP_API_BASE || 'https://api.workforcedemocracyproject.org';
+            const proxyUrl = `${base}/api/rss/proxy?url=${encodeURIComponent(source.rss)}`;
             
             const response = await fetch(proxyUrl, {
                 method: 'GET',

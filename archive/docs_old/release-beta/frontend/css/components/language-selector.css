@@ -1,0 +1,101 @@
+/* ============================================================================
+   WORKFORCE DEMOCRACY PROJECT - LANGUAGE SELECTOR
+   Version: 37.11.0-PHASE3B
+   Date: November 14, 2024
+   
+   Language selection dropdown component
+   
+   Dependencies: variables.css (MUST load before this file)
+   
+   ============================================================================ */
+
+/* ============================================
+   LANGUAGE SELECTOR CONTAINER
+   ============================================ */
+
+.language-selector {
+  position: relative;
+  display: inline-block;
+  overflow: visible;
+  z-index: 1001;
+}
+
+/* ============================================
+   LANGUAGE BUTTON
+   ============================================ */
+
+.language-btn {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border: 2px solid rgba(102, 126, 234, 0.3);
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+  cursor: pointer;
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  color: white;
+  padding: var(--space-sm) var(--space-md);
+  border-radius: var(--radius-md);
+  transition: all var(--transition-fast);
+  min-width: 44px;
+  min-height: 44px;
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+}
+
+.language-btn:hover {
+  background: linear-gradient(135deg, #7c8ff0 0%, #8b5fc4 100%);
+  border-color: rgba(102, 126, 234, 0.5);
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.5);
+}
+
+.language-btn:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* ============================================
+   LANGUAGE DROPDOWN MENU
+   ============================================ */
+
+.language-menu {
+  position: fixed;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-xl);
+  min-width: 140px;
+  display: none;
+  overflow: visible;
+  z-index: 9999;
+}
+
+.language-menu.active {
+  display: block;
+  visibility: visible;
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.language-menu button {
+  width: 100%;
+  padding: var(--space-sm) var(--space-md);
+  background: transparent;
+  border: none;
+  text-align: left;
+  cursor: pointer;
+  font-size: var(--font-size-sm);
+  color: var(--text);
+  transition: background var(--transition-fast);
+}
+
+.language-menu button:hover,
+.language-menu button:focus {
+  background: var(--surface-alt);
+}
+
+.language-menu button.active {
+  background: var(--primary);
+  color: white;
+}
