@@ -56,7 +56,7 @@ async function loadReps(zip, container) {
         <div style="font-size:0.8rem; opacity:0.5; margin-top:15px; text-align:left; border-top:1px solid rgba(255,255,255,0.1); padding-top:10px;">
             <p style="margin-bottom:5px;"><strong>Technical Diagnostics:</strong></p>
             <ul style="margin:0; padding-left:20px;">
-                <li>App Version: v1.1.11</li>
+                <li>App Version: v1.1.12</li>
                 <li>Status: ${data.success ? 'Success (0 results)' : (data.error || 'Failed')}</li>
                 <li>Sources Checked: ${dataSources.join(', ')}</li>
                 <li>Federal Count: ${counts.federal ?? 0}</li>

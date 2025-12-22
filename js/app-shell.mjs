@@ -3,7 +3,7 @@ import { envConfig } from '/env-config.mjs';
 
 // Central config (dynamic)
 export const CONFIG = {
-  VERSION: '1.1.11-20251222-UI-FIX',
+  VERSION: '1.1.12-20251222-CSP-FIX',
   get API_BASE() {
     return window.WDP_API_BASE || envConfig.apiBase || 'https://api.workforcedemocracyproject.org';
   },
